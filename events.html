@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+  <meta content="description" name="description">
+  <meta name="google" content="notranslate" />
+  <meta content="Mashup templates have been developed by Orson.io team" name="author">
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-icon-180x180.png">
+  <link href="./assets/favicon.ico" rel="icon">
+
+  <title>Photography Gallery</title>
+  <link href="./main.3f6952e4.css" rel="stylesheet">
+  
+  
+  
+</head>
+
+<body class="">
+  <div id="site-border-left"></div>
+  <div id="site-border-right"></div>
+  <div id="site-border-top"></div>
+  <div id="site-border-bottom"></div>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar navbar-fixed-top navbar-default">
+      <div class="container">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"
+          aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav ">
+            <li><a href="./index.html" title="">01 : Home</a></li>
+            <li><a href="./works.html" title="">02 : Works</a></li>
+            <li><a href="./about.html" title="">03 : About me</a></li>
+            <li><a href="./contact.html" title="">04 : Contact</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right navbar-small visible-md visible-lg">
+            <li><a href="./nps.html" title="">001</a></li>
+            <li><a href="./khwaab.html" title="">002</a></li>
+            <li><a href="./rooh.html" title="">003</a></li>
+            <li><a href="./events.html" title="" class="active">004</a></li>
+            <li><a href="./Na-photography.html" title="">005</a></li>
+            <li><a href="./short-films.html" title="" >006</a></li>
+          </ul>
+        </div>
+
+        
+      </div>
+    </nav>
+  </header>
+
+  <!-- Gallery Section -->
+  <style>
+    /* General body adjustment */
+    body {
+      margin-top: 80px;
+      background-color: #f5f5f5; /* Light background for better image contrast */
+    }
+  
+    header h1 {
+      margin: 20px 0;
+      text-align: center;
+      font-size: 24px;
+    }
+  
+    /* Gallery container */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
+      gap: 15px; /* Add spacing between images */
+      padding: 20px; /* Padding around the gallery */
+      background-color: #ffffff; /* White background for gallery area */
+      border-radius: 10px; /* Rounded edges for the gallery section */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    }
+  
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 12px; /* Rounded edges for images */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for each image */
+    }
+  
+    /* Horizontal images */
+    .horizontal {
+      grid-column: span 1; /* Occupies 1 column */
+      aspect-ratio: 3/4; /* Maintain aspect ratio for horizontal images */
+    }
+  
+    /* Vertical images */
+    .vertical {
+      grid-row: span 2; /* Span 2 rows for vertical images */
+      aspect-ratio: 4/3; /* Maintain aspect ratio for vertical images */
+    }
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure images fill the container without distortion */
+      border-radius: 12px; /* Smooth edges for images */
+      transition: transform 0.3s ease; /* Smooth zoom effect on hover */
+    }
+  
+    /* Hover effect */
+    img:hover {
+      transform: scale(1.05); /* Slight zoom-in on hover */
+    }
+  
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+        gap: 10px; /* Adjust spacing for smaller screens */
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: 1fr; /* Single-column layout for very small screens */
+        gap: 8px; /* Minimal spacing for mobile */
+      }
+    }
+  </style>
+  
+  <!-- Gallery HTML -->
+  <section>
+    <header>
+      <h1>Event Photo Gallery</h1>
+    </header>
+  
+    <div class="gallery">
+        <!-- horizontal Images -->
+      <div class="gallery-item vertical">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0038.jpg" alt="Vertical Image 1">
+      </div>
+      <div class="gallery-item vertical">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0040.jpg" alt="Vertical Image 2">
+      </div>
+      
+      <div class="gallery-item vertical">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0043.jpg" alt="Vertical Image 3">
+      </div>
+      <div class="gallery-item vertical">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0045.jpg" alt="Vertical Image 4">
+      </div>
+      <div class="gallery-item vertical">
+        <img src="univers/assets/images/event-photography/IMG_9499.jpg" alt="Vertical Image 4">
+      </div>
+      <div class="gallery-item vertical">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0037.jpg" alt="Vertical Image 4">
+      </div>
+      <!-- vertical Images -->
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG_0563.jpg" alt="Horizontal Image 4">
+      </div>
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0001.jpg" alt="Vertical Image 3">
+      </div>
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0034.jpg" alt="Horizontal Image 1">
+      </div>
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0035.jpg" alt="Horizontal Image 2">
+      </div>
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0036.jpg" alt="Horizontal Image 3">
+      </div>
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0039.jpg" alt="Horizontal Image 4">
+      </div>
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0041.jpg" alt="Horizontal Image 4">
+      </div>
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0042.jpg" alt="Horizontal Image 4">
+      </div>
+      <div class="gallery-item horizontal">
+        <img src="univers/assets/images/event-photography/IMG-20250105-WA0044.jpg" alt="Horizontal Image 4">
+      </div>
+      
+
+    </div>
+  </section>
+  
+
+  <!-- Footer -->
+  <footer class="footer-container text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <p>© Raghav Raj Sobti</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+      navActivePage();
+    });
+  </script>
+  <script type="text/javascript" src="./main.70a66962.js"></script>
+</body>
+
+</html>

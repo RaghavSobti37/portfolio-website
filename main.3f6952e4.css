@@ -5309,7 +5309,7 @@ textarea {
     width: 80%; /* Text width for mobile */
     margin-left: 0;
     margin-top: 40px;
-    text-align: center; /* Center text on mobile */
+    text-align: left; /* Center text on mobile */
   }
 
   .about-me-image {
@@ -5327,3 +5327,93 @@ textarea {
 .button-container a {
   display: inline-block;
 }
+
+/* General Styling */
+.milestone {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.milestone h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.milestone-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.milestone-slider::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+.milestone-card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 0 auto;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.milestone-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.milestone-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.milestone-content {
+  padding: 20px;
+}
+
+.milestone-content h4 {
+  font-size: 16px;
+  color: #777;
+  margin: 5px 0;
+}
+
+.milestone-content h3 {
+  font-size: 20px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.milestone-content p {
+  font-size: 14px;
+  color: #555;
+  margin: 10px 0 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
