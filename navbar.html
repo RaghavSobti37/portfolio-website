@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>bluepolaroid</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/main.3f6952e4.css">
+
+    <style>
+        .navbar {
+            background: transparent;
+            transition: background 0.3s ease-in-out;
+          }
+          
+          .navbar-fixed-top {
+            width: 100%;
+            top: 0;
+            left: 0;
+            position: fixed;
+            z-index: 1000;
+          }
+          
+          /* Change navbar background on scroll */
+          .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.8); /* Darken navbar on scroll */
+          }
+          
+        .dropdown-menu {
+            background-color: #fff !important;
+            border: 1px solid #ccc;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-menu > li > a {
+            color: #333 !important;
+            padding: 10px 20px;
+        }
+
+        .dropdown-menu > li > a:hover {
+            background-color: #007bff !important;
+            color: #fff !important;
+        }
+
+        .body {
+            padding-top: 70px; /* Adjust based on navbar height */
+          }
+          
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+          <button 
+            type="button" 
+            class="navbar-toggle collapsed" 
+            data-toggle="collapse" 
+            data-target="#navbar-collapse" 
+            aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="./index.html">01 : HOME</a></li>
+              <li class="dropdown">
+                <a href="./works.html" class="dropdown-toggle" class="active" data-toggle="dropdown">02 : WORKS <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="./nps.html">001 : NPS ad films</a></li>
+                  <li><a href="./khwaab.html">002 : Music Videos</a></li>
+                  <li><a href="./socialmedia.html">003 : Social Media</a></li>
+                  <li><a href="./events.html">004 : Event photography</a></li>
+                  <li><a href="./Na-photography.html">005 : Nature photography</a></li>
+                  <li><a href="./short-films.html">006 : Short films </a></li>
+                </ul>
+              </li>
+              <li><a href="./about.html">03 : ABOUT ME</a></li>
+              <li><a href="./index.html#connect">04 : CONNECT</a></li>
+              <!-- Instagram Link -->
+              <li>
+                <a href="https://www.instagram.com/bluepolaroid05/" id="instagram-link" target="_blank" rel="noopener noreferrer">
+                  INSTAGRAM <i class="fa fa-instagram"></i>
+                </a>
+              </li>
+              <!-- YouTube Link -->
+              <li>
+                <a href="https://www.youtube.com/@bluepolaroid05/videos" id="youtube-link" target="_blank" rel="noopener noreferrer">
+                  YOUTUBE <i class="fa fa-youtube"></i>
+                </a>
+              </li>
+              <!-- WhatsApp Link -->
+              <li>
+                <a href="https://wa.me/918591499393?text=Hello,%20I'm%20interested%20in%20your%20work!" target="_blank" rel="noopener noreferrer">
+                  WHATSAPP <i class="fa fa-whatsapp"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div id="loading" style="display: none;">Redirecting... Buckle up</div>
+
+      <script>
+        // Function to detect mobile devices
+        function isMobile() {
+          return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+      
+        // Function to open app or fallback to web URL
+        function openAppOrWeb(appUrl, webUrl) {
+          if (isMobile()) {
+            // Try to open the app
+            window.location.href = appUrl;
+            // If the app is not installed, fallback to the web URL after a short delay
+            setTimeout(function () {
+              window.location.href = webUrl;
+            }, 500); // Adjust the delay as needed
+          } else {
+            // Open the web URL in a new tab for desktop users
+            window.open(webUrl, "_blank");
+          }
+        }
+      
+        // Add event listeners to the links
+        document.getElementById("instagram-link").addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent default link behavior
+          openAppOrWeb(
+            "instagram://user?username=bluepolaroid05", // App URL
+            "https://www.instagram.com/bluepolaroid05/" // Web URL
+          );
+        });
+      
+        document.getElementById("youtube-link").addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent default link behavior
+          openAppOrWeb(
+            "vnd.youtube://www.youtube.com/@bluepolaroid05/videos", // App URL
+            "https://www.youtube.com/@bluepolaroid05/videos" // Web URL
+          );
+        });
+      </script>
+
+      <script>
+        function openAppOrWeb(appUrl, webUrl) {
+            if (isMobile()) {
+              // Show loading indicator
+              document.getElementById("loading").style.display = "block";
+              // Try to open the app
+              window.location.href = appUrl;
+              // Fallback to web URL after delay
+              setTimeout(function () {
+                document.getElementById("loading").style.display = "none";
+                window.location.href = webUrl;
+              }, 500);
+            } else {
+              window.open(webUrl, "_blank");
+            }
+          }
+        </script>
+
+<!-- jQuery (Required for Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".dropdown-toggle").dropdown();
+    });
+</script>
+
+<script>
+    window.addEventListener("scroll", function () {
+        let navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+      
+</script>
+
+<script type="text/javascript" src="./main.70a66962.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

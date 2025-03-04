@@ -8125,3 +8125,44 @@
     }).call(e, n("juYr"));
   },
 });
+
+ // JavaScript to detect when the about section comes into view
+ document.addEventListener("DOMContentLoaded", function () {
+  const aboutSection = document.querySelector(".about-me-section");
+
+  // Function to check if the section is in the viewport
+  function checkSectionVisibility() {
+    const rect = aboutSection.getBoundingClientRect();
+    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+      aboutSection.classList.add("visible");
+    }
+  }
+
+  // Initially check for visibility
+  checkSectionVisibility();
+
+  // Listen for scroll events to check visibility
+  window.addEventListener("scroll", checkSectionVisibility);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const navbarPlaceholder = document.getElementById("navbar-placeholder");
+
+  if (navbarPlaceholder) {
+    fetch("navbar.html")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Failed to load navbar");
+        }
+        return response.text();
+      })
+      .then(data => {
+        navbarPlaceholder.innerHTML = data;
+      })
+      .catch(error => console.error("Error loading navbar:", error));
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function (event) {
+  type();
+});

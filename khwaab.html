@@ -26,39 +26,15 @@
 <div id="site-border-bottom"></div>
 <!-- Add your content of header -->
 <header>
-  <nav class="navbar  navbar-fixed-top navbar-default">
-    <div class="container">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-
-      <div class="collapse navbar-collapse" id="navbar-collapse">
-        <ul class="nav navbar-nav ">
-          <li><a href="./index.html" title="">01 : HOME</a></li>
-          <li><a href="./works.html" title="">02 : WORKS</a></li>
-          <li><a href="./about.html" title="">03 : ABOUT ME</a></li>
-          <li><a href="./contact.html" title="">04 : CONNECT </a></li>
-          <li> <a href="https://www.instagram.com/bluepolaroid05/">INSTAGRAM <i class="fa fa-instagram"></i></a></li>
-            <li><a href="https://www.youtube.com/@bluepolaroid05/videos" >YOUTUBE <i class="fa fa-youtube"></i></a></li>
-        </ul>
-
-
-          <ul class="nav navbar-nav navbar-right navbar-small visible-md visible-lg">
-            <li><a href="./nps.html" title="" >001</a></li>
-            <li><a href="./khwaab.html" title="" class="active">002</a></li>
-            <li><a href="./rooh.html" title="">003</a></li>
-            <li><a href="./events.html" title="">004</a></li>
-            <li><a href="./Na-photography.html" title="">005</a></li>
-            <li><a href="./short-films.html" title="">006</a></li>
-          </ul>
-
-
-      </div> 
-    </div>
-  </nav>
+  <div id="navbar-placeholder">
+    
+  </div>
+  <script>
+    // Load the navbar from navbar.html
+    fetch("navbar.html")
+      .then(response => response.text())
+      .then(data => document.getElementById("navbar-placeholder").innerHTML = data);
+  </script>
 </header>
 <div class="section-container">
   <div class="container">
@@ -67,10 +43,12 @@
         <img src= "/univers/assets/images/work02-hover.jpg" alt="Khwaab Banner" class="fit-image" alt="">
         <div class="card-container">
           <div class="text-center">
-            <h1 class="h2">002 : Khwaab MV</h1>
-            <h1 class="h3">ROLE : Assistant Director</h1>
+            <h1 class="h2">002 : Music Videos</h1>
+            <h1 class="h3">01. Khwaab Music video || Role :Assistant Director </h1>
+            <h1 class="h3"></h1>
           </div>
-          <p>"Engaged in a new experience of outdoor shooting with a small indie crew from kashmir. Learned a lot while assisting along the shoot and those experiences helped me shape my persepective about making videos"</p>
+
+          <p>Engaged in a new experience of outdoor shooting with a small indie crew from kashmir. Learned a lot while assisting along the shoot and those experiences helped me shape my persepective about making videos</p>
 
           <!-- <blockquote>
             <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."</p>
@@ -109,6 +87,227 @@
         </div>
       </div>
       
+      <style>
+        .image-row {
+          display: flex;
+          justify-content: center; /* Centers the images horizontally */
+          gap: 20px; /* Adds space between the images */
+        }
+      
+        .side-by-side-img {
+          max-width: 45%; /* Ensures images are responsive and take up to 45% of container */
+          height: auto; /* Maintains the original aspect ratio */
+          display: block;
+        }
+      
+        @media (max-width: 768px) {
+          .side-by-side-img {
+            max-width: 100%; /* Stacks images on smaller screens */
+          }
+      
+          .image-row {
+            flex-direction: column; /* Changes layout to vertical for smaller screens */
+            align-items: center;
+          }
+        }
+      </style>
+      
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="card-container">
+          <div class="text-center">
+            <h1 class="h2"></h1>
+            <h1 class="h3">02 : Rooh MV || ROLE : 2nd AD</h1>
+          </div>
+          <p>""</p>
+
+          <!-- <blockquote>
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."</p>
+            <small class="pull-right">Irina Martin</small>
+          </blockquote> -->
+        </div>
+      </div>
+
+      <div class="video-wrapper">
+        <div class="embed-container">
+          <iframe 
+            src="https://www.youtube.com/embed/7mPGwqdqtvU?si=D94kuqBqRKok-9t3" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <h2 class="h2">Behind the Scenes</h2>
+      </div>
+      
+      <style>
+        .video-row {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 20px; /* Space between videos */
+        }
+        .video-row iframe {
+          width: 30%; /* Adjust width as needed */
+          height: 200px; /* Fixed height */
+        }
+      </style>
+      
+      <div class="video-row">
+        <iframe src="https://www.youtube.com/embed/4qBjBI7muGU" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+        
+        <iframe src="https://www.youtube.com/embed/E0m0DiRTZ5E" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen></iframe>
+      </div>
+      
+      
+      
+   
+      <style>
+        .image-row {
+          display: flex;
+          justify-content: center; /* Centers the images horizontally */
+          gap: 20px; /* Adds space between the images */
+        }
+      
+        .side-by-side-img {
+          max-width: 45%; /* Ensures images are responsive and take up to 45% of container */
+          height: auto; /* Maintains the original aspect ratio */
+          display: block;
+        }
+      
+        @media (max-width: 768px) {
+          .side-by-side-img {
+            max-width: 100%; /* Stacks images on smaller screens */
+          }
+      
+          .image-row {
+            flex-direction: column; /* Changes layout to vertical for smaller screens */
+            align-items: center;
+          }
+        }
+      </style>
+      
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="card-container">
+          <div class="text-center">
+            <h1 class="h3">03: Riqqat Album Launch || ROLE : 2nd AD </h1>
+          </div>
+
+          <!-- <blockquote>
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."</p>
+            <small class="pull-right">Irina Martin</small>
+          </blockquote> -->
+        </div>
+      </div>
+
+      <div class="col-md-8 col-md-offset-2 section-container-spacer">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="embed-container">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/8d9tcK27H0I?si=EaTkKNlFCpGJjIMf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="embed-container">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/mm48gpsJ9bQ?si=-MFu-aFJ59vjZd2V" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="embed-container">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/xk1qELGYnDQ?si=1IgOo6WpSRtU6Cvq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="embed-container">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/Gt7_LUqnldo?si=ucrBZKKyg9en9cWm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="embed-container">
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/EKET-n4cBHI?si=fwK48MuSVMNCrmAn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <h2 class="h2">Behind the Scenes</h2>
+      </div>
+      
+      <style>
+        .video-row {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 20px; /* Space between videos */
+        }
+        .video-row iframe {
+          width: 30%; /* Adjust width as needed */
+          height: 200px; /* Fixed height */
+        }
+      </style>
+      
+      <div class="video-row">
+        <iframe 
+    width="350" 
+    height="620" 
+    src="https://www.youtube.com/embed/uZLi21LBsnU" 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allowfullscreen>
+</iframe>
+
+        
+<iframe 
+width="350" 
+height="620" 
+src="https://www.youtube.com/embed/kvlrOk98EEE" 
+title="YouTube video player" 
+frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+allowfullscreen>
+</iframe>
+
+      </div>
+      
+      
+      
+   
       <style>
         .image-row {
           display: flex;
