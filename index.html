@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta content="width=device-width,initial-scale=1" name="viewport" />
-    <meta content="description" name="description" />
-    <meta name="google" content="notranslate" />
-
-    <!-- Disable tap highlight on IE -->
-    <meta name="msapplication-tap-highlight" content="no" />
-
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="univers/assets/apple-icon-180x180.png"
-    />
-    <link href="univers/assets/favicon.ico" rel="icon" />
-
-    <title>bluepolaroid05</title>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  </head>
+  <head id="head-content"></head>
 
   <body class="">
     <div id="site-border-left"></div>
@@ -355,18 +336,30 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
 
     <script type="text/javascript" src="./main.70a66962.js"></script>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Q0H44N1TJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9Q0H44N1TJ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  gtag('config', 'G-9Q0H44N1TJ');
-</script>
+      gtag("config", "G-9Q0H44N1TJ");
+    </script>
+
+    <script>
+      fetch("head.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("head-content").innerHTML = data;
+        });
+    </script>
 
     <!-- Include jQuery and Bootstrap JS -->
   </body>

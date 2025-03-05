@@ -5173,13 +5173,13 @@ textarea {
 }
 @media (max-width: 768px) {
   .navbar-inverse {
-    background-color: transparent;
+    background-color: white;
   }
   .navbar-inverse .navbar-collapse {
     background-color: #000;
   }
   .navbar-default {
-    background-color: transparent;
+    background-color: white;
   }
   .navbar-default .navbar-collapse {
     background-color: #fff;
