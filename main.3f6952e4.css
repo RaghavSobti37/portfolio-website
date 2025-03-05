@@ -229,15 +229,25 @@ th {
     page-break-after: avoid;
   }
   /* Navbar styles */
-.navbar {
-  background-color: rgba(255, 255, 255, 0.7); /* Light grey/white with 70% opacity */
-  transition: background-color 0.3s ease; /* Smooth transition */
-}
+  .navbar {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.7
+    ); /* Light grey/white with 70% opacity */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
 
-/* If you want the effect to apply only after scrolling */
-.navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly less transparent when scrolled */
-}
+  /* If you want the effect to apply only after scrolling */
+  .navbar.scrolled {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.9
+    ); /* Slightly less transparent when scrolled */
+  }
 
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -4808,8 +4818,6 @@ body.minimal {
   }
 }
 
-
-
 .white-text-container h1,
 .white-text-container h2,
 .white-text-container h3,
@@ -5274,7 +5282,7 @@ textarea {
   margin-top: 20px;
   font-family: inherit;
   display: flex;
-  
+
   text-align: justify; /* Center text inside the container */
   flex-direction: column;
   align-items: center;
@@ -5293,8 +5301,8 @@ textarea {
   transition: background 0.3s;
 }
 
-.about-me-btn .btn:hover{
-    background: #0056b3;
+.about-me-btn .btn:hover {
+  background: #0056b3;
 }
 
 /* Image section with transition */
@@ -5392,7 +5400,6 @@ textarea {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-
 .milestone-image img {
   width: 100%;
   height: auto;
@@ -5447,7 +5454,6 @@ textarea {
   object-fit: cover; /* Ensures images fill the container without distortion */
 }
 
-
 .container {
   max-width: 1100px;
   margin: auto;
@@ -5498,11 +5504,10 @@ textarea {
   padding: 10px 0; /* Top and bottom padding */
 }
 
-
 .about-me-text h1 {
-          color: #34495e; /* Dark greyish-blue color */
-        }
-      
+  color: #34495e; /* Dark greyish-blue color */
+}
+
 html {
-          scroll-behavior: smooth;
-        }
+  scroll-behavior: smooth;
+}
