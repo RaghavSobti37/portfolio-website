@@ -5511,3 +5511,47 @@ textarea {
 html {
   scroll-behavior: smooth;
 }
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-left: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+
+/* Firefox Scrollbar */
+/* Hide default scrollbar */
+* {
+  scrollbar-width: none;
+}
+
+/* Custom scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+}
+
+html, body {
+  overflow: hidden; /* Hides native scrollbar */
+  height: 100vh;
+}
+
+body {
+  overflow-y: scroll; /* Enables only custom scrollbar */
+}
+
