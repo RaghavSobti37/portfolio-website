@@ -1,116 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head id="head-content"></head>
 
-<head id="head-content"></head>
-
-<body>
+  <body>
     <div id="site-border-left"></div>
-<div id="site-border-right"></div>
-<div id="site-border-top"></div>
-<div id="site-border-bottom"></div>
- <!-- Add your content of header -->
-<header>
-  <div id="navbar-placeholder">
-    
-  </div>
-  <script>
-    // Load the navbar from navbar.html
-    fetch("navbar.html")
-      .then(response => response.text())
-      .then(data => document.getElementById("navbar-placeholder").innerHTML = data);
-  </script>
+    <div id="site-border-right"></div>
+    <div id="site-border-top"></div>
+    <div id="site-border-bottom"></div>
 
-</header>
+    <!-- Navbar -->
+    <header>
+      <div id="navbar-placeholder"></div>
+      <script>
+        // Load the navbar from navbar.html
+        fetch("navbar.html")
+          .then((response) => response.text())
+          .then(
+            (data) =>
+              (document.getElementById("navbar-placeholder").innerHTML = data)
+          );
+      </script>
+    </header>
 
-  <div class="section-container">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <img src="univers/assets/images/BLU01156.JPG" class="img-responsive" alt="">
-          <div class="card-container">
-            <div class="text-center">
-              <h1 class="h2">003 : Social Media</h1>
-              <h1 class="h3">ROLE : Videographer / Editor</h1>
+    <!-- Main Content -->
+    <div class="section-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <img
+              src="univers/assets/images/BLU01156.JPG"
+              class="img-responsive"
+              alt=""
+            />
+            <div class="card-container">
+              <div class="text-center">
+                <h1 class="h2">003 : Social Media</h1>
+                <h1 class="h3">ROLE : Videographer / Editor</h1>
+              </div>
+              <p>
+                "Transforming moments into engaging digital stories, I capture
+                events, BTS, and freelance projects that connect with audiences
+                in real-time. "
+              </p>
             </div>
-            <p>
-              "Transforming moments into engaging digital stories, I capture events, BTS, and freelance projects that connect with audiences in real-time. "
-            </p>
+          </div>
+        </div>
+
+        <!-- Reels Grid Section -->
+        <div class="reel-grid">
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DGsNRvwtlX4/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DFPZ_mGPKg-/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DFM-Fm6osZu/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DELCubty0cN/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DE7hrOqP8Tu/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DE458vbyo2G/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DEmePaCsQ0R/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DEm1fkJIuGy/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/C4DcH0WSkiY/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DA3MTdqSZht/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DGcXwViyG8r/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DErNVB7S4Qv/"
+            data-instgrm-version="14"
+          ></blockquote>
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DEO5O6PS5Gu/"
+            data-instgrm-version="14"
+          ></blockquote>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-container text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>© Raghav Raj Sobti</p>
           </div>
         </div>
       </div>
+    </footer>
 
-      <!-- Reels Grid Section -->
-      <div class="reel-grid">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DGsNRvwtlX4/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DFPZ_mGPKg-/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DFM-Fm6osZu/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DELCubty0cN/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DE7hrOqP8Tu/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DE458vbyo2G/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DEmePaCsQ0R/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DEm1fkJIuGy/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C4DcH0WSkiY/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DA3MTdqSZht/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DGcXwViyG8r/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DErNVB7S4Qv/" data-instgrm-version="14"></blockquote>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DEO5O6PS5Gu/" data-instgrm-version="14"></blockquote>
-    </div>
-    </div>
-  </div>
+    <!-- Instagram Embed Script -->
+    <script async src="//www.instagram.com/embed.js"></script>
 
-  <footer class="footer-container text-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <p>© Raghav Raj Sobti</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    $(document).ready(function () {
-      $(".navbar-toggle").click(function () {
-        $("#navbar-collapse").slideToggle();
-      });
-    });
-
-    window.onload = function() {
+    <!-- Initialize Instagram Embeds -->
+    <script>
+      window.onload = function () {
         if (window.instgrm) {
-            instgrm.Embeds.process();
+          instgrm.Embeds.process();
         }
-    };
-  </script>
+      };
+    </script>
 
-  <!-- jQuery (required for Bootstrap JS) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery (required for Bootstrap JS) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Bootstrap JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-       navActivePage();
-    });
-  </script>
-
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Q0H44N1TJ"></script>
-<script>
-  fetch('head.html')
-      .then(response => response.text())
-      .then(data => {
-          document.getElementById('head-content').innerHTML = data;
+    <!-- Other Scripts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        navActivePage();
       });
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    </script>
 
-  gtag('config', 'G-9Q0H44N1TJ');
-</script>
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-9Q0H44N1TJ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-9Q0H44N1TJ");
+    </script>
 
-</body>
+    <!-- Load Head Content -->
+    <script>
+      fetch("head.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("head-content").innerHTML = data;
+        });
+    </script>
+  </body>
 </html>
