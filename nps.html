@@ -4,6 +4,13 @@
 <head id="head-content"></head>
 
 <body class="">
+  <script>
+    fetch("head.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("head-content").innerHTML = data;
+      });
+  </script>
 <div id="site-border-left"></div>
 <div id="site-border-right"></div>
 <div id="site-border-top"></div>
