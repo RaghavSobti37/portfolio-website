@@ -5726,3 +5726,30 @@ body {
   margin: 0; /* Remove default margin */
 }
 
+/* Container for the embedded form */
+.form-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 150%; /* Adjust this value based on the form's height */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Responsive iframe */
+.form-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Adjust padding for smaller screens */
+@media (max-width: 768px) {
+  .form-container {
+    padding-bottom: 200%; /* Increase padding for smaller screens */
+  }
+}
+
