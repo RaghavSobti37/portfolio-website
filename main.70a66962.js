@@ -8168,7 +8168,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 window.addEventListener("load", function () {
-    document.getElementById("preloader").style.display = "none"; 
-    document.getElementById("content").style.display = "block"; 
+    // Remove preloader
+    document.getElementById("preloader").style.display = "none";
+
+    // Show the content
+    document.body.style.overflow = "auto"; // Enable scrolling
+    document.getElementById("content").style.display = "block";
   });
 

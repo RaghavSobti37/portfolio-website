@@ -7,243 +7,362 @@
       <div class="loader">Loading...</div>
     </div>
     
+    <div id="content">
+      <div id="site-border-left"></div>
+      <div id="site-border-right"></div>
+      <div id="site-border-top"></div>
+      <div id="site-border-bottom"></div>
 
-    <div id="site-border-left"></div>
-    <div id="site-border-right"></div>
-    <div id="site-border-top"></div>
-    <div id="site-border-bottom"></div>
-    <!-- Add your content of header -->
-    <header>
-      <div id="navbar-placeholder">
-    
+      <!-- Navbar -->
+      <header>
+        <div id="navbar-placeholder"></div>
+        <script>
+          // Load the navbar from navbar.html
+          fetch("navbar.html")
+            .then((response) => response.text())
+            .then(
+              (data) =>
+                (document.getElementById("navbar-placeholder").innerHTML = data)
+            );
+        </script>
+      </header>
+
+      <!-- Hero Section -->
+      <div
+        class="hero-full-container background-image-container white-text-container"
+        style="background-image: url('univers/assets/background-1.png');"
+      >
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="hero-full-wrapper">
+                <div class="text-content">
+                  <h1>
+                    Hello ,I am<br />
+                    <span id="typed-strings">
+                      <span>Raghav Raj Sobti</span>
+                      <span>A Photographer</span>
+                      <span>A Cinematographer</span>
+                      <span>A Freelancer</span>
+                    </span>
+                    <span id="typed"></span>
+                  </h1>
+                  <h1 class="button-container">
+                    <a href="works.html" class="btn btn-primary btn-lg">VIEW MY WORK</a>
+                    <a
+                      href="https://docs.google.com/forms/d/e/1FAIpQLSdxY4Jh6mGhh4kEavbBBqgWZ_wcUHbBUbcgZXC5_NnWYfPTEg/viewform"
+                      class="btn btn-primary btn-lg"
+                      onclick="window.open(this.href, '_blank'); return false;"
+                    >
+                      CONNECT WITH ME
+                    </a>
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <script>
-        // Load the navbar from navbar.html
-        fetch("navbar.html")
-          .then(response => response.text())
-          .then(data => document.getElementById("navbar-placeholder").innerHTML = data);
-      </script>
-    </header>
 
-    <div
-      class="hero-full-container background-image-container white-text-container"
-      style="background-image: url('univers/assets/image.png')"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="hero-full-wrapper">
-              <div class="text-content">
-                <h1>
-                  Hello ,I am<br />
-                  <span id="typed-strings">
-                    <span>Raghav Raj Sobti</span>
-                    <span>A Photographer</span>
-                    <span>A Cinematographer</span>
-                    <!-- <span>Working as a Freelance</span> -->
-                  </span>
-                  <span id="typed"></span>
-                </h1>
-                <h1 class="button-container">
-                  <a href="works.html" class="btn btn-primary btn-lg"
-                    >VIEW MY WORK</a
+      <!-- About Me Section -->
+      <div class="section-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <!-- Who Am I? Section -->
+              <section class="about-me-section">
+                <div class="about-me-text">
+                  <h2>Who Am I?</h2>
+                  <p>
+                    I’m <strong>Raghav Raj Sobti</strong>, a passionate
+                    <strong>Photographer & Cinematographer</strong> with a knack
+                    for visual storytelling. My work is driven by a deep love for
+                    capturing moments that resonate emotionally, whether it’s
+                    through the lens of a camera or the edit timeline. I thrive on
+                    blending creativity with technology, leveraging tools like AI
+                    and advanced editing software to push creative boundaries and
+                    deliver impactful visuals.
+                  </p>
+                </div>
+                <div class="about-me-image">
+                  <img
+                    src="univers/assets/images/raghav.jpg"
+                    alt="Raghav Raj Sobti"
+                  />
+                </div>
+              </section>
+
+              <!-- Skills Section -->
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="journey-heading">
+                    <h2>My Skills</h2>
+                  </div>
+                  <div class="skills-grid">
+                    <div class="skill-box highlight">
+                      <h4>Pre-Production Planning</h4>
+                      <p>Crafting detailed plans with clear deliverables.</p>
+                    </div>
+                    <div class="skill-box">
+                      <h4>Art Direction</h4>
+                      <p>Ensuring cohesive visual aesthetics on set.</p>
+                    </div>
+                    <div class="skill-box highlight">
+                      <h4>Video Editing</h4>
+                      <p>
+                        Proficient in Final Cut Pro, CapCut, and Adobe Lightroom.
+                      </p>
+                    </div>
+                    <div class="skill-box">
+                      <h4>Team Collaboration</h4>
+                      <p>
+                        Working seamlessly with teams to achieve production goals.
+                      </p>
+                    </div>
+                    <div class="skill-box">
+                      <h4>Problem-Solving</h4>
+                      <p>
+                        Thriving under tight deadlines and high-pressure
+                        environments.
+                      </p>
+                    </div>
+                    <div class="skill-box highlight">
+                      <h4>AI Integration</h4>
+                      <p>Leveraging AI tools to enhance creative workflows.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- My Journey Timeline -->
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="journey-heading">
+                    <h2>My Journey</h2>
+                  </div>
+                  <div class="timeline">
+                    <div class="timeline-item">
+                      <div class="timeline-year">2023</div>
+                      <div class="timeline-content">
+                        <h4>Assistant Director | Artistefirst</h4>
+                        <p>
+                          Assisted in scene setup, frame balancing, and creative
+                          edits for music videos.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div class="timeline-year">2023 & 2024</div>
+                      <div class="timeline-content">
+                        <h4>Intern AD | Classic Films</h4>
+                        <p>
+                          Created 4 ad films for an NPS app and worked on a
+                          Complan ad film, handling art direction and offline
+                          editing.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div class="timeline-year">2024</div>
+                      <div class="timeline-content">
+                        <h4>2nd AD | EBC Originals</h4>
+                        <p>
+                          Worked on the ‘Rooh’ music video in Ladakh and multiple
+                          ‘Riqqat’ album music videos.
+                        </p>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div class="timeline-year">2024</div>
+                      <div class="timeline-content">
+                        <h4>DA | Faheem Abdullah</h4>
+                        <p>Directed ‘Dhamaal’ and ‘Abiroo’ music videos.</p>
+                      </div>
+                    </div>
+                    <div class="timeline-item">
+                      <div class="timeline-year">2024</div>
+                      <div class="timeline-content">
+                        <h4>2nd AD | Riqqat Album</h4>
+                        <p>
+                          Assisted in 4 music videos and a podcast for the album
+                          launch.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- Carousel Section (Imported from works.html) -->
+<div class="section-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 section-container-spacer">
+        <div class="text-center">
+          <h1 class="h2">My Creative journey</h1>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div id="myCarousel" class="carousel slide projects-carousel">
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <!-- First Slide -->
+            <div class="item active">
+              <div class="row">
+                <div class="col-sm-4">
+                  <a
+                    href="./Na-photography.html"
+                    class="black-image-project-hover"
                   >
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxY4Jh6mGhh4kEavbBBqgWZ_wcUHbBUbcgZXC5_NnWYfPTEg/viewform" 
-                  class="btn btn-primary btn-lg"
-                  onclick="window.open(this.href, '_blank'); return false;">
-                  CONNECT WITH ME
-               </a>
-               
+                    <img
+                      src="univers/assets/images/raghav camera.jpg"
+                      alt=""
+                      class="banner-image"
+                    />
+                  </a>
+                  <div class="card-container card-container-lg">
+                    <h3>Social Media</h3>
+                    <h4>// Iphone & Canon 1200D</h4>
 
-                </h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <section class="about-me-section">
-      <div class="about-me-text">
-        <h2>Behind the camera</h2>
-        <p>
-          An aspiring cinematographer with hands-on experience in photography
-          and filmmaking. Passionate about crafting impactful visual stories
-          inspired by everyday life and human connections. Known for creativity,
-          collaborating with different people, and give a fresh perspective
-          towards an idea. Eager to bring vision and energy to dynamic projects.
-        </p>
-
-        <a href="about.html" class="about-me-btn">ABOUT ME</a>
-      </div>
-      <div class="about-me-image">
-        <img src="/univers/assets/images/raghav.jpg" alt="About Me Image" />
-      </div>
-    </section>
-
-    <!-- Carousel Section (Imported from works.html) -->
-    <div class="section-container">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8 col-sm-offset-2 section-container-spacer">
-            <div class="text-center">
-              <h1 class="h2">My Creative journey</h1>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div id="myCarousel" class="carousel slide projects-carousel">
-              <!-- Carousel items -->
-              <div class="carousel-inner">
-                <!-- First Slide -->
-                <div class="item active">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <a
-                        href="./Na-photography.html"
-                        class="black-image-project-hover"
-                      >
-                        <img
-                          src="univers/assets/images/raghav camera.jpg"
-                          alt=""
-                          class="banner-image"
-                        />
-                      </a>
-                      <div class="card-container card-container-lg">
-                        <h3>Social Media</h3>
-                        <h4>// Iphone & Canon 1200D</h4>
-
-                        <a href="./socialmedia.html" class="btn btn-default"
-                          >Discover</a
-                        >
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <a href="./events.html" class="black-image-project-hover">
-                        <img
-                          src="univers/assets/images/event-photography/event-2.jpg"
-                          alt=""
-                          class="banner-image"
-                        />
-                      </a>
-                      <div class="card-container card-container-lg">
-                        <h3>Event Photography</h3>
-                        <h4>// Canon 1200D & Sony a7iii</h4>
-                        <a href="./events.html" class="btn btn-default"
-                          >Discover</a
-                        >
-                      </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                      <a
-                        href="./short-films.html"
-                        class="black-image-project-hover"
-                      >
-                        <img
-                          src="univers/assets/images/BLU02003.JPG"
-                          alt=""
-                          class="banner-image"
-                        />
-                      </a>
-                      <div class="card-container card-container-lg">
-                        <h3>My Short Films</h3>
-                        <h4>// Sony a7iii</h4>
-                        <a href="./short-films.html" class="btn btn-default"
-                          >Discover</a
-                        >
-                      </div>
-                    </div>
+                    <a href="./socialmedia.html" class="btn btn-default"
+                      >Discover</a
+                    >
                   </div>
                 </div>
 
-                <!-- Second Slide -->
-                <div class="item">
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <a
-                        href="./Na-photography.html"
-                        class="black-image-project-hover"
-                      >
-                        <img
-                          src="univers/assets/images/BLU01366.JPG"
-                          alt=""
-                          class="banner-image"
-                        />
-                      </a>
-                      <div class="card-container card-container-lg">
-                        <h3>Nature Photography</h3>
-                        <h4>// Iphone & Canon 1200D</h4>
+                <div class="col-sm-4">
+                  <a href="./events.html" class="black-image-project-hover">
+                    <img
+                      src="univers/assets/images/event-photography/event-2.jpg"
+                      alt=""
+                      class="banner-image"
+                    />
+                  </a>
+                  <div class="card-container card-container-lg">
+                    <h3>Event Photography</h3>
+                    <h4>// Canon 1200D & Sony a7iii</h4>
+                    <a href="./events.html" class="btn btn-default"
+                      >Discover</a
+                    >
+                  </div>
+                </div>
 
-                        <a href="./Na-photography.html" class="btn btn-default"
-                          >Discover</a
-                        >
-                      </div>
-                    </div>
+                <div class="col-sm-4">
+                  <a
+                    href="./short-films.html"
+                    class="black-image-project-hover"
+                  >
+                    <img
+                      src="univers/assets/images/BLU02003.JPG"
+                      alt=""
+                      class="banner-image"
+                    />
+                  </a>
+                  <div class="card-container card-container-lg">
+                    <h3>My Short Films</h3>
+                    <h4>// Sony a7iii</h4>
+                    <a href="./short-films.html" class="btn btn-default"
+                      >Discover</a
+                    >
                   </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Controls -->
-              <a
-                class="left carousel-control"
-                href="#myCarousel"
-                data-slide="prev"
-                >‹</a
-              >
-              <a
-                class="right carousel-control"
-                href="#myCarousel"
-                data-slide="next"
-                >›</a
-              >
+            <!-- Second Slide -->
+            <div class="item">
+              <div class="row">
+                <div class="col-sm-4">
+                  <a
+                    href="./Na-photography.html"
+                    class="black-image-project-hover"
+                  >
+                    <img
+                      src="univers/assets/images/BLU01366.JPG"
+                      alt=""
+                      class="banner-image"
+                    />
+                  </a>
+                  <div class="card-container card-container-lg">
+                    <h3>Nature Photography</h3>
+                    <h4>// Iphone & Canon 1200D</h4>
+
+                    <a href="./Na-photography.html" class="btn btn-default"
+                      >Discover</a
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Controls -->
+          <a
+            class="left carousel-control"
+            href="#myCarousel"
+            data-slide="prev"
+            >‹</a
+          >
+          <a
+            class="right carousel-control"
+            href="#myCarousel"
+            data-slide="next"
+            >›</a
+          >
         </div>
       </div>
     </div>
+  </div>
+</div>
+</div>
 
-    <!-- Icons and Stylesheets -->
-
-    <link href="./main.3f6952e4.css" rel="stylesheet" />
-
-    <!-- Footer -->
-    <footer class="footer-container text-center">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <p>© Raghav Raj Sobti</p>
+      <!-- Footer -->
+      <footer class="footer-container text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <p>© Raghav Raj Sobti</p>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script type="text/javascript" src="./main.70a66962.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-9Q0H44N1TJ"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-9Q0H44N1TJ");
-    </script>
-
-    <script>
-      fetch("head.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("head-content").innerHTML = data;
+      <!-- Scripts -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+          navActivePage();
         });
-    </script>
+      </script>
 
-    <!-- Include jQuery and Bootstrap JS -->
+      <!-- Google Analytics -->
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-9Q0H44N1TJ"
+      ></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", "G-9Q0H44N1TJ");
+      </script>
+
+      <!-- Load Head Content -->
+      <script>
+        fetch("head.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("head-content").innerHTML = data;
+          });
+      </script>
+
+      <script type="text/javascript" src="./main.70a66962.js"></script>
+    </div>
   </body>
 </html>
