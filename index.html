@@ -10,49 +10,14 @@
     <!-- Add your content of header -->
     <header>
       <div id="navbar-placeholder">
-        <nav class="navbar navbar-fixed-top navbar-default">
-          <div class="container">
-            <button
-              type="button"
-              class="navbar-toggle collapsed"
-              data-toggle="collapse"
-              data-target="#navbar-collapse"
-              aria-expanded="false"
-            >
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-              <ul class="nav navbar-nav">
-                <li><a href="./index.html">01 : HOME</a></li>
-                <li><a href="./works.html">02 : WORKS </a></li>
-                <li><a href="./about.html">03 : ABOUT ME</a></li>
-                <li><a href="./contact.html">04 : CONNECT</a></li>
-                <li>
-                  <a href="instagram://user?username=bluepolaroid05"
-                    >INSTAGRAM <i class="fa fa-instagram"></i
-                  ></a>
-                </li>
-                <li>
-                  <a href="vnd.youtube://www.youtube.com/@bluepolaroid05/videos"
-                    >YOUTUBE <i class="fa fa-youtube"></i
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    href="https://wa.me/918591499393?text=Hello,%20I'm%20interested%20in%20your%20work!"
-                    target="_blank"
-                    >WHATSAPP <i class="fa fa-whatsapp"></i
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+    
       </div>
+      <script>
+        // Load the navbar from navbar.html
+        fetch("navbar.html")
+          .then(response => response.text())
+          .then(data => document.getElementById("navbar-placeholder").innerHTML = data);
+      </script>
     </header>
 
     <div
@@ -78,7 +43,12 @@
                   <a href="works.html" class="btn btn-primary btn-lg"
                     >VIEW MY WORK</a
                   >
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxY4Jh6mGhh4kEavbBBqgWZ_wcUHbBUbcgZXC5_NnWYfPTEg/viewform" class="btn btn-primary btn-lg">CONNECT WITH ME</a>
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxY4Jh6mGhh4kEavbBBqgWZ_wcUHbBUbcgZXC5_NnWYfPTEg/viewform" 
+                  class="btn btn-primary btn-lg"
+                  onclick="window.open(this.href, '_blank'); return false;">
+                  CONNECT WITH ME
+               </a>
+               
 
                 </h1>
               </div>
