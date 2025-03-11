@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta content="IE=edge" http-equiv="X-UA-Compatible">
-  <meta content="width=device-width,initial-scale=1" name="viewport">
-  <meta content="description" name="description">
-  <meta name="google" content="notranslate" />
-  <meta content="Mashup templates have been developped by Orson.io team" name="author">
-
-  <!-- Disable tap highlight on IE -->
-  <meta name="msapplication-tap-highlight" content="no">
-  
-  <link rel="apple-touch-icon" sizes="180x180" href="univers/assets/apple-icon-180x180.png">
-  <link href="univers/assets/favicon.ico" rel="icon">
-
-  <title>Title page</title>  
+<head id="head">
+  <script>
+    fetch("head.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("head-content").innerHTML = data;
+      });
+  </script>
+</head>
 
 <link href="./main.3f6952e4.css" rel="stylesheet"></head>
 
 <body class="">
+  <div id="preloader">
+    <div class="loader">Loading...</div>
+  </div>
+  
 <div id="site-border-left"></div>
 <div id="site-border-right"></div>
 <div id="site-border-top"></div>

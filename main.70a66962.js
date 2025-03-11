@@ -8166,3 +8166,9 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function (event) {
   type();
 });
+
+window.addEventListener("load", function () {
+    document.getElementById("preloader").style.display = "none"; 
+    document.getElementById("content").style.display = "block"; 
+  });
+
