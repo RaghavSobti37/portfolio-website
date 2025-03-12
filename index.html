@@ -1,32 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head id="head-content"></head>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content="description" name="description" />
+    <meta name="google" content="notranslate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no" />
+  
+    <!-- Favicon for every mobile type and web-->
+    <link rel="icon" type="image/png" href="univers/assets/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="univers/assets/favicon.svg" />
+    <link rel="shortcut icon" href="univers/assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="univers/assets/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Bluepolaroid" />
+    <link rel="manifest" href="univers/assets/site.webmanifest" />
+  
+    <!-- Title -->
+    <title>bluepolaroid05</title>
+  
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+    <!-- Stylesheets -->
+    <link href="./main.3f6952e4.css" rel="stylesheet" />
+  </head>
   <body class="">
     <div id="preloader">
       <div class="loader"></div>
     </div>
-    
-    <div id="content">
-      <div id="site-border-left"></div>
-      <div id="site-border-right"></div>
-      <div id="site-border-top"></div>
-      <div id="site-border-bottom"></div>
+    <div id="content" style="display: none;">
 
-      <!-- Navbar -->
-      <header>
-        <div id="navbar-placeholder"></div>
-        <script>
-          // Load the navbar from navbar.html
-          fetch("navbar.html")
-            .then((response) => response.text())
-            .then(
-              (data) =>
-                (document.getElementById("navbar-placeholder").innerHTML = data)
-            );
-        </script>
-      </header>
-
+      <nav class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+          <button 
+            type="button" 
+            class="navbar-toggle collapsed" 
+            data-toggle="collapse" 
+            data-target="#navbar-collapse" 
+            aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a href ="./index.html"> 01 : HOME </a> </li>
+              <li class="dropdown">
+                <a href="./works.html" class="dropdown-toggle" data-toggle="dropdown">02 : WORKS <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="./nps.html">001 : NPS ad films</a></li>
+                  <li><a href="./khwaab.html">002 : Music Videos</a></li>
+                  <li><a href="./events.html">003 : Event photography</a></li>
+                  <li><a href="./Na-photography.html">004 : Nature photography</a></li>
+                  <li><a href="./short-films.html">005 : Short films </a></li>
+                </ul>
+              </li>
+              <li><a href="#aboutme">03 : ABOUT ME</a></li>
+              <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdxY4Jh6mGhh4kEavbBBqgWZ_wcUHbBUbcgZXC5_NnWYfPTEg/viewform" target="_blank">04 : CONNECT</a></li>
+              <!-- Instagram Link -->
+              <li>
+                <a href="https://www.instagram.com/bluepolaroid05/" id="instagram-link" target="_blank" rel="noopener noreferrer">
+                  INSTAGRAM <i class="fa fa-instagram"></i>
+                </a>
+              </li>
+              <!-- YouTube Link -->
+              <li>
+                <a href="https://www.youtube.com/@bluepolaroid05/videos" id="youtube-link" target="_blank" rel="noopener noreferrer">
+                  YOUTUBE <i class="fa fa-youtube"></i>
+                </a>
+              </li>
+              <!-- WhatsApp Link -->
+              <li>
+                <a href="https://wa.me/918591499393?text=Hello,%20I'm%20interested%20in%20your%20work!" target="_blank" rel="noopener noreferrer">
+                  WHATSAPP <i class="fa fa-whatsapp"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
       <!-- Hero Section -->
       <div
         class="hero-full-container background-image-container white-text-container"
@@ -85,6 +143,7 @@
                   </p>
                 </div>
                 <div class="about-me-image">
+                  <!-- First Image (Loaded Immediately) -->
                   <img
                     src="univers/assets/images/raghav.jpg"
                     alt="Raghav Raj Sobti"
@@ -197,187 +256,166 @@
         </div>
       </div>
 
-<!-- Carousel Section (Imported from works.html) -->
-<div class="section-container">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-2 section-container-spacer">
-        <div class="text-center">
-          <h1 class="h2">My Creative journey</h1>
-        </div>
-      </div>
-
-      <div class="col-md-12">
-        <div id="myCarousel" class="carousel slide projects-carousel">
-          <!-- Carousel items -->
-          <div class="carousel-inner">
-            <!-- First Slide -->
-            <div class="item active">
-              <div class="row">
-                <div class="col-sm-4">
-                  <a
-                    href="./Na-photography.html"
-                    class="black-image-project-hover"
-                  >
-                    <img
-                      src="univers/assets/images/raghav camera.jpg"
-                      alt=""
-                      class="banner-image"
-                    />
-                  </a>
-                  <div class="card-container card-container-lg">
-                    <h3>Music Video</h3>
-                    <h4>// Assistant Director</h4>
-
-                    <a href="./khwaab.html" class="btn btn-default"
-                      >Discover</a
-                    >
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <a href="./events.html" class="black-image-project-hover">
-                    <img
-                      src="univers/assets/images/event-photography/event-2.jpg"
-                      alt=""
-                      class="banner-image"
-                    />
-                  </a>
-                  <div class="card-container card-container-lg">
-                    <h3>Event Photography</h3>
-                    <h4>// Canon 1200D & Sony a7iii</h4>
-                    <a href="./events.html" class="btn btn-default"
-                      >Discover</a
-                    >
-                  </div>
-                </div>
-
-                <div class="col-sm-4">
-                  <a
-                    href="./short-films.html"
-                    class="black-image-project-hover"
-                  >
-                    <img
-                      src="univers/assets/images/BLU02003.JPG"
-                      alt=""
-                      class="banner-image"
-                    />
-                  </a>
-                  <div class="card-container card-container-lg">
-                    <h3>My Short Films</h3>
-                    <h4>// Sony a7iii</h4>
-                    <a href="./short-films.html" class="btn btn-default"
-                      >Discover</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Second Slide -->
-            <div class="item">
-              <div class="row">
-                <div class="col-sm-4">
-                  <a
-                    href="./Na-photography.html"
-                    class="black-image-project-hover"
-                  >
-                    <img
-                      src="univers/assets/images/BLU01366.JPG"
-                      alt=""
-                      class="banner-image"
-                    />
-                  </a>
-                  <div class="card-container card-container-lg">
-                    <h3>Nature Photography</h3>
-                    <h4>// Iphone & Canon 1200D</h4>
-
-                    <a href="./Na-photography.html" class="btn btn-default"
-                      >Discover</a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Controls -->
-          <a
-            class="left carousel-control"
-            href="#myCarousel"
-            data-slide="prev"
-            >‹</a
-          >
-          <a
-            class="right carousel-control"
-            href="#myCarousel"
-            data-slide="next"
-            >›</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-      <!-- Footer -->
-      <footer class="footer-container text-center">
+      <!-- Carousel Section -->
+      <div class="section-container">
         <div class="container">
           <div class="row">
-            <div class="col-xs-12">
-              <p>© Raghav Raj Sobti</p>
+            <div class="col-sm-8 col-sm-offset-2 section-container-spacer">
+              <div class="text-center">
+                <h1 class="h2">My Creative Journey</h1>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div id="myCarousel" class="carousel slide projects-carousel">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                  <!-- First Slide -->
+                  <div class="item active">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <a
+                          href="./Na-photography.html"
+                          class="black-image-project-hover"
+                        >
+                          <!-- Lazy Loaded Image -->
+                          <img
+                            src="placeholder.jpg"
+                            data-src="univers/assets/images/raghav camera.jpg"
+                            alt=""
+                            class="banner-image lazyload"
+                          />
+                        </a>
+                        <div class="card-container card-container-lg">
+                          <h3>Music Video</h3>
+                          <h4>// Assistant Director</h4>
+                          <a href="./khwaab.html" class="btn btn-default"
+                            >Discover</a
+                          >
+                        </div>
+                      </div>
+
+                      <div class="col-sm-4">
+                        <a href="./events.html" class="black-image-project-hover">
+                          <!-- Lazy Loaded Image -->
+                          <img
+                            src="placeholder.jpg"
+                            data-src="univers/assets/images/event-photography/event-2.jpg"
+                            alt=""
+                            class="banner-image lazyload"
+                          />
+                        </a>
+                        <div class="card-container card-container-lg">
+                          <h3>Event Photography</h3>
+                          <h4>// Canon 1200D & Sony a7iii</h4>
+                          <a href="./events.html" class="btn btn-default"
+                            >Discover</a
+                          >
+                        </div>
+                      </div>
+
+                      <div class="col-sm-4">
+                        <a
+                          href="./short-films.html"
+                          class="black-image-project-hover"
+                        >
+                          <!-- Lazy Loaded Image -->
+                          <img
+                            src="placeholder.jpg"
+                            data-src="univers/assets/images/BLU02003.JPG"
+                            alt=""
+                            class="banner-image lazyload"
+                          />
+                        </a>
+                        <div class="card-container card-container-lg">
+                          <h3>My Short Films</h3>
+                          <h4>// Sony a7iii</h4>
+                          <a href="./short-films.html" class="btn btn-default"
+                            >Discover</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Second Slide -->
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <a
+                          href="./Na-photography.html"
+                          class="black-image-project-hover"
+                        >
+                          <!-- Lazy Loaded Image -->
+                          <img
+                            src="placeholder.jpg"
+                            data-src="univers/assets/images/BLU01366.JPG"
+                            alt=""
+                            class="banner-image lazyload"
+                          />
+                        </a>
+                        <div class="card-container card-container-lg">
+                          <h3>Nature Photography</h3>
+                          <h4>// Iphone & Canon 1200D</h4>
+                          <a href="./Na-photography.html" class="btn btn-default"
+                            >Discover</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Controls -->
+                <a
+                  class="left carousel-control"
+                  href="#myCarousel"
+                  data-slide="prev"
+                  >‹</a
+                >
+                <a
+                  class="right carousel-control"
+                  href="#myCarousel"
+                  data-slide="next"
+                  >›</a
+                >
+              </div>
             </div>
           </div>
         </div>
-      </footer>
-
-      <!-- Scripts -->
+      </div>
     </div>
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          // Hide the preloader and show the content after the page loads
-          window.addEventListener("load", function () {
-            const preloader = document.getElementById("preloader");
-            const content = document.getElementById("content");
-  
-            // Hide preloader
-            preloader.style.display = "none";
-  
-            // Show content
-            content.style.display = "block";
-          });
+
+    <!-- Footer -->
+    <footer class="footer-container text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>© Raghav Raj Sobti</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Lazy Load Images
+      document.addEventListener("DOMContentLoaded", function () {
+        const lazyImages = document.querySelectorAll(".lazyload");
+        lazyImages.forEach((img) => {
+          img.src = img.dataset.src;
         });
-      </script>
-      <script>
-        document.addEventListener("DOMContentLoaded", function (event) {
-          navActivePage();
-        });
-      </script>
+      });
 
-      <!-- Google Analytics -->
-      <script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-9Q0H44N1TJ"
-      ></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
-        gtag("config", "G-9Q0H44N1TJ");
-      </script>
+      // Preloader
+      window.addEventListener("load", function () {
+        const preloader = document.getElementById("preloader");
+        const content = document.getElementById("content");
 
-      <!-- Load Head Content -->
-      <script>
-        fetch("head.html")
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById("head-content").innerHTML = data;
-          });
-      </script>
-
-      <script type="text/javascript" src="./main.70a66962.js"></script>
+        preloader.style.display = "none";
+        content.style.display = "block";
+      });
+    </script>
+    <script src="main.70a66962.js" defer></script>
   </body>
 </html>
