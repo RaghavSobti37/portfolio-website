@@ -1,0 +1,168 @@
+
+.services-page {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-container h1 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--accent);
+}
+
+.service-category {
+  margin-bottom: 4rem;
+}
+
+.service-category h2 {
+  position: relative;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  color: var(--accent);
+}
+
+.service-category h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background: var(--accent);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  background: var(--dark-secondary);
+  padding: 2rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.service-card h3 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.service-card p {
+  line-height: 1.6;
+}
+
+.workflow-section {
+  margin: 5rem 0;
+}
+
+.workflow-section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--accent);
+}
+
+.workflow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.workflow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(26, 26, 26, 0.5);
+  border-radius: 8px;
+  position: relative;
+}
+
+.step-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 77, 77, 0.1);
+  border-radius: 50%;
+}
+
+.step-content h3 {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.step-content p {
+  line-height: 1.6;
+}
+
+.conditions-section {
+  margin: 5rem 0;
+}
+
+.conditions-section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--accent);
+}
+
+.condition-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.condition-card {
+  background: var(--dark-secondary);
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--accent);
+}
+
+.condition-card h3 {
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+.condition-card p {
+  line-height: 1.6;
+}
+
+.contact-cta {
+  text-align: center;
+  margin-top: 5rem;
+  padding: 3rem;
+  background: rgba(255, 77, 77, 0.1);
+  border-radius: 8px;
+}
+
+.contact-cta h2 {
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: var(--accent);
+  color: white;
+  border-radius: 4px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: #ff3333;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+}
