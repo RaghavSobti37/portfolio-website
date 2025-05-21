@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram, FaYoutube, FaWhatsapp, FaEnvelope, FaPhone } from 'react-icons/fa';
 import '../styles/main.css';
-import '../styles/responsive.css';
 import emailjs from 'emailjs-com';
 import '../styles/contact.css';
 
