@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import '../styles/responsive.css';
 import '../styles/about.css';
 import '../styles/main.css';
-import profileImage from '../images/raghav.png';
+import profileImage from '../images/raghav3.jpg';
 
 const About = () => {
   return (
@@ -89,10 +89,24 @@ const About = () => {
                 <h3><strong>Assistant Director</strong></h3>
                 <h4><strong>EBC Originals & ArtisteFirst</strong></h4>
                 <ul>
-                  <li>Pre-production, shot listing, and art direction</li>
-                  <li>Worked in Ladakh for <i>Rooh</i> and other music videos</li>
-                  <li>Assisted on <i>Khwaab</i>, <i>Dhamaal</i>, <i>Riqqat</i> music videos</li>
+                  <li>2nd AD in <i>Riqqat</i> Album launch  </li>
                   <li>Helped with scene setups and creative direction</li>
+                  <li>Worked in Ladakh for the musical film <i>Rooh</i> </li>
+                  <li>Assisted on MV projects like <i>Khwaab</i>, <i>Dhamaal</i>, </li>
+                  
+                </ul>
+              </div>
+            </div>
+
+            <div className="timeline-item highlighted">
+              <div className="timeline-date">🎬 2022</div>
+              <div className="timeline-gap" />
+              <div className="timeline-content">
+                <h3><strong>Intern Assistant Director</strong></h3>
+                <h4><strong>Classic Films</strong></h4>
+                <ul>
+                  <li>Pre-production, shot listing, and art direction</li>
+                  <li>Created 4 offline edits for NPS ads</li>
                 </ul>
               </div>
             </div>
