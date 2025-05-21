@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import '../styles/responsive.css';
 import '../styles/about.css';
 import '../styles/main.css';
-import profileImage from '../images/raghav3.jpg';
+import profileImage from '../images/i25.jpg';
 
 const About = () => {
   return (
