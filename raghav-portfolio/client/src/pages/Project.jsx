@@ -5,6 +5,21 @@ import "../styles/responsive.css";
 import "../styles/projects.css";
 import { useEffect } from "react";
 
+import { useInView } from 'react-intersection-observer';
+
+const ProjectImage = ({ src, alt }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true, // load only once when visible
+    rootMargin: '100px', // load a bit before they come into view
+  });
+
+  return (
+    <div ref={ref} className="project-image">
+      {inView ? <img src={src} alt={alt} /> : <div style={{ height: '200px', background: '#eee' }}></div>}
+    </div>
+  );
+};
+
 const projects = [
   {
     id: 1,
@@ -822,7 +837,7 @@ const projects = [
     role: "Videographer",
     year: "2024",
     description: "Behind the scenes on the set of Rooh",
-    image: "/thumbnails/177.jpg",
+    image: "/thumbnails/177.JPG",
     category: "Behind the scenes",
     details: {
       date: "March 2024",
@@ -840,7 +855,7 @@ const projects = [
     role: "Videographer",
     year: "2024",
     description: "Behind the scenes on the set of Rooh",
-    image: "/thumbnails/066.jpg",
+    image: "/thumbnails/066.JPG",
     category: "Behind the scenes",
     details: {
       date: "March 2024",
@@ -924,7 +939,7 @@ const Projects = () => {
               onClick={() => openProjectModal(project)}
             >
               <div className="project-image">
-                <img src={project.image} alt={project.title} />
+                <ProjectImage src={project.image} alt={project.title} />
                 <div className="project-overlay">
                   <span>VIEW PROJECT</span>
                 </div>
