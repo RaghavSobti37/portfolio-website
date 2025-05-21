@@ -642,7 +642,7 @@ const projects = [
       artist: "Multiple Artists",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/TdHVE9_9iHA",
+      videos: [{ url: "https://www.youtube.com/embed/D8HXMxND-aY",
           platform: "youtube" }], 
     },
   },
