@@ -10,7 +10,7 @@ const Gallery = () => {
   
   // Sample photo data - replace with your actual photos
   const photos = [
-  { id: 1, src: "/thumbnails/i28.jpg", title: "Nature", category: "nature" },
+  { id: 1, src: "/thumbnails/i28.JPG", title: "Nature", category: "nature" },
   { id: 2, src: "/thumbnails/i47.jpg", title: "Nature", category: "nature" },
   { id: 3, src: "/thumbnails/i5.jpg", title: "Concert Photography", category: "concert" },
   { id: 4, src: "/thumbnails/i46.jpg", title: "Art", category: "art" },
