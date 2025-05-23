@@ -19,10 +19,10 @@ const Home = () => {
             <img src={profileImage} alt="Raghav Raj Sobti" className="profile-image" />
 
             {/* Decorative Graphic Elements */}
-            <div className="graphic-element sun"></div>
+            {/* <div className="graphic-element sun"></div>
             <div className="graphic-element moon"></div>
             <div className="graphic-line line-one"></div>
-            <div className="graphic-line line-two"></div>
+            <div className="graphic-line line-two"></div> */}
           </div>
 
           <div className="hero-text">

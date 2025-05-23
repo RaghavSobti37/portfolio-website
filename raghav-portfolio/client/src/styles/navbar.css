@@ -24,6 +24,9 @@
   overflow: hidden;
 }
 
+.logo-full{
+  font-family:'Times New Roman', Times, serif;
+}
 .nav-logo {
   padding: 1rem;
   margin-bottom: 2rem;
@@ -99,9 +102,11 @@
   width: var(--navbar-collapsed-width);
 }
 .vertical-navbar.collapsed .nav-logo .logo-full {
+  font-family:'Times New Roman', Times, serif;
   display: none;
 }
 .vertical-navbar.collapsed .nav-logo .logo-collapsed {
+  font-family:'Times New Roman', Times, serif;
   display: block;
   font-size: 1.8rem;
 }
@@ -166,7 +171,7 @@
 }
 
 .mobile-nav-logo {
-  font-family: var(--font-heading);
+  font-family: 'Times New Roman', Times, serif;
   font-size: 1.3rem;
   color: var(--accent);
   text-decoration: none;
