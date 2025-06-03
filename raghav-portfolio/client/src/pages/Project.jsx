@@ -107,7 +107,7 @@ const projects = [
       type: "Short Film",
       videos: [
         {
-          url: "https://www.youtube.com/embed/79ooo0YE5fY",
+          url: "https://www.youtube.com/embed/s6P4pilPNwQ",
           platform: "youtube",
         },
       ],
