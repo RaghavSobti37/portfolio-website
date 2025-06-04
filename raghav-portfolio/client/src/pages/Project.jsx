@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import "../styles/main.css";
 import "../styles/responsive.css";
 import "../styles/projects.css";
-import { useEffect } from "react";
 
 import { useInView } from 'react-intersection-observer';
 
@@ -871,33 +870,34 @@ const projects = [
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedProject, setSelectedProject] = useState(null);
-
-  // Load Instagram embed script when component mounts
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "//www.instagram.com/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
 
   const filteredProjects =
     activeCategory === "all"
       ? projects
       : projects.filter((project) => project.category === activeCategory);
 
-  const openProjectModal = (project) => {
-    setSelectedProject(project);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeProjectModal = () => {
-    setSelectedProject(null);
-    document.body.style.overflow = "auto";
+  const handleProjectClick = (project) => {
+    if (project.details && project.details.videos && project.details.videos.length > 0) {
+      const firstVideo = project.details.videos[0];
+      let urlToOpen = '';
+      if (firstVideo.platform === "instagram") {
+        urlToOpen = `https://www.instagram.com/reel/${firstVideo.url}/`;
+      } else if (firstVideo.platform === "youtube") {
+        // Extract video ID from embed URL and construct watch URL
+        const embedId = firstVideo.url.split('/').pop();
+        urlToOpen = `https://www.youtube.com/watch?v=${embedId}`;
+      } else {
+        // Fallback for other platforms or if platform is missing
+        urlToOpen = firstVideo.url;
+      }
+      if (urlToOpen) {
+        window.open(urlToOpen, '_blank', 'noopener,noreferrer');
+      } else {
+        console.warn("No valid URL found for project:", project.title);
+      }
+    } else {
+      console.warn("No videos found for project:", project.title);
+    }
   };
 
   return (
@@ -936,7 +936,7 @@ const Projects = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
               whileHover={{ scale: 1.03 }}
-              onClick={() => openProjectModal(project)}
+              onClick={() => handleProjectClick(project)}
             >
               <div className="project-image">
                 <ProjectImage src={project.image} alt={project.title} />
@@ -956,99 +956,6 @@ const Projects = () => {
           ))}
         </div>
       </div>
-
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            className="project-modal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="modal-content">
-              <h2>{selectedProject.title}</h2>
-              <button className="close-button" onClick={closeProjectModal}>
-                &times;
-              </button>
-
-              <div className="modal-videos">
-                {selectedProject.details.videos.map((video, index) => (
-                  <div key={index} className="video-container">
-                    {video.platform === "instagram" ? (
-                      <blockquote
-                        className="instagram-media"
-                        data-instgrm-permalink={`https://www.instagram.com/reel/${video.url}/`}
-                        data-instgrm-version="13"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          minHeight: "100%",
-                          textDecoration: "none",
-                        }}
-                      >
-                        <a
-                          href={`https://www.instagram.com/reel/${video.url}/`}
-                          style={{
-                            color: "var(--dark-primary)",
-                            fontSize: "1.5rem",
-                            fontWeight: "bold",
-                            padding: "1rem 2rem",
-                            border: "2px solid var(--dark-primary)",
-                            borderRadius: "4px",
-                            textAlign: "center",
-                            textDecoration: "none",
-                            transition: "all 0.3s ease",
-                          }}
-                          onMouseEnter={(e) =>
-                            (e.target.style.backgroundColor =
-                              "var(--dark-primary)")
-                          }
-                          onMouseLeave={(e) =>
-                            (e.target.style.backgroundColor = "transparent")
-                          }
-                        >
-                          View on Instagram
-                        </a>
-                      </blockquote>
-                    ) : (
-                      <iframe
-                        src={video.url}
-                        title={`${selectedProject.title} - Video ${index + 1}`}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              <div className="modal-details">
-                <div className="details-grid">
-                  {Object.entries(selectedProject.details).map(
-                    ([key, value]) =>
-                      key !== "videos" && (
-                        <div key={key} className="detail-item">
-                          <span className="detail-label">
-                            {key.charAt(0).toUpperCase() + key.slice(1)}
-                          </span>
-                          <span className="detail-value">{value}</span>
-                        </div>
-                      )
-                  )}
-                </div>
-
-                <div className="project-description">
-                  <h3>About the Project</h3>
-                  <p>{selectedProject.description}</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
