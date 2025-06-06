@@ -2,10 +2,6 @@
 
 A personal portfolio website showcasing photography and videography work, services, and contact information. Built with React for the frontend.
 
-## Live Demo
-
-(Link to your deployed Vercel site here)
-
 ## Features
 
 *   **Home Page:** Engaging introduction with hero section.
