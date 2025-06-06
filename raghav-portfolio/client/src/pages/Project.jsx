@@ -4,17 +4,21 @@ import "../styles/main.css";
 import "../styles/responsive.css";
 import "../styles/projects.css";
 
-import { useInView } from 'react-intersection-observer';
+import { useInView } from "react-intersection-observer";
 
 const ProjectImage = ({ src, alt }) => {
   const { ref, inView } = useInView({
     triggerOnce: true, // load only once when visible
-    rootMargin: '100px', // load a bit before they come into view
+    rootMargin: "100px", // load a bit before they come into view
   });
 
   return (
     <div ref={ref} className="project-image">
-      {inView ? <img src={src} alt={alt} /> : <div style={{ height: '200px', background: '#eee' }}></div>}
+      {inView ? (
+        <img src={src} alt={alt} />
+      ) : (
+        <div style={{ height: "200px", background: "#eee" }}></div>
+      )}
     </div>
   );
 };
@@ -89,7 +93,7 @@ const projects = [
       ],
     },
   },
-    {
+  {
     id: 36,
     title: "The Last Page",
     role: "Director",
@@ -282,10 +286,10 @@ const projects = [
       artist: "Various",
       director: "Raghav",
       type: "Showreel",
-      videos: [{ url: "DHdF3gyorF-", platform: "instagram" }], 
+      videos: [{ url: "DHdF3gyorF-", platform: "instagram" }],
     },
   },
-   {
+  {
     id: 12,
     title: "Bandhan Indian Wear Showreel",
     role: "Videographer",
@@ -300,10 +304,10 @@ const projects = [
       artist: "Porash Mishra",
       director: "Raghav",
       type: "Showreel",
-      videos: [{ url: "DGsNRvwtlX4", platform: "instagram" }], 
+      videos: [{ url: "DGsNRvwtlX4", platform: "instagram" }],
     },
   },
-     {
+  {
     id: 13,
     title: "Bandhan Western Wear Showreel",
     role: "Videographer",
@@ -318,10 +322,10 @@ const projects = [
       artist: "Porash Mishra",
       director: "Raghav",
       type: "Showreel",
-      videos: [{ url: "DIzAjRGIOOU", platform: "instagram" }], 
+      videos: [{ url: "DIzAjRGIOOU", platform: "instagram" }],
     },
   },
-    {
+  {
     id: 14,
     title: "NPS for Flexibility",
     role: "Intern AD",
@@ -336,12 +340,16 @@ const projects = [
       artist: "Arpit Choudhary",
       director: "Abhay Nihalani",
       type: "ad film",
-      videos: [{ url: "https://www.youtube.com/embed/oLjqyQlZ75U",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/oLjqyQlZ75U",
+          platform: "youtube",
+        },
+      ],
     },
   },
 
-   {
+  {
     id: 15,
     title: "NPS for Transparency",
     role: "Intern AD",
@@ -356,11 +364,15 @@ const projects = [
       artist: "Arpit Choudhary",
       director: "Abhay Nihalani",
       type: "ad film",
-      videos: [{ url: "https://www.youtube.com/embed/BZL_kGt-zRQ",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/BZL_kGt-zRQ",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 16,
     title: "NPS for Portability",
     role: "Intern AD",
@@ -375,11 +387,15 @@ const projects = [
       artist: "Arpit Choudhary",
       director: "Abhay Nihalani",
       type: "ad film",
-      videos: [{ url: "https://www.youtube.com/embed/7WAAMXyT4l8",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/7WAAMXyT4l8",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 17,
     title: "NPS for Trust",
     role: "Intern AD",
@@ -394,16 +410,21 @@ const projects = [
       artist: "Arpit Choudhary",
       director: "Abhay Nihalani",
       type: "ad film",
-      videos: [{ url: "https://www.youtube.com/embed/qguwlDHest0",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/qguwlDHest0",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 18,
     title: "Khwaab",
     role: "Assistant Director",
     year: "2024",
-    description: "Khwaab means unrequited love. A kind of love where feelings are not reciprocated. The song expresses the feelings one goes through and it reminds of the days gone by",
+    description:
+      "Khwaab means unrequited love. A kind of love where feelings are not reciprocated. The song expresses the feelings one goes through and it reminds of the days gone by",
     image: "/thumbnails/khwaab.png",
     category: "Music Video",
     details: {
@@ -413,16 +434,21 @@ const projects = [
       artist: "Faheem Abdullah and PHO",
       director: "Imbesat Ahmad & Oun Mehdi",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/EWIay_vyFMk",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/EWIay_vyFMk",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 19,
     title: "Rooh Music Film",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "A song that describes deep love. In this state of passionate love, you see your lover as perfect, almost unreal, like a divine being.",
+    description:
+      "A song that describes deep love. In this state of passionate love, you see your lover as perfect, almost unreal, like a divine being.",
     image: "/thumbnails/rooh.png",
     category: "Music Video",
     details: {
@@ -432,16 +458,21 @@ const projects = [
       artist: "Rekha Bhardwaj, Arslan Nizami",
       director: "Jomin Varghese ",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/EWIay_vyFMk",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/EWIay_vyFMk",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 20,
     title: "Masa Rosh",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "Masa Rosh is a playful song that captures the essence of making amends in a fun and endearing way. It's a song about playful apologies, cheeky charm, and the joy of making up to someone.",
+    description:
+      "Masa Rosh is a playful song that captures the essence of making amends in a fun and endearing way. It's a song about playful apologies, cheeky charm, and the joy of making up to someone.",
     image: "/thumbnails/masa.png",
     category: "Music Video",
     details: {
@@ -451,16 +482,21 @@ const projects = [
       artist: "Arslan Nizami  ,Siddharth Pandit",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/Gt7_LUqnldo",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/Gt7_LUqnldo",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 21,
     title: "Mora Piya",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "The song talks about a heart yearning for its beloved. The lyrics express a deep sense of longing, as they eagerly awaits the arrival of their love, their heart pounding with each passing moment.",
+    description:
+      "The song talks about a heart yearning for its beloved. The lyrics express a deep sense of longing, as they eagerly awaits the arrival of their love, their heart pounding with each passing moment.",
     image: "/thumbnails/mora.png",
     category: "Music Video",
     details: {
@@ -470,16 +506,21 @@ const projects = [
       artist: "Arslan Nizami , Shradha Mishra",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/y0g1uj3OE_Y",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/y0g1uj3OE_Y",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 22,
     title: "Fanna Fillah ",
     role: "2nd Assistant Director",
     year: "2024",
-    description: " The song gives hope, reminding us that even when we feel lost, we will eventually find our way. It’s a song that resonates with today’s generation, who often feel lost in their own thoughts, overwhelmed by the complexities of life.",
+    description:
+      " The song gives hope, reminding us that even when we feel lost, we will eventually find our way. It’s a song that resonates with today’s generation, who often feel lost in their own thoughts, overwhelmed by the complexities of life.",
     image: "/thumbnails/fanna.png",
     category: "Music Video",
     details: {
@@ -489,16 +530,21 @@ const projects = [
       artist: "Arslan Nizami , Faheem Abdullah , Siddharth Pandit",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/mm48gpsJ9bQ",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/mm48gpsJ9bQ",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 23,
     title: "Dhamaal",
     role: "2nd Assistant Director",
     year: "2025",
-    description: "Dhamaal is a song that captures the intense emotional journey of someone searching for their love and the joy that would have come if they have got that love.",
+    description:
+      "Dhamaal is a song that captures the intense emotional journey of someone searching for their love and the joy that would have come if they have got that love.",
     image: "/thumbnails/dhamaal.png",
     category: "Music Video",
     details: {
@@ -508,16 +554,21 @@ const projects = [
       artist: "Arslan Nizami , Faheem Abdullah , Qaisar Nizami , Aman Moroney",
       director: "Faheem Abdullah",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/EKET-n4cBHI",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/EKET-n4cBHI",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 24,
     title: "Tu kahan hai",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "Tu Kahan Hai is a journey of self-discovery, a quest for meaning. 'Tu Kahan Hai' is an exploration of identity, purpose, and the human condition.",
+    description:
+      "Tu Kahan Hai is a journey of self-discovery, a quest for meaning. 'Tu Kahan Hai' is an exploration of identity, purpose, and the human condition.",
     image: "/thumbnails/kahan.png",
     category: "Music Video",
     details: {
@@ -527,16 +578,21 @@ const projects = [
       artist: "Arslan Nizami",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/GQn3vTTKo9g",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/GQn3vTTKo9g",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 25,
     title: "Zamane Ki Zanjeer",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "Zamane Ki Zanjeer delves into the themes of existentialism, and social demons. It explores the human condition, questioning the purpose of life and the nature of reality. ",
+    description:
+      "Zamane Ki Zanjeer delves into the themes of existentialism, and social demons. It explores the human condition, questioning the purpose of life and the nature of reality. ",
     image: "/thumbnails/zanjeer.png",
     category: "Music Video",
     details: {
@@ -546,16 +602,21 @@ const projects = [
       artist: "Arslan Nizami , Farozan Nizami , Huzaif Nazar ",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/xk1qELGYnDQ",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/xk1qELGYnDQ",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 26,
     title: "Dard-e-Maa ",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "Dard-e-Maa is a mystical song blending Hafiz's and Shamas Faqir’s Persian poetry with Kashmiri influences. It symbolizes a door that leads listeners to a personal, journey.",
+    description:
+      "Dard-e-Maa is a mystical song blending Hafiz's and Shamas Faqir’s Persian poetry with Kashmiri influences. It symbolizes a door that leads listeners to a personal, journey.",
     image: "/thumbnails/dardemaa.png",
     category: "Music Video",
     details: {
@@ -565,16 +626,21 @@ const projects = [
       artist: "Arslan Nizami",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/dBUTXHooqF0",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/dBUTXHooqF0",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 27,
     title: "Saba Ke Baad",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "A song that describes deep, love. In this state of passionate love, you see your lover as perfect, almost unreal, like a divine being.",
+    description:
+      "A song that describes deep, love. In this state of passionate love, you see your lover as perfect, almost unreal, like a divine being.",
     image: "/thumbnails/sabba.png",
     category: "Music Video",
     details: {
@@ -584,16 +650,21 @@ const projects = [
       artist: "Arslan Nizami , Zeeshaan Nabi",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/nFQTEXzwFqI",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/nFQTEXzwFqI",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 28,
     title: "Rooh 2.0",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "A song that shows you admire someone so much that you’re willing to loose yourself for them. It’s a love that’s pure, intense, and all-consuming",
+    description:
+      "A song that shows you admire someone so much that you’re willing to loose yourself for them. It’s a love that’s pure, intense, and all-consuming",
     image: "/thumbnails/rooh2.png",
     category: "Music Video",
     details: {
@@ -603,16 +674,21 @@ const projects = [
       artist: "Arslan Nizami , Qafilah",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/K2_L5On8N-M",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/K2_L5On8N-M",
+          platform: "youtube",
+        },
+      ],
     },
   },
-     {
+  {
     id: 32,
     title: "Aabruu",
     role: "1st Director's Assistant",
     year: "2024",
-    description: "The song captures the essence of a deep and enduring love, where the lover's dignity becomes a source of immense joy.",
+    description:
+      "The song captures the essence of a deep and enduring love, where the lover's dignity becomes a source of immense joy.",
     image: "/thumbnails/aabruu.png",
     category: "Music Video",
     details: {
@@ -622,16 +698,21 @@ const projects = [
       artist: "Arslan Nizami , Khan Inam-Ul-Haq , Princy Khatiwada",
       director: "Faheem Abdullah",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/8d9tcK27H0I",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/8d9tcK27H0I",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 29,
     title: "RIQQAT The Decode",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "The artists themselves unravel the layers of RIQQAT, exploring its rich lyrics, music, and the collaborative journey that brought it to life.",
+    description:
+      "The artists themselves unravel the layers of RIQQAT, exploring its rich lyrics, music, and the collaborative journey that brought it to life.",
     image: "/thumbnails/decode.png",
     category: "interview",
     details: {
@@ -641,16 +722,21 @@ const projects = [
       artist: "Multiple Artists",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/D8HXMxND-aY",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/D8HXMxND-aY",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 30,
     title: "RIQQAT The Decode EP-2",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "The artists themselves unravel the layers of RIQQAT, exploring its rich lyrics, music, and the collaborative journey that brought it to life.",
+    description:
+      "The artists themselves unravel the layers of RIQQAT, exploring its rich lyrics, music, and the collaborative journey that brought it to life.",
     image: "/thumbnails/decode2.png",
     category: "interview",
     details: {
@@ -660,16 +746,21 @@ const projects = [
       artist: "Multiple Artists",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/ngeMq67_3sM",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/ngeMq67_3sM",
+          platform: "youtube",
+        },
+      ],
     },
   },
-   {
+  {
     id: 31,
     title: "RIQQAT The Decode EP-3",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "The artists themselves unravel the layers of RIQQAT, exploring its rich lyrics, music, and the collaborative journey that brought it to life.",
+    description:
+      "The artists themselves unravel the layers of RIQQAT, exploring its rich lyrics, music, and the collaborative journey that brought it to life.",
     image: "/thumbnails/decode3.png",
     category: "interview",
     details: {
@@ -679,16 +770,21 @@ const projects = [
       artist: "Multiple Artists",
       director: "Deepak Rawat",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/TdHVE9_9iHA",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/TdHVE9_9iHA",
+          platform: "youtube",
+        },
+      ],
     },
   },
-{
+  {
     id: 33,
     title: "Making of Aabruu",
     role: "1st Director's Assistant",
     year: "2024",
-    description: "Aabruu is a heartfelt song that expresses having pride on your lover. It delves into the emotions of love, admiration, and pride.",
+    description:
+      "Aabruu is a heartfelt song that expresses having pride on your lover. It delves into the emotions of love, admiration, and pride.",
     image: "/thumbnails/making1.png",
     category: "Behind the scenes",
     details: {
@@ -698,16 +794,21 @@ const projects = [
       artist: "Arslan Nizami , Khan Inam-Ul-Haq , Princy Khatiwada",
       director: "Faheem Abdullah",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/N2_sGRTLaIs",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/N2_sGRTLaIs",
+          platform: "youtube",
+        },
+      ],
     },
   },
-{
+  {
     id: 34,
     title: "Making of Dhamaal",
     role: "1st Director's Assistant",
     year: "2024",
-    description: "Presenting the journey and the making of the music film of Dhamaal from Arslan Nizami's latest album RIQQAT.",
+    description:
+      "Presenting the journey and the making of the music film of Dhamaal from Arslan Nizami's latest album RIQQAT.",
     image: "/thumbnails/making2.png",
     category: "Behind the scenes",
     details: {
@@ -717,16 +818,21 @@ const projects = [
       artist: "Arslan Nizami , Quaisar Nizami ",
       director: "Faheem Abdullah",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/prEhLOAk3GI",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/prEhLOAk3GI",
+          platform: "youtube",
+        },
+      ],
     },
   },
-{
+  {
     id: 35,
     title: "Making of Rooh",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "Presenting the journey and the making of the music film of Rooh from Arslan Nizami's latest album RIQQAT.",
+    description:
+      "Presenting the journey and the making of the music film of Rooh from Arslan Nizami's latest album RIQQAT.",
     image: "/thumbnails/making3.png",
     category: "Behind the scenes",
     details: {
@@ -736,16 +842,21 @@ const projects = [
       artist: "Rekha Bhardwaj, Arslan Nizami, Shiwani Bhardwaj",
       director: "Faheem Abdullah",
       type: "Music Video",
-      videos: [{ url: "https://www.youtube.com/embed/RRUdEIQ9vH8",
-          platform: "youtube" }], 
+      videos: [
+        {
+          url: "https://www.youtube.com/embed/RRUdEIQ9vH8",
+          platform: "youtube",
+        },
+      ],
     },
   },
-    {
+  {
     id: 37,
     title: "Jahnvi Hard Rock Cafe",
     role: "Videographer",
     year: "2025",
-    description: " It felt as if it was waiting for me to cut through the things that were killing me and be born right at that miracle moment. ",
+    description:
+      " It felt as if it was waiting for me to cut through the things that were killing me and be born right at that miracle moment. ",
     image: "/thumbnails/jahnvi3.png",
     category: "showreel",
     details: {
@@ -755,15 +866,16 @@ const projects = [
       artist: "Jahnvi",
       director: "Raghav",
       type: "Showreel",
-      videos: [{ url: "DJCEeopy2F3", platform: "instagram" }], 
+      videos: [{ url: "DJCEeopy2F3", platform: "instagram" }],
     },
   },
-      {
+  {
     id: 38,
     title: "Holy Trinity of Filmmakers",
     role: "Director",
     year: "2025",
-    description: "Three storytellers united by a love for cinema, crafting short films that speak from the heart. ",
+    description:
+      "Three storytellers united by a love for cinema, crafting short films that speak from the heart. ",
     image: "/thumbnails/holy.png",
     category: "showreel",
     details: {
@@ -773,10 +885,10 @@ const projects = [
       artist: "Various",
       director: "Various",
       type: "Showreel",
-      videos: [{ url: "DELCubty0cN", platform: "instagram" }], 
+      videos: [{ url: "DELCubty0cN", platform: "instagram" }],
     },
   },
-    {
+  {
     id: 39,
     title: "Savera EC Reveal",
     role: "Videographer",
@@ -791,7 +903,7 @@ const projects = [
       artist: "Various",
       director: "Various",
       type: "Showreel",
-      videos: [{ url: "C_lEzIZvEU4", platform: "instagram" }], 
+      videos: [{ url: "C_lEzIZvEU4", platform: "instagram" }],
     },
   },
   {
@@ -809,7 +921,7 @@ const projects = [
       artist: "Various",
       director: "Raghav",
       type: "Showreel",
-      videos: [{ url: "C5DY3hsSJWO", platform: "instagram" }], 
+      videos: [{ url: "C5DY3hsSJWO", platform: "instagram" }],
     },
   },
   {
@@ -827,7 +939,7 @@ const projects = [
       artist: "Various",
       director: "Raghav",
       type: "Showreel",
-      videos: [{ url: "C4DcH0WSkiY", platform: "instagram" }], 
+      videos: [{ url: "C4DcH0WSkiY", platform: "instagram" }],
     },
   },
   {
@@ -845,7 +957,7 @@ const projects = [
       artist: "Arsalan nizami , Rekha Bhardwaj , Shiwani Bhardwaj",
       director: "Raghav",
       type: "Showreel",
-      videos: [{ url: "DE7hrOqP8Tu", platform: "instagram" }], 
+      videos: [{ url: "DE7hrOqP8Tu", platform: "instagram" }],
     },
   },
   {
@@ -863,7 +975,7 @@ const projects = [
       artist: "Arsalan nizami , Rekha Bhardwaj , Shiwani Bhardwaj",
       director: "Raghav",
       type: "Showreel",
-      videos: [{ url: "DEmePaCsQ0R", platform: "instagram" }], 
+      videos: [{ url: "DEmePaCsQ0R", platform: "instagram" }],
     },
   },
 ];
@@ -877,21 +989,25 @@ const Projects = () => {
       : projects.filter((project) => project.category === activeCategory);
 
   const handleProjectClick = (project) => {
-    if (project.details && project.details.videos && project.details.videos.length > 0) {
+    if (
+      project.details &&
+      project.details.videos &&
+      project.details.videos.length > 0
+    ) {
       const firstVideo = project.details.videos[0];
-      let urlToOpen = '';
+      let urlToOpen = "";
       if (firstVideo.platform === "instagram") {
         urlToOpen = `https://www.instagram.com/reel/${firstVideo.url}/`;
       } else if (firstVideo.platform === "youtube") {
         // Extract video ID from embed URL and construct watch URL
-        const embedId = firstVideo.url.split('/').pop();
+        const embedId = firstVideo.url.split("/").pop();
         urlToOpen = `https://www.youtube.com/watch?v=${embedId}`;
       } else {
         // Fallback for other platforms or if platform is missing
         urlToOpen = firstVideo.url;
       }
       if (urlToOpen) {
-        window.open(urlToOpen, '_blank', 'noopener,noreferrer');
+        window.open(urlToOpen, "_blank", "noopener,noreferrer");
       } else {
         console.warn("No valid URL found for project:", project.title);
       }
@@ -912,7 +1028,16 @@ const Projects = () => {
         </motion.h1>
 
         <div className="category-filter">
-          {["all", "Music Video","Behind the scenes","short-film", "event","Ad Film","interview" , "showreel"].map((cat) => (
+          {[
+            "all",
+            "Music Video",
+            "Behind the scenes",
+            "short-film",
+            "event",
+            "Ad Film",
+            "interview",
+            "showreel",
+          ].map((cat) => (
             <button
               key={cat}
               className={activeCategory === cat ? "active" : ""}
