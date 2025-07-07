@@ -1,7 +1,19 @@
 {
-  "name": "client",
+  "name": "professional-videographer-portfolio",
   "version": "0.1.0",
   "private": true,
+  "description": "Professional videographer and photographer portfolio showcasing gimbal work, reel shoots, and cinematography services",
+  "keywords": [
+    "videographer",
+    "photographer",
+    "cinematographer",
+    "gimbal-operator",
+    "professional-shoot",
+    "reel-shoot",
+    "video-production",
+    "commercial-photography"
+  ],
+  "homepage": "https://yourwebsite.com",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@testing-library/dom": "^10.4.0",
@@ -10,6 +22,7 @@
     "framer-motion": "^12.12.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-helmet": "^6.1.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
     "react-router-dom": "^7.6.0",
