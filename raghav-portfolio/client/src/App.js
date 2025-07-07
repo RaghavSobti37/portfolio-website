@@ -13,8 +13,6 @@ import "./styles/main.css";
 import "./styles/responsive.css";
 import "./styles/navbar.css";
 
-import GoldenSpiralLoader from "./components/GoldenSpiralLoader";
-
 // Create a wrapper component to use useLocation inside Router context
 const AppContent = () => {
   const location = useLocation();
@@ -44,7 +42,6 @@ const AppContent = () => {
             zIndex: 9999,
           }}
         >
-          <GoldenSpiralLoader />
         </div>
       )}
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   FaInstagram,
@@ -21,21 +21,23 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState(null);
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitMessage(null);
 
-    const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-    const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-    const USER_ID = process.env.REACT_APP_EMAILJS_USER_ID;
+    // Use environment variables with fallbacks
+    const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || "your_service_id";
+    const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "your_template_id";
+    const USER_ID = process.env.REACT_APP_EMAILJS_USER_ID || "your_user_id";
 
     const templateParams = {
       name: formData.name,
@@ -45,30 +47,33 @@ const Contact = () => {
       to_email: "raghavsobti37@gmail.com",
     };
 
-    // Send primary message to yourself
-    emailjs
-      .send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
-      .then(() => {
-        console.log("Primary message sent.");
-      })
-      .then(() => {
-        console.log("Auto-reply sent.");
-        setIsSubmitting(false);
-        setSubmitMessage({
-          type: "success",
-          text: "Your message has been sent successfully! I will get back to you soon.",
-        });
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      })
-      .catch((error) => {
-        console.error("Email sending failed:", error);
-        setIsSubmitting(false);
-        setSubmitMessage({
-          type: "error",
-          text: "Failed to send message. Please try again later or contact me directly.",
-        });
+    try {
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID);
+      
+      setSubmitMessage({
+        type: "success",
+        text: "Your message has been sent successfully! I will get back to you soon.",
       });
-  };
+      
+      // Reset form
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => setSubmitMessage(null), 5000);
+      
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      setSubmitMessage({
+        type: "error",
+        text: "Failed to send message. Please try again later or contact me directly.",
+      });
+      
+      // Clear error message after 5 seconds
+      setTimeout(() => setSubmitMessage(null), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formData]);
 
   return (
     <div className="contact-page">
@@ -104,6 +109,7 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group">
@@ -115,6 +121,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group">
@@ -126,6 +133,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                 />
               </div>
               <div className="form-group">
@@ -136,6 +144,8 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
+                  rows="5"
                 />
               </div>
               <button
@@ -211,6 +221,7 @@ const Contact = () => {
                 href="https://instagram.com/bluepolaroid05"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Instagram"
               >
                 <FaInstagram className="social-icon" />
               </a>
@@ -218,6 +229,7 @@ const Contact = () => {
                 href="https://youtube.com/@bluepolaroid05"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="YouTube"
               >
                 <FaYoutube className="social-icon" />
               </a>
@@ -225,10 +237,11 @@ const Contact = () => {
                 href="https://wa.me/918591499393"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="WhatsApp"
               >
                 <FaWhatsapp className="social-icon" />
               </a>
-              <a href="mailto:raghavsobti37@gmail.com">
+              <a href="mailto:raghavsobti37@gmail.com" aria-label="Email">
                 <FaEnvelope className="social-icon" />
               </a>
             </div>
