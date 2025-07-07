@@ -87,9 +87,11 @@
 
 .cta-buttons {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 
@@ -145,18 +147,25 @@
   position: relative;
   display: inline-block;
   padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-decoration: none;
+  border: 2px solid;
+  background: transparent;
   color: white;
-  border: none;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
   cursor: pointer;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 4px;
+  min-width: 160px;
+  justify-content: center;
   background: linear-gradient(45deg, #ff6161, #ffcc33);
   border-radius: 50px;
   box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
-  transition: all 0.3s ease-in-out;
 }
 
 .animated-button::before {
@@ -190,6 +199,65 @@
   box-shadow: 0 0 20px rgba(255, 77, 77, 0.8);
 }
 
+/* Primary button (View My Work) */
+.animated-button.primary {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.animated-button.primary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Secondary button (Contact Me) */
+.animated-button.secondary {
+  border-color: #fff;
+  background: transparent;
+}
+
+.animated-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Download Resume button */
+.animated-button.download-resume {
+  border-color: #4CAF50;
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.animated-button.download-resume:hover {
+  background: rgba(76, 175, 80, 0.2);
+  color: #fff;
+  border-color: #4CAF50;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+/* Service Agreement button */
+.animated-button.download-agreement {
+  border-color: #2196F3;
+  background: rgba(33, 150, 243, 0.1);
+  color: #2196F3;
+}
+
+.animated-button.download-agreement:hover {
+  background: rgba(33, 150, 243, 0.2);
+  color: #fff;
+  border-color: #2196F3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+}
+
+/* Button icons */
+.button-icon {
+  font-size: 1rem;
+  margin-right: 0.25rem;
+}
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
@@ -250,7 +318,7 @@
   }
   
   .hero-text h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   .hero-text h2 {
@@ -269,5 +337,26 @@
   .animated-button {
     width: 80%; /* Make buttons take more width */
     max-width: 300px; /* But not too wide */
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .animated-button {
+    width: 100%;
+    max-width: 280px;
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-button {
+    font-size: 0.8rem;
+    padding: 12px 16px;
+    min-width: 140px;
   }
 }
