@@ -59,9 +59,9 @@ const photos = [
 
   // Events & Concerts
   { id: 54, src: "/gallery/professional-event-photographer-storytelling-festival.jpg", title: "Professional Event Photography - Storytelling Festival", category: "events" },
-  { id: 55, src: "/thumbnails/samarpan2.jpg", title: "Samarpan Event", category: "events" },
-  { id: 56, src: "/thumbnails/porash.jpg", title: "Porash Performance", category: "events" },
-  { id: 57, src: "/thumbnails/porash2.jpg", title: "Porash Portrait", category: "events" },
+  // { id: 55, src: "/thumbnails/samarpan2.jpg", title: "Samarpan Event", category: "events" },
+  // { id: 56, src: "/thumbnails/porash.jpg", title: "Porash Performance", category: "events" },
+  // { id: 57, src: "/thumbnails/porash2.jpg", title: "Porash Portrait", category: "events" },
 
   // Street & Urban
   { id: 58, src: "/gallery/professional-street-photographer-urban-moments.jpg", title: "Professional Street Photography - Urban Moments", category: "street" },

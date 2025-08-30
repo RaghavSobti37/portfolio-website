@@ -516,7 +516,51 @@ const projectsData = [
     category: "showreel",
     videoUrl: "https://www.instagram.com/reel/DKH4RVozCiU/",
     platform: "instagram"
-  }
+  },
+  {
+    id: 48,
+    title: "90 Seconds with Sinash",
+    role: "Videographer",
+    year: "2025",
+    description: "Rising from Jaipur, Sinash is an upcoming rhythm prodigy who is coming in front of the mic after being the man behind some of your favourite underground bangers!!",
+    image: "/thumbnails/sinash.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DNLZmU2T5bZ/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram"
+  },
+  {
+    id: 49,
+    title: "90 Seconds with Ankur Tiwari",
+    role: "Videographer",
+    year: "2025",
+    description: "a lucky opportunity to spend some time with Ankur as he prepared for his set at @buskr.in and got to watch him live as he mesmerized the hundreds in attendance for him!",
+    image: "/thumbnails/Image-665.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DMXy444xFMx/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram"
+  },
+  {
+    id: 50,
+    title: "Karun's Confession",
+    role: "Videographer",
+    year: "2025",
+    description: "Special Trailer for the album launch of Karun with a story to unfold his true face to his listeners.",
+    image: "/thumbnails/karun.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DM0AVz2TRmw/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram"
+  },
+  {
+    id: 51,
+    title: "Pyaar @ Kalarooms",
+    role: "Videographer",
+    year: "2025",
+    description: "In this special collaboration at a one-of-a-kind antique shop that preserves the history of entertainment and design,",
+    image: "/thumbnails/pyaar.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DNk66ZzyVMw/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram"
+  },
 ];
 
 // Function to shuffle array while maintaining ID order

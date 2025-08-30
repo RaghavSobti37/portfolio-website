@@ -88,7 +88,6 @@ const Gallery = () => {
           >
             <img src={photo.src} alt={photo.title} loading="lazy" />
             <div className="photo-overlay">
-              <h3>{photo.title}</h3>
             </div>
           </motion.div>
         ))}
