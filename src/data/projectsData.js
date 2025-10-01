@@ -551,6 +551,17 @@ const projectsData = [
     platform: "instagram"
   },
   {
+    id: 52,
+    title: "Manali - Through my lens",
+    role: "Videographer",
+    year: "2025",
+    description: "capturing the beauty of Manali through my lens.",
+    image: "/gallery/31.jpg",
+    category: "showreel",
+    videoUrl: "https://www.instagram.com/reel/DO1n0CCE_q-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    platform: "instagram"
+  },
+  {
     id: 51,
     title: "Pyaar @ Kalarooms",
     role: "Videographer",

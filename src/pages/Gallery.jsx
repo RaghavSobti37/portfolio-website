@@ -60,21 +60,24 @@ const Gallery = () => {
       <h1>Photography Gallery</h1>
 
       <div className="category-filter">
-        <button
-          onClick={() => setActiveCategory("all")}
-          className={activeCategory === "all" ? "active" : ""}
-        >
-          All
-        </button>
-        {photoCategories.map((category) => (
+        <div>
           <button
-            key={category.id}
-            onClick={() => setActiveCategory(category.id)}
-            className={activeCategory === category.id ? "active" : ""}
+            onClick={() => setActiveCategory("all")}
+            className={activeCategory === "all" ? "active" : ""}
           >
-            {category.name}
+            All
           </button>
-        ))}
+          {photoCategories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={activeCategory === category.id ? "active" : ""}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
+        <a href="/projects" className="gallery-button">Go to Projects →</a>
       </div>
 
       <div className="gallery-grid">

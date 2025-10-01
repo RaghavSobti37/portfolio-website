@@ -5,9 +5,10 @@ import "../styles/responsive.css";
 import "../styles/projects.css";
 import { useInView } from "react-intersection-observer";
 import { projects, categories } from "../data/projectsData";
-
+console.log("Projects data:", projects);
 const ProjectImage = ({ src, alt }) => {
   const { ref, inView } = useInView({
+
     triggerOnce: true, // load only once when visible
     rootMargin: "100px", // load a bit before they come into view
   });
@@ -25,11 +26,22 @@ const ProjectImage = ({ src, alt }) => {
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  
 
-  const filteredProjects =
-    activeCategory === "all"
-      ? projects
-      : projects.filter((project) => project.category === activeCategory);
+  const filteredProjects = projects.filter(project => {
+    if (activeCategory === "all") {
+      return true;
+    }
+    // Special case for "AD" to catch all related roles
+    if (activeCategory === "AD") {
+      return project.role.includes("AD") || project.role.includes("Assistant Director") || project.role.includes("Director's Assistant");
+    }
+    // Special case for "Director" to exclude "Assistant" roles
+    if (activeCategory === "Director") {
+      return project.role.includes("Director") && !project.role.includes("Assistant");
+    }
+    return project.role.includes(activeCategory);
+  });
 
   const handleProjectClick = (project) => {
     let urlToOpen = "";
@@ -63,19 +75,14 @@ const Projects = () => {
         </motion.h1>
 
         <div className="category-filter">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={activeCategory === cat ? "active" : ""}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat.replace("-", " ").replace(/^\w/, (c) => c.toUpperCase())}
-            </button>
-          ))}
-
-          <a href="/gallery" className="gallery-button">
-            Go to Gallery →
-          </a>
+          <div>
+            <button className={activeCategory === 'all' ? 'active' : ''} onClick={() => setActiveCategory("all")}>All</button>
+            <button className={activeCategory === 'Videographer' ? 'active' : ''} onClick={() => setActiveCategory("Videographer")}>Videographer</button>
+            <button className={activeCategory === 'Director' ? 'active' : ''} onClick={() => setActiveCategory("Director")}>Director</button>
+            <button className={activeCategory === 'Cinematographer' ? 'active' : ''} onClick={() => setActiveCategory("Cinematographer")}>Cinematographer</button>
+            <button className={activeCategory === 'AD' ? 'active' : ''} onClick={() => setActiveCategory("AD")}>AD</button>
+          </div>
+          <a href="/gallery" className="gallery-button">Go to Gallery →</a>
         </div>
 
         <div className="projects-grid">
