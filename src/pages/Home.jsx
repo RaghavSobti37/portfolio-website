@@ -54,20 +54,19 @@ const Home = () => {
             >
               RAGHAV RAJ SOBTI
             </motion.h1>
-            {/* <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              PROFESSIONAL VIDEOGRAPHER & CINEMATOGRAPHER
-            </motion.h2> */}
-            <motion.p
+            <motion.div
+              className="hero-intro-text"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Bringing stories to life through compelling visuals, gimbal operations, and cinematic storytelling. Specializing in music videos, commercials, and professional photography.
-            </motion.p>
+              <p>
+                Crafting <span className="highlight-main">cinematic narratives</span> is my passion. My journey began with a love for <span className="highlight-secondary">gaming</span>, a curiosity for <span className="highlight-accent">code</span>, and a mind for <span className="highlight-main">problem-solving</span>. This led me to not only bring stories to life through the lens, but to also <span className="highlight-secondary">self-code</span> and <span className="highlight-accent">self-host</span> this entire website.
+              </p>
+              <p>
+                My skills are complemented by a solid foundation in <span className="highlight-main">cinematography</span>, honed as a graduate of the  <span className="highlight-main">New York Film Academy</span>. Let's create something <span className="highlight-accent">unforgettable</span> together.
+              </p>
+            </motion.div>
 
             <motion.div
               className="cta-buttons"
@@ -88,16 +87,7 @@ const Home = () => {
                 DOWNLOAD RESUME
               </button>
               
-              <button 
-                onClick={() => handleDownload('Service Workflow and Conditions .pdf', 'Service_Workflow_and_Conditions.pdf')}
-                className="animated-button download-agreement"
-                aria-label="Download Service Agreement"
-              >
-                {/* <span className="button-icon">📋</span> */}
-                SERVICE AGREEMENT
-              </button>
-              
-              <Link to="/contact" className="animated-button secondary">
+              <Link to="/contact" className="animated-button download-agreement">
                 CONTACT ME
               </Link>
             </motion.div>

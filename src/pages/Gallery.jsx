@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import "../styles/main.css";
@@ -10,10 +10,19 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [activeCategory, setActiveCategory] = useState("all");
 
+  const shuffledPhotos = useMemo(() => {
+    const array = [...photos];
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }, []);
+
   const filteredPhotos =
     activeCategory === "all"
-      ? photos
-      : photos.filter((photo) => photo.category === activeCategory);
+      ? shuffledPhotos
+      : shuffledPhotos.filter((photo) => photo.category === activeCategory);
 
   // Navigation functions
   const goToPrevious = () => {

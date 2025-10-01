@@ -61,7 +61,17 @@ const About = () => {
           <h2>WORK EXPERIENCE</h2>
           <div className="timeline">
             <div className="timeline-item highlighted">
-              <div className="timeline-date">🎥 2025</div>
+              <div className="timeline-date">2025</div>
+              <div className="timeline-gap"></div>
+              <div className="timeline-content">
+                <h3>New York Film Academy (Currently in progress)</h3>
+                <h4>15 Week Cinematography Course Graduate</h4>
+                <p>Completed an intensive 15-week course, honing skills in lighting, composition, and cinematic storytelling.</p>
+              </div>
+            </div>
+
+            <div className="timeline-item highlighted">
+              <div className="timeline-date">2025</div>
               <div className="timeline-gap" />
               <div className="timeline-content">
                 <h3>
@@ -78,7 +88,7 @@ const About = () => {
             </div>
 
             <div className="timeline-item highlighted">
-              <div className="timeline-date">📹 2024–2025</div>
+              <div className="timeline-date">2024–2025</div>
               <div className="timeline-gap" />
               <div className="timeline-content">
                 <h3>
@@ -99,7 +109,7 @@ const About = () => {
             </div>
 
             <div className="timeline-item highlighted">
-              <div className="timeline-date">🎬 2023–2024</div>
+              <div className="timeline-date">2023–2024</div>
               <div className="timeline-gap" />
               <div className="timeline-content">
                 <h3>
@@ -124,7 +134,7 @@ const About = () => {
             </div>
 
             <div className="timeline-item highlighted">
-              <div className="timeline-date">🎬 2022</div>
+              <div className="timeline-date">2022</div>
               <div className="timeline-gap" />
               <div className="timeline-content">
                 <h3>

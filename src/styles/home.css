@@ -2,7 +2,7 @@
 
 .home-page {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh; /* Ensure it's at least the height of the viewport */
   position: relative;
   overflow: hidden;
 }
@@ -12,7 +12,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0 2rem; /* Increased padding for better spacing */
 }
 
 .hero-background {
@@ -80,9 +80,51 @@
   color: var(--text-primary);
 }
 
-.hero-text p {
+.hero-intro-text {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-intro-text p {
   margin-bottom: 2rem;
   font-size: clamp(0.9rem, 1.5vw, 1.1rem); /* Responsive font size */
+  line-height: 2.2; /* Increased line-height to accommodate larger words */
+  color: var(--text-secondary);
+}
+
+.hero-intro-text .intro-heading {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+/* --- Irregular Highlight Styles --- */
+.hero-intro-text span[class^="highlight-"] {
+  font-weight: 700;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.highlight-main {
+  color: #82aaff; /* A pleasant blue */
+  font-size: 1.15em;
+}
+
+.highlight-accent {
+  color: var(--accent); /* Your main accent color */
+  font-size: 1.5em;
+  font-family: var(--font-heading);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-secondary {
+  color: #c792ea; /* A soft purple */
+  font-size: 1.3em;
+  letter-spacing: 1px;
 }
 
 .cta-buttons {
@@ -325,7 +367,7 @@
     font-size: 1.5rem;
   }
 
-  .hero-text p {
+  .hero-intro-text p {
     text-align: justify; /* Justify paragraph text on mobile */
     font-size: 0.9rem; /* Adjust paragraph font size for mobile */
   }
