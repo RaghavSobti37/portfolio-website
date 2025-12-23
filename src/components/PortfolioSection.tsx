@@ -12,8 +12,9 @@ interface PortfolioItem {
   type: string;
   description: string;
   icon: typeof Film;
-  embedType?: 'youtube' | 'instagram' | 'image';
+  embedType?: 'youtube' | 'instagram' | 'image' | 'video';
   embedUrl?: string;
+  thumbnail?: string;
 }
 
 const portfolioItems: PortfolioItem[] = [
@@ -26,6 +27,7 @@ const portfolioItems: PortfolioItem[] = [
     icon: Film,
     embedType: 'youtube',
     embedUrl: 'https://www.youtube.com/embed/28Mb1cIooGw?si=cZ5zHs2jnqOrDET9',
+    thumbnail: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80',
   },
   {
     id: 2,
@@ -34,8 +36,9 @@ const portfolioItems: PortfolioItem[] = [
     type: 'Documentary',
     description: 'A visual journey through city soundscapes.',
     icon: Film,
-    embedType: 'youtube',
-    embedUrl: 'https://www.youtube.com/embed/28Mb1cIooGw?si=cZ5zHs2jnqOrDET9',
+    embedType: 'video',
+    embedUrl: 'https://cdn.coverr.co/videos/coverr-filming-a-woman-in-a-studio-6285/1080p.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80',
   },
   {
     id: 3,
@@ -46,16 +49,18 @@ const portfolioItems: PortfolioItem[] = [
     icon: Instagram,
     embedType: 'instagram',
     embedUrl: 'https://www.instagram.com/reel/DGsNRvwtlX4/embed',
+    thumbnail: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80',
   },
   {
     id: 4,
     title: 'Product Launch',
     category: 'social',
-    type: 'Instagram Reel',
+    type: 'TikTok Series',
     description: 'High-engagement vertical content.',
     icon: Instagram,
-    embedType: 'instagram',
-    embedUrl: 'https://www.instagram.com/reel/DGsNRvwtlX4/embed',
+    embedType: 'video',
+    embedUrl: 'https://cdn.coverr.co/videos/coverr-woman-taking-a-video-of-food-1567/1080p.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?w=800&q=80',
   },
   {
     id: 5,
@@ -64,6 +69,8 @@ const portfolioItems: PortfolioItem[] = [
     type: 'React Website',
     description: 'Full-stack portfolio with CMS.',
     icon: Globe,
+    embedType: 'image',
+    thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
   },
   {
     id: 6,
@@ -72,6 +79,29 @@ const portfolioItems: PortfolioItem[] = [
     type: 'Next.js App',
     description: 'High-performance online store.',
     icon: Globe,
+    embedType: 'image',
+    thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+  },
+  {
+    id: 7,
+    title: 'Cinematic Wedding',
+    category: 'film',
+    type: 'Wedding Film',
+    description: 'Emotional storytelling for special moments.',
+    icon: Film,
+    embedType: 'video',
+    embedUrl: 'https://cdn.coverr.co/videos/coverr-couple-walking-in-a-lavender-field-4856/1080p.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
+  },
+  {
+    id: 8,
+    title: 'Coffee Brand Story',
+    category: 'social',
+    type: 'Content Series',
+    description: 'Artisanal coffee brand visual identity.',
+    icon: Instagram,
+    embedType: 'image',
+    thumbnail: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
   },
 ];
 
@@ -168,8 +198,8 @@ export const PortfolioSection = () => {
                 item.embedType === 'instagram' ? 'aspect-[9/16] md:row-span-2' : 'aspect-video'
               }`}
             >
-              {/* Embed Content */}
-              {item.embedType && loadedEmbeds.includes(item.id) ? (
+              {/* Loaded Embed Content */}
+              {loadedEmbeds.includes(item.id) ? (
                 <div className="absolute inset-0">
                   {item.embedType === 'youtube' && (
                     <iframe
@@ -188,16 +218,43 @@ export const PortfolioSection = () => {
                       allowFullScreen
                     />
                   )}
+                  {item.embedType === 'video' && (
+                    <video
+                      src={item.embedUrl}
+                      className="w-full h-full object-cover"
+                      controls
+                      autoPlay
+                      muted
+                    />
+                  )}
+                  {item.embedType === 'image' && (
+                    <img
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
               ) : (
                 <>
-                  {/* Placeholder Content */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-secondary/50">
-                    <item.icon className="w-12 h-12 text-primary/30 group-hover:text-accent/50 transition-colors duration-300" />
+                  {/* Thumbnail */}
+                  <div className="absolute inset-0">
+                    {item.thumbnail ? (
+                      <img
+                        src={item.thumbnail}
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-secondary/50">
+                        <item.icon className="w-12 h-12 text-primary/30" />
+                      </div>
+                    )}
                   </div>
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
 
                   {/* Content */}
                   <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
@@ -211,7 +268,7 @@ export const PortfolioSection = () => {
                       {item.description}
                     </p>
                     <div className="flex gap-3">
-                      {item.embedType && (
+                      {(item.embedType === 'youtube' || item.embedType === 'video' || item.embedType === 'instagram') && (
                         <button
                           onClick={() => handleLoadEmbed(item.id)}
                           className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors"
