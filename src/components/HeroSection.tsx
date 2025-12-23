@@ -13,10 +13,28 @@ export const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-50"
+        >
+          <source
+            src="https://cdn.coverr.co/videos/coverr-cinematographer-filming-in-a-studio-1584/1080p.mp4"
+            type="video/mp4"
+          />
+        </video>
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-background/60" />
+      </div>
+
+      {/* Animated Background Elements */}
       <motion.div
         style={{ y }}
-        className="absolute inset-0 bg-hero-gradient"
+        className="absolute inset-0 z-[1]"
       >
         {/* Gradient orbs for depth */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />

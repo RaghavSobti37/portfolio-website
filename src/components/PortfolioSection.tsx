@@ -5,7 +5,18 @@ import { Button } from '@/components/ui/button';
 
 type Category = 'all' | 'film' | 'social' | 'web';
 
-const portfolioItems = [
+interface PortfolioItem {
+  id: number;
+  title: string;
+  category: 'film' | 'social' | 'web';
+  type: string;
+  description: string;
+  icon: typeof Film;
+  embedType?: 'youtube' | 'instagram' | 'image';
+  embedUrl?: string;
+}
+
+const portfolioItems: PortfolioItem[] = [
   {
     id: 1,
     title: 'The Fifth Wall',
@@ -13,6 +24,8 @@ const portfolioItems = [
     type: 'Short Film',
     description: 'An experimental narrative exploring perception and reality.',
     icon: Film,
+    embedType: 'youtube',
+    embedUrl: 'https://www.youtube.com/embed/28Mb1cIooGw?si=cZ5zHs2jnqOrDET9',
   },
   {
     id: 2,
@@ -21,22 +34,28 @@ const portfolioItems = [
     type: 'Documentary',
     description: 'A visual journey through city soundscapes.',
     icon: Film,
+    embedType: 'youtube',
+    embedUrl: 'https://www.youtube.com/embed/28Mb1cIooGw?si=cZ5zHs2jnqOrDET9',
   },
   {
     id: 3,
     title: 'Brand Story Campaign',
     category: 'social',
-    type: 'Instagram Reels',
+    type: 'Instagram Reel',
     description: 'Viral content series for lifestyle brand.',
     icon: Instagram,
+    embedType: 'instagram',
+    embedUrl: 'https://www.instagram.com/reel/DGsNRvwtlX4/embed',
   },
   {
     id: 4,
     title: 'Product Launch',
     category: 'social',
-    type: 'TikTok Series',
+    type: 'Instagram Reel',
     description: 'High-engagement vertical content.',
     icon: Instagram,
+    embedType: 'instagram',
+    embedUrl: 'https://www.instagram.com/reel/DGsNRvwtlX4/embed',
   },
   {
     id: 5,
@@ -68,6 +87,7 @@ export const PortfolioSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeCategory, setActiveCategory] = useState<Category>('all');
   const [visibleCount, setVisibleCount] = useState(6);
+  const [loadedEmbeds, setLoadedEmbeds] = useState<number[]>([]);
 
   const filteredItems = portfolioItems.filter(
     (item) => activeCategory === 'all' || item.category === activeCategory
@@ -90,6 +110,10 @@ export const PortfolioSection = () => {
       scale: 1,
       transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
     },
+  };
+
+  const handleLoadEmbed = (id: number) => {
+    setLoadedEmbeds((prev) => [...prev, id]);
   };
 
   return (
@@ -140,45 +164,75 @@ export const PortfolioSection = () => {
               key={item.id}
               variants={itemVariants}
               layout
-              className="group relative aspect-[4/3] rounded-sm overflow-hidden bg-card-gradient border border-border cursor-pointer"
+              className={`group relative rounded-sm overflow-hidden bg-card-gradient border border-border ${
+                item.embedType === 'instagram' ? 'aspect-[9/16] md:row-span-2' : 'aspect-video'
+              }`}
             >
-              {/* Placeholder Content */}
-              <div className="absolute inset-0 flex items-center justify-center bg-secondary/50">
-                <item.icon className="w-12 h-12 text-primary/30 group-hover:text-accent/50 transition-colors duration-300" />
-              </div>
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-
-              {/* Content */}
-              <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                <span className="font-display text-xs tracking-widest uppercase text-accent mb-2">
-                  {item.type}
-                </span>
-                <h3 className="font-display text-xl font-semibold mb-2">
-                  {item.title}
-                </h3>
-                <p className="font-body text-sm text-muted-foreground mb-4">
-                  {item.description}
-                </p>
-                <div className="flex gap-3">
-                  {item.category === 'film' && (
-                    <button className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors">
-                      <Play className="w-4 h-4 text-primary-foreground" fill="currentColor" />
-                    </button>
+              {/* Embed Content */}
+              {item.embedType && loadedEmbeds.includes(item.id) ? (
+                <div className="absolute inset-0">
+                  {item.embedType === 'youtube' && (
+                    <iframe
+                      src={item.embedUrl}
+                      title={item.title}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
                   )}
-                  <button className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary transition-colors">
-                    <ExternalLink className="w-4 h-4 text-foreground" />
-                  </button>
+                  {item.embedType === 'instagram' && (
+                    <iframe
+                      src={item.embedUrl}
+                      title={item.title}
+                      className="w-full h-full"
+                      allowFullScreen
+                    />
+                  )}
                 </div>
-              </div>
+              ) : (
+                <>
+                  {/* Placeholder Content */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-secondary/50">
+                    <item.icon className="w-12 h-12 text-primary/30 group-hover:text-accent/50 transition-colors duration-300" />
+                  </div>
 
-              {/* Category Badge */}
-              <div className="absolute top-4 right-4 px-3 py-1 rounded-sm bg-background/80 backdrop-blur-sm">
-                <span className="font-display text-xs tracking-wider uppercase text-muted-foreground">
-                  {item.category}
-                </span>
-              </div>
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+
+                  {/* Content */}
+                  <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <span className="font-display text-xs tracking-widest uppercase text-accent mb-2">
+                      {item.type}
+                    </span>
+                    <h3 className="font-display text-xl font-semibold mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="font-body text-sm text-muted-foreground mb-4">
+                      {item.description}
+                    </p>
+                    <div className="flex gap-3">
+                      {item.embedType && (
+                        <button
+                          onClick={() => handleLoadEmbed(item.id)}
+                          className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors"
+                        >
+                          <Play className="w-4 h-4 text-primary-foreground" fill="currentColor" />
+                        </button>
+                      )}
+                      <button className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary transition-colors">
+                        <ExternalLink className="w-4 h-4 text-foreground" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Category Badge */}
+                  <div className="absolute top-4 right-4 px-3 py-1 rounded-sm bg-background/80 backdrop-blur-sm">
+                    <span className="font-display text-xs tracking-wider uppercase text-muted-foreground">
+                      {item.category}
+                    </span>
+                  </div>
+                </>
+              )}
             </motion.div>
           ))}
         </motion.div>
