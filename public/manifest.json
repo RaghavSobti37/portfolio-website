@@ -1,0 +1,18 @@
+{
+  "short_name": "Bluepolaroid",
+  "name": "Raghav Raj Sobti - Photography & Videography Portfolio",
+  "description": "Professional Photography & Videography Services",
+  "icons": [
+    {
+      "src": "favicon.jpg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ff4d4d",
+  "background_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "categories": ["photography", "business", "entertainment"]
+}

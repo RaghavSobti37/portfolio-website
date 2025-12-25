@@ -27,7 +27,7 @@ export const AboutSection = () => {
   const timelineData = [
     {
       date: '2025',
-      title: 'New York Film Academy (Currently in progress)',
+      title: 'New York Film Academy Graduate',
       subtitle: '15 Week Cinematography Course Graduate',
       description: 'Completed an intensive 15-week course, honing skills in lighting, composition, and cinematic storytelling.',
     },
@@ -96,7 +96,7 @@ export const AboutSection = () => {
             <motion.div variants={itemVariants} className="relative order-2 md:order-1">
               <div className="aspect-square relative rounded-sm overflow-hidden bg-secondary">
                 <img
-                  src="/gallery/25.jpg"
+                  src="/gallery/i25.jpg"
                   alt="Raghav at work"
                   className="w-full h-full object-cover"
                 />
