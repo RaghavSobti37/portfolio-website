@@ -1,6 +1,5 @@
 import { motion, useInView, type Variants } from 'framer-motion';
 import { useRef } from 'react';
-import { Film, Code, Mic } from 'lucide-react';
 
 export const AboutSection = () => {
   const ref = useRef(null);
@@ -11,7 +10,7 @@ export const AboutSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
@@ -25,6 +24,52 @@ export const AboutSection = () => {
     },
   };
 
+  const timelineData = [
+    {
+      date: '2025',
+      title: 'New York Film Academy (Currently in progress)',
+      subtitle: '15 Week Cinematography Course Graduate',
+      description: 'Completed an intensive 15-week course, honing skills in lighting, composition, and cinematic storytelling.',
+    },
+    {
+      date: '2025',
+      title: 'Director',
+      subtitle: '"Ek Kamra" – Music Video',
+      description: 'Directed and shot with a minimalist aesthetic and a strong emotional narrative.',
+    },
+    {
+      date: '2024–2025',
+      title: 'Videographer',
+      subtitle: 'BoxoutFM & Premise',
+      items: [
+        'Covered live DJ set events & afterparties',
+        'Captured underground electronic music culture',
+        'Filmed interviews with Laksh Maheshwari, Smoke, Rebel7',
+        'Shot BTS for The Sundog Project, Jahnvi, and more',
+      ],
+    },
+    {
+      date: '2023–2024',
+      title: 'Assistant Director',
+      subtitle: 'EBC Originals & ArtisteFirst',
+      items: [
+        '2nd AD in Riqqat Album launch',
+        'Helped with scene setups and creative direction',
+        'Worked in Ladakh for the musical film Rooh',
+        'Assisted on MV projects like Khwaab, Dhamaal',
+      ],
+    },
+    {
+      date: '2022',
+      title: 'Intern Assistant Director',
+      subtitle: 'Classic Films',
+      items: [
+        'Pre-production, shot listing, and art direction',
+        'Created 4 offline edits for NPS ads',
+      ],
+    },
+  ];
+
   return (
     <section id="about" className="py-24 md:py-32 relative overflow-hidden">
       {/* Background accent */}
@@ -36,94 +81,102 @@ export const AboutSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-2 gap-12 md:gap-20 items-center"
         >
-          {/* Image Side */}
-          <motion.div variants={itemVariants} className="relative">
-            <div className="aspect-[4/5] relative rounded-sm overflow-hidden">
-              {/* Placeholder with cinematic overlay */}
-              <div className="absolute inset-0 bg-card-gradient" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <Film className="w-16 h-16 text-primary mx-auto mb-4" />
-                  <p className="font-display text-sm tracking-widest uppercase text-muted-foreground">
-                    The Storyteller
-                  </p>
-                </div>
-              </div>
-              {/* Film strip decoration */}
-              <div className="absolute top-0 left-0 right-0 h-4 bg-background flex gap-1 p-1">
-                {[...Array(20)].map((_, i) => (
-                  <div key={i} className="flex-1 bg-muted rounded-sm" />
-                ))}
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-4 bg-background flex gap-1 p-1">
-                {[...Array(20)].map((_, i) => (
-                  <div key={i} className="flex-1 bg-muted rounded-sm" />
-                ))}
-              </div>
-            </div>
+          {/* Header */}
+          <motion.h1
+            variants={itemVariants}
+            className="font-display text-5xl md:text-7xl font-bold text-center mb-16 tracking-tight"
+          >
+            RAGHAV
+          </motion.h1>
 
-            {/* Floating badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute -bottom-6 -right-6 md:right-6 bg-primary px-6 py-4 rounded-sm shadow-lift"
-            >
-              <p className="font-display text-xs tracking-widest uppercase text-primary-foreground">
-                NYFA Class of
-              </p>
-              <p className="font-display text-3xl font-bold text-primary-foreground">
-                2024
-              </p>
+          {/* Content Grid */}
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start mb-20">
+            {/* Image Side */}
+            <motion.div variants={itemVariants} className="relative order-2 md:order-1">
+              <div className="aspect-square relative rounded-sm overflow-hidden bg-secondary">
+                <img
+                  src="/gallery/25.jpg"
+                  alt="Raghav at work"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+              </div>
             </motion.div>
-          </motion.div>
 
-          {/* Text Side */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            <div>
-              <p className="font-display text-sm tracking-[0.3em] uppercase text-primary mb-4">
-                The Story
-              </p>
-              <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-                I am a writer, singer,{' '}
-                <span className="text-gradient">and storyteller.</span>
-              </h2>
-            </div>
+            {/* Text Side */}
+            <motion.div variants={itemVariants} className="space-y-6 order-1 md:order-2">
+              <div className="space-y-4 font-body text-muted-foreground leading-relaxed text-lg">
+                <p>
+                  A passionate and dedicated cinematographer with hands-on
+                  experience, always eager to learn and contribute creative ideas.
+                  Skilled in visual storytelling, I aim to bring my expertise to
+                  dynamic filmmaking projects and deliver impactful visuals.
+                </p>
+                <p>
+                  My journey in visual arts began with a curiosity about how images
+                  can evoke emotions and tell stories. Over the years, I've
+                  developed a distinctive style that blends technical precision with
+                  artistic expression.
+                </p>
+              </div>
+            </motion.div>
+          </div>
 
-            <div className="space-y-4 font-body text-muted-foreground leading-relaxed">
-              <p>
-                As a proud graduate of the <span className="text-foreground font-semibold">New York Film Academy</span>, 
-                I bring a unique perspective to every project—blending the art of cinema with the precision of code.
-              </p>
-              <p>
-                My expertise in <span className="text-accent">DaVinci Resolve</span> allows me to craft 
-                clean, narrative-driven content that captivates audiences. But I don't just film—I recite 
-                ghazals, tell stories, and weave emotions into every frame.
-              </p>
-              <p>
-                This rare combination makes me not just a filmmaker or a developer, but a 
-                <span className="text-foreground font-semibold"> complete creative force</span>.
-              </p>
-            </div>
+          {/* Work Experience Section */}
+          <motion.div variants={itemVariants} className="mt-20">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-12 tracking-tight">
+              WORK EXPERIENCE
+            </h2>
 
-            {/* Skills Icons */}
-            <div className="flex gap-6 pt-6">
-              {[
-                { icon: Film, label: 'Cinematography' },
-                { icon: Code, label: 'Development' },
-                { icon: Mic, label: 'Storytelling' },
-              ].map((skill) => (
-                <div key={skill.label} className="text-center group">
-                  <div className="w-14 h-14 rounded-sm bg-secondary flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors duration-300">
-                    <skill.icon className="w-6 h-6 text-primary group-hover:text-accent transition-colors duration-300" />
-                  </div>
-                  <p className="font-display text-xs tracking-wider uppercase text-muted-foreground">
-                    {skill.label}
-                  </p>
-                </div>
-              ))}
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-0 md:left-32 top-0 bottom-0 w-px bg-border" />
+
+              <div className="space-y-8">
+                {timelineData.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="relative flex flex-col md:flex-row gap-4 md:gap-8"
+                  >
+                    {/* Date */}
+                    <div className="md:w-28 flex-shrink-0 text-right">
+                      <span className="font-display text-sm tracking-wider text-primary font-semibold">
+                        {item.date}
+                      </span>
+                    </div>
+
+                    {/* Timeline dot */}
+                    <div className="absolute left-0 md:left-32 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full bg-primary border-2 border-background" />
+
+                    {/* Content */}
+                    <div className="pl-6 md:pl-8 pb-8 border-l md:border-l-0 border-border md:border-none">
+                      <h3 className="font-display text-xl font-bold text-foreground">
+                        {item.title}
+                      </h3>
+                      <h4 className="font-display text-base text-accent mb-2">
+                        {item.subtitle}
+                      </h4>
+                      {item.description && (
+                        <p className="font-body text-muted-foreground leading-relaxed">
+                          {item.description}
+                        </p>
+                      )}
+                      {item.items && (
+                        <ul className="mt-2 space-y-1">
+                          {item.items.map((listItem, i) => (
+                            <li key={i} className="font-body text-muted-foreground leading-relaxed flex items-start gap-2">
+                              <span className="text-primary mt-1.5">•</span>
+                              {listItem}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </motion.div>
