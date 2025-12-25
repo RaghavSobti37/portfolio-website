@@ -1,24 +1,10 @@
 import { motion, useInView, type Variants } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Play, ExternalLink, Film, Instagram, Globe } from 'lucide-react';
+import { Play, ExternalLink, Instagram, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-type Category = 'all' | 'film' | 'social' | 'web';
+import { projects, projectCategories, type Project } from '@/data/projects';
 
 type GridSize = 'small' | 'medium' | 'large' | 'tall' | 'wide';
-
-interface PortfolioItem {
-  id: number;
-  title: string;
-  category: 'film' | 'social' | 'web';
-  type: string;
-  description: string;
-  icon: typeof Film;
-  embedType?: 'youtube' | 'instagram' | 'image' | 'video';
-  embedUrl?: string;
-  thumbnail?: string;
-  gridSize: GridSize;
-}
 
 // Grid size patterns for puzzle layout - cycles through to ensure variety
 const gridSizePatterns: GridSize[] = ['large', 'small', 'tall', 'small', 'wide', 'small', 'medium', 'tall'];
@@ -26,102 +12,6 @@ const gridSizePatterns: GridSize[] = ['large', 'small', 'tall', 'small', 'wide',
 const getGridSize = (index: number): GridSize => {
   return gridSizePatterns[index % gridSizePatterns.length];
 };
-
-const portfolioItems: PortfolioItem[] = [
-  {
-    id: 1,
-    title: 'The Fifth Wall',
-    category: 'film',
-    type: 'Short Film',
-    description: 'An experimental narrative exploring perception and reality.',
-    icon: Film,
-    embedType: 'youtube',
-    embedUrl: 'https://www.youtube.com/embed/28Mb1cIooGw?si=cZ5zHs2jnqOrDET9',
-    thumbnail: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80',
-    gridSize: 'large',
-  },
-  {
-    id: 2,
-    title: 'Urban Rhythms',
-    category: 'film',
-    type: 'Documentary',
-    description: 'A visual journey through city soundscapes.',
-    icon: Film,
-    embedType: 'video',
-    embedUrl: 'https://cdn.coverr.co/videos/coverr-filming-a-woman-in-a-studio-6285/1080p.mp4',
-    thumbnail: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80',
-    gridSize: 'small',
-  },
-  {
-    id: 3,
-    title: 'Brand Story Campaign',
-    category: 'social',
-    type: 'Instagram Reel',
-    description: 'Viral content series for lifestyle brand.',
-    icon: Instagram,
-    embedType: 'instagram',
-    embedUrl: 'https://www.instagram.com/reel/DGsNRvwtlX4/embed',
-    thumbnail: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80',
-    gridSize: 'tall',
-  },
-  {
-    id: 4,
-    title: 'Product Launch',
-    category: 'social',
-    type: 'TikTok Series',
-    description: 'High-engagement vertical content.',
-    icon: Instagram,
-    embedType: 'video',
-    embedUrl: 'https://cdn.coverr.co/videos/coverr-woman-taking-a-video-of-food-1567/1080p.mp4',
-    thumbnail: 'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?w=800&q=80',
-    gridSize: 'small',
-  },
-  {
-    id: 5,
-    title: 'Studio Portfolio',
-    category: 'web',
-    type: 'React Website',
-    description: 'Full-stack portfolio with CMS.',
-    icon: Globe,
-    embedType: 'image',
-    thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
-    gridSize: 'wide',
-  },
-  {
-    id: 6,
-    title: 'E-Commerce Platform',
-    category: 'web',
-    type: 'Next.js App',
-    description: 'High-performance online store.',
-    icon: Globe,
-    embedType: 'image',
-    thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    gridSize: 'small',
-  },
-  {
-    id: 7,
-    title: 'Cinematic Wedding',
-    category: 'film',
-    type: 'Wedding Film',
-    description: 'Emotional storytelling for special moments.',
-    icon: Film,
-    embedType: 'video',
-    embedUrl: 'https://cdn.coverr.co/videos/coverr-couple-walking-in-a-lavender-field-4856/1080p.mp4',
-    thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
-    gridSize: 'medium',
-  },
-  {
-    id: 8,
-    title: 'Coffee Brand Story',
-    category: 'social',
-    type: 'Content Series',
-    description: 'Artisanal coffee brand visual identity.',
-    icon: Instagram,
-    embedType: 'image',
-    thumbnail: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
-    gridSize: 'tall',
-  },
-];
 
 // Helper to get grid classes based on size
 const getGridClasses = (size: GridSize): string => {
@@ -140,21 +30,24 @@ const getGridClasses = (size: GridSize): string => {
   }
 };
 
-const categories = [
-  { id: 'all', label: 'All Work' },
-  { id: 'film', label: 'Filmmaking' },
-  { id: 'social', label: 'Social Media' },
-  { id: 'web', label: 'Web Projects' },
-];
+// Convert Instagram URL to embed URL
+const getInstagramEmbedUrl = (url: string): string => {
+  // Extract the reel ID and create embed URL
+  const match = url.match(/instagram\.com\/reel\/([^/?]+)/);
+  if (match) {
+    return `https://www.instagram.com/reel/${match[1]}/embed`;
+  }
+  return url;
+};
 
 export const PortfolioSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [activeCategory, setActiveCategory] = useState<Category>('all');
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [visibleCount, setVisibleCount] = useState(8);
   const [loadedEmbeds, setLoadedEmbeds] = useState<number[]>([]);
 
-  const filteredItems = portfolioItems.filter(
+  const filteredItems = projects.filter(
     (item) => activeCategory === 'all' || item.category === activeCategory
   );
 
@@ -181,6 +74,16 @@ export const PortfolioSection = () => {
     setLoadedEmbeds((prev) => [...prev, id]);
   };
 
+  const openExternalLink = (item: Project) => {
+    if (item.platform === 'instagram') {
+      window.open(item.videoUrl, '_blank');
+    } else {
+      // Convert embed URL to watch URL for YouTube
+      const watchUrl = item.videoUrl.replace('/embed/', '/watch?v=').split('?')[0];
+      window.open(watchUrl.includes('watch') ? watchUrl : item.videoUrl, '_blank');
+    }
+  };
+
   return (
     <section id="work" className="py-24 md:py-32 relative">
       <div className="container mx-auto px-6">
@@ -199,12 +102,15 @@ export const PortfolioSection = () => {
           </h2>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((cat) => (
+          <div className="flex flex-wrap justify-center gap-3">
+            {projectCategories.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setActiveCategory(cat.id as Category)}
-                className={`font-display text-sm tracking-widest uppercase px-6 py-2 rounded-sm transition-all duration-300 ${
+                onClick={() => {
+                  setActiveCategory(cat.id);
+                  setVisibleCount(8);
+                }}
+                className={`font-display text-xs md:text-sm tracking-widest uppercase px-4 py-2 rounded-sm transition-all duration-300 ${
                   activeCategory === cat.id
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-secondary text-muted-foreground hover:text-foreground'
@@ -222,49 +128,33 @@ export const PortfolioSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] md:auto-rows-[220px] lg:auto-rows-[240px]"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] md:auto-rows-[220px] lg:auto-rows-[240px] gap-1"
         >
           {filteredItems.slice(0, visibleCount).map((item, index) => (
             <motion.div
               key={item.id}
               variants={itemVariants}
               layout
-              className={`group relative overflow-hidden bg-card-gradient ${getGridClasses(item.gridSize)}`}
+              className={`group relative overflow-hidden bg-card ${getGridClasses(getGridSize(index))}`}
             >
               {/* Loaded Embed Content */}
               {loadedEmbeds.includes(item.id) ? (
                 <div className="absolute inset-0">
-                  {item.embedType === 'youtube' && (
+                  {item.platform === 'youtube' && (
                     <iframe
-                      src={item.embedUrl}
+                      src={`${item.videoUrl}?autoplay=1`}
                       title={item.title}
                       className="w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
                     />
                   )}
-                  {item.embedType === 'instagram' && (
+                  {item.platform === 'instagram' && (
                     <iframe
-                      src={item.embedUrl}
+                      src={getInstagramEmbedUrl(item.videoUrl)}
                       title={item.title}
                       className="w-full h-full"
                       allowFullScreen
-                    />
-                  )}
-                  {item.embedType === 'video' && (
-                    <video
-                      src={item.embedUrl}
-                      className="w-full h-full object-cover"
-                      controls
-                      autoPlay
-                      muted
-                    />
-                  )}
-                  {item.embedType === 'image' && (
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
                     />
                   )}
                 </div>
@@ -272,54 +162,55 @@ export const PortfolioSection = () => {
                 <>
                   {/* Thumbnail */}
                   <div className="absolute inset-0">
-                    {item.thumbnail ? (
-                      <img
-                        src={item.thumbnail}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-secondary/50">
-                        <item.icon className="w-12 h-12 text-primary/30" />
-                      </div>
-                    )}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
                   </div>
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
 
                   {/* Content */}
-                  <div className="absolute inset-0 p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <span className="font-display text-xs tracking-widest uppercase text-accent mb-2">
-                      {item.type}
-                    </span>
-                    <h3 className="font-display text-xl font-semibold mb-2">
+                  <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="font-display text-xs tracking-widest uppercase text-accent">
+                        {item.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground">• {item.year}</span>
+                    </div>
+                    <h3 className="font-display text-lg md:text-xl font-semibold mb-1 line-clamp-1">
                       {item.title}
                     </h3>
-                    <p className="font-body text-sm text-muted-foreground mb-4">
+                    <p className="font-body text-xs text-primary mb-1">{item.role}</p>
+                    <p className="font-body text-xs md:text-sm text-muted-foreground mb-4 line-clamp-2 hidden md:block">
                       {item.description}
                     </p>
                     <div className="flex gap-3">
-                      {(item.embedType === 'youtube' || item.embedType === 'video' || item.embedType === 'instagram') && (
-                        <button
-                          onClick={() => handleLoadEmbed(item.id)}
-                          className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors"
-                        >
-                          <Play className="w-4 h-4 text-primary-foreground" fill="currentColor" />
-                        </button>
-                      )}
-                      <button className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary transition-colors">
+                      <button
+                        onClick={() => handleLoadEmbed(item.id)}
+                        className="w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:bg-accent transition-colors"
+                      >
+                        <Play className="w-4 h-4 text-primary-foreground" fill="currentColor" />
+                      </button>
+                      <button
+                        onClick={() => openExternalLink(item)}
+                        className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-primary transition-colors"
+                      >
                         <ExternalLink className="w-4 h-4 text-foreground" />
                       </button>
                     </div>
                   </div>
 
-                  {/* Category Badge */}
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-sm bg-background/80 backdrop-blur-sm">
-                    <span className="font-display text-xs tracking-wider uppercase text-muted-foreground">
-                      {item.category}
-                    </span>
+                  {/* Platform Badge */}
+                  <div className="absolute top-3 right-3 p-2 rounded-full bg-background/80 backdrop-blur-sm">
+                    {item.platform === 'youtube' ? (
+                      <Youtube className="w-4 h-4 text-red-500" />
+                    ) : (
+                      <Instagram className="w-4 h-4 text-pink-500" />
+                    )}
                   </div>
                 </>
               )}
@@ -336,7 +227,7 @@ export const PortfolioSection = () => {
             className="text-center mt-12"
           >
             <Button
-              onClick={() => setVisibleCount((prev) => prev + 6)}
+              onClick={() => setVisibleCount((prev) => prev + 8)}
               variant="outline"
               className="font-display tracking-widest uppercase border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
