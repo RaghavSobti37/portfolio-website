@@ -1,73 +1,191 @@
-# Welcome to your Lovable project
+# Portfolio Website
 
-## Project info
+A modern, animated portfolio website built with React, TypeScript, and Tailwind CSS featuring a cinematic design aesthetic.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🛠️ Tech Stack
 
-## How can I edit this code?
+- **Framework:** React 18 with TypeScript
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Routing:** React Router DOM
+- **UI Components:** Radix UI + shadcn/ui
 
-There are several ways of editing your application.
+## 📋 Prerequisites
 
-**Use Lovable**
+Before you begin, ensure you have the following installed:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- [Node.js](https://nodejs.org/) (v18.0.0 or higher)
+- [npm](https://www.npmjs.com/) (v9.0.0 or higher) or [Bun](https://bun.sh/)
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🚀 Local Development Setup
 
-**Use your preferred IDE**
+### 1. Clone the Repository
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+```bash
+git clone <your-repo-url>
+cd <your-project-folder>
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 2. Install Dependencies
 
-Follow these steps:
+Using npm:
+```bash
+npm install
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Or using Bun:
+```bash
+bun install
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 3. Start Development Server
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+Using npm:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Or using Bun:
+```bash
+bun run dev
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The application will be available at `http://localhost:8080`
 
-**Use GitHub Codespaces**
+## 📦 Build for Production
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+To create an optimized production build:
 
-## What technologies are used for this project?
+```bash
+npm run build
+```
 
-This project is built with:
+To preview the production build locally:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+npm run preview
+```
 
-## How can I deploy this project?
+## 🌐 Deploying to Vercel
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Option 1: Deploy via Vercel Dashboard (Recommended)
 
-## Can I connect a custom domain to my Lovable project?
+#### Step 1: Push to GitHub
+Ensure your code is pushed to a GitHub repository.
 
-Yes, you can!
+#### Step 2: Connect to Vercel
+1. Go to [vercel.com](https://vercel.com) and sign in with your GitHub account
+2. Click **"Add New..."** → **"Project"**
+3. Select your repository from the list
+4. Click **"Import"**
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+#### Step 3: Configure Build Settings
+Vercel should auto-detect the settings, but verify:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+| Setting | Value |
+|---------|-------|
+| Framework Preset | Vite |
+| Build Command | `npm run build` |
+| Output Directory | `dist` |
+| Install Command | `npm install` |
+
+#### Step 4: Deploy
+1. Click **"Deploy"**
+2. Wait for the build to complete (typically 1-2 minutes)
+3. Your site will be live at `https://your-project.vercel.app`
+
+### Option 2: Deploy via Vercel CLI
+
+#### Step 1: Install Vercel CLI
+
+```bash
+npm install -g vercel
+```
+
+#### Step 2: Login to Vercel
+
+```bash
+vercel login
+```
+
+#### Step 3: Deploy
+
+From your project root directory:
+
+```bash
+vercel
+```
+
+Follow the prompts:
+- Set up and deploy? **Y**
+- Which scope? Select your account
+- Link to existing project? **N** (for first deploy)
+- Project name? Enter a name or press Enter for default
+- Directory with code? **./** (press Enter)
+- Override settings? **N**
+
+#### Step 4: Deploy to Production
+
+```bash
+vercel --prod
+```
+
+## ⚙️ Environment Variables (If Needed)
+
+If your project uses environment variables, add them in Vercel:
+
+1. Go to your project in Vercel Dashboard
+2. Navigate to **Settings** → **Environment Variables**
+3. Add your variables (e.g., `VITE_API_KEY`)
+4. Redeploy for changes to take effect
+
+**Note:** Vite requires environment variables to be prefixed with `VITE_` to be exposed to the client.
+
+## 🔧 Custom Domain Setup
+
+1. In Vercel Dashboard, go to your project
+2. Navigate to **Settings** → **Domains**
+3. Add your custom domain
+4. Update your DNS records as instructed by Vercel
+5. SSL certificate is automatically provisioned
+
+## 📁 Project Structure
+
+```
+├── public/              # Static assets
+├── src/
+│   ├── components/      # React components
+│   │   └── ui/          # shadcn/ui components
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Utility functions
+│   ├── pages/           # Page components
+│   ├── App.tsx          # Main app component
+│   ├── index.css        # Global styles & design tokens
+│   └── main.tsx         # Entry point
+├── index.html           # HTML template
+├── tailwind.config.ts   # Tailwind configuration
+├── vite.config.ts       # Vite configuration
+└── package.json         # Dependencies & scripts
+```
+
+## 📜 Available Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint |
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
