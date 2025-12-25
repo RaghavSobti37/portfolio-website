@@ -39,12 +39,15 @@ export const PortfolioSection = () => {
   const [activeCategory, setActiveCategory] = useState('featured');
   const [visibleCount, setVisibleCount] = useState(12);
   const [loadedEmbeds, setLoadedEmbeds] = useState<number[]>([]);
+  const [showAll, setShowAll] = useState(false);
 
   const filteredItems = projects.filter((item) => {
     if (activeCategory === 'featured') return item.featured === true;
     if (activeCategory === 'all') return true;
     return item.category === activeCategory;
   });
+
+  const displayedItems = showAll ? filteredItems : filteredItems.slice(0, visibleCount);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -104,6 +107,7 @@ export const PortfolioSection = () => {
                 onClick={() => {
                   setActiveCategory(cat.id);
                   setVisibleCount(8);
+                  setShowAll(false);
                 }}
                 className={`font-display text-xs md:text-sm tracking-widest uppercase px-4 py-2 rounded-sm transition-all duration-300 ${
                   activeCategory === cat.id
@@ -123,14 +127,17 @@ export const PortfolioSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] md:auto-rows-[220px] lg:auto-rows-[240px] gap-1"
+          className={showAll 
+            ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" 
+            : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] md:auto-rows-[220px] lg:auto-rows-[240px] gap-1"
+          }
         >
-          {filteredItems.slice(0, visibleCount).map((item, index) => (
+          {displayedItems.map((item, index) => (
             <motion.div
               key={item.id}
               variants={itemVariants}
               layout
-              className={`group relative overflow-hidden bg-card ${getGridClasses(getGridSizeByPlatform(item.platform))}`}
+              className={`group relative overflow-hidden bg-card ${showAll ? 'aspect-video' : getGridClasses(getGridSizeByPlatform(item.platform))}`}
             >
               {/* Loaded Embed Content */}
               {loadedEmbeds.includes(item.id) ? (
@@ -213,13 +220,13 @@ export const PortfolioSection = () => {
           ))}
         </motion.div>
 
-        {/* Load More */}
-        {visibleCount < filteredItems.length && (
+        {/* View All / Load More Buttons */}
+        {!showAll && filteredItems.length > visibleCount && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-center mt-12"
+            className="text-center mt-12 flex justify-center gap-4"
           >
             <Button
               onClick={() => setVisibleCount((prev) => prev + 8)}
@@ -227,6 +234,32 @@ export const PortfolioSection = () => {
               className="font-display tracking-widest uppercase border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               Load More
+            </Button>
+            <Button
+              onClick={() => setShowAll(true)}
+              variant="default"
+              className="font-display tracking-widest uppercase"
+            >
+              View All Projects
+            </Button>
+          </motion.div>
+        )}
+
+        {showAll && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center mt-12"
+          >
+            <Button
+              onClick={() => {
+                setShowAll(false);
+                setVisibleCount(12);
+              }}
+              variant="outline"
+              className="font-display tracking-widest uppercase border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              Show Less
             </Button>
           </motion.div>
         )}
