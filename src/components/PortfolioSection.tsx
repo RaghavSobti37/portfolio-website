@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 
 type Category = 'all' | 'film' | 'social' | 'web';
 
+type GridSize = 'small' | 'medium' | 'large' | 'tall' | 'wide';
+
 interface PortfolioItem {
   id: number;
   title: string;
@@ -15,7 +17,15 @@ interface PortfolioItem {
   embedType?: 'youtube' | 'instagram' | 'image' | 'video';
   embedUrl?: string;
   thumbnail?: string;
+  gridSize: GridSize;
 }
+
+// Grid size patterns for puzzle layout - cycles through to ensure variety
+const gridSizePatterns: GridSize[] = ['large', 'small', 'tall', 'small', 'wide', 'small', 'medium', 'tall'];
+
+const getGridSize = (index: number): GridSize => {
+  return gridSizePatterns[index % gridSizePatterns.length];
+};
 
 const portfolioItems: PortfolioItem[] = [
   {
@@ -28,6 +38,7 @@ const portfolioItems: PortfolioItem[] = [
     embedType: 'youtube',
     embedUrl: 'https://www.youtube.com/embed/28Mb1cIooGw?si=cZ5zHs2jnqOrDET9',
     thumbnail: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80',
+    gridSize: 'large',
   },
   {
     id: 2,
@@ -39,6 +50,7 @@ const portfolioItems: PortfolioItem[] = [
     embedType: 'video',
     embedUrl: 'https://cdn.coverr.co/videos/coverr-filming-a-woman-in-a-studio-6285/1080p.mp4',
     thumbnail: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80',
+    gridSize: 'small',
   },
   {
     id: 3,
@@ -50,6 +62,7 @@ const portfolioItems: PortfolioItem[] = [
     embedType: 'instagram',
     embedUrl: 'https://www.instagram.com/reel/DGsNRvwtlX4/embed',
     thumbnail: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80',
+    gridSize: 'tall',
   },
   {
     id: 4,
@@ -61,6 +74,7 @@ const portfolioItems: PortfolioItem[] = [
     embedType: 'video',
     embedUrl: 'https://cdn.coverr.co/videos/coverr-woman-taking-a-video-of-food-1567/1080p.mp4',
     thumbnail: 'https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?w=800&q=80',
+    gridSize: 'small',
   },
   {
     id: 5,
@@ -71,6 +85,7 @@ const portfolioItems: PortfolioItem[] = [
     icon: Globe,
     embedType: 'image',
     thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+    gridSize: 'wide',
   },
   {
     id: 6,
@@ -81,6 +96,7 @@ const portfolioItems: PortfolioItem[] = [
     icon: Globe,
     embedType: 'image',
     thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+    gridSize: 'small',
   },
   {
     id: 7,
@@ -92,6 +108,7 @@ const portfolioItems: PortfolioItem[] = [
     embedType: 'video',
     embedUrl: 'https://cdn.coverr.co/videos/coverr-couple-walking-in-a-lavender-field-4856/1080p.mp4',
     thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
+    gridSize: 'medium',
   },
   {
     id: 8,
@@ -102,8 +119,26 @@ const portfolioItems: PortfolioItem[] = [
     icon: Instagram,
     embedType: 'image',
     thumbnail: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
+    gridSize: 'tall',
   },
 ];
+
+// Helper to get grid classes based on size
+const getGridClasses = (size: GridSize): string => {
+  switch (size) {
+    case 'large':
+      return 'md:col-span-2 md:row-span-2';
+    case 'tall':
+      return 'md:row-span-2';
+    case 'wide':
+      return 'md:col-span-2';
+    case 'medium':
+      return 'md:col-span-1 md:row-span-1';
+    case 'small':
+    default:
+      return 'md:col-span-1 md:row-span-1';
+  }
+};
 
 const categories = [
   { id: 'all', label: 'All Work' },
@@ -181,22 +216,20 @@ export const PortfolioSection = () => {
           </div>
         </motion.div>
 
-        {/* Portfolio Grid */}
+        {/* Portfolio Grid - Masonry Puzzle Layout */}
         <motion.div
           ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] md:auto-rows-[220px] lg:auto-rows-[240px]"
         >
-          {filteredItems.slice(0, visibleCount).map((item) => (
+          {filteredItems.slice(0, visibleCount).map((item, index) => (
             <motion.div
               key={item.id}
               variants={itemVariants}
               layout
-              className={`group relative rounded-sm overflow-hidden bg-card-gradient border border-border ${
-                item.embedType === 'instagram' ? 'aspect-[9/16] md:row-span-2' : 'aspect-video'
-              }`}
+              className={`group relative overflow-hidden bg-card-gradient ${getGridClasses(item.gridSize)}`}
             >
               {/* Loaded Embed Content */}
               {loadedEmbeds.includes(item.id) ? (
