@@ -10,6 +10,7 @@ export interface Project {
   category: string;
   videoUrl: string;
   platform: 'youtube' | 'instagram';
+  featured?: boolean; // Mark as true to show in featured grid
 }
 
 const projectsData: Project[] = [
@@ -587,25 +588,8 @@ const projectsData: Project[] = [
   },
 ];
 
-// Function to shuffle array while maintaining ID order
-const shuffleProjects = (projects: Project[]): Project[] => {
-  const shuffled = [...projects];
-  
-  // Fisher-Yates shuffle algorithm
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  
-  // Re-assign IDs in order 1, 2, 3, etc.
-  return shuffled.map((project, index) => ({
-    ...project,
-    id: index + 1
-  }));
-};
-
-// Export the shuffled projects
-export const projects = shuffleProjects(projectsData);
+// Export projects in the exact order they are listed above (no shuffle)
+export const projects = projectsData;
 
 // Export individual categories for filtering
 export const projectCategories = [
