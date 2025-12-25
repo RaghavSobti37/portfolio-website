@@ -602,6 +602,7 @@ export const projects = projectsData;
 
 // Export individual categories for filtering
 export const projectCategories = [
+  { id: "featured", label: "Featured" },
   { id: "all", label: "All Work" },
   { id: "Music Video", label: "Music Videos" },
   { id: "Behind the scenes", label: "Behind the Scenes" },

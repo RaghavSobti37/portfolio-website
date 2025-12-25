@@ -6,25 +6,18 @@ import { projects, projectCategories, type Project } from '@/data/projects';
 
 type GridSize = 'small' | 'medium' | 'large' | 'tall' | 'wide';
 
-// Grid size patterns for puzzle layout - cycles through to ensure variety
-const gridSizePatterns: GridSize[] = ['large', 'small', 'tall', 'small', 'wide', 'small', 'medium', 'tall'];
-
-const getGridSize = (index: number): GridSize => {
-  return gridSizePatterns[index % gridSizePatterns.length];
+// Get grid size based on platform - Instagram is vertical (tall), YouTube is horizontal (wide)
+const getGridSizeByPlatform = (platform: 'youtube' | 'instagram'): GridSize => {
+  return platform === 'instagram' ? 'tall' : 'wide';
 };
 
 // Helper to get grid classes based on size
 const getGridClasses = (size: GridSize): string => {
   switch (size) {
-    case 'large':
-      return 'md:col-span-2 md:row-span-2';
     case 'tall':
-      return 'md:row-span-2';
+      return 'md:row-span-2'; // Vertical for Instagram
     case 'wide':
-      return 'md:col-span-2';
-    case 'medium':
-      return 'md:col-span-1 md:row-span-1';
-    case 'small':
+      return 'md:col-span-2'; // Horizontal for YouTube
     default:
       return 'md:col-span-1 md:row-span-1';
   }
@@ -43,13 +36,15 @@ const getInstagramEmbedUrl = (url: string): string => {
 export const PortfolioSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [activeCategory, setActiveCategory] = useState('featured');
+  const [visibleCount, setVisibleCount] = useState(12);
   const [loadedEmbeds, setLoadedEmbeds] = useState<number[]>([]);
 
-  const filteredItems = projects.filter(
-    (item) => activeCategory === 'all' || item.category === activeCategory
-  );
+  const filteredItems = projects.filter((item) => {
+    if (activeCategory === 'featured') return item.featured === true;
+    if (activeCategory === 'all') return true;
+    return item.category === activeCategory;
+  });
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -135,7 +130,7 @@ export const PortfolioSection = () => {
               key={item.id}
               variants={itemVariants}
               layout
-              className={`group relative overflow-hidden bg-card ${getGridClasses(getGridSize(index))}`}
+              className={`group relative overflow-hidden bg-card ${getGridClasses(getGridSizeByPlatform(item.platform))}`}
             >
               {/* Loaded Embed Content */}
               {loadedEmbeds.includes(item.id) ? (
