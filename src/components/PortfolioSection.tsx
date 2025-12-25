@@ -36,13 +36,15 @@ const getInstagramEmbedUrl = (url: string): string => {
 export const PortfolioSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [activeCategory, setActiveCategory] = useState('featured');
+  const [visibleCount, setVisibleCount] = useState(12);
   const [loadedEmbeds, setLoadedEmbeds] = useState<number[]>([]);
 
-  const filteredItems = projects.filter(
-    (item) => activeCategory === 'all' || item.category === activeCategory
-  );
+  const filteredItems = projects.filter((item) => {
+    if (activeCategory === 'featured') return item.featured === true;
+    if (activeCategory === 'all') return true;
+    return item.category === activeCategory;
+  });
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

@@ -23,7 +23,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/professional-cinematographer-music-video-ek-kamra.jpg",
     category: "Music Video",
     videoUrl: "https://www.youtube.com/embed/28Mb1cIooGw",
-    platform: "youtube"
+    platform: "youtube",
+    featured: true
   },
   {
     id: 2,
@@ -67,7 +68,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/professional-cinematographer-black-white-film-narazi.jpg",
     category: "short-film",
     videoUrl: "https://www.youtube.com/embed/CVIGswYIsUM",
-    platform: "youtube"
+    platform: "youtube",
+    featured: true
   },
   {
     id: 6,
@@ -221,7 +223,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/professional-cinematographer-music-video-rooh.jpg",
     category: "Music Video",
     videoUrl: "https://www.youtube.com/embed/EWIay_vyFMk",
-    platform: "youtube"
+    platform: "youtube",
+    featured: true
   },
   {
     id: 20,
@@ -265,7 +268,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/professional-cinematographer-music-video-dhamaal.jpg",
     category: "Music Video",
     videoUrl: "https://www.youtube.com/embed/EKET-n4cBHI",
-    platform: "youtube"
+    platform: "youtube",
+    featured: true
   },
   {
     id: 24,
@@ -342,7 +346,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/professional-cinematographer-artist-interview-riqqat-2.jpg",
     category: "interview",
     videoUrl: "https://www.youtube.com/embed/ngeMq67_3sM",
-    platform: "youtube"
+    platform: "youtube",
+    featured: true
   },
   {
     id: 31,
@@ -430,7 +435,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/professional-cinematographer-filmmakers-showreel.jpg",
     category: "showreel",
     videoUrl: "https://www.instagram.com/reel/DELCubty0cN/",
-    platform: "instagram"
+    platform: "instagram",
+    featured: true
   },
   {
     id: 39,
@@ -496,7 +502,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/professional-videographer-delhi-market-colors-reel.jpg",
     category: "showreel",
     videoUrl: "https://www.instagram.com/reel/DLrW2bxSK37/",
-    platform: "instagram"
+    platform: "instagram",
+    featured: true
   },
   {
     id: 45,
@@ -551,7 +558,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/Image-665.jpg",
     category: "interview",
     videoUrl: "https://www.instagram.com/reel/DMXy444xFMx/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    platform: "instagram"
+    platform: "instagram",
+    featured: true
   },
   {
     id: 50,
@@ -562,7 +570,8 @@ const projectsData: Project[] = [
     image: "/thumbnails/karun.jpg",
     category: "interview",
     videoUrl: "https://www.instagram.com/reel/DM0AVz2TRmw/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-    platform: "instagram"
+    platform: "instagram",
+    featured: true
   },
   {
     id: 51,
@@ -593,6 +602,7 @@ export const projects = projectsData;
 
 // Export individual categories for filtering
 export const projectCategories = [
+  { id: "featured", label: "Featured" },
   { id: "all", label: "All Work" },
   { id: "Music Video", label: "Music Videos" },
   { id: "Behind the scenes", label: "Behind the Scenes" },
