@@ -10,10 +10,13 @@ export const GallerySection = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [visibleCount, setVisibleCount] = useState(12);
   const [selectedPhoto, setSelectedPhoto] = useState<typeof photos[0] | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   const filteredPhotos = photos.filter(
     (photo) => activeCategory === 'all' || photo.category === activeCategory
   );
+
+  const displayedPhotos = showAll ? filteredPhotos : filteredPhotos.slice(0, visibleCount);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -59,6 +62,7 @@ export const GallerySection = () => {
                 onClick={() => {
                   setActiveCategory(cat.id);
                   setVisibleCount(12);
+                  setShowAll(false);
                 }}
                 className={`font-display text-sm tracking-widest uppercase px-5 py-2 rounded-sm transition-all duration-300 ${
                   activeCategory === cat.id
@@ -72,26 +76,29 @@ export const GallerySection = () => {
           </div>
         </motion.div>
 
-        {/* Photo Grid - Masonry Layout */}
+        {/* Photo Grid */}
         <motion.div
           ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
+          className={showAll 
+            ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+            : "columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
+          }
         >
-          {filteredPhotos.slice(0, visibleCount).map((photo) => (
+          {displayedPhotos.map((photo) => (
             <motion.div
               key={photo.id}
               variants={itemVariants}
-              className="break-inside-avoid group cursor-pointer"
+              className={`group cursor-pointer ${showAll ? '' : 'break-inside-avoid'}`}
               onClick={() => setSelectedPhoto(photo)}
             >
-              <div className="relative overflow-hidden rounded-lg bg-card">
+              <div className={`relative overflow-hidden rounded-lg bg-card ${showAll ? 'aspect-square' : ''}`}>
                 <img
                   src={photo.src}
                   alt={photo.title}
-                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${showAll ? 'h-full' : 'h-auto'}`}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -105,13 +112,13 @@ export const GallerySection = () => {
           ))}
         </motion.div>
 
-        {/* Load More */}
-        {visibleCount < filteredPhotos.length && (
+        {/* View All / Load More Buttons */}
+        {!showAll && filteredPhotos.length > visibleCount && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-center mt-12"
+            className="text-center mt-12 flex justify-center gap-4"
           >
             <Button
               onClick={() => setVisibleCount((prev) => prev + 12)}
@@ -119,6 +126,32 @@ export const GallerySection = () => {
               className="font-display tracking-widest uppercase border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               Load More Photos
+            </Button>
+            <Button
+              onClick={() => setShowAll(true)}
+              variant="default"
+              className="font-display tracking-widest uppercase"
+            >
+              View All Photos
+            </Button>
+          </motion.div>
+        )}
+
+        {showAll && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center mt-12"
+          >
+            <Button
+              onClick={() => {
+                setShowAll(false);
+                setVisibleCount(12);
+              }}
+              variant="outline"
+              className="font-display tracking-widest uppercase border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              Show Less
             </Button>
           </motion.div>
         )}
