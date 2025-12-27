@@ -59,7 +59,7 @@ export const HeroSection = () => {
         >
           <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
           <span className="font-display text-xs tracking-[0.2em] uppercase text-gold">
-            NYFA Graduate
+            New York Film Academy Alum
           </span>
         </motion.div>
 
