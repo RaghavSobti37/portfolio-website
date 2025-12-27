@@ -111,7 +111,9 @@ export const PortfolioSection = () => {
                 }}
                 className={`font-display text-xs md:text-sm tracking-widest uppercase px-4 py-2 rounded-sm transition-all duration-300 ${
                   activeCategory === cat.id
-                    ? 'bg-primary text-primary-foreground'
+                    ? cat.id === 'featured'
+                      ? 'bg-accent text-accent-foreground'
+                      : 'bg-primary text-primary-foreground'
                     : 'bg-secondary text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -221,20 +223,22 @@ export const PortfolioSection = () => {
         </motion.div>
 
         {/* View All / Load More Buttons */}
-        {!showAll && filteredItems.length > visibleCount && (
+        {!showAll && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
             className="text-center mt-12 flex justify-center gap-4"
           >
-            <Button
-              onClick={() => setVisibleCount((prev) => prev + 8)}
-              variant="outline"
-              className="font-display tracking-widest uppercase border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            >
-              Load More
-            </Button>
+            {filteredItems.length > visibleCount && (
+              <Button
+                onClick={() => setVisibleCount((prev) => prev + 8)}
+                variant="outline"
+                className="font-display tracking-widest uppercase border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                Load More
+              </Button>
+            )}
             <Button
               onClick={() => setShowAll(true)}
               variant="default"
