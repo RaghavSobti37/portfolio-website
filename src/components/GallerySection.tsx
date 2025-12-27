@@ -83,8 +83,8 @@ export const GallerySection = () => {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           className={showAll 
-            ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
-            : "columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4"
+            ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0"
+            : "columns-2 md:columns-3 lg:columns-4 gap-0"
           }
         >
           {displayedPhotos.map((photo) => (
@@ -94,7 +94,7 @@ export const GallerySection = () => {
               className={`group cursor-pointer ${showAll ? '' : 'break-inside-avoid'}`}
               onClick={() => setSelectedPhoto(photo)}
             >
-              <div className={`relative overflow-hidden rounded-lg bg-card ${showAll ? 'aspect-square' : ''}`}>
+              <div className={`relative overflow-hidden bg-card ${showAll ? 'aspect-square' : ''}`}>
                 <img
                   src={photo.src}
                   alt={photo.title}
