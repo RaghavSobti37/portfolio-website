@@ -240,7 +240,10 @@ export const PortfolioSection = () => {
               </Button>
             )}
             <Button
-              onClick={() => setShowAll(true)}
+              onClick={() => {
+                setActiveCategory('all');
+                setShowAll(true);
+              }}
               variant="default"
               className="font-display tracking-widest uppercase"
             >
