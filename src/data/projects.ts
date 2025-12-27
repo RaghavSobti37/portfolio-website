@@ -611,6 +611,7 @@ export const projectCategories = [
   { id: "Ad Film", label: "Ad Films" },
   { id: "interview", label: "Interviews" },
   { id: "showreel", label: "Showreels" },
+  { id: "Editing", label: "Editing" },
 ];
 
 export default projects;
