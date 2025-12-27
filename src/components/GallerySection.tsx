@@ -82,23 +82,20 @@ export const GallerySection = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className={showAll 
-            ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0"
-            : "columns-2 md:columns-3 lg:columns-4 gap-0"
-          }
+          className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-0"
         >
           {displayedPhotos.map((photo) => (
             <motion.div
               key={photo.id}
               variants={itemVariants}
-              className={`group cursor-pointer ${showAll ? '' : 'break-inside-avoid'}`}
+              className="group cursor-pointer break-inside-avoid"
               onClick={() => setSelectedPhoto(photo)}
             >
-              <div className={`relative overflow-hidden bg-card ${showAll ? 'aspect-square' : ''}`}>
+              <div className="relative overflow-hidden bg-card">
                 <img
                   src={photo.src}
                   alt={photo.title}
-                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${showAll ? 'h-full' : 'h-auto'}`}
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
