@@ -130,8 +130,8 @@ export const PortfolioSection = () => {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           className={showAll 
-            ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" 
-            : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] md:auto-rows-[220px] lg:auto-rows-[240px] gap-1"
+            ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0" 
+            : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] md:auto-rows-[220px] lg:auto-rows-[240px] gap-0"
           }
         >
           {displayedItems.map((item, index) => (
