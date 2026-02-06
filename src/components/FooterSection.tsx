@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { Instagram, Youtube, Linkedin, Mail } from 'lucide-react';
 
 const socialLinks = [
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Youtube, href: '#', label: 'YouTube' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Mail, href: '#contact', label: 'Email' },
+  { icon: Instagram, href: 'https://www.instagram.com/bluepolaroid05/', label: 'Instagram' },
+  { icon: Youtube, href: 'https://www.youtube.com/@bluepolaroid05/videos', label: 'YouTube' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/raghav-raj-sobti/', label: 'LinkedIn' },
+  
 ];
 
 export const FooterSection = () => {
@@ -68,10 +68,10 @@ export const FooterSection = () => {
             className="mb-10"
           >
             <a
-              href="mailto:hello@bluepolaroid.com"
+              href="mailto:raghavsobti37@gmail.com"
               className="font-display text-sm tracking-[0.3em] uppercase text-accent hover:text-foreground transition-colors duration-300"
             >
-              hello@bluepolaroid.com
+              raghavsobti37@gmail.com
             </a>
           </motion.div>
 

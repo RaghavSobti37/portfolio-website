@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Instagram, Youtube, Linkedin } from 'lucide-react';
 
 const navLinks = [
   { name: 'Work', href: '#work' },
@@ -55,6 +55,18 @@ export const Navigation = () => {
                 </button>
               </li>
             ))}
+            {/* Social Links */}
+            <div className="flex items-center gap-4 ml-4">
+              <a href="https://www.instagram.com/bluepolaroid05/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
+                <Instagram size={20} />
+              </a>
+              <a href="https://www.youtube.com/@bluepolaroid05/videos" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
+                <Youtube size={20} />
+              </a>
+              <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
+                <Linkedin size={20} />
+              </a>
+            </div>
           </ul>
 
           {/* Mobile Menu Button */}
@@ -91,6 +103,23 @@ export const Navigation = () => {
                   {link.name}
                 </motion.button>
               ))}
+              {/* Social Links */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.1 }}
+                className="flex items-center gap-6 mt-8"
+              >
+                <a href="https://www.instagram.com/bluepolaroid05/" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
+                  <Instagram size={28} />
+                </a>
+                <a href="https://www.youtube.com/@bluepolaroid05/videos" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
+                  <Youtube size={28} />
+                </a>
+                <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
+                  <Linkedin size={28} />
+                </a>
+              </motion.div>
             </div>
           </motion.div>
         )}
