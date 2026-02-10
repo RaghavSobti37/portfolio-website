@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const navLinks = [
   { name: 'Projects', href: '#projects' },
@@ -36,15 +35,9 @@ export const CodingNavigation = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link to="/" className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-accent transition-colors">
-              ← Film
-            </Link>
-            <span className="text-border">|</span>
-            <span className="font-display text-2xl font-bold tracking-wider text-foreground">
-              RAGHAV<span className="text-accent">.</span>DEV
-            </span>
-          </div>
+          <span className="font-display text-2xl font-bold tracking-wider text-foreground">
+            RAGS<span className="text-accent">.</span>DEV
+          </span>
 
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
@@ -62,7 +55,7 @@ export const CodingNavigation = () => {
               <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="https://github.com/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
+              <a href="https://github.com/RaghavSobti37" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
                 <Github size={20} />
               </a>
             </div>
@@ -109,7 +102,7 @@ export const CodingNavigation = () => {
                 <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
                   <Linkedin size={28} />
                 </a>
-                <a href="https://github.com/" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
+                <a href="https://github.com/RaghavSobti37" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
                   <Github size={28} />
                 </a>
               </motion.div>

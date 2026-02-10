@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
-import { Linkedin, Github, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Linkedin, Github } from 'lucide-react';
 
 const socialLinks = [
   { icon: Linkedin, href: 'https://www.linkedin.com/in/raghav-raj-sobti/', label: 'LinkedIn' },
-  { icon: Github, href: 'https://github.com/', label: 'GitHub' },
+  { icon: Github, href: 'https://github.com/RaghavSobti37', label: 'GitHub' },
 ];
 
 export const CodingFooter = () => {
@@ -19,20 +18,9 @@ export const CodingFooter = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-display text-3xl font-bold tracking-wider mb-2"
+            className="font-display text-3xl font-bold tracking-wider mb-6"
           >
-            RAGHAV<span className="text-accent">.</span>DEV
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <Link to="/" className="font-display text-xs tracking-widest uppercase text-muted-foreground hover:text-accent transition-colors">
-              ← Back to Film Portfolio
-            </Link>
+            RAGS<span className="text-accent">.</span>DEV
           </motion.div>
 
           <motion.p
@@ -40,7 +28,7 @@ export const CodingFooter = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-body text-muted-foreground mb-8 max-w-md mt-6"
+            className="font-body text-muted-foreground mb-8 max-w-md"
           >
             Building performant, beautiful web experiences with modern technologies.
           </motion.p>
