@@ -31,7 +31,7 @@ const codingProjects = [
     github: 'https://github.com/RaghavSobti37/portfolio-website',
     website: 'https://bluepolaroid.com',
     preview: 'https://bluepolaroid.com',
-    isInternal: true,
+    },
   },
   {
     id: 3,
