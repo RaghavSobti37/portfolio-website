@@ -26,18 +26,15 @@ export const CodingExperience = () => {
       title: 'Project Intern — EKORS',
       description: 'Assisted in development of internal tools and projects. Supported achieving key milestones in project delivery.',
     },
-  ];
-
-  const educationData = [
-    {
-      date: '2021 – 2025',
-      title: 'B.Tech in Computer Science',
-      subtitle: 'BML Munjal University, Gurugram',
-    },
     {
       date: '2025',
-      title: 'Cinematography Program',
-      subtitle: 'New York Film Academy — Academic Excellence Award',
+      title: 'Cinematography Program — New York Film Academy',
+      description: 'Intensive cinematography training at NYFA, focusing on visual storytelling and production techniques.',
+    },
+    {
+      date: '2021 – 2025',
+      title: 'B.Tech in Computer Science — BML Munjal University, Gurugram',
+      description: 'Comprehensive education in computer science fundamentals, software engineering, and web technologies.',
     },
   ];
 
@@ -70,10 +67,10 @@ export const CodingExperience = () => {
             </p>
           </motion.div>
 
-          {/* Work Experience */}
+          {/* Timeline */}
           <motion.div variants={itemVariants} className="mb-20">
             <h3 className="font-display text-3xl md:text-4xl font-bold mb-12 tracking-tight">
-              EXPERIENCE
+              EXPERIENCE & EDUCATION
             </h3>
 
             <div className="relative">
@@ -99,27 +96,6 @@ export const CodingExperience = () => {
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </motion.div>
-
-          {/* Education */}
-          <motion.div variants={itemVariants} className="mb-20">
-            <h3 className="font-display text-3xl md:text-4xl font-bold mb-12 tracking-tight">
-              EDUCATION
-            </h3>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {educationData.map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="bg-card-gradient rounded-sm p-8 border-2 border-accent/10"
-                >
-                  <span className="font-display text-sm tracking-wider text-accent font-semibold">{item.date}</span>
-                  <h4 className="font-display text-xl font-bold text-foreground mt-2">{item.title}</h4>
-                  <p className="font-body text-muted-foreground mt-1">{item.subtitle}</p>
-                </motion.div>
-              ))}
             </div>
           </motion.div>
 

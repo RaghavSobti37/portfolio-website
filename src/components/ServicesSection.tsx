@@ -1,6 +1,7 @@
 import { motion, useInView, type Variants } from 'framer-motion';
 import { useRef } from 'react';
-import { Clapperboard, Globe, TrendingUp } from 'lucide-react';
+import { Clapperboard, Globe, TrendingUp, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
@@ -118,6 +119,17 @@ export const ServicesSection = () => {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Web Dev CTA */}
+                  {service.title === 'Web Development' && (
+                    <Link
+                      to="/coding"
+                      className="inline-flex items-center gap-2 mt-6 font-display text-sm tracking-widest uppercase text-accent hover:text-foreground transition-colors duration-300 group/link"
+                    >
+                      View Dev Portfolio
+                      <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                    </Link>
+                  )}
                 </div>
 
                 {/* Number decoration */}

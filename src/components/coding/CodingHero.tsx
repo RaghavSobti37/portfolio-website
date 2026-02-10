@@ -16,31 +16,51 @@ export const CodingHero = () => {
       {/* Animated code background */}
       <motion.div style={{ y }} className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/50 to-background" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/8 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
+        <motion.div
+          animate={{ scale: [1, 1.1, 1], opacity: [0.06, 0.12, 0.06] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.08, 0.14, 0.08] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl"
+        />
         
         {/* Floating code snippets */}
         <motion.div
-          animate={{ y: [0, -15, 0], opacity: [0.05, 0.1, 0.05] }}
+          animate={{ y: [0, -15, 0], opacity: [0.05, 0.12, 0.05] }}
           transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-20 left-10 font-mono text-xs text-accent/10 whitespace-pre hidden md:block"
+          className="absolute top-20 left-10 font-mono text-xs text-accent/15 whitespace-pre hidden md:block"
         >
 {`const App = () => {
   return <World />;
 };`}
         </motion.div>
         <motion.div
-          animate={{ y: [0, 10, 0], opacity: [0.05, 0.08, 0.05] }}
+          animate={{ y: [0, 10, 0], opacity: [0.05, 0.1, 0.05] }}
           transition={{ duration: 6, repeat: Infinity, delay: 2 }}
-          className="absolute bottom-32 right-16 font-mono text-xs text-primary/10 whitespace-pre hidden md:block"
+          className="absolute bottom-32 right-16 font-mono text-xs text-primary/15 whitespace-pre hidden md:block"
         >
 {`useEffect(() => {
   buildSomethingGreat();
 }, []);`}
         </motion.div>
+        <motion.div
+          animate={{ y: [5, -10, 5], opacity: [0.03, 0.08, 0.03] }}
+          transition={{ duration: 9, repeat: Infinity, delay: 4 }}
+          className="absolute top-1/2 right-1/4 font-mono text-xs text-accent/10 whitespace-pre hidden lg:block"
+        >
+{`const deploy = async () => {
+  await magic();
+};`}
+        </motion.div>
 
-        {/* Film grain */}
-        <div className="absolute inset-0 opacity-[0.02] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIi8+PC9zdmc+')]" />
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: 'linear-gradient(hsl(var(--accent) / 0.3) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--accent) / 0.3) 1px, transparent 1px)',
+          backgroundSize: '60px 60px'
+        }} />
       </motion.div>
 
       <motion.div
@@ -67,21 +87,43 @@ export const CodingHero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
         >
-          <span className="block">Building Digital.</span>
-          <span className="block text-gradient">Crafting Experiences.</span>
+          <motion.span
+            className="block"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+          >
+            Building Digital.
+          </motion.span>
+          <motion.span
+            className="block text-gradient"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+          >
+            Crafting Experiences.
+          </motion.span>
         </motion.h1>
 
         {/* Sub-headline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
           className="font-body text-lg md:text-xl text-muted-foreground mb-8 tracking-wide"
         >
           React.js{' '}
-          <span className="text-accent">•</span>{' '}
+          <motion.span
+            className="text-accent inline-block"
+            animate={{ scale: [1, 1.3, 1] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+          >•</motion.span>{' '}
           Next.js{' '}
-          <span className="text-accent">•</span>{' '}
+          <motion.span
+            className="text-accent inline-block"
+            animate={{ scale: [1, 1.3, 1] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
+          >•</motion.span>{' '}
           UI/UX Design
         </motion.p>
 
@@ -89,7 +131,7 @@ export const CodingHero = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
         >
           <Button
             onClick={handleScrollToProjects}
@@ -104,7 +146,7 @@ export const CodingHero = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
           className="absolute bottom-12 left-1/2 -translate-x-1/2"
         >
           <motion.div
