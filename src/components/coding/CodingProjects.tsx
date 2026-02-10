@@ -15,8 +15,8 @@ const codingProjects = [
       'Dynamic management interfaces for real-time CRUD',
     ],
     github: 'https://github.com/RaghavSobti37/Ekors-ERP',
-    website: null,
-    preview: null,
+    website: 'https://ekors-erp-dyix.vercel.app/login',
+    preview: 'https://ekors-erp-dyix.vercel.app/login',
   },
   {
     id: 2,
