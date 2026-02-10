@@ -113,7 +113,7 @@ export const CodingProjects = () => {
 
                 {/* Faded website preview */}
                 {project.preview && (
-                  <div className="absolute top-4 right-4 w-48 h-32 md:w-64 md:h-44 rounded-sm overflow-hidden opacity-10 group-hover:opacity-20 transition-opacity duration-500 hidden md:block">
+                  <div className="absolute top-4 right-4 w-48 h-32 md:w-64 md:h-44 rounded-sm overflow-hidden opacity-10 group-hover:opacity-100 transition-opacity duration-500 hidden md:block">
                     <iframe
                       src={project.preview}
                       title={`${project.title} preview`}
