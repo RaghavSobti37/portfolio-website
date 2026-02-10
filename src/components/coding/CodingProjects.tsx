@@ -15,8 +15,8 @@ const codingProjects = [
       'Dynamic management interfaces for real-time CRUD',
     ],
     github: 'https://github.com/RaghavSobti37/Ekors-ERP',
-    website: null,
-    preview: null,
+    website: 'https://ekors-erp-dyix.vercel.app/login',
+    preview: 'https://ekors-erp-dyix.vercel.app/login',
   },
   {
     id: 2,
@@ -29,9 +29,8 @@ const codingProjects = [
       'Optimized image pipeline & SEO metadata',
     ],
     github: 'https://github.com/RaghavSobti37/portfolio-website',
-    website: '/',
-    preview: null,
-    isInternal: true,
+    website: 'https://bluepolaroid.com',
+    preview: 'https://bluepolaroid.com',
   },
   {
     id: 3,
@@ -113,7 +112,7 @@ export const CodingProjects = () => {
 
                 {/* Faded website preview */}
                 {project.preview && (
-                  <div className="absolute top-4 right-4 w-48 h-32 md:w-64 md:h-44 rounded-sm overflow-hidden opacity-10 group-hover:opacity-20 transition-opacity duration-500 hidden md:block">
+                  <div className="absolute top-4 right-4 w-48 h-32 md:w-64 md:h-44 rounded-sm overflow-hidden opacity-10 group-hover:opacity-100 transition-opacity duration-500 hidden md:block">
                     <iframe
                       src={project.preview}
                       title={`${project.title} preview`}
@@ -135,8 +134,8 @@ export const CodingProjects = () => {
                         {project.description}
                       </p>
                     </div>
-                    {/* Number decoration */}
-                    <div className="font-display text-7xl font-bold text-foreground/5 group-hover:text-accent/10 transition-colors duration-500 flex-shrink-0">
+                    {/* Number decoration - hidden on hover */}
+                    <div className="font-display text-7xl font-bold text-foreground/5 group-hover:opacity-0 transition-all duration-500 flex-shrink-0">
                       0{index + 1}
                     </div>
                   </div>
@@ -174,21 +173,12 @@ export const CodingProjects = () => {
                       </a>
                     )}
                     {project.website && (
-                      project.isInternal ? (
-                        <a href={project.website}>
-                          <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
-                            <ExternalLink className="w-4 h-4" />
-                            View Website
-                          </Button>
-                        </a>
-                      ) : (
-                        <a href={project.website} target="_blank" rel="noreferrer">
-                          <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
-                            <ExternalLink className="w-4 h-4" />
-                            View Website
-                          </Button>
-                        </a>
-                      )
+                      <a href={project.website} target="_blank" rel="noreferrer">
+                        <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
+                          <ExternalLink className="w-4 h-4" />
+                          View Website
+                        </Button>
+                      </a>
                     )}
                   </div>
                 </div>
