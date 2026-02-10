@@ -1,6 +1,7 @@
 import { motion, useInView, type Variants } from 'framer-motion';
 import { useRef } from 'react';
-import { Clapperboard, Globe, TrendingUp } from 'lucide-react';
+import { Clapperboard, Globe, TrendingUp, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
