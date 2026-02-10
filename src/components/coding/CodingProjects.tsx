@@ -135,8 +135,8 @@ export const CodingProjects = () => {
                         {project.description}
                       </p>
                     </div>
-                    {/* Number decoration */}
-                    <div className="font-display text-7xl font-bold text-foreground/5 group-hover:text-accent/10 transition-colors duration-500 flex-shrink-0">
+                    {/* Number decoration - hidden on hover */}
+                    <div className="font-display text-7xl font-bold text-foreground/5 group-hover:opacity-0 transition-all duration-500 flex-shrink-0">
                       0{index + 1}
                     </div>
                   </div>
