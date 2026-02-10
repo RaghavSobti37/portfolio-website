@@ -174,21 +174,12 @@ export const CodingProjects = () => {
                       </a>
                     )}
                     {project.website && (
-                      project.isInternal ? (
-                        <a href={project.website}>
-                          <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
-                            <ExternalLink className="w-4 h-4" />
-                            View Website
-                          </Button>
-                        </a>
-                      ) : (
-                        <a href={project.website} target="_blank" rel="noreferrer">
-                          <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
-                            <ExternalLink className="w-4 h-4" />
-                            View Website
-                          </Button>
-                        </a>
-                      )
+                      <a href={project.website} target="_blank" rel="noreferrer">
+                        <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
+                          <ExternalLink className="w-4 h-4" />
+                          View Website
+                        </Button>
+                      </a>
                     )}
                   </div>
                 </div>
