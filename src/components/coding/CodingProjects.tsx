@@ -29,8 +29,8 @@ const codingProjects = [
       'Optimized image pipeline & SEO metadata',
     ],
     github: 'https://github.com/RaghavSobti37/portfolio-website',
-    website: '/',
-    preview: null,
+    website: 'https://bluepolaroid.com',
+    preview: 'https://bluepolaroid.com',
     isInternal: true,
   },
   {
