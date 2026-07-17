@@ -1,191 +1,100 @@
-# Portfolio Website
+<p align="center">
+  <img src="public/favicon.jpg" alt="Cinematic Canvas logo" width="120" />
+</p>
 
-A modern, animated portfolio website built with React, TypeScript, and Tailwind CSS featuring a cinematic design aesthetic.
+<h1 align="center">Cinematic Canvas</h1>
 
-## 🛠️ Tech Stack
+<p align="center">
+  BluePolaroid portfolio for Raghav Raj Sobti, combining cinematography, photography and creative-technology work.
+</p>
 
-- **Framework:** React 18 with TypeScript
-- **Build Tool:** Vite
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
-- **Routing:** React Router DOM
-- **UI Components:** Radix UI + shadcn/ui
+<p align="center">
+  <img src="https://img.shields.io/badge/visibility-public-brightgreen" alt="Public repository" />
+  <img src="https://img.shields.io/badge/maintained-yes-blue" alt="Maintained" />
+  <img src="https://img.shields.io/badge/owner-RaghavSobti37-111827" alt="Owner" />
+</p>
+<p align="center">
+  <a href="https://portfolio-website-final-raghavsobti37s-projects.vercel.app"><strong>Live Project</strong></a>
+</p>
 
-## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed:
+## Overview
 
-- [Node.js](https://nodejs.org/) (v18.0.0 or higher)
-- [npm](https://www.npmjs.com/) (v9.0.0 or higher) or [Bun](https://bun.sh/)
+BluePolaroid portfolio for Raghav Raj Sobti, combining cinematography, photography and creative-technology work.
 
-## 🚀 Local Development Setup
+This README is structured as a professional project handoff: it explains the purpose, stack, setup flow, and maintenance expectations so the repository is easier to evaluate, run, and extend.
 
-### 1. Clone the Repository
+## Highlights
+
+- Clear implementation of the project goal: BluePolaroid portfolio for Raghav Raj Sobti, combining cinematography, photography and creative-technology work.
+- Organized repository structure for maintainable iteration and future extension.
+- Built around TypeScript, Node.js, Vite, Tailwind CSS with pragmatic tooling choices.
+- Tagged for discoverability around cinematography, portfolio, react, tailwindcss, typescript.
+
+## Tech Stack
+
+- TypeScript
+- Node.js
+- Vite
+- Tailwind CSS
+
+<p>
+  <img src="https://img.shields.io/badge/TypeScript-111827?style=flat" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Node.js-111827?style=flat" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Vite-111827?style=flat" alt="Vite" />
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-111827?style=flat" alt="Tailwind CSS" />
+</p>
+
+## Getting Started
+
+### Prerequisites
+
+- Git
+- A runtime appropriate for the stack listed above
+
+### Installation
 
 ```bash
-git clone <your-repo-url>
-cd <your-project-folder>
-```
-
-### 2. Install Dependencies
-
-Using npm:
-```bash
+git clone https://github.com/RaghavSobti37/cinematic-canvas.git
+cd cinematic-canvas
 npm install
 ```
 
-Or using Bun:
-```bash
-bun install
-```
+### Development
 
-### 3. Start Development Server
-
-Using npm:
 ```bash
 npm run dev
 ```
 
-Or using Bun:
-```bash
-bun run dev
-```
-
-The application will be available at `http://localhost:8080`
-
-## 📦 Build for Production
-
-To create an optimized production build:
+### Production Build
 
 ```bash
 npm run build
 ```
 
-To preview the production build locally:
+## Project Structure
 
-```bash
-npm run preview
-```
+The repository is organized around the source code, configuration, and project assets needed to run or extend the application. Start with the main entry point and configuration files, then follow the feature or module directories from there.
 
-## 🌐 Deploying to Vercel
+## Quality Notes
 
-### Option 1: Deploy via Vercel Dashboard (Recommended)
+- Keep implementation changes small, reviewed, and easy to reason about.
+- Document new environment variables, scripts, and external services as they are added.
+- Prefer clear naming and predictable structure over clever abstractions.
+- Validate user-facing flows after any dependency, routing, or deployment change.
 
-#### Step 1: Push to GitHub
-Ensure your code is pushed to a GitHub repository.
+## Topics
 
-#### Step 2: Connect to Vercel
-1. Go to [vercel.com](https://vercel.com) and sign in with your GitHub account
-2. Click **"Add New..."** → **"Project"**
-3. Select your repository from the list
-4. Click **"Import"**
+- cinematography
+- portfolio
+- react
+- tailwindcss
+- typescript
+- vite
 
-#### Step 3: Configure Build Settings
-Vercel should auto-detect the settings, but verify:
+## Author
 
-| Setting | Value |
-|---------|-------|
-| Framework Preset | Vite |
-| Build Command | `npm run build` |
-| Output Directory | `dist` |
-| Install Command | `npm install` |
+Built and maintained by [Raghav Raj Sobti](https://github.com/RaghavSobti37).
 
-#### Step 4: Deploy
-1. Click **"Deploy"**
-2. Wait for the build to complete (typically 1-2 minutes)
-3. Your site will be live at `https://your-project.vercel.app`
+Project link: [https://portfolio-website-final-raghavsobti37s-projects.vercel.app](https://portfolio-website-final-raghavsobti37s-projects.vercel.app)
 
-### Option 2: Deploy via Vercel CLI
-
-#### Step 1: Install Vercel CLI
-
-```bash
-npm install -g vercel
-```
-
-#### Step 2: Login to Vercel
-
-```bash
-vercel login
-```
-
-#### Step 3: Deploy
-
-From your project root directory:
-
-```bash
-vercel
-```
-
-Follow the prompts:
-- Set up and deploy? **Y**
-- Which scope? Select your account
-- Link to existing project? **N** (for first deploy)
-- Project name? Enter a name or press Enter for default
-- Directory with code? **./** (press Enter)
-- Override settings? **N**
-
-#### Step 4: Deploy to Production
-
-```bash
-vercel --prod
-```
-
-## ⚙️ Environment Variables (If Needed)
-
-If your project uses environment variables, add them in Vercel:
-
-1. Go to your project in Vercel Dashboard
-2. Navigate to **Settings** → **Environment Variables**
-3. Add your variables (e.g., `VITE_API_KEY`)
-4. Redeploy for changes to take effect
-
-**Note:** Vite requires environment variables to be prefixed with `VITE_` to be exposed to the client.
-
-## 🔧 Custom Domain Setup
-
-1. In Vercel Dashboard, go to your project
-2. Navigate to **Settings** → **Domains**
-3. Add your custom domain
-4. Update your DNS records as instructed by Vercel
-5. SSL certificate is automatically provisioned
-
-## 📁 Project Structure
-
-```
-├── public/              # Static assets
-├── src/
-│   ├── components/      # React components
-│   │   └── ui/          # shadcn/ui components
-│   ├── hooks/           # Custom React hooks
-│   ├── lib/             # Utility functions
-│   ├── pages/           # Page components
-│   ├── App.tsx          # Main app component
-│   ├── index.css        # Global styles & design tokens
-│   └── main.tsx         # Entry point
-├── index.html           # HTML template
-├── tailwind.config.ts   # Tailwind configuration
-├── vite.config.ts       # Vite configuration
-└── package.json         # Dependencies & scripts
-```
-
-## 📜 Available Scripts
-
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
