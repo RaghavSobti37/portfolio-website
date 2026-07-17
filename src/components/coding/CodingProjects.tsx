@@ -16,7 +16,7 @@ const codingProjects = [
     ],
     github: 'https://github.com/RaghavSobti37/Auto-Mailer',
     website: '',
-    preview: '',
+    preview: '/gallery/10.jpg',
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const codingProjects = [
     ],
     github: 'https://github.com/RaghavSobti37/CoreKnot',
     website: '',
-    preview: '',
+    preview: '/gallery/11.jpg',
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ const codingProjects = [
     ],
     github: 'https://github.com/RaghavSobti37/photo-cleaner-app',
     website: '',
-    preview: '',
+    preview: '/gallery/12.jpg',
   },
   {
     id: 4,
@@ -58,7 +58,7 @@ const codingProjects = [
     ],
     github: 'https://github.com/RaghavSobti37/Resume-Generator',
     website: '',
-    preview: '',
+    preview: '/gallery/13.jpg',
   },
 ];
 
@@ -109,81 +109,75 @@ export const CodingProjects = () => {
               variants={cardVariants}
               className="group relative"
             >
-              <div className="relative bg-card-gradient rounded-sm p-8 md:p-10 border-2 border-accent/10 hover:border-accent/30 card-lift overflow-hidden">
-                {/* Hover glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:to-primary/5 transition-all duration-500" />
+              <div className="relative overflow-hidden rounded-sm border-2 border-accent/10 bg-card-gradient p-8 transition-all duration-300 hover:border-accent/30 md:p-10 card-lift">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent/0 transition-all duration-500 group-hover:from-accent/5 group-hover:to-primary/5" />
 
-                {/* Faded website preview */}
-                {project.preview && (
-                  <div className="absolute top-4 right-4 w-48 h-32 md:w-64 md:h-44 rounded-sm overflow-hidden opacity-10 group-hover:opacity-100 transition-opacity duration-500 hidden md:block">
-                    <iframe
-                      src={project.preview}
-                      title={`${project.title} preview`}
-                      className="w-[1280px] h-[800px] border-0 pointer-events-none"
-                      style={{ transform: 'scale(0.2)', transformOrigin: 'top left' }}
-                      loading="lazy"
-                      sandbox="allow-scripts allow-same-origin"
-                    />
-                  </div>
-                )}
-
-                <div className="relative z-10">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
-                    <div className="flex-1">
-                      <h3 className="font-display text-2xl md:text-3xl font-bold group-hover:text-accent transition-colors duration-300">
-                        {project.title}
-                      </h3>
-                      <p className="font-body text-muted-foreground leading-relaxed mt-3 max-w-2xl">
-                        {project.description}
-                      </p>
+                <div className="relative z-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+                  <div>
+                    <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                      <div className="flex-1">
+                        <h3 className="font-display text-2xl font-bold transition-colors duration-300 md:text-3xl group-hover:text-accent">
+                          {project.title}
+                        </h3>
+                        <p className="mt-3 max-w-2xl font-body leading-relaxed text-muted-foreground">
+                          {project.description}
+                        </p>
+                      </div>
+                      <div className="font-display text-7xl font-bold text-foreground/5 transition-all duration-500 group-hover:opacity-0">
+                        0{index + 1}
+                      </div>
                     </div>
-                    {/* Number decoration - hidden on hover */}
-                    <div className="font-display text-7xl font-bold text-foreground/5 group-hover:opacity-0 transition-all duration-500 flex-shrink-0">
-                      0{index + 1}
+
+                    <div className="mb-6 flex flex-wrap gap-2">
+                      {project.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="rounded-full border border-accent/20 bg-accent/10 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.24em] text-accent"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    <ul className="mb-6 space-y-2">
+                      {project.highlights.map((h, i) => (
+                        <li key={i} className="flex items-start gap-2 font-body text-sm text-muted-foreground">
+                          <span className="mt-1 text-accent">▸</span>
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex flex-wrap gap-3">
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noreferrer">
+                          <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
+                            <Github className="w-4 h-4" />
+                            View GitHub
+                          </Button>
+                        </a>
+                      )}
+                      {project.website && (
+                        <a href={project.website} target="_blank" rel="noreferrer">
+                          <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
+                            <ExternalLink className="w-4 h-4" />
+                            View Website
+                          </Button>
+                        </a>
+                      )}
                     </div>
                   </div>
 
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="font-mono text-xs px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/20"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Highlights */}
-                  <ul className="space-y-2 mb-6">
-                    {project.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-2 font-body text-sm text-muted-foreground">
-                        <span className="text-accent mt-1">▸</span>
-                        {h}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-3">
-                    {project.github && (
-                      <a href={project.github} target="_blank" rel="noreferrer">
-                        <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
-                          <Github className="w-4 h-4" />
-                          View GitHub
-                        </Button>
-                      </a>
-                    )}
-                    {project.website && (
-                      <a href={project.website} target="_blank" rel="noreferrer">
-                        <Button variant="outline" size="sm" className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-wider uppercase text-xs gap-2">
-                          <ExternalLink className="w-4 h-4" />
-                          View Website
-                        </Button>
-                      </a>
-                    )}
-                  </div>
+                  {project.preview && (
+                    <div className="overflow-hidden rounded-2xl border border-accent/15 bg-background/70 p-2 shadow-sm">
+                      <img
+                        src={project.preview}
+                        alt={`${project.title} preview`}
+                        className="h-56 w-full rounded-xl object-cover sm:h-64"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

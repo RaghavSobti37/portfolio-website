@@ -39,12 +39,12 @@ export const CodingExperience = () => {
   ];
 
   const certifications = [
-    { title: 'Internet of Things: Communication Technologies', org: 'University of California San Diego', date: 'Apr 2024' },
-    { title: 'Deep Learning Applications for Computer Vision', org: 'University of Colorado Boulder', date: 'Nov 2023' },
-    { title: 'Google Cloud Computing Foundations: Infrastructure in Google Cloud', org: 'Google', date: 'Oct 2023' },
-    { title: 'Number Theory and Cryptography', org: 'University of California San Diego', date: 'Oct 2023' },
-    { title: 'Get Started with Figma', org: 'Coursera Guided Project', date: 'Feb 2023' },
-    { title: 'Create a Storyboard using Canva', org: 'Coursera Project Network', date: 'Feb 2023' },
+    { title: 'Internet of Things: Communication Technologies', org: 'University of California San Diego', date: 'Apr 2024', image: '/gallery/14.jpg' },
+    { title: 'Deep Learning Applications for Computer Vision', org: 'University of Colorado Boulder', date: 'Nov 2023', image: '/gallery/15.jpg' },
+    { title: 'Google Cloud Computing Foundations: Infrastructure in Google Cloud', org: 'Google', date: 'Oct 2023', image: '/gallery/16.jpg' },
+    { title: 'Number Theory and Cryptography', org: 'University of California San Diego', date: 'Oct 2023', image: '/gallery/17.jpg' },
+    { title: 'Get Started with Figma', org: 'Coursera Guided Project', date: 'Feb 2023', image: '/gallery/18.jpg' },
+    { title: 'Create a Storyboard using Canva', org: 'Coursera Project Network', date: 'Feb 2023', image: '/gallery/19.jpg' },
   ];
 
   return (
@@ -114,10 +114,18 @@ export const CodingExperience = () => {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className="bg-card-gradient rounded-sm p-8 border-2 border-accent/10 group hover:border-accent/30 card-lift"
+                  className="overflow-hidden rounded-sm border-2 border-accent/10 bg-card-gradient group hover:border-accent/30 card-lift"
                 >
-                  <h4 className="font-display text-lg font-bold text-foreground group-hover:text-accent transition-colors">{cert.title}</h4>
-                  <p className="font-body text-muted-foreground mt-1">{cert.org} - {cert.date}</p>
+                  <img
+                    src={cert.image}
+                    alt={`${cert.title} certificate preview`}
+                    className="h-44 w-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="p-8">
+                    <h4 className="font-display text-lg font-bold text-foreground transition-colors group-hover:text-accent">{cert.title}</h4>
+                    <p className="mt-1 font-body text-muted-foreground">{cert.org} - {cert.date}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
