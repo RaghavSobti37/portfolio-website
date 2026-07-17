@@ -36,7 +36,7 @@ export const FooterSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-body text-muted-foreground mb-8 max-w-md"
           >
-            Crafting visual stories and digital experiences that leave a lasting impression.
+            Building intelligent digital products and creating cinematic visual stories.
           </motion.p>
 
           {/* Social Links */}
@@ -86,7 +86,7 @@ export const FooterSection = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="font-body text-sm text-muted-foreground"
           >
-            © {new Date().getFullYear()} BluePolaroid. Designed & Developed with passion.
+            &copy; {new Date().getFullYear()} BluePolaroid. Designed &amp; developed by Raghav Raj Sobti.
           </motion.p>
         </div>
       </div>

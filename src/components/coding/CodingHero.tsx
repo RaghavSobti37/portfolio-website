@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Terminal } from 'lucide-react';
+import { ArrowRight, ChevronDown, Code2, Github, Terminal, Workflow, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const CodingHero = () => {
@@ -11,8 +11,16 @@ export const CodingHero = () => {
     document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const proofPoints = [
+    { icon: Code2, label: 'Interactive apps', value: 'React + TypeScript' },
+    { icon: Workflow, label: 'Workflow systems', value: 'Automation + APIs' },
+    { icon: Zap, label: 'Product utilities', value: 'Resume + mailer tools' },
+  ];
+
+  const featuredBuilds = ['Auto Mailer', 'CoreKnot', 'Photo Cleaner App', 'Resume Generator'];
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-32">
       {/* Animated code background */}
       <motion.div style={{ y }} className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/50 to-background" />
@@ -93,7 +101,7 @@ export const CodingHero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
           >
-            Building Digital.
+            Products That Work.
           </motion.span>
           <motion.span
             className="block text-gradient"
@@ -101,7 +109,7 @@ export const CodingHero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.7 }}
           >
-            Crafting Experiences.
+            Systems That Scale.
           </motion.span>
         </motion.h1>
 
@@ -112,20 +120,68 @@ export const CodingHero = () => {
           transition={{ duration: 0.8, delay: 0.9 }}
           className="font-body text-lg md:text-xl text-muted-foreground mb-8 tracking-wide"
         >
-          React.js{' '}
+          Next.js{' '}
           <motion.span
             className="text-accent inline-block"
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 2, repeat: Infinity, delay: 1 }}
           >•</motion.span>{' '}
-          Next.js{' '}
+          APIs{' '}
           <motion.span
             className="text-accent inline-block"
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 2, repeat: Infinity, delay: 1.5 }}
           >•</motion.span>{' '}
-          UI/UX Design
+          Automation
         </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="font-body text-base md:text-lg text-muted-foreground/90 leading-relaxed max-w-3xl mx-auto mb-8"
+        >
+          I build practical web tools, AI-assisted workflows and lightweight
+          operations systems that turn scattered work into usable products.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.02 }}
+          className="flex flex-wrap items-center justify-center gap-2 max-w-3xl mx-auto mb-8"
+        >
+          {featuredBuilds.map((build) => (
+            <span
+              key={build}
+              className="rounded-full border border-accent/20 bg-background/70 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-accent/80 backdrop-blur"
+            >
+              {build}
+            </span>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.05 }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mb-10"
+        >
+          {proofPoints.map((point) => (
+            <div
+              key={point.label}
+              className="border border-accent/20 bg-accent/5 backdrop-blur-sm px-5 py-4 text-left"
+            >
+              <point.icon className="w-5 h-5 text-accent mb-3" />
+              <p className="font-display text-xs tracking-[0.24em] uppercase text-muted-foreground">
+                {point.label}
+              </p>
+              <p className="font-display text-sm md:text-base text-foreground mt-1">
+                {point.value}
+              </p>
+            </div>
+          ))}
+        </motion.div>
 
         {/* CTA */}
         <motion.div
@@ -133,13 +189,26 @@ export const CodingHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.1 }}
         >
-          <Button
-            onClick={handleScrollToProjects}
-            size="lg"
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-display tracking-widest uppercase px-10 py-6 text-sm rounded-sm transition-all duration-300 hover:shadow-glow"
-          >
-            View Projects
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Button
+              onClick={handleScrollToProjects}
+              size="lg"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-display tracking-widest uppercase px-10 py-6 text-sm rounded-sm transition-all duration-300 hover:shadow-glow gap-2"
+            >
+              View Projects
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+            <a href="https://github.com/RaghavSobti37" target="_blank" rel="noreferrer">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-widest uppercase px-10 py-6 text-sm rounded-sm gap-2"
+              >
+                <Github className="w-4 h-4" />
+                GitHub
+              </Button>
+            </a>
+          </div>
         </motion.div>
 
         {/* Scroll Indicator */}

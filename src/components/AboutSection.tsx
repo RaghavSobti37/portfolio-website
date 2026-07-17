@@ -29,34 +29,34 @@ export const AboutSection = () => {
       date: '2025',
       title: 'New York Film Academy Graduate',
       subtitle: '15 Week Cinematography Course Graduate',
-      description: 'Completed an intensive 15-week course, honing skills in lighting, composition, and cinematic storytelling.',
+      description: 'Completed intensive cinematography training across lighting, camera technicalities, storytelling, pacing, set practice, DaVinci Resolve, colour correction and grading.',
     },
     {
       date: '2025',
       title: 'Director',
-      subtitle: '"Ek Kamra" – Music Video',
-      description: 'Directed and shot with a minimalist aesthetic and a strong emotional narrative.',
+      subtitle: '"Ek Kamra" - Music Video',
+      description: 'Directed and shot a flagship authorship project with a minimalist visual language and a strong emotional narrative.',
     },
     {
-      date: '2024–2025',
-      title: 'Videographer',
-      subtitle: 'BoxoutFM & Premise',
+      date: '2024-2025',
+      title: 'Videographer and Artist Storyteller',
+      subtitle: 'Live Music, Interviews and Cultural Documentation',
       items: [
-        'Covered live DJ set events & afterparties',
-        'Captured underground electronic music culture',
-        'Filmed interviews with Laksh Maheshwari, Smoke, Rebel7',
-        'Shot BTS for The Sundog Project, Jahnvi, and more',
+        'Covered Jahnvi, Samarpan, Delhi Gate, concerts, festival recaps and underground music events',
+        'Created short-form artist interviews including Laksh, Jahnvi, Nikamma, Muzzle, Sinash, Ankur Tiwari and Pyaar',
+        'Built repeatable vertical formats for Instagram Reels and YouTube-led releases',
+        'Captured fashion reels, travel studies, urban visuals and behind-the-scenes documentation',
       ],
     },
     {
-      date: '2023–2024',
-      title: 'Assistant Director',
-      subtitle: 'EBC Originals & ArtisteFirst',
+      date: '2023-2024',
+      title: 'Assistant Direction and Production',
+      subtitle: 'EBC Originals, ArtisteFirst and Music-Film Sets',
       items: [
-        '2nd AD in Riqqat Album launch',
-        'Helped with scene setups and creative direction',
-        'Worked in Ladakh for the musical film Rooh',
-        'Assisted on MV projects like Khwaab, Dhamaal',
+        'Supported the RIQQAT album-launch body of work across decode interviews and production material',
+        'Worked on Rooh, Khwaab, Dhamaal, Aabruu and related music-film projects',
+        'Handled scene setup, on-set coordination, production support and creative-direction assistance',
+        'Progressed between second assistant direction and first director-assistant responsibilities',
       ],
     },
     {
@@ -108,16 +108,16 @@ export const AboutSection = () => {
             <motion.div variants={itemVariants} className="space-y-6 order-1 md:order-2">
               <div className="space-y-4 font-body text-muted-foreground leading-relaxed text-lg">
                 <p>
-                  A passionate and dedicated cinematographer with hands-on
-                  experience, always eager to learn and contribute creative ideas.
-                  Skilled in visual storytelling, I aim to bring my expertise to
-                  dynamic filmmaking projects and deliver impactful visuals.
+                  Raghav Raj Sobti is a Creative Technologist and Cinematographer
+                  working across digital products, automation, visual storytelling
+                  and production environments.
                 </p>
                 <p>
-                  My journey in visual arts began with a curiosity about how images
-                  can evoke emotions and tell stories. Over the years, I've
-                  developed a distinctive style that blends technical precision with
-                  artistic expression.
+                  His camera practice spans direction, cinematography, live-event
+                  coverage, artist portraits, fashion reels, behind-the-scenes
+                  documentation and assistant direction. His technology work focuses
+                  on web platforms, workflow systems, APIs and creative-business
+                  operations.
                 </p>
               </div>
             </motion.div>

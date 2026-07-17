@@ -6,22 +6,22 @@ const skillCategories = [
   {
     icon: Code2,
     title: 'Frontend',
-    skills: ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'CSS3/SASS'],
+    skills: ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Responsive UI'],
   },
   {
     icon: Server,
-    title: 'Backend',
-    skills: ['Node.js', 'Express', 'MongoDB', 'JWT Auth', 'REST APIs', 'PostgreSQL'],
+    title: 'Backend & Data',
+    skills: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'JWT Auth', 'REST APIs'],
   },
   {
     icon: Palette,
-    title: 'Design',
-    skills: ['UI/UX Design', 'Figma', 'Responsive Design', 'Design Systems', 'Accessibility', 'Motion Design'],
+    title: 'Creative Systems',
+    skills: ['UI/UX Design', 'Figma', 'Motion Design', 'SEO Structure', 'Media Layouts', 'Design Systems'],
   },
   {
     icon: Zap,
-    title: 'Tools & Other',
-    skills: ['Git/GitHub', 'DaVinci Resolve', 'SEO Optimization', 'Performance Tuning', 'EmailJS', 'Vercel'],
+    title: 'Automation',
+    skills: ['GitHub Actions', 'AiSensy', 'Google Sheets API', 'EmailJS', 'WhatsApp Workflows', 'Vercel'],
   },
 ];
 

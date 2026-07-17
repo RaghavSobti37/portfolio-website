@@ -50,7 +50,7 @@ export const HeroSection = () => {
         style={{ opacity }}
         className="relative z-10 text-center px-6 max-w-4xl mx-auto"
       >
-        {/* NYFA Badge */}
+        {/* Identity Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -59,7 +59,7 @@ export const HeroSection = () => {
         >
           <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
           <span className="font-display text-xs tracking-[0.2em] uppercase text-gold">
-            New York Film Academy Alum
+            Creative Technologist &amp; Cinematographer
           </span>
         </motion.div>
 
@@ -70,8 +70,8 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 drop-shadow-lg"
         >
-          <span className="block">Capturing Frames.</span>
-          <span className="block text-gradient">Building Brands.</span>
+          <span className="block">Building Systems.</span>
+          <span className="block text-gradient">Creating Cinema.</span>
         </motion.h1>
 
         {/* Sub-headline */}
@@ -81,11 +81,11 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="font-body text-lg md:text-xl text-muted-foreground mb-8 tracking-wide drop-shadow-md"
         >
-          Cinematographer{' '}
+          Intelligent digital products{' '}
           <span className="text-primary">•</span>{' '}
-          Web Developer{' '}
+          Cinematic visual stories{' '}
           <span className="text-primary">•</span>{' '}
-          Strategist
+          Creative operations
         </motion.p>
 
         {/* CTA Button */}

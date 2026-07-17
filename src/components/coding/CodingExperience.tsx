@@ -17,30 +17,34 @@ export const CodingExperience = () => {
 
   const timelineData = [
     {
-      date: 'Mar 2025 – Present',
+      date: 'Mar 2025 - Present',
       title: 'Freelance Creative Technologist',
-      description: 'Developing custom web solutions for various brands. Ensuring usability and enhancing digital presence effectively.',
+      description: 'Building web platforms, workflow systems, API integrations and automation for creative-business operations and public-facing digital experiences.',
     },
     {
-      date: 'Mar 2025 – Jul 2025',
-      title: 'Project Intern — EKORS',
-      description: 'Assisted in development of internal tools and projects. Supported achieving key milestones in project delivery.',
+      date: 'Mar 2025 - Jul 2025',
+      title: 'Project Intern - Full-Stack Systems',
+      description: 'Developed internal business workflows with role-based permissions, secure authentication and MongoDB-backed data models.',
     },
     {
       date: '2025',
-      title: 'Cinematography Program — New York Film Academy',
-      description: 'Intensive cinematography training at NYFA, focusing on visual storytelling and production techniques.',
+      title: 'Cinematography Programme - New York Film Academy',
+      description: 'Completed intensive training in lighting, camera technicalities, storytelling, pacing, set practice, DaVinci Resolve, colour correction and grading.',
     },
     {
-      date: '2021 – 2025',
-      title: 'B.Tech in Computer Science — BML Munjal University, Gurugram',
+      date: '2021 - 2025',
+      title: 'B.Tech in Computer Science - BML Munjal University, Gurugram',
       description: 'Comprehensive education in computer science fundamentals, software engineering, and web technologies.',
     },
   ];
 
   const certifications = [
-    { title: 'Google Cloud Computing Foundations', org: 'Google', date: 'Jan 2026' },
-    { title: 'UI/UX Design Principles', org: 'Online Learning Platform', date: 'Dec 2025' },
+    { title: 'Internet of Things: Communication Technologies', org: 'University of California San Diego', date: 'Apr 2024' },
+    { title: 'Deep Learning Applications for Computer Vision', org: 'University of Colorado Boulder', date: 'Nov 2023' },
+    { title: 'Google Cloud Computing Foundations: Infrastructure in Google Cloud', org: 'Google', date: 'Oct 2023' },
+    { title: 'Number Theory and Cryptography', org: 'University of California San Diego', date: 'Oct 2023' },
+    { title: 'Get Started with Figma', org: 'Coursera Guided Project', date: 'Feb 2023' },
+    { title: 'Create a Storyboard using Canva', org: 'Coursera Project Network', date: 'Feb 2023' },
   ];
 
   return (
@@ -61,9 +65,9 @@ export const CodingExperience = () => {
               Raghav Raj <span className="text-gradient">Sobti</span>
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
-              Creative Technologist with expertise in visual storytelling and web applications. 
-              Proven skills in UI/UX design, fostering collaboration between technical and creative 
-              teams to drive impactful digital solutions.
+              Creative Technologist and Cinematographer building digital products,
+              automation workflows and cinematic web experiences. His strongest work
+              connects frontend craft, backend systems, APIs and creative operations.
             </p>
           </motion.div>
 
@@ -113,7 +117,7 @@ export const CodingExperience = () => {
                   className="bg-card-gradient rounded-sm p-8 border-2 border-accent/10 group hover:border-accent/30 card-lift"
                 >
                   <h4 className="font-display text-lg font-bold text-foreground group-hover:text-accent transition-colors">{cert.title}</h4>
-                  <p className="font-body text-muted-foreground mt-1">{cert.org} — {cert.date}</p>
+                  <p className="font-body text-muted-foreground mt-1">{cert.org} - {cert.date}</p>
                 </motion.div>
               ))}
             </div>

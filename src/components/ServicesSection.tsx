@@ -6,24 +6,24 @@ import { Link } from 'react-router-dom';
 const services = [
   {
     icon: Clapperboard,
-    title: 'Cinematography & Production',
+    title: 'Camera & Production',
     description:
-      'Shooting scripts, direction, and expert editing in DaVinci Resolve. From concept to final cut, I bring your vision to life with cinematic precision.',
-    features: ['Script Writing', 'Direction', 'Color Grading', 'Sound Design'],
+      'Direction, cinematography, live-performance coverage, artist interviews, BTS documentation and assistant-direction support from brief to final delivery.',
+    features: ['Direction', 'Cinematography', 'Live Events', 'BTS & Interviews'],
   },
   {
     icon: Globe,
-    title: 'Web Development',
+    title: 'Digital Products',
     description:
-      'Custom React & Next.js websites designed for SEO and high performance. Clean code, stunning visuals, and seamless user experiences.',
-    features: ['React/Next.js', 'Tailwind CSS', 'SEO Optimization', 'Performance'],
+      'React and Next.js products that combine responsive interfaces, structured content, motion, SEO, API integration and practical business workflows.',
+    features: ['React/Next.js', 'TypeScript', 'APIs', 'Responsive UX'],
   },
   {
     icon: TrendingUp,
-    title: 'Growth Strategy',
+    title: 'Automation & Operations',
     description:
-      'Complete social media roadmaps to boost brand visibility for creators and businesses. Data-driven strategies that deliver results.',
-    features: ['Content Strategy', 'Analytics', 'Brand Building', 'Engagement'],
+      'Workflow systems for reminders, CRM-like data layers, WhatsApp communication, scheduled jobs and repeatable creative-business operations.',
+    features: ['GitHub Actions', 'AiSensy', 'Google Sheets API', 'EmailJS'],
   },
 ];
 
@@ -121,7 +121,7 @@ export const ServicesSection = () => {
                   </ul>
 
                   {/* Web Dev CTA */}
-                  {service.title === 'Web Development' && (
+                  {service.title === 'Digital Products' && (
                     <Link
                       to="/coding"
                       className="inline-flex items-center gap-2 mt-6 font-display text-sm tracking-widest uppercase text-accent hover:text-foreground transition-colors duration-300 group/link"

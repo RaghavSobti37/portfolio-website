@@ -30,7 +30,7 @@ export const CodingFooter = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-body text-muted-foreground mb-8 max-w-md"
           >
-            Building performant, beautiful web experiences with modern technologies.
+            Building digital products, workflow systems and creative web experiences.
           </motion.p>
 
           <motion.div
@@ -78,7 +78,7 @@ export const CodingFooter = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="font-body text-sm text-muted-foreground"
           >
-            © {new Date().getFullYear()} Raghav Raj Sobti. Crafted with React & passion.
+            &copy; {new Date().getFullYear()} Raghav Raj Sobti. Built with React, TypeScript and creative systems thinking.
           </motion.p>
         </div>
       </div>

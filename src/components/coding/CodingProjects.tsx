@@ -6,59 +6,59 @@ import { Button } from '@/components/ui/button';
 const codingProjects = [
   {
     id: 1,
-    title: 'ERP System – Quotation & User Management',
-    description: 'Full-stack system with Role-Based Access Control (RBAC) for tiered user permissions. Secure Token-Based Authentication and modular schemas for automated quotation and ticket tracking.',
-    tech: ['Next.js', 'Node.js', 'Express', 'MongoDB', 'JWT'],
+    title: 'Auto Mailer',
+    description: 'Automation project built to remove repetitive manual effort from outreach and communication workflows through structured email-process design.',
+    tech: ['Automation', 'Email Systems', 'Workflow Design'],
     highlights: [
-      'Role-Based Access Control (User/Admin/Super-Admin)',
-      'Secure Token-Based Authentication',
-      'Dynamic management interfaces for real-time CRUD',
+      'Repeated-task elimination for email outreach',
+      'Reusable communication workflow structure',
+      'Practical operations tool for faster follow-ups',
     ],
-    github: 'https://github.com/RaghavSobti37/Ekors-ERP',
-    website: 'https://ekors-erp-dyix.vercel.app/login',
-    preview: 'https://ekors-erp-dyix.vercel.app/login',
+    github: 'https://github.com/RaghavSobti37/Auto-Mailer',
+    website: '',
+    preview: '',
   },
   {
     id: 2,
-    title: 'Personal Portfolio Website',
-    description: 'High-performance, responsive portfolio featuring advanced Framer Motion animations and page transitions. Integrated EmailJS for serverless communication.',
-    tech: ['React.js', 'Framer Motion', 'EmailJS', 'CSS3'],
+    title: 'CoreKnot',
+    description: 'A product and workflow systems project focused on connecting core business information, user actions and operational tasks into a cleaner digital experience.',
+    tech: ['Product Systems', 'Web Development', 'Operations UX'],
     highlights: [
-      'Advanced animations & page transitions',
-      'Serverless client communication',
-      'Optimized image pipeline & SEO metadata',
+      'Organizes scattered operational data into clearer flows',
+      'Designed around practical business use cases',
+      'Built as a foundation for connected internal tools',
     ],
-    github: 'https://github.com/RaghavSobti37/portfolio-website',
-    website: 'https://bluepolaroid.com',
-    preview: 'https://bluepolaroid.com',
+    github: 'https://github.com/RaghavSobti37/CoreKnot',
+    website: '',
+    preview: '',
   },
   {
     id: 3,
-    title: 'The Shakti Collective (TSC)',
-    description: 'Modern, visually-driven web application utilizing server-side rendering. High-bitrate video backgrounds and interactive UI bridging cinematic art with web technology.',
-    tech: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+    title: 'Photo Cleaner App',
+    description: 'Streamlit-based photo utility built for practical image-collection cleanup, sorting and lightweight media workflow experimentation.',
+    tech: ['Python', 'Streamlit', 'Image Utilities'],
     highlights: [
-      'Server-side rendering for performance',
-      'High-bitrate video backgrounds',
-      'Mobile-first, utility-driven design',
+      'Simple interface for photo cleanup workflows',
+      'Python application development with Streamlit',
+      'Designed for practical media-library maintenance',
     ],
-    github: 'https://github.com/RaghavSobti37/TSC-Website',
-    website: 'https://theshakticollective.in',
-    preview: 'https://theshakticollective.in',
+    github: 'https://github.com/RaghavSobti37/photo-cleaner-app',
+    website: '',
+    preview: '',
   },
   {
     id: 4,
-    title: 'EnerCore Solar Energy Solutions',
-    description: 'Responsive website for a solar energy company with dynamic content, Bootstrap-powered layouts, video banners, and WhatsApp integration for customer engagement.',
-    tech: ['HTML5', 'CSS3', 'Bootstrap 5', 'JavaScript', 'Fetch API'],
+    title: 'Resume Generator',
+    description: 'Developer-focused tool designed to connect with a GitHub account, import projects and generate structured resumes with AI-assisted project descriptions.',
+    tech: ['Web Development', 'GitHub Integration', 'AI-Assisted Writing'],
     highlights: [
-      'Dynamic head, navbar & footer components',
-      'Autoplay video banner & carousel sections',
-      'WhatsApp integration for engagement',
+      'GitHub project ingestion workflow',
+      'AI-supported resume content generation',
+      'Clean structured output for developer portfolios',
     ],
-    github: 'https://github.com/st412613/enercore.co',
-    website: 'https://www.enercore.co',
-    preview: 'https://www.enercore.co',
+    github: 'https://github.com/RaghavSobti37/Resume-Generator',
+    website: '',
+    preview: '',
   },
 ];
 
@@ -86,11 +86,14 @@ export const CodingProjects = () => {
           className="text-center mb-16 md:mb-20"
         >
           <p className="font-display text-sm tracking-[0.3em] uppercase text-accent mb-4">
-            Portfolio
+            Selected Builds
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold">
             Featured <span className="text-gradient">Projects</span>
           </h2>
+          <p className="font-body text-muted-foreground mt-4 mx-auto max-w-2xl leading-relaxed">
+            A curated collection of automation-first and developer-focused tools built to simplify everyday work and turn ideas into practical products.
+          </p>
         </motion.div>
 
         <motion.div
