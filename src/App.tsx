@@ -9,6 +9,7 @@ import SpotifyCallback from "./pages/SpotifyCallback";
 import NotFound from "./pages/NotFound";
 import { NowPlayingDisc } from "@/components/NowPlayingDisc";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { ClarityRouteTracker } from "@/components/ClarityRouteTracker";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <ClarityRouteTracker />
         <NowPlayingDisc />
         <Routes>
           <Route path="/" element={<Index />} />
