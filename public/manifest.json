@@ -1,18 +1,19 @@
 {
-  "short_name": "Bluepolaroid",
-  "name": "Raghav Raj Sobti - Photography & Videography Portfolio",
-  "description": "Professional Photography & Videography Services",
+  "short_name": "BluePolaroid",
+  "name": "Raghav Raj Sobti — BluePolaroid",
+  "description": "Cinematographer, music-film director & creative technologist in Mumbai. Portfolio of film, artist stories and digital products.",
   "icons": [
     {
-      "src": "favicon.jpg",
+      "src": "/favicon.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/jpeg"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#ff4d4d",
-  "background_color": "#0a0a0a",
+  "theme_color": "#0B0B0D",
+  "background_color": "#0B0B0D",
   "orientation": "portrait-primary",
-  "categories": ["photography", "business", "entertainment"]
+  "categories": ["photography", "entertainment", "business"],
+  "lang": "en"
 }

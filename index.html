@@ -15,11 +15,13 @@
     <meta name="author" content="Raghav Raj Sobti" />
     <meta
       name="keywords"
-      content="Raghav Raj Sobti, Raghav Sobti, BluePolaroid, cinematographer Mumbai, filmmaker Mumbai, music video cinematographer, creative technologist, NYFA cinematography, Ek Kamra, videographer Delhi NCR, Indian cinematographer"
+      content="Raghav Raj Sobti, Raghav Sobti, BluePolaroid, bluepolaroid05, cinematographer Mumbai, filmmaker Mumbai, music video director India, videographer Mumbai, creative technologist Mumbai, NYFA cinematography, Ek Kamra, CoreKnot, The Shakti Collective, Indian cinematographer, portfolio Raghav Sobti"
     />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://bluepolaroid.com/" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     <!-- Geo / locale -->
     <meta name="geo.region" content="IN-MH" />
@@ -37,7 +39,9 @@
     />
     <meta property="og:url" content="https://bluepolaroid.com/" />
     <meta property="og:image" content="https://bluepolaroid.com/gallery/i25.jpg" />
-    <meta property="og:image:alt" content="Raghav Raj Sobti — BluePolaroid" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:image:alt" content="Raghav Raj Sobti — BluePolaroid cinematographer and creative technologist" />
     <meta property="profile:first_name" content="Raghav" />
     <meta property="profile:last_name" content="Sobti" />
     <meta property="profile:username" content="bluepolaroid05" />
@@ -50,8 +54,9 @@
       content="Cinematographer &amp; creative technologist in Mumbai. Film, digital, experiments."
     />
     <meta name="twitter:image" content="https://bluepolaroid.com/gallery/i25.jpg" />
+    <meta name="twitter:image:alt" content="Raghav Raj Sobti — BluePolaroid" />
 
-    <!-- Structured data: Person + WebSite (helps Search + Knowledge Panel eligibility) -->
+    <!-- Structured data: Person + WebSite + CreativeWork -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -61,9 +66,9 @@
             "@id": "https://bluepolaroid.com/#website",
             "url": "https://bluepolaroid.com/",
             "name": "BluePolaroid",
-            "alternateName": ["Raghav Raj Sobti Portfolio", "Blue Polaroid"],
-            "description": "Portfolio of cinematographer and creative technologist Raghav Raj Sobti.",
-            "inLanguage": "en",
+            "alternateName": ["Raghav Raj Sobti Portfolio", "Blue Polaroid", "Raghav Sobti"],
+            "description": "Portfolio of cinematographer and creative technologist Raghav Raj Sobti — film, music videos, artist stories and software.",
+            "inLanguage": "en-IN",
             "publisher": { "@id": "https://bluepolaroid.com/#person" }
           },
           {
@@ -73,7 +78,7 @@
             "alternateName": ["Raghav Sobti", "BluePolaroid", "bluepolaroid05"],
             "url": "https://bluepolaroid.com/",
             "image": "https://bluepolaroid.com/gallery/i25.jpg",
-            "jobTitle": ["Cinematographer", "Director", "Creative Technologist"],
+            "jobTitle": ["Cinematographer", "Director", "Creative Technologist", "Videographer"],
             "description": "Cinematographer, music-film director and creative technologist based in Mumbai, India. Works across music videos, artist stories, live events and digital products under BluePolaroid.",
             "email": "mailto:raghavsobti37@gmail.com",
             "address": {
@@ -83,16 +88,19 @@
               "addressCountry": "IN"
             },
             "nationality": "Indian",
-            "alumniOf": {
-              "@type": "CollegeOrUniversity",
-              "name": "New York Film Academy"
-            },
+            "alumniOf": [
+              { "@type": "CollegeOrUniversity", "name": "New York Film Academy" },
+              { "@type": "CollegeOrUniversity", "name": "BML Munjal University" }
+            ],
             "knowsAbout": [
               "Cinematography",
               "Music videos",
               "Filmmaking",
+              "Videography",
               "Web development",
-              "Creative technology"
+              "Creative technology",
+              "React",
+              "Next.js"
             ],
             "sameAs": [
               "https://www.instagram.com/bluepolaroid05/",
@@ -113,6 +121,23 @@
             "url": "https://bluepolaroid.com/",
             "name": "Raghav Raj Sobti — BluePolaroid",
             "mainEntity": { "@id": "https://bluepolaroid.com/#person" },
+            "about": { "@id": "https://bluepolaroid.com/#person" },
+            "isPartOf": { "@id": "https://bluepolaroid.com/#website" }
+          },
+          {
+            "@type": "CreativeWork",
+            "name": "Ek Kamra",
+            "creator": { "@id": "https://bluepolaroid.com/#person" },
+            "genre": "Music Video",
+            "url": "https://bluepolaroid.com/"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://bluepolaroid.com/coding#webpage",
+            "url": "https://bluepolaroid.com/coding",
+            "name": "Dev Portfolio — Raghav Raj Sobti",
+            "description": "Software and digital product builds by Raghav Raj Sobti — CoreKnot, The Shakti Collective, and more.",
+            "isPartOf": { "@id": "https://bluepolaroid.com/#website" },
             "about": { "@id": "https://bluepolaroid.com/#person" }
           }
         ]

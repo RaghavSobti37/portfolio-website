@@ -7,10 +7,17 @@ import { ServicesSection } from '@/components/ServicesSection';
 import { AboutSection } from '@/components/AboutSection';
 import { TopTracksSection } from '@/components/TopTracksSection';
 import { FooterSection } from '@/components/FooterSection';
+import { Seo } from '@/components/Seo';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Seo
+        title="Raghav Raj Sobti | Cinematographer & Creative Technologist in Mumbai | BluePolaroid"
+        description="Raghav Raj Sobti (BluePolaroid) — cinematographer, music-film director and creative technologist in Mumbai. Ek Kamra, artist stories, live events, and digital products."
+        path="/"
+        type="profile"
+      />
       <Navigation />
       <main>
         <HeroSection />
