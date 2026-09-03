@@ -1,6 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useEffect, useMemo, useState } from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Area,
   AreaChart,
@@ -13,30 +12,6 @@ import {
 import { GITHUB_USER } from '@/data/codingProjects';
 import { relativeTime } from '@/hooks/useRepoCommitGraph';
 
-interface GhCommit {
-  sha?: string;
-  message?: string;
-  author?: { name?: string; email?: string };
-}
-
-interface GhEvent {
-  id: string;
-  type: string;
-  actor?: { login?: string; display_login?: string; avatar_url?: string };
-  repo: { name: string };
-  created_at: string;
-  payload?: {
-    commits?: GhCommit[];
-    ref_type?: string;
-    size?: number;
-    action?: string;
-    pull_request?: { title?: string; user?: { login?: string } };
-    issue?: { title?: string; user?: { login?: string } };
-    forkee?: { full_name?: string };
-    ref?: string;
-  };
-}
-
 type DayPoint = { day: string; label: string; count: number };
 
 type FeedItem = {
@@ -48,97 +23,7 @@ type FeedItem = {
   kind: string;
 };
 
-function buildDailySeries(events: GhEvent[], days = 28): DayPoint[] {
-  const map = new Map<string, number>();
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  for (let i = days - 1; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(today.getDate() - i);
-    const key = d.toISOString().slice(0, 10);
-    map.set(key, 0);
-  }
-
-  for (const e of events) {
-    const key = e.created_at.slice(0, 10);
-    if (!map.has(key)) continue;
-    const bump =
-      e.type === 'PushEvent'
-        ? Math.max(1, e.payload?.commits?.length ?? e.payload?.size ?? 1)
-        : 1;
-    map.set(key, (map.get(key) ?? 0) + bump);
-  }
-
-  return [...map.entries()].map(([day, count]) => ({
-    day,
-    label: new Date(day + 'T12:00:00').toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-    }),
-    count,
-  }));
-}
-
-function firstLine(msg: string) {
-  return msg.split('\n')[0]?.trim() || msg.trim();
-}
-
-function uniquePeople(names: Array<string | undefined>) {
-  return [...new Set(names.map((n) => n?.trim()).filter(Boolean) as string[])];
-}
-
-/** Prefer real commits / PRs — skip stars, branch creates, forks (noise) */
-function toFeed(events: GhEvent[], limit = 10): FeedItem[] {
-  const out: FeedItem[] = [];
-  const ownPrefix = `${GITHUB_USER}/`;
-
-  for (const e of events) {
-    if (out.length >= limit) break;
-    const full = e.repo.name;
-    const repo = full.startsWith(ownPrefix) ? full.slice(ownPrefix.length) : full;
-    const actor = e.actor?.display_login || e.actor?.login;
-    const isOwn = full.startsWith(ownPrefix) || full.toLowerCase().startsWith(ownPrefix.toLowerCase());
-
-    if (e.type === 'PushEvent' && e.payload?.commits?.length) {
-      // Prefer pushes to own repos
-      if (!isOwn && out.length > 2) continue;
-      for (const c of e.payload.commits) {
-        if (out.length >= limit) break;
-        const msg = c.message ? firstLine(c.message) : '';
-        if (!msg || msg.length < 3) continue;
-        // skip merge noise / empty bots
-        if (/^Merge (branch|pull request)/i.test(msg)) continue;
-        out.push({
-          id: `${e.id}-${c.sha ?? out.length}`,
-          repo,
-          message: msg,
-          people: uniquePeople([c.author?.name, actor]),
-          when: e.created_at,
-          kind: 'commit',
-        });
-      }
-      continue;
-    }
-
-    if (e.type === 'PullRequestEvent' && e.payload?.action === 'closed') {
-      const title = e.payload?.pull_request?.title;
-      if (!title) continue;
-      out.push({
-        id: e.id,
-        repo,
-        message: `Merged: ${title}`,
-        people: uniquePeople([e.payload?.pull_request?.user?.login, actor]),
-        when: e.created_at,
-        kind: 'pr',
-      });
-    }
-  }
-
-  return out.slice(0, limit);
-}
-
-/** Curated shipping log when public events are thin / noisy */
+/** Curated shipping log when live feed is thin */
 const SHIPPED: FeedItem[] = [
   {
     id: 'ship-coreknot',
@@ -182,35 +67,60 @@ const SHIPPED: FeedItem[] = [
   },
 ];
 
+function emptySeries(days = 28): DayPoint[] {
+  const map: DayPoint[] = [];
+  const now = new Date();
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - i));
+    const day = d.toISOString().slice(0, 10);
+    map.push({
+      day,
+      label: new Date(day + 'T12:00:00Z').toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC',
+      }),
+      count: 0,
+    });
+  }
+  return map;
+}
+
 export const CodingActivity = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
-  const [rawEvents, setRawEvents] = useState<GhEvent[]>([]);
+  const [series, setSeries] = useState<DayPoint[]>(() => emptySeries());
+  const [liveFeed, setLiveFeed] = useState<FeedItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
-    fetch(`https://api.github.com/users/${GITHUB_USER}/events/public?per_page=100`, {
-      headers: { Accept: 'application/vnd.github+json' },
-    })
-      .then((r) => (r.ok ? r.json() : []))
-      .then((data: GhEvent[]) => {
+
+    fetch('/api/github-activity')
+      .then(async (r) => {
+        if (!r.ok) throw new Error(`activity ${r.status}`);
+        return r.json();
+      })
+      .then((data: { series?: DayPoint[]; feed?: FeedItem[] }) => {
         if (cancelled) return;
-        setRawEvents(Array.isArray(data) ? data : []);
+        if (Array.isArray(data.series) && data.series.length) setSeries(data.series);
+        if (Array.isArray(data.feed)) setLiveFeed(data.feed);
       })
       .catch(() => {
-        if (!cancelled) setRawEvents([]);
+        if (!cancelled) {
+          setSeries(emptySeries());
+          setLiveFeed([]);
+        }
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
       });
+
     return () => {
       cancelled = true;
     };
   }, []);
 
-  const series = useMemo(() => buildDailySeries(rawEvents, 28), [rawEvents]);
-  const liveFeed = useMemo(() => toFeed(rawEvents, 8), [rawEvents]);
   const feed = liveFeed.length >= 3 ? liveFeed : SHIPPED;
   const hasActivity = series.some((d) => d.count > 0);
 
@@ -263,7 +173,7 @@ export const CodingActivity = () => {
                   </p>
                 ) : !hasActivity ? (
                   <p className="font-mono text-xs text-muted-foreground pt-16 text-center">
-                    No recent public events to chart.
+                    No recent public activity to chart.
                   </p>
                 ) : (
                   <ResponsiveContainer width="100%" height="100%">
@@ -303,7 +213,7 @@ export const CodingActivity = () => {
                       <Area
                         type="monotone"
                         dataKey="count"
-                        name="Events"
+                        name="Activity"
                         stroke="#F35F0E"
                         strokeWidth={2}
                         fill="url(#bpActivityFill)"
