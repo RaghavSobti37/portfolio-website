@@ -9,6 +9,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).end();
   }
 
-  const payload = await getNowPlaying();
-  return res.status(200).json(payload);
+  try {
+    const payload = await getNowPlaying();
+    return res.status(200).json(payload);
+  } catch (err) {
+    return res.status(200).json({
+      isPlaying: false,
+      empty: true,
+      configured: false,
+      error: err instanceof Error ? err.message : 'Spotify error',
+    });
+  }
 }

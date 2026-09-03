@@ -130,11 +130,12 @@ export const ServicesSection = () => {
 
         <div className="border-t border-border pt-16 flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
           <p className="font-display text-[clamp(2.8rem,10vw,7rem)] font-bold tracking-tighter leading-none text-primary/90 shrink-0">
-            <CountUp to={15000000} />
+            {/* live YouTube embed tally ~14.77M (Mar 2026) → round */}
+            <CountUp to={15_000_000} />
           </p>
           <p className="font-body text-muted-foreground max-w-md md:pb-3 text-base md:text-lg leading-relaxed">
-            Combined YouTube views across music films, shorts, BTS and related projects on this
-            site — rounded from the live tally.
+            Combined YouTube views across project embeds on this site — rounded from a live
+            tally of ~14.8M. Instagram reel views aren’t public, so they’re not included.
           </p>
         </div>
 

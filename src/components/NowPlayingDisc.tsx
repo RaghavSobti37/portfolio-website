@@ -87,16 +87,20 @@ export const NowPlayingDisc = () => {
       className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-[90] pointer-events-none"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onFocusCapture={() => setHovered(true)}
+      onBlurCapture={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) setHovered(false);
+      }}
     >
       <div className="pointer-events-auto relative flex items-end gap-3">
-        <a
-          href={href}
-          target="_blank"
-          rel="noreferrer"
-          className="relative w-[72px] h-[72px] md:w-20 md:h-20 shrink-0 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-[0_8px_40px_rgba(35,92,185,0.35)] block"
+        {/* Disc only by default — title / Open on Spotify appear on hover */}
+        <button
+          type="button"
+          className="relative w-[72px] h-[72px] md:w-20 md:h-20 shrink-0 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-[0_8px_40px_rgba(35,92,185,0.35)] block cursor-pointer"
           aria-label={
             spinning ? `Now playing: ${data.title}` : `Listening: ${data.title}`
           }
+          aria-expanded={hovered}
         >
           <motion.div
             className="absolute inset-0 rounded-full border-2 border-primary/50"
@@ -120,7 +124,7 @@ export const NowPlayingDisc = () => {
           {spinning && (
             <span className="absolute top-0 right-0 w-3 h-3 rounded-full bg-accent animate-pulse border-2 border-ink" />
           )}
-        </a>
+        </button>
 
         <AnimatePresence>
           {hovered && (
