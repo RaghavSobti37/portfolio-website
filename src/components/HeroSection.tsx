@@ -1,126 +1,190 @@
+import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
+declare global {
+  interface Window {
+    YT?: {
+      Player: new (
+        el: HTMLElement | string,
+        opts: Record<string, unknown>
+      ) => {
+        seekTo: (seconds: number, allowSeekAhead: boolean) => void;
+        playVideo: () => void;
+        destroy: () => void;
+      };
+      PlayerState: { PLAYING: number };
+    };
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+
+const VIDEO_ID = '28Mb1cIooGw';
+const LOOP_SECONDS = 7;
 
 export const HeroSection = () => {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const y = useTransform(scrollY, [0, 500], [0, 120]);
+  const opacity = useTransform(scrollY, [0, 280], [1, 0]);
+  const playerHostRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<{
+    seekTo: (s: number, a: boolean) => void;
+    playVideo: () => void;
+    destroy: () => void;
+  } | null>(null);
+  const loopRef = useRef<number | null>(null);
 
-  const handleScrollToWork = () => {
+  useEffect(() => {
+    let cancelled = false;
+
+    const mountPlayer = () => {
+      if (cancelled || !playerHostRef.current || !window.YT?.Player) return;
+
+      playerRef.current = new window.YT.Player(playerHostRef.current, {
+        videoId: VIDEO_ID,
+        width: '100%',
+        height: '100%',
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          rel: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          iv_load_policy: 3,
+          disablekb: 1,
+          fs: 0,
+          start: 0,
+        },
+        events: {
+          onReady: (e: { target: { playVideo: () => void; seekTo: (s: number, a: boolean) => void } }) => {
+            e.target.playVideo();
+            if (loopRef.current) window.clearInterval(loopRef.current);
+            loopRef.current = window.setInterval(() => {
+              e.target.seekTo(0, true);
+              e.target.playVideo();
+            }, LOOP_SECONDS * 1000);
+          },
+        },
+      });
+    };
+
+    if (window.YT?.Player) {
+      mountPlayer();
+    } else {
+      const existing = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
+      if (!existing) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.body.appendChild(tag);
+      }
+      const prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        prev?.();
+        mountPlayer();
+      };
+    }
+
+    return () => {
+      cancelled = true;
+      if (loopRef.current) window.clearInterval(loopRef.current);
+      try {
+        playerRef.current?.destroy();
+      } catch {
+        /* ignore */
+      }
+    };
+  }, []);
+
+  const handleEnter = () => {
     document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // YouTube video ID
-  const videoId = '28Mb1cIooGw';
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background YouTube Video */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Extra wrapper to crop YouTube UI elements */}
         <div className="absolute -inset-20 overflow-hidden">
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1`}
-            title="Background Video"
+          <div
+            ref={playerHostRef}
+            id="hero-yt-player"
             className="absolute inset-0 w-[calc(100%+160px)] h-[calc(100%+160px)] -translate-x-20 -translate-y-20"
-            style={{ border: 'none' }}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           />
         </div>
-        {/* Dark overlay for readability - 50% transparency */}
-        <div className="absolute inset-0 bg-background/50" />
+        <div className="absolute inset-0 bg-background/60" />
+        <div className="absolute inset-0 film-grain opacity-[0.12] mix-blend-overlay" />
       </div>
 
-      {/* Animated Background Elements */}
-      <motion.div
-        style={{ y }}
-        className="absolute inset-0 z-[1] pointer-events-none"
-      >
-        {/* Gradient orbs for depth */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-midnight-light/30 to-transparent rounded-full" />
-        
-        {/* Film grain effect */}
-        <div className="absolute inset-0 opacity-[0.02] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIi8+PC9zdmc+')]" />
+      <motion.div style={{ y }} className="absolute inset-0 z-[1] pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-accent/10 rounded-full blur-3xl" />
       </motion.div>
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 text-center px-6 max-w-4xl mx-auto"
+        className="relative z-10 px-6 max-w-5xl mx-auto w-full pt-24"
       >
-        {/* Identity Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-gold/30 bg-gold/10 backdrop-blur-sm"
-        >
-          <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
-          <span className="font-display text-xs tracking-[0.2em] uppercase text-gold">
-            Creative Technologist &amp; Cinematographer
-          </span>
-        </motion.div>
-
-        {/* Main Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 drop-shadow-lg"
-        >
-          <span className="block">Building Systems.</span>
-          <span className="block text-gradient">Creating Cinema.</span>
-        </motion.h1>
-
-        {/* Sub-headline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="font-body text-lg md:text-xl text-muted-foreground mb-8 tracking-wide drop-shadow-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="font-mono-meta text-primary mb-8"
         >
-          Intelligent digital products{' '}
-          <span className="text-primary">•</span>{' '}
-          Cinematic visual stories{' '}
-          <span className="text-primary">•</span>{' '}
-          Creative operations
+          BLUEPOLAROID / CINEMA × CODE × CHAOS
         </motion.p>
 
-        {/* CTA Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        <motion.h1
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="font-display text-[clamp(3.2rem,12vw,8.5rem)] leading-[0.9] font-bold tracking-tighter mb-8"
         >
-          <Button
-            onClick={handleScrollToWork}
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground font-display tracking-widest uppercase px-10 py-6 text-sm rounded-sm transition-all duration-300 hover:shadow-glow"
-          >
-            View Work
-          </Button>
-        </motion.div>
+          <span className="block">I MAKE</span>
+          <span className="block">THINGS THAT</span>
+          <span className="block text-primary">MOVE.</span>
+        </motion.h1>
 
-        {/* Scroll Indicator */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="font-body text-base md:text-lg text-muted-foreground max-w-md mb-3"
+        >
+          Film. Digital. Experiments.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+          className="font-body text-sm md:text-base text-muted-foreground/80 max-w-lg mb-10"
+        >
+          Somewhere between a camera and a computer.
+        </motion.p>
+
+        <motion.button
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          onClick={handleEnter}
+          className="group inline-flex items-center gap-3 font-display text-sm tracking-[0.2em] uppercase text-foreground border border-foreground/20 px-8 py-4 hover:border-primary hover:text-primary transition-colors duration-300"
+        >
+          Step into the work
+          <span className="text-accent group-hover:translate-x-1 transition-transform">→</span>
+        </motion.button>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          transition={{ duration: 0.6, delay: 1.1 }}
+          className="mt-20 md:mt-28 flex items-center gap-3 cursor-pointer"
+          onClick={handleEnter}
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
+            animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="flex flex-col items-center gap-2 cursor-pointer group"
-            onClick={handleScrollToWork}
           >
-            <span className="font-display text-xs tracking-[0.3em] uppercase text-muted-foreground group-hover:text-accent transition-colors">
-              Scroll
-            </span>
-            <ChevronDown className="w-5 h-5 text-accent" />
+            <ChevronDown className="w-4 h-4 text-primary" />
           </motion.div>
+          <span className="font-mono-meta">SCROLL / FRAME_001</span>
         </motion.div>
       </motion.div>
     </section>

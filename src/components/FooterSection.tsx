@@ -1,94 +1,55 @@
 import { motion } from 'framer-motion';
-import { Instagram, Youtube, Linkedin, Mail } from 'lucide-react';
 
 const socialLinks = [
-  { icon: Instagram, href: 'https://www.instagram.com/bluepolaroid05/', label: 'Instagram' },
-  { icon: Youtube, href: 'https://www.youtube.com/@bluepolaroid05/videos', label: 'YouTube' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/raghav-raj-sobti/', label: 'LinkedIn' },
-  
+  { label: 'INSTAGRAM', href: 'https://www.instagram.com/bluepolaroid05/' },
+  { label: 'YOUTUBE', href: 'https://www.youtube.com/@bluepolaroid05/videos' },
+  { label: 'SPOTIFY', href: 'https://open.spotify.com/user/314i4j6nzrmctdy5xvhosa4iwvlu' },
+  { label: 'GITHUB', href: 'https://github.com/RaghavSobti37' },
+  { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/raghav-raj-sobti/' },
 ];
 
 export const FooterSection = () => {
   return (
-    <footer id="contact" className="relative py-16 bg-primary/20">
-      {/* Top border accent */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
-
+    <footer id="contact" className="relative py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center text-center">
-          {/* Logo */}
-          <motion.a
-            href="#"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-display text-3xl font-bold tracking-wider mb-6"
-          >
-            BLUE<span className="text-primary">POLAROID</span>
-          </motion.a>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="font-mono-meta text-accent mb-6">GOT AN IDEA?</p>
+          <h2 className="font-display text-[clamp(2.5rem,8vw,5.5rem)] font-bold tracking-tighter leading-[0.95] mb-10 max-w-3xl">
+            LET’S MAKE<br />SOMETHING WEIRD.
+          </h2>
 
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-body text-muted-foreground mb-8 max-w-md"
+          <a
+            href="mailto:raghavsobti37@gmail.com"
+            className="font-display text-xl md:text-2xl text-primary hover:text-accent transition-colors"
           >
-            Building intelligent digital products and creating cinematic visual stories.
-          </motion.p>
+            raghavsobti37@gmail.com
+          </a>
 
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex gap-4 mb-10"
-          >
-            {socialLinks.map((social) => (
+          <div className="flex flex-wrap gap-6 mt-10 mb-20">
+            {socialLinks.map((s) => (
               <a
-                key={social.label}
-                href={social.href}
-                aria-label={social.label}
-                className="w-12 h-12 rounded-sm bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:shadow-glow"
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono-meta text-muted-foreground hover:text-primary transition-colors"
               >
-                <social.icon className="w-5 h-5" />
+                {s.label} ↗
               </a>
             ))}
-          </motion.div>
+          </div>
 
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-10"
-          >
-            <a
-              href="mailto:raghavsobti37@gmail.com"
-              className="font-display text-sm tracking-[0.3em] uppercase text-accent hover:text-foreground transition-colors duration-300"
-            >
-              raghavsobti37@gmail.com
-            </a>
-          </motion.div>
-
-          {/* Divider */}
-          <div className="w-full max-w-md h-px bg-border mb-8" />
-
-          {/* Copyright */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="font-body text-sm text-muted-foreground"
-          >
-            &copy; {new Date().getFullYear()} BluePolaroid. Designed &amp; developed by Raghav Raj Sobti.
-          </motion.p>
-        </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-t border-border pt-8">
+            <p className="font-mono-meta">BLUEPOLAROID © {new Date().getFullYear()}</p>
+            <p className="font-body text-sm text-muted-foreground">
+              Designed, shot &amp; coded by Raghav.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </footer>
   );

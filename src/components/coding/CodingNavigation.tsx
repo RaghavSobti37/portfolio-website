@@ -35,9 +35,17 @@ export const CodingNavigation = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <span className="font-display text-2xl font-bold tracking-wider text-foreground">
-            RAGS<span className="text-accent">.</span>DEV
-          </span>
+          <div className="flex items-center gap-4">
+            <a
+              href="/"
+              className="font-mono text-[10px] tracking-wider uppercase text-muted-foreground hover:text-primary transition-colors hidden sm:inline"
+            >
+              ← Cinema
+            </a>
+            <span className="font-display text-2xl font-bold tracking-wider text-foreground">
+              RAGS<span className="text-accent">.</span>DEV
+            </span>
+          </div>
 
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (

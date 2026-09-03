@@ -1,185 +1,138 @@
-import { motion, useInView, type Variants } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+
+const storyTimeline = [
+  { year: '2022', line: 'Assistant Director' },
+  { year: '2023', line: 'Production / Music Films' },
+  { year: '2024', line: 'Artist Stories / Events' },
+  { year: '2025', line: 'NYFA Cinematography + Director' },
+  { year: '2026', line: 'Cinema × Code' },
+];
+
+const experience = [
+  {
+    date: '2025',
+    title: 'Formally trained. Still experimenting.',
+    subtitle: '15-week Cinematography — New York Film Academy',
+    description:
+      'Lighting, camera, storytelling, pacing, set practice, DaVinci Resolve, colour.',
+  },
+  {
+    date: '2025',
+    title: 'Director — Ek Kamra',
+    subtitle: 'Music film',
+    description: 'Minimalist visual study of intimacy, distance and emotional space.',
+  },
+  {
+    date: '2024–25',
+    title: 'Videographer & artist storyteller',
+    subtitle: 'Live music, interviews, culture',
+    description:
+      'Jahnvi, Samarpan, Delhi Gate, concerts, festival recaps, short-form artist interviews.',
+  },
+  {
+    date: '2023–24',
+    title: 'Assistant direction & production',
+    subtitle: 'EBC Originals, ArtisteFirst',
+    description: 'RIQQAT, Rooh, Khwaab, Dhamaal, Aabruu — sets, coordination, creative support.',
+  },
+  {
+    date: '2022',
+    title: 'Intern AD — Classic Films',
+    subtitle: 'NPS ads',
+    description: 'Pre-production, shot listing, art direction, offline edits.',
+  },
+];
 
 export const AboutSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
-  };
-
-  const timelineData = [
-    {
-      date: '2025',
-      title: 'New York Film Academy Graduate',
-      subtitle: '15 Week Cinematography Course Graduate',
-      description: 'Completed intensive cinematography training across lighting, camera technicalities, storytelling, pacing, set practice, DaVinci Resolve, colour correction and grading.',
-    },
-    {
-      date: '2025',
-      title: 'Director',
-      subtitle: '"Ek Kamra" - Music Video',
-      description: 'Directed and shot a flagship authorship project with a minimalist visual language and a strong emotional narrative.',
-    },
-    {
-      date: '2024-2025',
-      title: 'Videographer and Artist Storyteller',
-      subtitle: 'Live Music, Interviews and Cultural Documentation',
-      items: [
-        'Covered Jahnvi, Samarpan, Delhi Gate, concerts, festival recaps and underground music events',
-        'Created short-form artist interviews including Laksh, Jahnvi, Nikamma, Muzzle, Sinash, Ankur Tiwari and Pyaar',
-        'Built repeatable vertical formats for Instagram Reels and YouTube-led releases',
-        'Captured fashion reels, travel studies, urban visuals and behind-the-scenes documentation',
-      ],
-    },
-    {
-      date: '2023-2024',
-      title: 'Assistant Direction and Production',
-      subtitle: 'EBC Originals, ArtisteFirst and Music-Film Sets',
-      items: [
-        'Supported the RIQQAT album-launch body of work across decode interviews and production material',
-        'Worked on Rooh, Khwaab, Dhamaal, Aabruu and related music-film projects',
-        'Handled scene setup, on-set coordination, production support and creative-direction assistance',
-        'Progressed between second assistant direction and first director-assistant responsibilities',
-      ],
-    },
-    {
-      date: '2022',
-      title: 'Intern Assistant Director',
-      subtitle: 'Classic Films',
-      items: [
-        'Pre-production, shot listing, and art direction',
-        'Created 4 offline edits for NPS ads',
-      ],
-    },
-  ];
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="about" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1/3 h-[600px] bg-gradient-to-r from-primary/5 to-transparent" />
-
-      <div className="container mx-auto px-6">
+    <section id="about" className="py-24 md:py-32 relative overflow-hidden border-t border-border">
+      <div className="container mx-auto px-6" ref={ref}>
         <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
         >
-          {/* Header */}
-          <motion.h1
-            variants={itemVariants}
-            className="font-display text-5xl md:text-7xl font-bold text-center mb-16 tracking-tight"
-          >
-            RAGHAV
-          </motion.h1>
+          <p className="font-mono-meta text-primary mb-6">ABOUT</p>
+          <h2 className="font-display text-[clamp(3rem,12vw,8rem)] font-bold tracking-tighter leading-[0.9] mb-8">
+            I’M RAGHAV.
+          </h2>
+          <p className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mb-16 leading-relaxed">
+            I work somewhere between cinema, technology and whatever interesting thing
+            happens in between.
+          </p>
+        </motion.div>
 
-          {/* Content Grid */}
-          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start mb-20">
-            {/* Image Side */}
-            <motion.div variants={itemVariants} className="relative order-2 md:order-1">
-              <div className="aspect-square relative rounded-sm overflow-hidden bg-secondary">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="polaroid-frame max-w-md rotate-[-1.5deg] relative">
+              <div className="aspect-square overflow-hidden bg-secondary">
                 <img
                   src="/gallery/i25.jpg"
-                  alt="Raghav at work"
+                  alt="Raghav"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
               </div>
-            </motion.div>
-
-            {/* Text Side */}
-            <motion.div variants={itemVariants} className="space-y-6 order-1 md:order-2">
-              <div className="space-y-4 font-body text-muted-foreground leading-relaxed text-lg">
-                <p>
-                  Raghav Raj Sobti is a Creative Technologist and Cinematographer
-                  working across digital products, automation, visual storytelling
-                  and production environments.
-                </p>
-                <p>
-                  His camera practice spans direction, cinematography, live-event
-                  coverage, artist portraits, fashion reels, behind-the-scenes
-                  documentation and assistant direction. His technology work focuses
-                  on web platforms, workflow systems, APIs and creative-business
-                  operations.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Work Experience Section */}
-          <motion.div variants={itemVariants} className="mt-20">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-12 tracking-tight">
-              WORK EXPERIENCE
-            </h2>
-
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-0 md:left-32 top-0 bottom-0 w-px bg-border" />
-
-              <div className="space-y-8">
-                {timelineData.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    className="relative flex flex-col md:flex-row gap-4 md:gap-8"
-                  >
-                    {/* Date */}
-                    <div className="md:w-28 flex-shrink-0 text-right">
-                      <span className="font-display text-sm tracking-wider text-primary font-semibold">
-                        {item.date}
-                      </span>
-                    </div>
-
-                    {/* Timeline dot */}
-                    <div className="absolute left-0 md:left-32 top-1.5 w-3 h-3 -translate-x-1/2 rounded-full bg-primary border-2 border-background" />
-
-                    {/* Content */}
-                    <div className="pl-6 md:pl-8 pb-8 border-l md:border-l-0 border-border md:border-none">
-                      <h3 className="font-display text-xl font-bold text-foreground">
-                        {item.title}
-                      </h3>
-                      <h4 className="font-display text-base text-accent mb-2">
-                        {item.subtitle}
-                      </h4>
-                      {item.description && (
-                        <p className="font-body text-muted-foreground leading-relaxed">
-                          {item.description}
-                        </p>
-                      )}
-                      {item.items && (
-                        <ul className="mt-2 space-y-1">
-                          {item.items.map((listItem, i) => (
-                            <li key={i} className="font-body text-muted-foreground leading-relaxed flex items-start gap-2">
-                              <span className="text-primary mt-1.5">•</span>
-                              {listItem}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              <p className="mt-2 px-1 font-mono text-[10px] text-ink/50">
+                RAGHAV / BEHIND_CAMERA
+              </p>
             </div>
           </motion.div>
-        </motion.div>
+
+          <div className="space-y-6 md:space-y-8">
+            {storyTimeline.map((t, i) => (
+              <motion.div
+                key={t.year}
+                initial={{ opacity: 0, x: 16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="flex gap-6 items-baseline border-b border-border pb-4"
+              >
+                <span className="font-mono text-accent text-sm w-12 shrink-0">{t.year}</span>
+                <span className="font-display text-xl md:text-2xl font-semibold tracking-tight">
+                  {t.line}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="font-mono-meta mb-3">PATH · SO FAR</p>
+          <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-10">
+            The fine print
+          </h3>
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
+            {experience.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="border border-border p-5 md:p-6 hover:border-primary/40 transition-colors"
+              >
+                <span className="font-mono text-xs text-accent">{item.date}</span>
+                <h4 className="font-display text-lg font-semibold mt-2 mb-1">{item.title}</h4>
+                <p className="font-mono text-[10px] tracking-wider uppercase text-primary mb-3">
+                  {item.subtitle}
+                </p>
+                <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

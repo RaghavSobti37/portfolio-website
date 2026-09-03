@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Instagram, Youtube, Linkedin } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
   { name: 'Work', href: '#work' },
-  { name: 'Services', href: '#services' },
+  { name: 'Archive', href: '#archive' },
+  { name: 'Lab', href: '#lab' },
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -14,118 +16,97 @@ export const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleLinkClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
+        initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'glass py-4' : 'bg-transparent py-6'
+          isScrolled ? 'glass py-3' : 'bg-transparent py-5'
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <a href="#" className="font-display text-2xl font-bold tracking-wider text-foreground">
+          <a href="#" className="font-display text-xl md:text-2xl font-bold tracking-tight">
             BLUE<span className="text-primary">POLAROID</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <button
                   onClick={() => handleLinkClick(link.href)}
-                  className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-accent transition-colors duration-300 relative group"
+                  className="font-mono-meta text-[11px] hover:text-primary transition-colors relative group"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
                 </button>
               </li>
             ))}
-            {/* Social Links */}
-            <div className="flex items-center gap-4 ml-4">
-              <a href="https://www.instagram.com/bluepolaroid05/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="https://www.youtube.com/@bluepolaroid05/videos" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
-                <Youtube size={20} />
-              </a>
-              <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
-                <Linkedin size={20} />
-              </a>
-            </div>
+            <li>
+              <Link
+                to="/coding"
+                className="font-mono-meta text-[11px] text-primary hover:text-accent transition-colors"
+              >
+                CAMERA → COMPUTER
+              </Link>
+            </li>
           </ul>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden text-foreground p-2"
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
+            transition={{ type: 'tween', duration: 0.28 }}
             className="fixed inset-y-0 right-0 w-3/4 max-w-sm z-50 glass"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
+            <div className="flex flex-col items-start justify-center h-full gap-6 px-10">
               {navLinks.map((link, index) => (
                 <motion.button
                   key={link.name}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.06 }}
                   onClick={() => handleLinkClick(link.href)}
-                  className="font-display text-2xl tracking-widest uppercase text-foreground hover:text-accent transition-colors"
+                  className="font-display text-2xl tracking-tight"
                 >
                   {link.name}
                 </motion.button>
               ))}
-              {/* Social Links */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-                className="flex items-center gap-6 mt-8"
+              <Link
+                to="/coding"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="font-mono-meta text-primary mt-4"
               >
-                <a href="https://www.instagram.com/bluepolaroid05/" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
-                  <Instagram size={28} />
-                </a>
-                <a href="https://www.youtube.com/@bluepolaroid05/videos" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
-                  <Youtube size={28} />
-                </a>
-                <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
-                  <Linkedin size={28} />
-                </a>
-              </motion.div>
+                CAMERA → COMPUTER
+              </Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div

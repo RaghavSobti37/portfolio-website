@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Oswald', 'Arial Narrow', 'sans-serif'],
-        body: ['Merriweather', 'Georgia', 'serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        body: ['DM Sans', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,18 +52,10 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        leather: {
-          DEFAULT: "hsl(var(--leather))",
-          light: "hsl(var(--leather-light))",
-        },
-        midnight: {
-          DEFAULT: "hsl(var(--midnight))",
-          light: "hsl(var(--midnight-light))",
-        },
-        cyan: {
-          glow: "hsl(var(--cyan-glow))",
-        },
-        gold: "hsl(var(--gold))",
+        paper: "hsl(var(--paper))",
+        ink: "hsl(var(--ink))",
+        electric: "hsl(var(--electric))",
+        polaroid: "hsl(var(--polaroid))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -109,10 +102,10 @@ export default {
         'card-gradient': 'linear-gradient(145deg, hsl(222 47% 16%) 0%, hsl(222 47% 12%) 100%)',
       },
       boxShadow: {
-        'glow': '0 0 30px hsl(187 85% 53% / 0.3)',
-        'glow-lg': '0 0 60px hsl(187 85% 53% / 0.4)',
-        'card': '0 10px 40px hsl(222 47% 5% / 0.5)',
-        'lift': '0 20px 60px hsl(222 47% 5% / 0.7)',
+        'glow': '0 0 30px hsl(217 68% 43% / 0.25)',
+        'glow-lg': '0 0 60px hsl(217 68% 43% / 0.35)',
+        'card': '0 12px 40px hsl(240 8% 2% / 0.6)',
+        'lift': '0 24px 60px hsl(240 8% 2% / 0.75)',
       },
     },
   },

@@ -1,9 +1,11 @@
 import { Navigation } from '@/components/Navigation';
 import { HeroSection } from '@/components/HeroSection';
-import { AboutSection } from '@/components/AboutSection';
-import { ServicesSection } from '@/components/ServicesSection';
 import { PortfolioSection } from '@/components/PortfolioSection';
+import { ReelsArchiveSection } from '@/components/ReelsArchiveSection';
 import { GallerySection } from '@/components/GallerySection';
+import { ServicesSection } from '@/components/ServicesSection';
+import { AboutSection } from '@/components/AboutSection';
+import { TopTracksSection } from '@/components/TopTracksSection';
 import { FooterSection } from '@/components/FooterSection';
 
 const Index = () => {
@@ -13,9 +15,11 @@ const Index = () => {
       <main>
         <HeroSection />
         <PortfolioSection />
+        <ReelsArchiveSection />
         <GallerySection />
         <ServicesSection />
         <AboutSection />
+        <TopTracksSection />
         <FooterSection />
       </main>
     </div>
