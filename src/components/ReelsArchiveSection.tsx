@@ -7,7 +7,6 @@ import {
   getReelEmbedUrl,
   getReelThumbnailUrl,
   reelViews,
-  shuffleReels,
   type Reel,
 } from '@/data/reels';
 import { LazyImage } from '@/components/LazyImage';
@@ -49,25 +48,17 @@ const ReelThumb = ({ reel, index }: { reel: Reel; index: number }) => {
   );
 };
 
-type SortMode = 'mix' | 'views';
-
 export const ReelsArchiveSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [series, setSeries] = useState('all');
-  const [sort, setSort] = useState<SortMode>('mix');
   const [active, setActive] = useState<Reel | null>(null);
   const [visible, setVisible] = useState(12);
 
-  const mixedPool = useMemo(() => shuffleReels(reels, 42), []);
-
   const filtered = useMemo(() => {
-    const pool = series === 'all' ? mixedPool : mixedPool.filter((r) => r.series === series);
-    if (sort === 'views') {
-      return [...pool].sort((a, b) => reelViews(b) - reelViews(a) || a.id.localeCompare(b.id));
-    }
-    return pool;
-  }, [mixedPool, series, sort]);
+    const pool = series === 'all' ? reels : reels.filter((r) => r.series === series);
+    return [...pool].sort((a, b) => reelViews(b) - reelViews(a) || a.id.localeCompare(b.id));
+  }, [series]);
 
   const shown = filtered.slice(0, visible);
 
@@ -88,37 +79,9 @@ export const ReelsArchiveSection = () => {
           </h2>
           <p className="font-body text-muted-foreground max-w-xl">
             Client &amp; artist reels — Rohith Sobti, Havells mYOUsic, Weekly Beat, TSC Academy,
-            HarshaDuhita Collective, and more. Mixed by default; sort by views when you want order.
+            HarshaDuhita Collective, and more. Ordered by views.
           </p>
         </motion.div>
-
-        <div className="flex flex-wrap items-center gap-2 mb-4">
-          <span className="font-mono text-[9px] tracking-wider uppercase text-muted-foreground mr-1">
-            Sort
-          </span>
-          {(
-            [
-              { id: 'mix', label: 'Mixed' },
-              { id: 'views', label: 'Most views' },
-            ] as const
-          ).map((s) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => {
-                setSort(s.id);
-                setVisible(12);
-              }}
-              className={`font-mono text-[10px] tracking-wider uppercase px-3 py-1.5 border transition-colors ${
-                sort === s.id
-                  ? 'border-primary text-primary bg-primary/10'
-                  : 'border-border text-muted-foreground hover:border-primary hover:text-primary'
-              }`}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
 
         <div className="flex flex-wrap gap-2 mb-10">
           {reelSeries.map((s) => (
