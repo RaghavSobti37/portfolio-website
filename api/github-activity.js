@@ -84,17 +84,30 @@ function eventsToFeed(events, limit = 8) {
     const repo = full.startsWith(prefix) ? full.slice(prefix.length) : full;
     const actor = e.actor?.display_login || e.actor?.login;
 
-    if (e.type === 'PushEvent' && e.payload?.commits?.length) {
-      for (const c of e.payload.commits) {
-        if (out.length >= limit) break;
-        const msg = firstLine(c.message);
-        if (!msg || msg.length < 3) continue;
-        if (/^Merge (branch|pull request)/i.test(msg)) continue;
+    if (e.type === 'PushEvent') {
+      const commits = e.payload?.commits || [];
+      if (commits.length) {
+        for (const c of commits) {
+          if (out.length >= limit) break;
+          const msg = firstLine(c.message);
+          if (!msg || msg.length < 3) continue;
+          if (/^Merge (branch|pull request)/i.test(msg)) continue;
+          out.push({
+            id: `${e.id}-${c.sha || out.length}`,
+            repo,
+            message: msg,
+            people: [c.author?.name, actor].filter(Boolean),
+            when: e.created_at,
+            kind: 'commit',
+          });
+        }
+      } else {
+        const n = Math.max(1, e.payload?.size ?? 1);
         out.push({
-          id: `${e.id}-${c.sha || out.length}`,
+          id: e.id,
           repo,
-          message: msg,
-          people: [c.author?.name, actor].filter(Boolean),
+          message: n === 1 ? 'Pushed 1 commit' : `Pushed ${n} commits`,
+          people: [actor].filter(Boolean),
           when: e.created_at,
           kind: 'commit',
         });
