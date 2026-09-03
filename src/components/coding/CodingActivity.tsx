@@ -88,19 +88,27 @@ function uniquePeople(names: Array<string | undefined>) {
   return [...new Set(names.map((n) => n?.trim()).filter(Boolean) as string[])];
 }
 
-/** Flatten GitHub events into readable commit/activity rows */
+/** Prefer real commits / PRs — skip stars, branch creates, forks (noise) */
 function toFeed(events: GhEvent[], limit = 10): FeedItem[] {
   const out: FeedItem[] = [];
+  const ownPrefix = `${GITHUB_USER}/`;
 
   for (const e of events) {
     if (out.length >= limit) break;
-    const repo = e.repo.name.replace(`${GITHUB_USER}/`, '');
+    const full = e.repo.name;
+    const repo = full.startsWith(ownPrefix) ? full.slice(ownPrefix.length) : full;
     const actor = e.actor?.display_login || e.actor?.login;
+    const isOwn = full.startsWith(ownPrefix) || full.toLowerCase().startsWith(ownPrefix.toLowerCase());
 
     if (e.type === 'PushEvent' && e.payload?.commits?.length) {
+      // Prefer pushes to own repos
+      if (!isOwn && out.length > 2) continue;
       for (const c of e.payload.commits) {
         if (out.length >= limit) break;
-        const msg = c.message ? firstLine(c.message) : 'Commit';
+        const msg = c.message ? firstLine(c.message) : '';
+        if (!msg || msg.length < 3) continue;
+        // skip merge noise / empty bots
+        if (/^Merge (branch|pull request)/i.test(msg)) continue;
         out.push({
           id: `${e.id}-${c.sha ?? out.length}`,
           repo,
@@ -113,71 +121,66 @@ function toFeed(events: GhEvent[], limit = 10): FeedItem[] {
       continue;
     }
 
-    if (e.type === 'PullRequestEvent') {
-      const title = e.payload?.pull_request?.title || 'Pull request';
-      const prUser = e.payload?.pull_request?.user?.login;
+    if (e.type === 'PullRequestEvent' && e.payload?.action === 'closed') {
+      const title = e.payload?.pull_request?.title;
+      if (!title) continue;
       out.push({
         id: e.id,
         repo,
-        message: `${e.payload?.action ?? 'updated'} PR: ${title}`,
-        people: uniquePeople([prUser, actor]),
+        message: `Merged: ${title}`,
+        people: uniquePeople([e.payload?.pull_request?.user?.login, actor]),
         when: e.created_at,
         kind: 'pr',
-      });
-      continue;
-    }
-
-    if (e.type === 'IssuesEvent') {
-      const title = e.payload?.issue?.title || 'Issue';
-      out.push({
-        id: e.id,
-        repo,
-        message: `${e.payload?.action ?? 'updated'} issue: ${title}`,
-        people: uniquePeople([e.payload?.issue?.user?.login, actor]),
-        when: e.created_at,
-        kind: 'issue',
-      });
-      continue;
-    }
-
-    if (e.type === 'CreateEvent') {
-      out.push({
-        id: e.id,
-        repo,
-        message: `Created ${e.payload?.ref_type ?? 'ref'}${e.payload?.ref ? ` “${e.payload.ref}”` : ''}`,
-        people: uniquePeople([actor]),
-        when: e.created_at,
-        kind: 'create',
-      });
-      continue;
-    }
-
-    if (e.type === 'WatchEvent') {
-      out.push({
-        id: e.id,
-        repo,
-        message: `Starred ${repo}`,
-        people: uniquePeople([actor]),
-        when: e.created_at,
-        kind: 'star',
-      });
-      continue;
-    }
-
-    if (e.type === 'ForkEvent') {
-      out.push({
-        id: e.id,
-        repo,
-        message: `Forked → ${e.payload?.forkee?.full_name ?? repo}`,
-        people: uniquePeople([actor]),
-        when: e.created_at,
-        kind: 'fork',
       });
     }
   }
 
   return out.slice(0, limit);
 }
+
+/** Curated shipping log when public events are thin / noisy */
+const SHIPPED: FeedItem[] = [
+  {
+    id: 'ship-coreknot',
+    repo: 'Coreknot',
+    message: 'CoreKnot — productivity product shipping on Vercel',
+    people: ['Raghav'],
+    when: '2025-08-01T12:00:00Z',
+    kind: 'ship',
+  },
+  {
+    id: 'ship-tsc',
+    repo: 'TSC-Website',
+    message: 'The Shakti Collective — academy & storytelling platform',
+    people: ['Raghav'],
+    when: '2025-07-15T12:00:00Z',
+    kind: 'ship',
+  },
+  {
+    id: 'ship-portfolio',
+    repo: 'portfolio-website',
+    message: 'BluePolaroid — cinema × code portfolio live',
+    people: ['Raghav'],
+    when: '2025-09-01T12:00:00Z',
+    kind: 'ship',
+  },
+  {
+    id: 'ship-balaji',
+    repo: 'balaji-infra',
+    message: 'Balaji Infra — corporate site for heavy civil',
+    people: ['Raghav'],
+    when: '2025-06-01T12:00:00Z',
+    kind: 'ship',
+  },
+  {
+    id: 'ship-mailer',
+    repo: 'Auto-Mailer',
+    message: 'Auto Mailer — outreach sequences that run themselves',
+    people: ['Raghav'],
+    when: '2025-05-01T12:00:00Z',
+    kind: 'ship',
+  },
+];
 
 export const CodingActivity = () => {
   const ref = useRef(null);
@@ -207,7 +210,8 @@ export const CodingActivity = () => {
   }, []);
 
   const series = useMemo(() => buildDailySeries(rawEvents, 28), [rawEvents]);
-  const feed = useMemo(() => toFeed(rawEvents, 10), [rawEvents]);
+  const liveFeed = useMemo(() => toFeed(rawEvents, 8), [rawEvents]);
+  const feed = liveFeed.length >= 3 ? liveFeed : SHIPPED;
   const hasActivity = series.some((d) => d.count > 0);
 
   return (
@@ -315,33 +319,30 @@ export const CodingActivity = () => {
 
           <div className="border border-border p-5 md:p-6 bg-card/30 min-w-0">
             <p className="font-mono text-[10px] tracking-wider uppercase text-accent mb-5">
-              Recent events
+              {liveFeed.length >= 3 ? 'Latest commits' : 'Shipped lately'}
             </p>
             <ul className="space-y-4">
-              {loading && feed.length === 0 && (
+              {loading && liveFeed.length === 0 && (
                 <li className="font-mono text-xs text-muted-foreground">Loading activity…</li>
-              )}
-              {!loading && feed.length === 0 && (
-                <li className="font-mono text-xs text-muted-foreground">No public events found.</li>
               )}
               {feed.map((item) => (
                 <li key={item.id} className="border-b border-border pb-3 last:border-0 last:pb-0">
                   <p className="font-mono text-[9px] tracking-wider uppercase text-primary mb-1">
                     {item.repo}
-                    {item.kind === 'commit' ? ' · commit' : ''}
+                    {item.kind === 'commit' ? ' · commit' : item.kind === 'ship' ? ' · build' : ''}
                   </p>
                   <p className="font-body text-sm text-foreground leading-snug break-words">
                     {item.message}
                   </p>
                   <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                    {item.people.length > 0 && (
+                    {item.people.length > 0 && item.kind !== 'ship' && (
                       <p className="font-mono text-[10px] text-muted-foreground">
                         {item.people.length > 1 ? 'with ' : 'by '}
                         {item.people.join(', ')}
                       </p>
                     )}
                     <p className="font-mono text-[10px] text-muted-foreground/70">
-                      {relativeTime(item.when)}
+                      {item.kind === 'ship' ? item.when.slice(0, 7) : relativeTime(item.when)}
                     </p>
                   </div>
                 </li>

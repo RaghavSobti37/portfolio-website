@@ -134,9 +134,9 @@ export const ServicesSection = () => {
             <CountUp to={15_200_000} />
           </p>
           <p className="font-body text-muted-foreground max-w-md md:pb-3 text-base md:text-lg leading-relaxed">
-            Combined reach across this site — YouTube project embeds (~14.8M live tally) plus
-            Instagram reels in the archive (~10k avg views each when exact counts aren’t
-            available). Rounded to the nearest hundred thousand.
+            Combined audience across the films, interviews, and reels on this site — about 14.8M
+            from YouTube projects plus Instagram archive reach (≈10k per reel when exact counts
+            aren’t public). Rounded. That’s the scale of work already in circulation.
           </p>
         </div>
 

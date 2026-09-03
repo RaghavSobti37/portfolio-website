@@ -1,8 +1,10 @@
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, ExternalLink, Play, X } from 'lucide-react';
-import { projects, type Project } from '@/data/projects';
+import { projects, projectCategories, type Project } from '@/data/projects';
 import { LazyImage } from '@/components/LazyImage';
+
+const MORE_PAGE = 12;
 
 const getInstagramEmbedUrl = (url: string): string => {
   const match = url.match(/instagram\.com\/(?:reel|p)\/([^/?]+)/);
@@ -31,6 +33,8 @@ export const PortfolioSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [active, setActive] = useState<Project | null>(null);
   const [slide, setSlide] = useState(0);
+  const [workCat, setWorkCat] = useState('all');
+  const [visibleWork, setVisibleWork] = useState(MORE_PAGE);
   const films = shortFilms.length > 0 ? shortFilms : projects.slice(0, 6);
   const current = films[slide] ?? films[0];
 
@@ -46,9 +50,12 @@ export const PortfolioSection = () => {
     .map((title) => projects.find((p) => p.title === title))
     .filter(Boolean) as Project[];
   const secondary = featured.filter((p) => p.category !== 'short-film');
-  const more = projects
-    .filter((p) => !featuredOrder.includes(p.title) && p.category !== 'short-film')
-    .slice(0, 8);
+
+  /** Full index — everything not already in the short-film hero */
+  const indexPool = projects.filter((p) => p.category !== 'short-film');
+  const filteredWork =
+    workCat === 'all' ? indexPool : indexPool.filter((p) => p.category === workCat);
+  const more = filteredWork.slice(0, visibleWork);
 
   const go = (dir: -1 | 1) => {
     setSlide((s) => (s + dir + films.length) % films.length);
@@ -209,7 +216,33 @@ export const PortfolioSection = () => {
         </div>
 
         <div className="mt-28">
-          <p className="font-mono-meta mb-8">MORE WORK · INDEX</p>
+          <p className="font-mono-meta mb-3">MORE WORK · INDEX</p>
+          <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-6">
+            Everything else I’ve made
+          </h3>
+
+          <div className="flex flex-wrap gap-2 mb-8">
+            {projectCategories
+              .filter((c) => c.id === 'all' || indexPool.some((p) => p.category === c.id))
+              .map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => {
+                    setWorkCat(c.id);
+                    setVisibleWork(MORE_PAGE);
+                  }}
+                  className={`font-mono text-[10px] tracking-wider uppercase px-3 py-1.5 border transition-colors ${
+                    workCat === c.id
+                      ? 'border-accent text-accent bg-accent/10'
+                      : 'border-border text-muted-foreground hover:border-primary hover:text-primary'
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
             {more.map((project, i) => (
               <motion.button
@@ -218,7 +251,7 @@ export const PortfolioSection = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.04 }}
+                transition={{ delay: (i % MORE_PAGE) * 0.03 }}
                 onClick={() => setActive(project)}
                 className="group relative aspect-[3/4] overflow-hidden bg-card text-left"
               >
@@ -231,8 +264,8 @@ export const PortfolioSection = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent opacity-80" />
                 <div className="absolute bottom-0 left-0 right-0 p-3">
-                  <p className="font-mono text-[10px] text-paper/60 mb-0.5">
-                    {String(project.id).padStart(3, '0')}
+                  <p className="font-mono text-[9px] text-paper/55 mb-0.5 uppercase tracking-wider">
+                    {project.category.replace('-', ' ')} · {project.year}
                   </p>
                   <p className="font-display text-sm text-paper font-medium truncate">
                     {project.title}
@@ -241,6 +274,23 @@ export const PortfolioSection = () => {
               </motion.button>
             ))}
           </div>
+
+          {filteredWork.length === 0 && (
+            <p className="font-mono text-xs text-muted-foreground mt-6">No pieces in this category.</p>
+          )}
+
+          {filteredWork.length > visibleWork && (
+            <div className="text-center mt-10">
+              <button
+                type="button"
+                onClick={() => setVisibleWork((v) => v + MORE_PAGE)}
+                className="font-mono-meta text-primary border border-primary/40 px-6 py-3 hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                LOAD MORE WORK
+              </button>
+            </div>
+          )}
+
           <a
             href="#archive"
             className="inline-block mt-10 font-mono-meta text-primary hover:text-accent transition-colors"

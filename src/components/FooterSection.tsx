@@ -8,6 +8,9 @@ const socialLinks = [
   { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/raghav-raj-sobti/' },
 ];
 
+const MAIL = 'raghavsobti37@gmail.com';
+const MAILTO = `mailto:${MAIL}?subject=${encodeURIComponent('Project inquiry')}`;
+
 export const FooterSection = () => {
   return (
     <footer id="contact" className="relative py-24 md:py-32 border-t border-border">
@@ -19,14 +22,16 @@ export const FooterSection = () => {
         >
           <p className="font-mono-meta text-accent mb-6">GOT AN IDEA?</p>
           <h2 className="font-display text-[clamp(2.5rem,8vw,5.5rem)] font-bold tracking-tighter leading-[0.95] mb-10 max-w-3xl">
-            LET’S MAKE<br />SOMETHING WEIRD.
+            LET’S MAKE
+            <br />
+            SOMETHING WEIRD.
           </h2>
 
           <a
-            href="mailto:raghavsobti37@gmail.com"
-            className="font-display text-xl md:text-2xl text-primary hover:text-accent transition-colors"
+            href={MAILTO}
+            className="font-display text-xl md:text-2xl text-primary hover:text-accent transition-colors break-all"
           >
-            raghavsobti37@gmail.com
+            {MAIL}
           </a>
 
           <div className="flex flex-wrap gap-6 mt-10 mb-20">

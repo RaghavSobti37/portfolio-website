@@ -1,86 +1,58 @@
 import { motion } from 'framer-motion';
-import { Linkedin, Github } from 'lucide-react';
 
 const socialLinks = [
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/raghav-raj-sobti/', label: 'LinkedIn' },
-  { icon: Github, href: 'https://github.com/RaghavSobti37', label: 'GitHub' },
+  { label: 'GITHUB', href: 'https://github.com/RaghavSobti37' },
+  { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/raghav-raj-sobti/' },
+  { label: 'INSTAGRAM', href: 'https://www.instagram.com/bluepolaroid05/' },
 ];
+
+const MAIL = 'raghavsobti37@gmail.com';
+const MAILTO = `mailto:${MAIL}?subject=${encodeURIComponent('Project inquiry')}`;
 
 export const CodingFooter = () => {
   return (
-    <footer id="contact" className="relative py-16 bg-accent/10">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
-
+    <footer id="contact" className="relative py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-display text-3xl font-bold tracking-wider mb-6"
-          >
-            RAGS<span className="text-accent">.</span>DEV
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="font-mono-meta text-accent mb-6">GOT AN IDEA?</p>
+          <h2 className="font-display text-[clamp(2.5rem,8vw,5.5rem)] font-bold tracking-tighter leading-[0.95] mb-10 max-w-3xl">
+            LET’S BUILD
+            <br />
+            SOMETHING SOLID.
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-body text-muted-foreground mb-8 max-w-md"
+          <a
+            href={MAILTO}
+            className="font-display text-xl md:text-2xl text-primary hover:text-accent transition-colors break-all"
           >
-            Building digital products, workflow systems and creative web experiences.
-          </motion.p>
+            {MAIL}
+          </a>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex gap-4 mb-10"
-          >
-            {socialLinks.map((social) => (
+          <div className="flex flex-wrap gap-6 mt-10 mb-20">
+            {socialLinks.map((s) => (
               <a
-                key={social.label}
-                href={social.href}
+                key={s.label}
+                href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={social.label}
-                className="w-12 h-12 rounded-sm bg-secondary flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-all duration-300 hover:shadow-glow"
+                className="font-mono-meta text-muted-foreground hover:text-primary transition-colors"
               >
-                <social.icon className="w-5 h-5" />
+                {s.label} ↗
               </a>
             ))}
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-10"
-          >
-            <a
-              href="mailto:raghavsobti37@gmail.com"
-              className="font-display text-sm tracking-[0.3em] uppercase text-accent hover:text-foreground transition-colors duration-300"
-            >
-              raghavsobti37@gmail.com
-            </a>
-          </motion.div>
-
-          <div className="w-full max-w-md h-px bg-border mb-8" />
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="font-body text-sm text-muted-foreground"
-          >
-            &copy; {new Date().getFullYear()} Raghav Raj Sobti. Built with React, TypeScript and creative systems thinking.
-          </motion.p>
-        </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-t border-border pt-8">
+            <p className="font-mono-meta">RAGS.DEV © {new Date().getFullYear()}</p>
+            <p className="font-body text-sm text-muted-foreground">
+              Built with React, TypeScript &amp; systems thinking.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </footer>
   );

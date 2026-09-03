@@ -600,18 +600,16 @@ const projectsData: Project[] = [
 // Export projects in the exact order they are listed above (no shuffle)
 export const projects = projectsData;
 
-// Export individual categories for filtering
+// Export individual categories for filtering (All first — gram-style chips)
 export const projectCategories = [
-  { id: "featured", label: "Featured" },
-  { id: "all", label: "All Work" },
-  { id: "Music Video", label: "Music Videos" },
-  { id: "Behind the scenes", label: "Behind the Scenes" },
-  { id: "short-film", label: "Short Films" },
-  { id: "event", label: "Events" },
-  { id: "Ad Film", label: "Ad Films" },
-  { id: "interview", label: "Interviews" },
-  { id: "showreel", label: "Showreels" },
-  { id: "Editing", label: "Editing" },
+  { id: 'all', label: 'All' },
+  { id: 'Music Video', label: 'Music Videos' },
+  { id: 'short-film', label: 'Short Films' },
+  { id: 'interview', label: 'Interviews' },
+  { id: 'event', label: 'Events' },
+  { id: 'showreel', label: 'Showreels' },
+  { id: 'Ad Film', label: 'Ad Films' },
+  { id: 'Behind the scenes', label: 'Behind the Scenes' },
 ];
 
 export default projects;
