@@ -2,6 +2,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, ExternalLink, Play, X } from 'lucide-react';
 import { projects, type Project } from '@/data/projects';
+import { LazyImage } from '@/components/LazyImage';
 
 const getInstagramEmbedUrl = (url: string): string => {
   const match = url.match(/instagram\.com\/(?:reel|p)\/([^/?]+)/);
@@ -67,9 +68,10 @@ export const PortfolioSection = () => {
               transition={{ duration: 0.6 }}
               className="absolute inset-0"
             >
-              <img
+              <LazyImage
                 src={current.image}
                 alt={current.title}
+                shellClassName="w-full h-full"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/25" />
@@ -178,9 +180,10 @@ export const PortfolioSection = () => {
               className="group w-full text-left grid md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] border border-border hover:border-primary/50 transition-colors overflow-hidden bg-card/20"
             >
               <div className="relative aspect-[16/10] md:aspect-auto md:min-h-[280px] overflow-hidden">
-                <img
+                <LazyImage
                   src={project.image}
                   alt={project.title}
+                  shellClassName="w-full h-full"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
@@ -219,9 +222,10 @@ export const PortfolioSection = () => {
                 onClick={() => setActive(project)}
                 className="group relative aspect-[3/4] overflow-hidden bg-card text-left"
               >
-                <img
+                <LazyImage
                   src={project.image}
                   alt={project.title}
+                  shellClassName="absolute inset-0"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />

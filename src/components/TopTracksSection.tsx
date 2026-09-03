@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { LazyImage } from '@/components/LazyImage';
 
 const SPOTIFY_PROFILE =
   'https://open.spotify.com/user/314i4j6nzrmctdy5xvhosa4iwvlu';
@@ -75,9 +76,10 @@ export const TopTracksSection = () => {
               className="group border border-border bg-secondary/20 hover:border-primary/50 transition-colors overflow-hidden"
             >
               <div className="aspect-square overflow-hidden bg-ink relative">
-                <img
+                <LazyImage
                   src={track.cover}
                   alt={`${track.name} album cover`}
+                  shellClassName="absolute inset-0"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />

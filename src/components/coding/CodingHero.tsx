@@ -13,7 +13,7 @@ export const CodingHero = () => {
     { icon: Zap, label: 'Product utilities', value: 'Resume + mailer tools' },
   ];
 
-  const featuredBuilds = ['Auto Mailer', 'CoreKnot', 'Photo Cleaner App', 'Resume Generator'];
+  const featuredBuilds = ['The Shakti Collective', 'CoreKnot', 'Auto Mailer', 'House of Kalla'];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-32">
@@ -66,20 +66,25 @@ export const CodingHero = () => {
               ))}
             </div>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-stretch w-full max-w-md sm:max-w-none">
               <Button
                 onClick={handleScrollToProjects}
                 size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground font-display tracking-widest uppercase px-8 py-6 text-sm rounded-sm gap-2"
+                className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground font-display tracking-widest uppercase px-8 py-6 text-sm rounded-sm gap-2"
               >
                 View Projects
                 <ArrowRight className="h-4 w-4" />
               </Button>
-              <a href="https://github.com/RaghavSobti37" target="_blank" rel="noreferrer">
+              <a
+                href="https://github.com/RaghavSobti37"
+                target="_blank"
+                rel="noreferrer"
+                className="w-full sm:w-auto"
+              >
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-accent/30 text-accent hover:bg-accent/10 font-display tracking-widest uppercase px-8 py-6 text-sm rounded-sm gap-2"
+                  className="w-full border-accent/30 text-accent hover:bg-accent/10 font-display tracking-widest uppercase px-8 py-6 text-sm rounded-sm gap-2"
                 >
                   <Github className="h-4 w-4" />
                   GitHub

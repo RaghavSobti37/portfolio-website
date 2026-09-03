@@ -84,7 +84,7 @@ export const NowPlayingDisc = () => {
 
   return (
     <div
-      className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-[90] pointer-events-none"
+      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[90] pointer-events-none"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocusCapture={() => setHovered(true)}
@@ -92,8 +92,8 @@ export const NowPlayingDisc = () => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setHovered(false);
       }}
     >
-      <div className="pointer-events-auto relative flex items-end gap-3">
-        {/* Disc only by default — title / Open on Spotify appear on hover */}
+      <div className="pointer-events-auto relative flex flex-row-reverse items-end gap-3">
+        {/* Disc only by default — title / Open on Spotify appear on hover (left of disc) */}
         <button
           type="button"
           className="relative w-[72px] h-[72px] md:w-20 md:h-20 shrink-0 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary shadow-[0_8px_40px_rgba(35,92,185,0.35)] block cursor-pointer"
@@ -129,18 +129,18 @@ export const NowPlayingDisc = () => {
         <AnimatePresence>
           {hovered && (
             <motion.div
-              initial={{ opacity: 0, x: -8 }}
+              initial={{ opacity: 0, x: 8 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -8 }}
-              className="max-w-[220px] border border-border bg-background/95 backdrop-blur-md p-3 shadow-card"
+              exit={{ opacity: 0, x: 8 }}
+              className="max-w-[220px] text-right border border-border bg-background/95 backdrop-blur-md p-3 shadow-card"
             >
-              <p className="font-mono text-[9px] tracking-wider uppercase text-accent mb-1.5 flex items-center gap-1.5">
+              <p className="font-mono text-[9px] tracking-wider uppercase text-accent mb-1.5 flex items-center justify-end gap-1.5">
+                {spinning ? 'Now playing' : 'Last played'}
                 <span
                   className={`w-1.5 h-1.5 rounded-full ${
                     spinning ? 'bg-accent animate-pulse' : 'bg-muted-foreground'
                   }`}
                 />
-                {spinning ? 'Now playing' : 'Last played'}
               </p>
               <p className="font-display text-sm font-semibold leading-tight line-clamp-2">
                 {data.title}

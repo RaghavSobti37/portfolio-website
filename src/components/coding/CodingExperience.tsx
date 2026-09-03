@@ -39,12 +39,30 @@ export const CodingExperience = () => {
   ];
 
   const certifications = [
-    { title: 'Internet of Things: Communication Technologies', org: 'University of California San Diego', date: 'Apr 2024', image: '/gallery/14.jpg' },
-    { title: 'Deep Learning Applications for Computer Vision', org: 'University of Colorado Boulder', date: 'Nov 2023', image: '/gallery/15.jpg' },
-    { title: 'Google Cloud Computing Foundations: Infrastructure in Google Cloud', org: 'Google', date: 'Oct 2023', image: '/gallery/16.jpg' },
-    { title: 'Number Theory and Cryptography', org: 'University of California San Diego', date: 'Oct 2023', image: '/gallery/17.jpg' },
-    { title: 'Get Started with Figma', org: 'Coursera Guided Project', date: 'Feb 2023', image: '/gallery/18.jpg' },
-    { title: 'Create a Storyboard using Canva', org: 'Coursera Project Network', date: 'Feb 2023', image: '/gallery/19.jpg' },
+    {
+      title: 'Google Cloud Computing Foundations: Infrastructure in Google Cloud',
+      org: 'Google Cloud',
+      date: 'Oct 2023',
+      tag: 'GCP',
+      accent: '#4285F4',
+      blurb: 'Cloud infrastructure fundamentals on Google Cloud.',
+    },
+    {
+      title: 'Get Started with Figma',
+      org: 'Coursera',
+      date: 'Feb 2023',
+      tag: 'FIGMA',
+      accent: '#A259FF',
+      blurb: 'Interface design workflow — frames, components, handoff basics.',
+    },
+    {
+      title: 'Create a Storyboard using Canva',
+      org: 'Coursera Project Network',
+      date: 'Feb 2023',
+      tag: 'CANVA',
+      accent: '#00C4CC',
+      blurb: 'Visual storytelling and storyboard layout for film / pitch decks.',
+    },
   ];
 
   return (
@@ -109,22 +127,40 @@ export const CodingExperience = () => {
               CERTIFICATIONS
             </h3>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {certifications.map((cert, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className="overflow-hidden rounded-sm border-2 border-accent/10 bg-card-gradient group hover:border-accent/30 card-lift"
+                  className="overflow-hidden border border-border bg-card/40 group hover:border-primary/40 transition-colors"
                 >
-                  <img
-                    src={cert.image}
-                    alt={`${cert.title} certificate preview`}
-                    className="h-44 w-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="p-8">
-                    <h4 className="font-display text-lg font-bold text-foreground transition-colors group-hover:text-accent">{cert.title}</h4>
-                    <p className="mt-1 font-body text-muted-foreground">{cert.org} - {cert.date}</p>
+                  <div
+                    className="relative h-36 flex items-end p-5 border-b border-border"
+                    style={{
+                      background: `linear-gradient(145deg, ${cert.accent}33 0%, hsl(240 6% 8%) 55%, hsl(240 6% 6%) 100%)`,
+                    }}
+                  >
+                    <div
+                      className="absolute top-4 right-4 w-10 h-10 rounded-full opacity-40 blur-xl"
+                      style={{ background: cert.accent }}
+                    />
+                    <span
+                      className="font-display text-3xl font-bold tracking-tight"
+                      style={{ color: cert.accent }}
+                    >
+                      {cert.tag}
+                    </span>
+                  </div>
+                  <div className="p-6">
+                    <p className="font-mono text-[10px] tracking-wider uppercase text-accent mb-2">
+                      {cert.org} · {cert.date}
+                    </p>
+                    <h4 className="font-display text-lg font-bold text-foreground transition-colors group-hover:text-primary leading-snug">
+                      {cert.title}
+                    </h4>
+                    <p className="mt-2 font-body text-sm text-muted-foreground leading-relaxed">
+                      {cert.blurb}
+                    </p>
                   </div>
                 </motion.div>
               ))}

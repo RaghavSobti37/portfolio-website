@@ -8,6 +8,7 @@ import Coding from "./pages/Coding";
 import SpotifyCallback from "./pages/SpotifyCallback";
 import NotFound from "./pages/NotFound";
 import { NowPlayingDisc } from "@/components/NowPlayingDisc";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <NowPlayingDisc />
         <Routes>
           <Route path="/" element={<Index />} />

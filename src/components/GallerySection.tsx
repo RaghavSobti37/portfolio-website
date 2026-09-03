@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { photos, photoCategories } from '@/data/photos';
+import { LazyImage } from '@/components/LazyImage';
 
 export const GallerySection = () => {
   const ref = useRef(null);
@@ -11,6 +12,7 @@ export const GallerySection = () => {
   const [visibleCount, setVisibleCount] = useState(18);
   const [selectedPhoto, setSelectedPhoto] = useState<(typeof photos)[0] | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [lightboxReady, setLightboxReady] = useState(false);
 
   const filteredPhotos = photos.filter(
     (photo) => activeCategory === 'all' || photo.category === activeCategory
@@ -32,6 +34,11 @@ export const GallerySection = () => {
       opacity: 1,
       transition: { duration: 0.35 },
     },
+  };
+
+  const openPhoto = (photo: (typeof photos)[0]) => {
+    setLightboxReady(false);
+    setSelectedPhoto(photo);
   };
 
   return (
@@ -84,16 +91,17 @@ export const GallerySection = () => {
               key={photo.id}
               type="button"
               variants={itemVariants}
-              onClick={() => setSelectedPhoto(photo)}
+              onClick={() => openPhoto(photo)}
               className="group relative overflow-hidden bg-card aspect-square"
             >
-              <img
+              <LazyImage
                 src={photo.src}
                 alt={photo.title || `Still ${index + 1}`}
+                shellClassName="absolute inset-0"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/45 transition-colors flex items-end p-2 opacity-0 group-hover:opacity-100">
+              <div className="absolute inset-0 z-[2] bg-ink/0 group-hover:bg-ink/45 transition-colors flex items-end p-2 opacity-0 group-hover:opacity-100 pointer-events-none">
                 <p className="font-mono text-[9px] text-paper tracking-wider">
                   {String(index + 1).padStart(4, '0')}
                   {photo.category ? ` / ${photo.category.toUpperCase()}` : ''}
@@ -143,15 +151,26 @@ export const GallerySection = () => {
           onClick={() => setSelectedPhoto(null)}
         >
           <button
-            className="absolute top-5 right-5 text-paper hover:text-accent"
+            className="absolute top-5 right-5 text-paper hover:text-accent z-10"
             aria-label="Close"
+            type="button"
+            onClick={() => setSelectedPhoto(null)}
           >
             <X size={28} />
           </button>
+          {!lightboxReady && (
+            <div
+              aria-hidden
+              className="absolute inset-0 m-auto w-10 h-10 border-2 border-primary/30 border-t-primary rounded-full animate-spin"
+            />
+          )}
           <img
             src={selectedPhoto.src}
             alt={selectedPhoto.title}
-            className="max-h-[85vh] max-w-full object-contain"
+            className={`max-h-[85vh] max-w-full object-contain transition-opacity duration-300 ${
+              lightboxReady ? 'opacity-100' : 'opacity-0'
+            }`}
+            onLoad={() => setLightboxReady(true)}
             onClick={(e) => e.stopPropagation()}
           />
         </div>

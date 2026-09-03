@@ -46,19 +46,20 @@ export const Navigation = () => {
               <li key={link.name}>
                 <button
                   onClick={() => handleLinkClick(link.href)}
-                  className="font-mono-meta text-[11px] hover:text-primary transition-colors relative group"
+                  className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors duration-300 relative group"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-accent transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
                 </button>
               </li>
             ))}
             <li>
               <Link
                 to="/coding"
-                className="font-mono-meta text-[11px] text-primary hover:text-accent transition-colors"
+                onClick={() => window.scrollTo(0, 0)}
+                className="font-display text-sm tracking-widest uppercase text-primary hover:text-accent transition-colors"
               >
-                CAMERA → COMPUTER
+                Dev Portfolio
               </Link>
             </li>
           </ul>
@@ -97,10 +98,13 @@ export const Navigation = () => {
               ))}
               <Link
                 to="/coding"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.scrollTo(0, 0);
+                }}
                 className="font-mono-meta text-primary mt-4"
               >
-                CAMERA → COMPUTER
+                Dev Portfolio
               </Link>
             </div>
           </motion.div>

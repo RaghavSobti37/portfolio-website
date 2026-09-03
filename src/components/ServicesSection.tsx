@@ -130,12 +130,13 @@ export const ServicesSection = () => {
 
         <div className="border-t border-border pt-16 flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
           <p className="font-display text-[clamp(2.8rem,10vw,7rem)] font-bold tracking-tighter leading-none text-primary/90 shrink-0">
-            {/* live YouTube embed tally ~14.77M (Mar 2026) → round */}
-            <CountUp to={15_000_000} />
+            {/* YT embeds ~14.77M + 40 IG reels × ~10k avg ≈ 15.17M → round */}
+            <CountUp to={15_200_000} />
           </p>
           <p className="font-body text-muted-foreground max-w-md md:pb-3 text-base md:text-lg leading-relaxed">
-            Combined YouTube views across project embeds on this site — rounded from a live
-            tally of ~14.8M. Instagram reel views aren’t public, so they’re not included.
+            Combined reach across this site — YouTube project embeds (~14.8M live tally) plus
+            Instagram reels in the archive (~10k avg views each when exact counts aren’t
+            available). Rounded to the nearest hundred thousand.
           </p>
         </div>
 

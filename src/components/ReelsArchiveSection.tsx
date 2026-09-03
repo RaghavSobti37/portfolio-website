@@ -8,6 +8,7 @@ import {
   getReelThumbnailUrl,
   type Reel,
 } from '@/data/reels';
+import { LazyImage } from '@/components/LazyImage';
 
 const ReelThumb = ({ reel, index }: { reel: Reel; index: number }) => {
   const [failed, setFailed] = useState(false);
@@ -16,9 +17,10 @@ const ReelThumb = ({ reel, index }: { reel: Reel; index: number }) => {
   return (
     <div className="aspect-[9/16] bg-ink relative overflow-hidden">
       {thumb && !failed ? (
-        <img
+        <LazyImage
           src={thumb}
           alt={reel.title}
+          shellClassName="absolute inset-0"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
           onError={() => setFailed(true)}

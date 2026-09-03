@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
   { name: 'Projects', href: '#projects' },
@@ -24,6 +25,11 @@ export const CodingNavigation = () => {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const goCinema = () => {
+    setIsMobileMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <motion.nav
@@ -35,14 +41,15 @@ export const CodingNavigation = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <a
-              href="/"
-              className="font-mono text-[10px] tracking-wider uppercase text-muted-foreground hover:text-primary transition-colors hidden sm:inline"
+          <div className="flex items-center gap-4 min-w-0">
+            <Link
+              to="/"
+              onClick={goCinema}
+              className="hidden md:inline font-mono text-[10px] tracking-wider uppercase text-primary hover:text-accent transition-colors shrink-0"
             >
-              ← Cinema
-            </a>
-            <span className="font-display text-2xl font-bold tracking-wider text-foreground">
+              Behind the camera
+            </Link>
+            <span className="font-display text-xl sm:text-2xl font-bold tracking-wider text-foreground truncate">
               RAGS<span className="text-accent">.</span>DEV
             </span>
           </div>
@@ -60,10 +67,20 @@ export const CodingNavigation = () => {
               </li>
             ))}
             <div className="flex items-center gap-4 ml-4">
-              <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
+              <a
+                href="https://www.linkedin.com/in/raghav-raj-sobti/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-accent transition-colors"
+              >
                 <Linkedin size={20} />
               </a>
-              <a href="https://github.com/RaghavSobti37" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
+              <a
+                href="https://github.com/RaghavSobti37"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-accent transition-colors"
+              >
                 <Github size={20} />
               </a>
             </div>
@@ -88,7 +105,14 @@ export const CodingNavigation = () => {
             transition={{ type: 'tween', duration: 0.3 }}
             className="fixed inset-y-0 right-0 w-3/4 max-w-sm z-50 glass"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-8">
+            <div className="flex flex-col items-center justify-center h-full gap-8 px-8">
+              <Link
+                to="/"
+                onClick={goCinema}
+                className="font-mono-meta text-primary text-center"
+              >
+                Behind the camera
+              </Link>
               {navLinks.map((link, index) => (
                 <motion.button
                   key={link.name}
@@ -107,10 +131,20 @@ export const CodingNavigation = () => {
                 transition={{ delay: navLinks.length * 0.1 }}
                 className="flex items-center gap-6 mt-8"
               >
-                <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
+                <a
+                  href="https://www.linkedin.com/in/raghav-raj-sobti/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-foreground hover:text-accent transition-colors"
+                >
                   <Linkedin size={28} />
                 </a>
-                <a href="https://github.com/RaghavSobti37" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent transition-colors">
+                <a
+                  href="https://github.com/RaghavSobti37"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-foreground hover:text-accent transition-colors"
+                >
                   <Github size={28} />
                 </a>
               </motion.div>
