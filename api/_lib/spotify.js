@@ -2,25 +2,7 @@ const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const NOW_PLAYING = 'https://api.spotify.com/v1/me/player/currently-playing';
 const RECENTLY_PLAYED = 'https://api.spotify.com/v1/me/player/recently-played?limit=1';
 
-export type SpotifyNowPlaying = {
-  isPlaying: boolean;
-  title?: string;
-  artist?: string;
-  album?: string;
-  albumArt?: string | null;
-  url?: string;
-  playedAt?: string | null;
-  empty?: boolean;
-  configured?: boolean;
-  error?: string;
-};
-
-function mapTrack(item: {
-  name: string;
-  external_urls?: { spotify?: string };
-  album?: { images?: Array<{ url: string }>; name?: string };
-  artists?: Array<{ name: string }>;
-}) {
+function mapTrack(item) {
   return {
     title: item.name,
     artist: item.artists?.map((a) => a.name).join(', ') ?? 'Unknown',
@@ -55,11 +37,11 @@ async function getAccessToken() {
   });
 
   if (!res.ok) throw new Error(`Token refresh failed: ${res.status}`);
-  const data = (await res.json()) as { access_token: string };
+  const data = await res.json();
   return data.access_token;
 }
 
-export async function getNowPlaying(): Promise<SpotifyNowPlaying> {
+export async function getNowPlaying() {
   const configured = Boolean(
     process.env.SPOTIFY_CLIENT_ID &&
       process.env.SPOTIFY_CLIENT_SECRET &&
@@ -77,12 +59,7 @@ export async function getNowPlaying(): Promise<SpotifyNowPlaying> {
     });
 
     if (nowRes.status === 200) {
-      const now = (await nowRes.json()) as {
-        is_playing?: boolean;
-        item?: Parameters<typeof mapTrack>[0] | null;
-        currently_playing_type?: string;
-      };
-
+      const now = await nowRes.json();
       if (now.item && now.currently_playing_type === 'track') {
         return {
           isPlaying: Boolean(now.is_playing),
@@ -98,9 +75,7 @@ export async function getNowPlaying(): Promise<SpotifyNowPlaying> {
     });
     if (!recentRes.ok) throw new Error(`Recently played failed: ${recentRes.status}`);
 
-    const recent = (await recentRes.json()) as {
-      items?: Array<{ played_at: string; track: Parameters<typeof mapTrack>[0] }>;
-    };
+    const recent = await recentRes.json();
     const last = recent.items?.[0];
     if (!last) return { isPlaying: false, empty: true, configured: true };
 

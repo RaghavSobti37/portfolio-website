@@ -1,21 +1,20 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 const REDIRECT_URI = 'https://bluepolaroid.com/callback';
 
 /**
  * Exchange Spotify auth code → tokens (used by /callback page).
  * POST { code: string }
  */
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
 
   const clientId = process.env.SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-  const code = typeof req.body === 'string'
-    ? (JSON.parse(req.body) as { code?: string }).code
-    : (req.body as { code?: string })?.code;
+  const code =
+    typeof req.body === 'string'
+      ? JSON.parse(req.body).code
+      : req.body?.code;
 
   if (!clientId || !clientSecret) {
     return res.status(500).json({ error: 'Spotify client env not configured on server' });

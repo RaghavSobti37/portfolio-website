@@ -16,7 +16,7 @@ function spotifyDevApi(): Plugin {
           process.env.SPOTIFY_CLIENT_SECRET ||= env.SPOTIFY_CLIENT_SECRET;
           process.env.SPOTIFY_REFRESH_TOKEN ||= env.SPOTIFY_REFRESH_TOKEN;
 
-          const { getNowPlaying } = await import("./api/_lib/spotify");
+          const { getNowPlaying } = await import("./api/_lib/spotify.js");
           const payload = await getNowPlaying();
           res.setHeader("Content-Type", "application/json");
           res.setHeader("Cache-Control", "no-store");

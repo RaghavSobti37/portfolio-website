@@ -1,7 +1,6 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getNowPlaying } from './_lib/spotify';
+import { getNowPlaying } from './_lib/spotify.js';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=60');
   res.setHeader('Access-Control-Allow-Origin', '*');
 
