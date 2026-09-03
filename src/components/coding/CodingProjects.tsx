@@ -15,7 +15,6 @@ const PROJECT_ORDER = [
   'kalla',
   'auto-mailer',
   'woteat',
-  'cine-clock',
   'resume-gen',
   'photo-cleaner',
   'ekors',

@@ -79,6 +79,7 @@ export const codingProjects: CodingProject[] = [
     website: 'https://taskmaster-sand.vercel.app',
     language: 'JavaScript',
     featured: true,
+    frame: '/project-frames/coreknot.png',
     preview: {
       bg: '#0c1210',
       accent: '#126d5e',
@@ -261,28 +262,6 @@ export const codingProjects: CodingProject[] = [
       headline: 'Ops console\nfor the team',
       sub: 'Admin · REST · MongoDB',
       layout: 'erp',
-    },
-  },
-  {
-    id: 'cine-clock',
-    title: 'Cine Clock',
-    repo: 'cine_clock',
-    description:
-      'Timezone utility for NYFA classmates to track class timing across locations.',
-    tech: ['JavaScript', 'NYFA', 'Utility'],
-    github: 'https://github.com/RaghavSobti37/cine_clock',
-    website: 'https://cine-clock.vercel.app',
-    language: 'JavaScript',
-    frame: '/project-frames/cine-clock.jpg',
-    preview: {
-      bg: '#0b0b0d',
-      accent: '#f35f0e',
-      text: '#f2f0eb',
-      muted: '#8a8680',
-      eyebrow: 'NYFA · TIMEZONES',
-      headline: 'Class time,\nany city',
-      sub: 'Clocks · classmates · sync',
-      layout: 'utility',
     },
   },
   {
