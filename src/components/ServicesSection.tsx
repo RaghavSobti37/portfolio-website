@@ -7,21 +7,29 @@ const capabilities = [
     num: '01',
     title: 'MAKE A FILM',
     items: 'Direction / Cinematography / Music Videos / Ads',
+    cta: { label: 'SEE THE GRAM →', href: 'https://www.instagram.com/bluepolaroid05/', external: true },
   },
   {
     num: '02',
     title: 'CAPTURE A MOMENT',
     items: 'Events / Artists / BTS / Interviews',
+    cta: {
+      label: 'EMAIL ME →',
+      href: `mailto:raghavsobti37@gmail.com?subject=${encodeURIComponent('Project inquiry')}`,
+      external: false,
+    },
   },
   {
     num: '03',
     title: 'BUILD A THING',
     items: 'Websites / Digital Products / Interactive Experiences',
+    cta: { label: 'SEE THE BUILDS →', href: '/coding', external: false, route: true },
   },
   {
     num: '04',
     title: 'MAKE IT RUN',
     items: 'APIs / Automation / Workflows',
+    cta: { label: 'GITHUB PROFILE →', href: 'https://github.com/RaghavSobti37', external: true },
   },
 ];
 
@@ -92,13 +100,21 @@ export const ServicesSection = () => {
                 {cap.title}
               </h3>
               <p className="font-body text-muted-foreground">{cap.items}</p>
-              {cap.num === '03' && (
+              {cap.cta.route ? (
                 <Link
-                  to="/coding"
+                  to={cap.cta.href}
                   className="inline-block mt-6 font-mono-meta text-primary hover:text-accent"
                 >
-                  SEE THE BUILDS →
+                  {cap.cta.label}
                 </Link>
+              ) : (
+                <a
+                  href={cap.cta.href}
+                  {...(cap.cta.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  className="inline-block mt-6 font-mono-meta text-primary hover:text-accent"
+                >
+                  {cap.cta.label}
+                </a>
               )}
             </motion.div>
           ))}
@@ -131,12 +147,11 @@ export const ServicesSection = () => {
         <div className="border-t border-border pt-16 flex flex-col md:flex-row md:items-end gap-6 md:gap-12">
           <p className="font-display text-[clamp(2.8rem,10vw,7rem)] font-bold tracking-tighter leading-none text-primary/90 shrink-0">
             {/* YT embeds ~14.77M + 40 IG reels × ~10k avg ≈ 15.17M → round */}
-            <CountUp to={15_200_000} />
+            <CountUp to={16_000_000} />
           </p>
           <p className="font-body text-muted-foreground max-w-md md:pb-3 text-base md:text-lg leading-relaxed">
-            Combined audience across the films, interviews, and reels on this site — about 14.8M
-            from YouTube projects plus Instagram archive reach (≈10k per reel when exact counts
-            aren’t public). Rounded. That’s the scale of work already in circulation.
+            Combined audience across the films, interviews, and reels on this site — about 15.8M
+            from YouTube projects plus Instagram archive reach. Rounded. That’s the scale of work already in circulation.
           </p>
         </div>
 

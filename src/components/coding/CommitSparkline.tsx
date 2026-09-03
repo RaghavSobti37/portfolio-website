@@ -1,47 +1,21 @@
 import { useRepoCommitGraph, relativeTime, type WeekBucket } from '@/hooks/useRepoCommitGraph';
 
-function Sparkline({ buckets, height = 36 }: { buckets: WeekBucket[]; height?: number }) {
+function Bars({ buckets }: { buckets: WeekBucket[] }) {
   const max = Math.max(1, ...buckets.map((b) => b.count));
-  const w = buckets.length * 4;
-  const points = buckets
-    .map((b, i) => {
-      const x = i * 4 + 1.5;
-      const y = height - (b.count / max) * (height - 4) - 2;
-      return `${x},${y}`;
-    })
-    .join(' ');
-
   return (
-    <svg
-      viewBox={`0 0 ${w} ${height}`}
-      className="w-full h-9"
-      preserveAspectRatio="none"
-      aria-hidden
-    >
-      <polyline
-        fill="none"
-        stroke="hsl(var(--primary))"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        points={points}
-        opacity={0.9}
-      />
-      {buckets.map((b, i) => {
-        if (b.count === 0) return null;
-        const x = i * 4 + 1.5;
-        const y = height - (b.count / max) * (height - 4) - 2;
+    <div className="flex items-end gap-px h-8 w-full" aria-hidden>
+      {buckets.map((b) => {
+        const h = b.count === 0 ? 2 : Math.max(3, Math.round((b.count / max) * 32));
         return (
-          <circle
+          <div
             key={b.weekStart}
-            cx={x}
-            cy={y}
-            r="1.4"
-            fill="hsl(var(--accent))"
+            className="flex-1 min-w-0 rounded-[1px] bg-primary/80"
+            style={{ height: h, opacity: b.count === 0 ? 0.15 : 0.55 + (b.count / max) * 0.45 }}
+            title={`${b.count} commits`}
           />
         );
       })}
-    </svg>
+    </div>
   );
 }
 
@@ -55,31 +29,25 @@ export const CommitSparkline = ({
   const { buckets, loading, error, lastPush, total } = useRepoCommitGraph(repo, weeks);
 
   if (error) {
-    return (
-      <p className="font-mono text-[10px] text-muted-foreground">
-        Graph unavailable
-      </p>
-    );
+    return <p className="font-mono text-[10px] text-muted-foreground/60">Graph unavailable</p>;
   }
 
   return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between gap-3">
-        <p className="font-mono text-[10px] tracking-wider uppercase text-muted-foreground">
-          Commits · {weeks}w
+    <div className="space-y-2 pt-1">
+      <div className="flex items-baseline justify-between gap-3">
+        <p className="font-mono text-[9px] tracking-[0.18em] uppercase text-muted-foreground">
+          {weeks}w activity
         </p>
-        <p className="font-mono text-[10px] text-primary">
-          {loading ? '…' : `${total}+ recent`}
-          {!loading && lastPush ? ` · pushed ${relativeTime(lastPush)}` : ''}
+        <p className="font-mono text-[10px] text-muted-foreground">
+          {loading ? '…' : `${total} commits`}
+          {!loading && lastPush ? ` · ${relativeTime(lastPush)}` : ''}
         </p>
       </div>
-      <div className="rounded-sm border border-border bg-secondary/40 px-2 py-1.5">
-        {loading ? (
-          <div className="h-9 animate-pulse bg-muted/40 rounded-sm" />
-        ) : (
-          <Sparkline buckets={buckets} />
-        )}
-      </div>
+      {loading ? (
+        <div className="h-8 animate-pulse bg-muted/30" />
+      ) : (
+        <Bars buckets={buckets} />
+      )}
     </div>
   );
 };

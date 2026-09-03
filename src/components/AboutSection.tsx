@@ -113,17 +113,16 @@ export const AboutSection = () => {
           </div>
         </div>
 
-        <div>
+        <div className="text-center">
           <p className="font-mono-meta mb-3">PATH · SO FAR</p>
           <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4">
             How I got here
           </h3>
-          <p className="font-body text-muted-foreground max-w-xl mb-12 leading-relaxed">
+          <p className="font-body text-muted-foreground max-w-xl mx-auto mb-12 leading-relaxed">
             Read top → bottom. Each step is a role shift — from set support to calling shots.
           </p>
 
-          <div className="relative max-w-3xl">
-            {/* spine */}
+          <div className="relative max-w-2xl mx-auto text-left">
             <div
               className="absolute left-[11px] md:left-[15px] top-2 bottom-2 w-px bg-gradient-to-b from-accent via-primary/50 to-border"
               aria-hidden
@@ -133,8 +132,8 @@ export const AboutSection = () => {
               {path.map((item, i) => (
                 <motion.li
                   key={`${item.era}-${item.title}`}
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ delay: i * 0.05 }}
                   className="relative pl-10 md:pl-14 pb-10 last:pb-0"
@@ -160,7 +159,7 @@ export const AboutSection = () => {
                   <p className="font-mono text-[10px] tracking-wider uppercase text-muted-foreground mb-3">
                     {item.subtitle}
                   </p>
-                  <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed max-w-xl">
+                  <p className="font-body text-sm md:text-base text-muted-foreground leading-relaxed">
                     {item.description}
                   </p>
                 </motion.li>

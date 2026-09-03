@@ -290,13 +290,6 @@ export const PortfolioSection = () => {
               </button>
             </div>
           )}
-
-          <a
-            href="#archive"
-            className="inline-block mt-10 font-mono-meta text-primary hover:text-accent transition-colors"
-          >
-            OPEN REELS ARCHIVE →
-          </a>
         </div>
       </div>
 

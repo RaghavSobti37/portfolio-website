@@ -10,6 +10,10 @@ export interface CodingProject {
   featured?: boolean;
   /** Optional real site frame (best crop). Falls back to design mock. */
   frame?: string;
+  /** Extra bullets shown on the project card */
+  highlights?: string[];
+  /** One-line impact / outcome */
+  impact?: string;
   /** Design tokens for generated preview when no frame */
   preview: ProjectPreviewTheme;
 }
@@ -57,6 +61,12 @@ export const codingProjects: CodingProject[] = [
     language: 'TypeScript',
     featured: true,
     frame: '/project-frames/tsc.jpg',
+    impact: 'Public-facing academy + artist platform for The Shakti Collective.',
+    highlights: [
+      'Course & storytelling surfaces',
+      'Motion-led brand system',
+      'Live at theshakticollective.in',
+    ],
     preview: {
       bg: '#0a0606',
       accent: '#b64d26',
@@ -80,6 +90,12 @@ export const codingProjects: CodingProject[] = [
     language: 'JavaScript',
     featured: true,
     frame: '/project-frames/coreknot.png',
+    impact: 'Ops dashboard for tasks, attendance, inbox, and team context.',
+    highlights: [
+      'Workspace switcher + modules',
+      'Tasks, reviews, clock-in',
+      'Built for real studio workflows',
+    ],
     preview: {
       bg: '#0c1210',
       accent: '#126d5e',
@@ -168,6 +184,8 @@ export const codingProjects: CodingProject[] = [
     website: 'https://balaji-infra.vercel.app',
     language: 'HTML',
     frame: '/project-frames/balaji.jpg',
+    impact: 'Lead-focused corporate site for heavy civil infrastructure.',
+    highlights: ['Hero-led storytelling', 'Services + partnerships CTA', 'Deployed on Vercel'],
     preview: {
       bg: '#1a1c1e',
       accent: '#c4a35a',
@@ -190,6 +208,8 @@ export const codingProjects: CodingProject[] = [
     website: 'https://shrim-exports-website.vercel.app',
     language: 'TypeScript',
     frame: '/project-frames/shrim.jpg',
+    impact: 'Export-business site that turns product story into inquiries.',
+    highlights: ['Catalog + quote flow', 'Trust-forward layout', 'Responsive React build'],
     preview: {
       bg: '#0e1621',
       accent: '#1e90ff',
@@ -212,6 +232,8 @@ export const codingProjects: CodingProject[] = [
     website: 'https://destiny-global-alpha.vercel.app',
     language: 'JavaScript',
     frame: '/project-frames/destiny.jpg',
+    impact: 'Service storytelling site built to capture inbound leads.',
+    highlights: ['Clear service narrative', 'Lead capture paths', 'Polished presentation'],
     preview: {
       bg: '#0a1628',
       accent: '#fcb040',

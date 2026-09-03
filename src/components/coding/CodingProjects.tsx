@@ -74,7 +74,7 @@ export const CodingProjects = () => {
             >
               @RaghavSobti37
             </a>
-            . Previews are cropped design frames from each build — not clean product shots.
+            . 16:9 frames from each product — design as shipped.
           </p>
         </motion.div>
 
@@ -90,12 +90,12 @@ export const CodingProjects = () => {
             return (
               <motion.div key={project.id} variants={cardVariants}>
                 <div className="group relative border border-border bg-card/40 hover:border-primary/40 transition-colors overflow-hidden">
-                  <div className="grid gap-0 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-                    <div className="relative border-b lg:border-b-0 lg:border-r border-border overflow-hidden">
+                  <div className="grid gap-0 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+                    <div className="relative border-b lg:border-b-0 lg:border-r border-border overflow-hidden bg-[#0a0a0b]">
                       <ProjectPreview project={project} />
                     </div>
 
-                    <div className="p-6 md:p-8 flex flex-col justify-between gap-6">
+                    <div className="p-6 md:p-8 flex flex-col justify-between gap-5">
                       <div>
                         <div className="flex flex-wrap items-center gap-3 mb-3">
                           <span className="font-mono text-[10px] text-accent">
@@ -116,11 +116,31 @@ export const CodingProjects = () => {
                           )}
                         </div>
 
-                        <p className="font-body text-muted-foreground leading-relaxed max-w-2xl mb-5">
+                        {project.impact && (
+                          <p className="font-body text-foreground/90 leading-relaxed mb-3">
+                            {project.impact}
+                          </p>
+                        )}
+
+                        <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">
                           {project.description}
                         </p>
 
-                        <div className="flex flex-wrap gap-2 mb-6">
+                        {project.highlights && project.highlights.length > 0 && (
+                          <ul className="mb-5 space-y-1.5">
+                            {project.highlights.map((h) => (
+                              <li
+                                key={h}
+                                className="flex gap-2 font-mono text-[11px] text-muted-foreground"
+                              >
+                                <span className="text-accent shrink-0">▸</span>
+                                <span>{h}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+
+                        <div className="flex flex-wrap gap-2 mb-5">
                           {project.tech.map((t) => (
                             <span
                               key={t}
@@ -167,6 +187,7 @@ export const CodingProjects = () => {
         {!showAll && restCount > 0 && (
           <div className="text-center mt-12">
             <button
+              type="button"
               onClick={() => setShowAll(true)}
               className="font-mono-meta text-primary border border-primary/40 px-6 py-3 hover:bg-primary hover:text-primary-foreground transition-colors"
             >

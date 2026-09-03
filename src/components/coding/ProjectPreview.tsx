@@ -286,7 +286,7 @@ const layouts = {
   erp: ErpMock,
 };
 
-/** Full-bleed design frame — real site crop when available, mock otherwise. No laptop chrome. */
+/** Full-bleed 16:9 frame — whole preview visible (contain), mock fallback. */
 export function ProjectPreview({ project }: { project: CodingProject }) {
   const t = project.preview;
   const Mock = layouts[t.layout];
@@ -294,17 +294,13 @@ export function ProjectPreview({ project }: { project: CodingProject }) {
   const frameSrc = project.frame && !imgFailed ? project.frame : null;
 
   return (
-    <div className="relative w-full aspect-[4/3] overflow-hidden bg-ink">
-      {/* slight off-crop so it reads as a still, not a clean product shot */}
-      <div
-        className="absolute inset-0 origin-center scale-[1.06] -rotate-[0.4deg] translate-y-[-1%]"
-        aria-hidden={Boolean(frameSrc)}
-      >
+    <div className="relative w-full aspect-video overflow-hidden bg-[#0a0a0b]">
+      <div className="absolute inset-0" aria-hidden={Boolean(frameSrc)}>
         {frameSrc ? (
           <img
             src={frameSrc}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className="absolute inset-0 w-full h-full object-contain object-center"
             loading="lazy"
             onError={() => setImgFailed(true)}
           />
@@ -312,15 +308,13 @@ export function ProjectPreview({ project }: { project: CodingProject }) {
           <Mock t={t} />
         )}
       </div>
-      {/* grain + edge vignette — less “clean UI mock” */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-overlay"
+        className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-overlay"
         style={{
           backgroundImage:
             'url("data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.85%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E")',
         }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-ink/10" />
     </div>
   );
 }
