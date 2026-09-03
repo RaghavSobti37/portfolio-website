@@ -8,7 +8,9 @@ export interface CodingProject {
   website?: string;
   language?: string;
   featured?: boolean;
-  /** Design tokens for the generated 4:3 laptop preview */
+  /** Optional real site frame (best crop). Falls back to design mock. */
+  frame?: string;
+  /** Design tokens for generated preview when no frame */
   preview: ProjectPreviewTheme;
 }
 
@@ -54,6 +56,7 @@ export const codingProjects: CodingProject[] = [
     website: 'https://theshakticollective.in',
     language: 'TypeScript',
     featured: true,
+    frame: '/project-frames/tsc.jpg',
     preview: {
       bg: '#0a0606',
       accent: '#b64d26',
@@ -119,6 +122,7 @@ export const codingProjects: CodingProject[] = [
     website: 'https://auto-mailer-blue.vercel.app',
     language: 'JavaScript',
     featured: true,
+    frame: '/project-frames/auto-mailer.jpg',
     preview: {
       bg: '#0b0f1a',
       accent: '#3b82f6',
@@ -162,6 +166,7 @@ export const codingProjects: CodingProject[] = [
     github: 'https://github.com/RaghavSobti37/balaji-infra',
     website: 'https://balaji-infra.vercel.app',
     language: 'HTML',
+    frame: '/project-frames/balaji.jpg',
     preview: {
       bg: '#1a1c1e',
       accent: '#c4a35a',
@@ -183,6 +188,7 @@ export const codingProjects: CodingProject[] = [
     github: 'https://github.com/RaghavSobti37/shrim-exports-website',
     website: 'https://shrim-exports-website.vercel.app',
     language: 'TypeScript',
+    frame: '/project-frames/shrim.jpg',
     preview: {
       bg: '#0e1621',
       accent: '#1e90ff',
@@ -204,6 +210,7 @@ export const codingProjects: CodingProject[] = [
     github: 'https://github.com/RaghavSobti37/destiny-global',
     website: 'https://destiny-global-alpha.vercel.app',
     language: 'JavaScript',
+    frame: '/project-frames/destiny.jpg',
     preview: {
       bg: '#0a1628',
       accent: '#fcb040',
@@ -224,6 +231,7 @@ export const codingProjects: CodingProject[] = [
     github: 'https://github.com/RaghavSobti37/House-Of-Kalla',
     website: 'https://house-of-kalla.vercel.app',
     language: 'HTML',
+    frame: '/project-frames/kalla.jpg',
     preview: {
       bg: '#1c1410',
       accent: '#d4a574',
@@ -265,6 +273,7 @@ export const codingProjects: CodingProject[] = [
     github: 'https://github.com/RaghavSobti37/cine_clock',
     website: 'https://cine-clock.vercel.app',
     language: 'JavaScript',
+    frame: '/project-frames/cine-clock.jpg',
     preview: {
       bg: '#0b0b0d',
       accent: '#f35f0e',
@@ -286,6 +295,7 @@ export const codingProjects: CodingProject[] = [
     github: 'https://github.com/RaghavSobti37/woTeaT',
     website: 'https://woteat.vercel.app',
     language: 'JavaScript',
+    frame: '/project-frames/woteat.jpg',
     preview: {
       bg: '#14110f',
       accent: '#ef4444',

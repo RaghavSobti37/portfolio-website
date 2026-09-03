@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { CodingProject, ProjectPreviewTheme } from '@/data/codingProjects';
 
 function lines(text: string) {
@@ -6,7 +7,7 @@ function lines(text: string) {
 
 function EditorialMock({ t }: { t: ProjectPreviewTheme }) {
   return (
-    <div className="absolute inset-0 flex flex-col justify-between p-[7%] overflow-hidden" style={{ background: t.bg }}>
+    <div className="absolute inset-0 flex flex-col justify-between p-[8%] overflow-hidden" style={{ background: t.bg }}>
       <div className="flex items-center justify-between">
         <span className="text-[7px] md:text-[9px] tracking-[0.2em] uppercase" style={{ color: t.muted }}>
           {t.eyebrow}
@@ -17,7 +18,7 @@ function EditorialMock({ t }: { t: ProjectPreviewTheme }) {
         {lines(t.headline).map((line) => (
           <p
             key={line}
-            className="font-display text-[clamp(1.1rem,2.6vw,1.85rem)] font-bold leading-[1.05] tracking-tight"
+            className="font-display text-[clamp(1.2rem,2.8vw,2rem)] font-bold leading-[1.05] tracking-tight"
             style={{ color: t.text }}
           >
             {line}
@@ -35,7 +36,11 @@ function EditorialMock({ t }: { t: ProjectPreviewTheme }) {
       </div>
       <div className="grid grid-cols-3 gap-1.5 opacity-80">
         {[0, 1, 2].map((i) => (
-          <div key={i} className="aspect-[4/3] border" style={{ borderColor: `${t.muted}44`, background: `${t.accent}${i === 1 ? '33' : '14'}` }} />
+          <div
+            key={i}
+            className="aspect-[4/3] border"
+            style={{ borderColor: `${t.muted}44`, background: `${t.accent}${i === 1 ? '33' : '14'}` }}
+          />
         ))}
       </div>
     </div>
@@ -69,7 +74,11 @@ function DashboardMock({ t }: { t: ProjectPreviewTheme }) {
         ))}
         <div className="mt-auto grid grid-cols-3 gap-2">
           {[40, 72, 55].map((h, i) => (
-            <div key={i} className="rounded-sm border p-2" style={{ borderColor: `${t.muted}33`, background: `${t.accent}12` }}>
+            <div
+              key={i}
+              className="rounded-sm border p-2"
+              style={{ borderColor: `${t.muted}33`, background: `${t.accent}12` }}
+            >
               <div className="h-1 w-8 mb-2 rounded-full" style={{ background: t.accent }} />
               <div className="flex items-end gap-0.5 h-8">
                 {[0.4, 0.7, 0.5, 0.9, 0.6].map((v, j) => (
@@ -125,10 +134,16 @@ function CorpMock({ t }: { t: ProjectPreviewTheme }) {
             {t.sub}
           </p>
           <div className="mt-4 flex gap-2">
-            <span className="px-3 py-1.5 text-[8px] md:text-[10px] uppercase tracking-wider" style={{ background: t.accent, color: t.bg }}>
+            <span
+              className="px-3 py-1.5 text-[8px] md:text-[10px] uppercase tracking-wider"
+              style={{ background: t.accent, color: t.bg }}
+            >
               Get a quote
             </span>
-            <span className="px-3 py-1.5 text-[8px] md:text-[10px] uppercase tracking-wider border" style={{ borderColor: `${t.muted}55`, color: t.text }}>
+            <span
+              className="px-3 py-1.5 text-[8px] md:text-[10px] uppercase tracking-wider border"
+              style={{ borderColor: `${t.muted}55`, color: t.text }}
+            >
               Services
             </span>
           </div>
@@ -166,7 +181,10 @@ function UtilityMock({ t }: { t: ProjectPreviewTheme }) {
           />
         ))}
       </div>
-      <div className="mt-3 h-7 rounded-sm flex items-center px-3 text-[8px] md:text-[10px]" style={{ background: t.accent, color: '#fff' }}>
+      <div
+        className="mt-3 h-7 rounded-sm flex items-center px-3 text-[8px] md:text-[10px]"
+        style={{ background: t.accent, color: '#fff' }}
+      >
         Run tool →
       </div>
     </div>
@@ -176,7 +194,10 @@ function UtilityMock({ t }: { t: ProjectPreviewTheme }) {
 function AppMock({ t }: { t: ProjectPreviewTheme }) {
   const light = t.bg.startsWith('#f') || t.bg.startsWith('#F');
   return (
-    <div className="absolute inset-0 flex items-center justify-center overflow-hidden" style={{ background: light ? '#e7e2d9' : '#080808' }}>
+    <div
+      className="absolute inset-0 flex items-center justify-center overflow-hidden"
+      style={{ background: light ? '#e7e2d9' : '#080808' }}
+    >
       <div
         className="w-[42%] aspect-[9/16] max-h-[88%] rounded-[1rem] border overflow-hidden shadow-2xl"
         style={{ background: t.bg, borderColor: `${t.muted}44` }}
@@ -198,7 +219,10 @@ function AppMock({ t }: { t: ProjectPreviewTheme }) {
           </p>
         </div>
         <div className="mt-3 mx-[10%] h-[28%] rounded-md" style={{ background: `${t.accent}33` }} />
-        <div className="mt-3 mx-[10%] h-6 rounded-md flex items-center justify-center text-[7px] font-semibold" style={{ background: t.accent, color: light ? '#fff' : t.bg }}>
+        <div
+          className="mt-3 mx-[10%] h-6 rounded-md flex items-center justify-center text-[7px] font-semibold"
+          style={{ background: t.accent, color: light ? '#fff' : t.bg }}
+        >
           Continue
         </div>
       </div>
@@ -262,27 +286,41 @@ const layouts = {
   erp: ErpMock,
 };
 
-/** 4:3 laptop chrome + design-faithful hero mock (not a flaky screenshot). */
+/** Full-bleed design frame — real site crop when available, mock otherwise. No laptop chrome. */
 export function ProjectPreview({ project }: { project: CodingProject }) {
   const t = project.preview;
   const Mock = layouts[t.layout];
+  const [imgFailed, setImgFailed] = useState(false);
+  const frameSrc = project.frame && !imgFailed ? project.frame : null;
 
   return (
-    <div className="relative w-full aspect-[4/3] bg-[#1a1b1e] flex items-center justify-center p-3 sm:p-4 md:p-5">
-      {/* laptop shell */}
-      <div className="relative w-full h-full flex flex-col max-w-[560px] mx-auto">
-        <div className="relative flex-1 min-h-0 rounded-t-md border border-b-0 border-white/10 bg-black overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.45)]">
-          {/* camera notch */}
-          <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/20 z-10" />
-          <div className="absolute inset-[3px] top-3 rounded-sm overflow-hidden">
-            <Mock t={t} />
-          </div>
-        </div>
-        <div className="h-2.5 sm:h-3 rounded-b-md bg-gradient-to-b from-[#2a2b2e] to-[#151617] border border-t-0 border-white/10 relative">
-          <div className="absolute left-1/2 -translate-x-1/2 top-0.5 w-[18%] h-1 rounded-b-sm bg-black/40" />
-        </div>
-        <div className="mx-auto w-[28%] h-0.5 mt-0.5 rounded-full bg-white/10" />
+    <div className="relative w-full aspect-[4/3] overflow-hidden bg-ink">
+      {/* slight off-crop so it reads as a still, not a clean product shot */}
+      <div
+        className="absolute inset-0 origin-center scale-[1.06] -rotate-[0.4deg] translate-y-[-1%]"
+        aria-hidden={Boolean(frameSrc)}
+      >
+        {frameSrc ? (
+          <img
+            src={frameSrc}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-top"
+            loading="lazy"
+            onError={() => setImgFailed(true)}
+          />
+        ) : (
+          <Mock t={t} />
+        )}
       </div>
+      {/* grain + edge vignette — less “clean UI mock” */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            'url("data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.85%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E")',
+        }}
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-ink/10" />
     </div>
   );
 }

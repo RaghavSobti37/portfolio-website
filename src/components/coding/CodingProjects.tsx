@@ -5,23 +5,23 @@ import { codingProjects, languageColor, type CodingProject } from '@/data/coding
 import { CommitSparkline } from '@/components/coding/CommitSparkline';
 import { ProjectPreview } from '@/components/coding/ProjectPreview';
 
-/** Display order: client/product sites first; Photo Cleaner + Resume Generator at 10–11 */
+/** CoreKnot first, then website designs (TSC → corp sites with frames), tools last */
 const PROJECT_ORDER = [
-  'tsc',
   'coreknot',
-  'auto-mailer',
+  'tsc',
   'balaji',
   'shrim',
   'destiny',
   'kalla',
+  'auto-mailer',
   'woteat',
   'cine-clock',
-  'photo-cleaner',
   'resume-gen',
+  'photo-cleaner',
   'ekors',
 ] as const;
 
-const FEATURED_IDS = new Set(['tsc', 'coreknot', 'auto-mailer', 'balaji', 'shrim']);
+const FEATURED_IDS = new Set(['coreknot', 'tsc', 'balaji', 'shrim', 'destiny']);
 
 function orderedProjects(): CodingProject[] {
   const map = new Map(codingProjects.map((p) => [p.id, p]));
@@ -75,7 +75,7 @@ export const CodingProjects = () => {
             >
               @RaghavSobti37
             </a>
-            . Previews are design frames generated from each product’s look — 4:3 laptop crop.
+            . Previews are cropped design frames from each build — not clean product shots.
           </p>
         </motion.div>
 

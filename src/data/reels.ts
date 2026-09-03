@@ -8,6 +8,30 @@ export interface Reel {
   year: string;
   url: string;
   note?: string;
+  /** Exact play count when known; else treat as 10k avg */
+  views?: number;
+}
+
+/** Avg 10k when exact IG views unavailable */
+export const DEFAULT_REEL_VIEWS = 10_000;
+
+export function reelViews(reel: Reel): number {
+  return reel.views ?? DEFAULT_REEL_VIEWS;
+}
+
+/** Deterministic shuffle so SSR/hydration stay in sync */
+export function shuffleReels<T extends { id: string }>(items: T[], seed = 42): T[] {
+  const arr = [...items];
+  let s = seed;
+  const rand = () => {
+    s = (s * 1664525 + 1013904223) >>> 0;
+    return s / 0xffffffff;
+  };
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
 export const reelSeries = [

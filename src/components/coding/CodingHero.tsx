@@ -13,7 +13,7 @@ export const CodingHero = () => {
     { icon: Zap, label: 'Product utilities', value: 'Resume + mailer tools' },
   ];
 
-  const featuredBuilds = ['The Shakti Collective', 'CoreKnot', 'Auto Mailer', 'House of Kalla'];
+  const featuredBuilds = ['CoreKnot', 'The Shakti Collective', 'Balaji Infra', 'Shrim Exports'];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-32">
