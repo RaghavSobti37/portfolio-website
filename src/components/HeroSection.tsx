@@ -2,13 +2,10 @@ import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-const CENTER_LOOP = 6;
-
 type Clip = {
   src: string;
   poster: string;
   label: string;
-  maxSeconds?: number;
   zoom?: boolean;
 };
 
@@ -16,7 +13,6 @@ const HeroClip = ({
   src,
   poster,
   label,
-  maxSeconds,
   zoom,
   className,
 }: Clip & { className?: string }) => {
@@ -29,12 +25,6 @@ const HeroClip = ({
     v.playbackRate = 1;
     v.play().catch(() => undefined);
   }, [src]);
-
-  const clampLoop = () => {
-    const v = ref.current;
-    if (!v || maxSeconds == null) return;
-    if (v.currentTime >= maxSeconds) v.currentTime = 0.04;
-  };
 
   return (
     <div
@@ -50,9 +40,8 @@ const HeroClip = ({
         muted
         playsInline
         autoPlay
-        loop={maxSeconds == null}
+        loop
         preload="auto"
-        onTimeUpdate={clampLoop}
         className={cn('absolute inset-0 w-full h-full object-cover', zoom && 'scale-[1.08]')}
         aria-label={label}
       />
@@ -90,10 +79,9 @@ const ReelVichaar = ({ className }: { className?: string }) => (
 
 const ReelNh7 = ({ className }: { className?: string }) => (
   <HeroClip
-    src="/hero/center.mp4"
+    src="/hero/center.mp4?v=first8-last8"
     poster="/thumbnails/ig-DWY8k8Jj79k.jpg"
     label="NH7 Weekender reel"
-    maxSeconds={CENTER_LOOP}
     className={className}
   />
 );
