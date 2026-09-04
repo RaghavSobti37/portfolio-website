@@ -1,3 +1,5 @@
+import { instagramViews } from '@/data/engagement';
+
 // Social / client reels shot or produced by Raghav
 
 export interface Reel {
@@ -36,6 +38,7 @@ export function shuffleReels<T extends { id: string }>(items: T[], seed = 42): T
 
 export const reelSeries = [
   { id: 'all', label: 'All' },
+  { id: 'premise', label: 'Premise' },
   { id: 'rohith-informative', label: 'Rohith · Informative' },
   { id: 'rohith-fun', label: 'Rohith · Fun' },
   { id: 'havells-dumka', label: 'Havells · Dumka' },
@@ -47,6 +50,86 @@ export const reelSeries = [
 ] as const;
 
 export const reels: Reel[] = [
+  {
+    id: 'p1',
+    title: 'Aditya Gadhvi',
+    series: 'premise',
+    role: 'Shot',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/DYZpxenwlot/',
+  },
+  {
+    id: 'p2',
+    title: 'Gini',
+    series: 'premise',
+    role: 'Shot',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/DaS166SBKj-/',
+  },
+  {
+    id: 'p3',
+    title: 'Vichaar · 3 Drags',
+    series: 'premise',
+    role: 'Shot',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/DbiexjeO0l-/',
+  },
+  {
+    id: 'p4',
+    title: 'Maan Panu',
+    series: 'premise',
+    role: 'Shot',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/DcgVDvltpxP/',
+  },
+  {
+    id: 'p5',
+    title: 'Garvit x Priyansh',
+    series: 'premise',
+    role: 'Shot',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/DZ7pI89Pun1/',
+  },
+  {
+    id: 'p6',
+    title: 'Raiez Khan',
+    series: 'premise',
+    role: 'Shot',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/Dbs-xEOJh_j/',
+  },
+  {
+    id: 'p7',
+    title: 'NH7 Weekender · The Team',
+    series: 'premise',
+    role: 'Creative Director',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/DXKAjwUk1N9/',
+  },
+  {
+    id: 'p8',
+    title: 'NH7 Weekender · Aashiqana',
+    series: 'premise',
+    role: 'Creative Director',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/DWY8k8Jj79k/',
+  },
+  {
+    id: 'p9',
+    title: 'Sinash',
+    series: 'premise',
+    role: 'Shot',
+    year: '2025',
+    url: 'https://www.instagram.com/reel/DNLZmU2T5bZ/',
+  },
+  {
+    id: 'p10',
+    title: 'Pyaar @ Kalarooms',
+    series: 'premise',
+    role: 'Shot',
+    year: '2025',
+    url: 'https://www.instagram.com/reel/DNk66ZzyVMw/',
+  },
   // Rohith Sobti — informative
   {
     id: 'r1',
@@ -384,10 +467,10 @@ export const reels: Reel[] = [
     year: '2025',
     url: 'https://www.instagram.com/p/DYzV7c8j7x1/',
   },
-];
+].map((reel) => ({ ...reel, views: instagramViews(reel.url) }));
 
 export const getReelShortcode = (url: string): string | null => {
-  const match = url.match(/instagram\.com\/(?:reel|p)\/([^/?]+)/);
+  const match = url.match(/instagram\.com\/(?:reels?|p)\/([^/?]+)/);
   return match?.[1] ?? null;
 };
 
@@ -398,10 +481,8 @@ export const getReelEmbedUrl = (url: string): string => {
   return `https://www.instagram.com/${kind}/${code}/embed`;
 };
 
-/** Public Instagram media redirect → proxied for <img> preview */
 export const getReelThumbnailUrl = (url: string): string | null => {
   const code = getReelShortcode(url);
   if (!code) return null;
-  const media = `https://www.instagram.com/p/${code}/media/?size=l`;
-  return `https://wsrv.nl/?url=${encodeURIComponent(media)}&w=720&h=1280&fit=cover&output=webp`;
+  return `/reels/${code}.jpg`;
 };

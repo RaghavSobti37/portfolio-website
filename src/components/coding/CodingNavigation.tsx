@@ -41,18 +41,9 @@ export const CodingNavigation = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <div className="flex items-center gap-4 min-w-0">
-            <Link
-              to="/"
-              onClick={goCinema}
-              className="hidden md:inline font-mono text-[10px] tracking-wider uppercase text-primary hover:text-accent transition-colors shrink-0"
-            >
-              Behind the camera
-            </Link>
-            <span className="font-display text-xl sm:text-2xl font-bold tracking-wider text-foreground truncate">
-              RAGS<span className="text-accent">.</span>DEV
-            </span>
-          </div>
+          <span className="font-display text-xl sm:text-2xl font-bold tracking-wider text-foreground truncate">
+            RAGS<span className="text-accent">.</span>DEV
+          </span>
 
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
@@ -66,7 +57,16 @@ export const CodingNavigation = () => {
                 </button>
               </li>
             ))}
-            <div className="flex items-center gap-4 ml-4">
+            <li>
+              <Link
+                to="/"
+                onClick={goCinema}
+                className="font-display text-sm tracking-widest uppercase text-primary hover:text-accent transition-colors"
+              >
+                Creative <span className="whitespace-nowrap">Portfolio ↗</span>
+              </Link>
+            </li>
+            <li className="flex items-center gap-4 ml-4">
               <a
                 href="https://www.linkedin.com/in/raghav-raj-sobti/"
                 target="_blank"
@@ -83,7 +83,7 @@ export const CodingNavigation = () => {
               >
                 <Github size={20} />
               </a>
-            </div>
+            </li>
           </ul>
 
           <button
@@ -111,7 +111,7 @@ export const CodingNavigation = () => {
                 onClick={goCinema}
                 className="font-mono-meta text-primary text-center"
               >
-                Behind the camera
+                Creative <span className="whitespace-nowrap">Portfolio ↗</span>
               </Link>
               {navLinks.map((link, index) => (
                 <motion.button

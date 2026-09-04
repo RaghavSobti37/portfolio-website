@@ -30,7 +30,7 @@ const path = [
   {
     date: '2024–25',
     era: '03',
-    title: 'Videographer & artist storyteller',
+    title: 'Videographer & Director',
     subtitle: 'Live music · interviews · culture',
     description: 'Jahnvi, Samarpan, Delhi Gate, festivals, short-form artist interviews — stories that travel.',
     beat: 'Own the frame',
@@ -38,7 +38,7 @@ const path = [
   {
     date: '2025',
     era: '04',
-    title: 'Director — Ek Kamra',
+    title: 'Director',
     subtitle: 'Music film',
     description: 'Minimalist visual study of intimacy, distance, and emotional space.',
     beat: 'Call the shots',

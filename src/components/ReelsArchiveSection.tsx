@@ -13,18 +13,25 @@ import { LazyImage } from '@/components/LazyImage';
 
 const ReelThumb = ({ reel, index }: { reel: Reel; index: number }) => {
   const [failed, setFailed] = useState(false);
-  const thumb = getReelThumbnailUrl(reel.url);
+  const [src, setSrc] = useState(() => getReelThumbnailUrl(reel.url));
+  const code = reel.url.match(/instagram\.com\/(?:reels?|p)\/([^/?]+)/)?.[1];
 
   return (
     <div className="aspect-[9/16] bg-ink relative overflow-hidden">
-      {thumb && !failed ? (
+      {src && !failed ? (
         <LazyImage
-          src={thumb}
+          src={src}
           alt={reel.title}
           shellClassName="absolute inset-0"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
-          onError={() => setFailed(true)}
+          onError={() => {
+            if (code && src === `/reels/${code}.jpg`) {
+              setSrc(`/thumbnails/ig-${code}.jpg`);
+            } else {
+              setFailed(true);
+            }
+          }}
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-[#833AB4]/40 via-[#FD1D1D]/30 to-[#F77737]/40 flex flex-col justify-between p-4">

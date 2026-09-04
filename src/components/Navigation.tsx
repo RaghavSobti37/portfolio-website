@@ -59,7 +59,7 @@ export const Navigation = () => {
                 onClick={() => window.scrollTo(0, 0)}
                 className="font-display text-sm tracking-widest uppercase text-primary hover:text-accent transition-colors"
               >
-                Dev Portfolio
+                Dev <span className="whitespace-nowrap">Portfolio ↗</span>
               </Link>
             </li>
           </ul>
@@ -104,7 +104,7 @@ export const Navigation = () => {
                 }}
                 className="font-mono-meta text-primary mt-4"
               >
-                Dev Portfolio
+                Dev <span className="whitespace-nowrap">Portfolio ↗</span>
               </Link>
             </div>
           </motion.div>

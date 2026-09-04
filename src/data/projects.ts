@@ -1,5 +1,7 @@
 // Project data for the portfolio
 
+import { mediaViews } from '@/data/engagement';
+
 export interface Project {
   id: number;
   title: string;
@@ -10,7 +12,8 @@ export interface Project {
   category: string;
   videoUrl: string;
   platform: 'youtube' | 'instagram';
-  featured?: boolean; // Mark as true to show in featured grid
+  featured?: boolean;
+  views?: number;
 }
 
 const projectsData: Project[] = [
@@ -544,9 +547,9 @@ const projectsData: Project[] = [
     role: "Videographer",
     year: "2025",
     description: "Rising from Jaipur, Sinash is an upcoming rhythm prodigy who is coming in front of the mic after being the man behind some of your favourite underground bangers!!",
-    image: "/thumbnails/sinash.jpg",
+    image: "/thumbnails/ig-DNLZmU2T5bZ.jpg",
     category: "interview",
-    videoUrl: "https://www.instagram.com/reel/DNLZmU2T5bZ/?utm_source=ig_web_button_share_sheet&igsh=MzRlODBiNWFlZA==",
+    videoUrl: "https://www.instagram.com/reel/DNLZmU2T5bZ/",
     platform: "instagram"
   },
   {
@@ -579,9 +582,9 @@ const projectsData: Project[] = [
     role: "Videographer",
     year: "2025",
     description: "In this special collaboration at a one-of-a-kind antique shop that preserves the history of entertainment and design,",
-    image: "/thumbnails/pyaar.jpg",
+    image: "/thumbnails/ig-DNk66ZzyVMw.jpg",
     category: "interview",
-    videoUrl: "https://www.instagram.com/reel/DNk66ZzyVMw/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    videoUrl: "https://www.instagram.com/reel/DNk66ZzyVMw/",
     platform: "instagram"
   },
   {
@@ -592,13 +595,105 @@ const projectsData: Project[] = [
     description: "capturing the beauty of Manali through my lens.",
     image: "/gallery/31.jpg",
     category: "showreel",
-    videoUrl: "https://www.instagram.com/reel/DO1n0CCE_q-/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    videoUrl: "https://www.instagram.com/reel/DO1n0CCE_q-/",
     platform: "instagram"
+  },
+  {
+    id: 53,
+    title: "NH7 Weekender · Aashiqana",
+    role: "Creative Director",
+    year: "2026",
+    description: "Memories from India's happiest music festival — Chaar Diwaari, Indian Ocean, Gini and the Weekender crowd.",
+    image: "/thumbnails/ig-DWY8k8Jj79k.jpg",
+    category: "event",
+    videoUrl: "https://www.instagram.com/reel/DWY8k8Jj79k/",
+    platform: "instagram"
+  },
+  {
+    id: 54,
+    title: "NH7 Weekender · The Team",
+    role: "Creative Director",
+    year: "2026",
+    description: "The story of India's biggest independent music festival, told by the people who build it every year.",
+    image: "/thumbnails/ig-DXKAjwUk1N9.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DXKAjwUk1N9/",
+    platform: "instagram"
+  },
+  {
+    id: 55,
+    title: "90 Seconds with Aditya Gadhvi",
+    role: "Videographer",
+    year: "2026",
+    description: "The man taking Kach to the world — Aditya Gadhvi on folk music, roots, and chart-ruling power.",
+    image: "/thumbnails/ig-DYZpxenwlot.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DYZpxenwlot/",
+    platform: "instagram"
+  },
+  {
+    id: 56,
+    title: "90 Seconds with Garvit x Priyansh",
+    role: "Videographer",
+    year: "2026",
+    description: "A duo making indie music sound truly Indian — Garvit x Priyansh on soulful contemporary folk.",
+    image: "/thumbnails/ig-DZ7pI89Pun1.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DZ7pI89Pun1/",
+    platform: "instagram"
+  },
+  {
+    id: 57,
+    title: "90 Seconds with Gini",
+    role: "Videographer",
+    year: "2026",
+    description: "Indie music's own sweetheart — Gini on women taking over India's independent scene.",
+    image: "/thumbnails/ig-DaS166SBKj-.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DaS166SBKj-/",
+    platform: "instagram",
+    featured: true
+  },
+  {
+    id: 58,
+    title: "90 Seconds with Raiez Khan",
+    role: "Videographer",
+    year: "2026",
+    description: "From Kashmir's Sufi tradition onto the indie stage — Raiez Khan on poetry, faith, and contemporary sound.",
+    image: "/thumbnails/ig-Dbs-xEOJh_j.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/Dbs-xEOJh_j/",
+    platform: "instagram"
+  },
+  {
+    id: 59,
+    title: "90 Seconds with Vichaar",
+    role: "Videographer",
+    year: "2026",
+    description: "Doon city rapper Vichaar on belief, 3 Drags, and walking onto India's biggest independent stage.",
+    image: "/thumbnails/ig-DbiexjeO0l-.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DbiexjeO0l-/",
+    platform: "instagram",
+    featured: true
+  },
+  {
+    id: 60,
+    title: "90 Seconds with Maan Panu",
+    role: "Videographer",
+    year: "2026",
+    description: "A force in Indian pop with no signs of stopping — Maan Panu before the biggest rooms.",
+    image: "/thumbnails/ig-DcgVDvltpxP.jpg",
+    category: "interview",
+    videoUrl: "https://www.instagram.com/reel/DcgVDvltpxP/",
+    platform: "instagram",
+    featured: true
   },
 ];
 
-// Export projects in the exact order they are listed above (no shuffle)
-export const projects = projectsData;
+export const projects = [...projectsData]
+  .map((p) => ({ ...p, views: mediaViews(p.videoUrl, p.platform) }))
+  .sort((a, b) => (b.views ?? 0) - (a.views ?? 0) || a.id - b.id);
 
 // Export individual categories for filtering (All first — gram-style chips)
 export const projectCategories = [

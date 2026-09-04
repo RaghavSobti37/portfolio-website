@@ -4,6 +4,8 @@ import { ChevronLeft, ChevronRight, ExternalLink, Play, X } from 'lucide-react';
 import { projects, projectCategories, type Project } from '@/data/projects';
 import { LazyImage } from '@/components/LazyImage';
 
+const byViews = (a: Project, b: Project) => (b.views ?? 0) - (a.views ?? 0);
+
 const MORE_PAGE = 12;
 
 const getInstagramEmbedUrl = (url: string): string => {
@@ -24,9 +26,7 @@ const openExternal = (item: Project) => {
   }
 };
 
-const featuredOrder = ['Ek Kamra', 'Rooh Music Film', 'Narazi', 'RIQQAT The Decode EP-2', 'Dhamaal'];
-
-const shortFilms = projects.filter((p) => p.category === 'short-film');
+const shortFilms = [...projects.filter((p) => p.category === 'short-film')].sort(byViews);
 
 export const PortfolioSection = () => {
   const ref = useRef(null);
@@ -46,26 +46,48 @@ export const PortfolioSection = () => {
     return () => window.clearInterval(id);
   }, [films.length]);
 
-  const featured = featuredOrder
-    .map((title) => projects.find((p) => p.title === title))
-    .filter(Boolean) as Project[];
-  const secondary = featured.filter((p) => p.category !== 'short-film');
+  const secondary = projects
+    .filter((p) => p.category !== 'short-film' && p.id !== 55)
+    .slice(0, 5);
+  const featuredIds = new Set(secondary.map((p) => p.id));
 
-  /** Full index — everything not already in the short-film hero */
-  const indexPool = projects.filter((p) => p.category !== 'short-film');
-  const filteredWork =
+  /** Index — skip short films and the featured five. Pin Laksh, NH7, Karun, Ankur at the top. */
+  const INDEX_PIN_IDS = [10, 53, 50, 49];
+  const indexPool = projects.filter(
+    (p) => p.category !== 'short-film' && !featuredIds.has(p.id)
+  );
+  const filteredBase =
     workCat === 'all' ? indexPool : indexPool.filter((p) => p.category === workCat);
+  const pinned = INDEX_PIN_IDS.map((id) => filteredBase.find((p) => p.id === id)).filter(
+    (p): p is Project => Boolean(p)
+  );
+  const pinIds = new Set(pinned.map((p) => p.id));
+  const filteredWork = [...pinned, ...filteredBase.filter((p) => !pinIds.has(p.id))];
   const more = filteredWork.slice(0, visibleWork);
 
   const go = (dir: -1 | 1) => {
     setSlide((s) => (s + dir + films.length) % films.length);
   };
 
+  const touchX = useRef<number | null>(null);
+
   return (
     <section id="work" className="relative" ref={ref}>
-      {/* Short films carousel */}
+      {/* Short films carousel — 16:9 on phone, full-bleed on desktop */}
       {current && (
-        <div className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+        <div
+          className="relative overflow-hidden md:min-h-screen md:flex md:flex-col md:justify-end"
+          onTouchStart={(e) => {
+            touchX.current = e.touches[0]?.clientX ?? null;
+          }}
+          onTouchEnd={(e) => {
+            if (touchX.current == null) return;
+            const dx = e.changedTouches[0].clientX - touchX.current;
+            if (dx > 48) go(-1);
+            if (dx < -48) go(1);
+            touchX.current = null;
+          }}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
@@ -73,7 +95,7 @@ export const PortfolioSection = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6 }}
-              className="absolute inset-0"
+              className="relative aspect-video md:absolute md:inset-0 md:aspect-auto"
             >
               <LazyImage
                 src={current.image}
@@ -81,12 +103,12 @@ export const PortfolioSection = () => {
                 shellClassName="w-full h-full"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/25" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent md:via-background/70 md:to-background/25" />
               <div className="absolute inset-0 film-grain opacity-[0.08] mix-blend-overlay" />
             </motion.div>
           </AnimatePresence>
 
-          <div className="relative z-10 container mx-auto px-6 pb-16 md:pb-24 pt-40">
+          <div className="relative z-10 container mx-auto px-6 pb-14 pt-8 md:pb-24 md:pt-40">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -168,7 +190,7 @@ export const PortfolioSection = () => {
       {/* Featured projects — redesigned */}
       <div className="container mx-auto px-6 py-24 md:py-32">
         <div className="mb-14 md:mb-20">
-          <p className="font-mono-meta text-primary mb-3">SELECTED · STILLS IN MOTION</p>
+          <p className="font-mono-meta text-primary mb-3">SELECTED · MOST WATCHED</p>
           <h3 className="font-display text-3xl md:text-5xl font-bold tracking-tight max-w-2xl">
             Projects that left a mark
           </h3>

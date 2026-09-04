@@ -102,10 +102,8 @@ export const NowPlayingDisc = () => {
           }
           aria-expanded={hovered}
         >
-          <motion.div
-            className="absolute inset-0 rounded-full border-2 border-primary/50"
-            animate={{ rotate: 360 }}
-            transition={{ duration: spinning ? 6 : 14, ease: 'linear', repeat: Infinity }}
+          <div
+            className="disc-spin absolute inset-0 rounded-full border-2 border-primary/50"
             style={{
               background:
                 'radial-gradient(circle at center, hsl(240 6% 10%) 28%, hsl(240 6% 6%) 29%, hsl(240 6% 14%) 30%, hsl(240 6% 8%) 55%, hsl(217 68% 25%) 100%)',
@@ -119,7 +117,7 @@ export const NowPlayingDisc = () => {
               )}
             </div>
             <div className="absolute inset-0 m-auto w-2.5 h-2.5 rounded-full bg-accent border border-ink z-10" />
-          </motion.div>
+          </div>
 
           {spinning && (
             <span className="absolute top-0 right-0 w-3 h-3 rounded-full bg-accent animate-pulse border-2 border-ink" />

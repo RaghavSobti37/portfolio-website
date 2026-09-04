@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const socialLinks = [
@@ -32,7 +33,7 @@ export const CodingFooter = () => {
             {MAIL}
           </a>
 
-          <div className="flex flex-wrap gap-6 mt-10 mb-20">
+          <div className="flex flex-wrap items-center gap-6 mt-10 mb-20">
             {socialLinks.map((s) => (
               <a
                 key={s.label}
@@ -44,6 +45,12 @@ export const CodingFooter = () => {
                 {s.label} ↗
               </a>
             ))}
+            <Link
+              to="/"
+              className="font-mono-meta text-accent hover:text-accent/80 transition-colors md:ml-auto w-fit shrink-0"
+            >
+              GO TO CREATIVE <span className="whitespace-nowrap">PORTFOLIO ↗</span>
+            </Link>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-t border-border pt-8">

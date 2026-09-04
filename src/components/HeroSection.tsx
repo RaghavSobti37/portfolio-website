@@ -1,116 +1,146 @@
 import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-declare global {
-  interface Window {
-    YT?: {
-      Player: new (
-        el: HTMLElement | string,
-        opts: Record<string, unknown>
-      ) => {
-        seekTo: (seconds: number, allowSeekAhead: boolean) => void;
-        playVideo: () => void;
-        destroy: () => void;
-      };
-      PlayerState: { PLAYING: number };
-    };
-    onYouTubeIframeAPIReady?: () => void;
-  }
-}
+const CENTER_LOOP = 6;
 
-const VIDEO_ID = '28Mb1cIooGw';
-const LOOP_SECONDS = 7;
+type Clip = {
+  src: string;
+  poster: string;
+  label: string;
+  maxSeconds?: number;
+  zoom?: boolean;
+};
+
+const HeroClip = ({
+  src,
+  poster,
+  label,
+  maxSeconds,
+  zoom,
+  className,
+}: Clip & { className?: string }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true;
+    v.playbackRate = 1;
+    v.play().catch(() => undefined);
+  }, [src]);
+
+  const clampLoop = () => {
+    const v = ref.current;
+    if (!v || maxSeconds == null) return;
+    if (v.currentTime >= maxSeconds) v.currentTime = 0.04;
+  };
+
+  return (
+    <div
+      className={cn(
+        'relative overflow-hidden bg-ink shadow-lift border border-foreground/10',
+        className
+      )}
+    >
+      <video
+        ref={ref}
+        src={src}
+        poster={poster}
+        muted
+        playsInline
+        autoPlay
+        loop={maxSeconds == null}
+        preload="auto"
+        onTimeUpdate={clampLoop}
+        className={cn('absolute inset-0 w-full h-full object-cover', zoom && 'scale-[1.08]')}
+        aria-label={label}
+      />
+    </div>
+  );
+};
+
+const WideKhwaab = ({ className }: { className?: string }) => (
+  <HeroClip
+    src="/hero/khwaab-b.mp4?v=cuts"
+    poster="/hero/khwaab-b.jpg"
+    label="Khwaab"
+    className={className}
+  />
+);
+
+const WideFanna = ({ className }: { className?: string }) => (
+  <HeroClip
+    src="/hero/fanna.mp4?v=cuts"
+    poster="/hero/fanna.jpg"
+    label="Fanna Fillah"
+    className={className}
+  />
+);
+
+const ReelVichaar = ({ className }: { className?: string }) => (
+  <HeroClip
+    src="/hero/right.mp4"
+    poster="/thumbnails/ig-DbiexjeO0l-.jpg"
+    label="Vichaar reel"
+    zoom
+    className={className}
+  />
+);
+
+const ReelNh7 = ({ className }: { className?: string }) => (
+  <HeroClip
+    src="/hero/center.mp4"
+    poster="/thumbnails/ig-DWY8k8Jj79k.jpg"
+    label="NH7 Weekender reel"
+    maxSeconds={CENTER_LOOP}
+    className={className}
+  />
+);
+
+const ReelAditya = ({ className }: { className?: string }) => (
+  <HeroClip
+    src="/hero/aditya.mp4"
+    poster="/hero/aditya.jpg"
+    label="Aditya Gadhvi reel"
+    className={className}
+  />
+);
 
 export const HeroSection = () => {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 120]);
+  const y = useTransform(scrollY, [0, 500], [0, 80]);
   const opacity = useTransform(scrollY, [0, 280], [1, 0]);
-  const playerHostRef = useRef<HTMLDivElement>(null);
-  const playerRef = useRef<{
-    seekTo: (s: number, a: boolean) => void;
-    playVideo: () => void;
-    destroy: () => void;
-  } | null>(null);
-  const loopRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    const mountPlayer = () => {
-      if (cancelled || !playerHostRef.current || !window.YT?.Player) return;
-
-      playerRef.current = new window.YT.Player(playerHostRef.current, {
-        videoId: VIDEO_ID,
-        width: '100%',
-        height: '100%',
-        playerVars: {
-          autoplay: 1,
-          mute: 1,
-          controls: 0,
-          rel: 0,
-          modestbranding: 1,
-          playsinline: 1,
-          iv_load_policy: 3,
-          disablekb: 1,
-          fs: 0,
-          start: 0,
-        },
-        events: {
-          onReady: (e: { target: { playVideo: () => void; seekTo: (s: number, a: boolean) => void } }) => {
-            e.target.playVideo();
-            if (loopRef.current) window.clearInterval(loopRef.current);
-            loopRef.current = window.setInterval(() => {
-              e.target.seekTo(0, true);
-              e.target.playVideo();
-            }, LOOP_SECONDS * 1000);
-          },
-        },
-      });
-    };
-
-    if (window.YT?.Player) {
-      mountPlayer();
-    } else {
-      const existing = document.querySelector('script[src="https://www.youtube.com/iframe_api"]');
-      if (!existing) {
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        document.body.appendChild(tag);
-      }
-      const prev = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => {
-        prev?.();
-        mountPlayer();
-      };
-    }
-
-    return () => {
-      cancelled = true;
-      if (loopRef.current) window.clearInterval(loopRef.current);
-      try {
-        playerRef.current?.destroy();
-      } catch {
-        /* ignore */
-      }
-    };
-  }, []);
 
   const handleEnter = () => {
     document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute -inset-20 overflow-hidden">
-          <div
-            ref={playerHostRef}
-            id="hero-yt-player"
-            className="absolute inset-0 w-[calc(100%+160px)] h-[calc(100%+160px)] -translate-x-20 -translate-y-20"
-          />
+    <section className="relative min-h-screen flex items-center overflow-hidden max-md:mb-20">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Phone — 2×16:9 stacked, then 3 equal 9:16 reels */}
+        <div className="md:hidden absolute inset-0 flex flex-col gap-2 px-3 pt-[4.5rem] pb-8">
+          <WideKhwaab className="w-full aspect-video shrink-0" />
+          <WideFanna className="w-full aspect-video shrink-0" />
+          <div className="flex justify-center gap-2 w-full shrink-0">
+            <ReelNh7 className="flex-1 aspect-[9/16]" />
+            <ReelAditya className="flex-1 aspect-[9/16]" />
+            <ReelVichaar className="flex-1 aspect-[9/16]" />
+          </div>
         </div>
-        <div className="absolute inset-0 bg-background/60" />
+
+        {/* Desktop — 16:9 stack same height as Vichaar */}
+        <div className="hidden md:flex absolute inset-y-0 right-10 lg:right-16 xl:right-24 items-center gap-5 lg:gap-7">
+          <div className="flex flex-col gap-3 lg:gap-4 h-[56vh] lg:h-[64vh] w-[calc((56vh-0.75rem)/2*16/9)] lg:w-[calc((64vh-1rem)/2*16/9)] shrink-0">
+            <WideKhwaab className="flex-1 min-h-0 w-full opacity-80" />
+            <WideFanna className="flex-1 min-h-0 w-full opacity-80" />
+          </div>
+          <ReelVichaar className="h-[56vh] lg:h-[64vh] aspect-[9/16] z-[1]" />
+          <ReelNh7 className="h-[42vh] lg:h-[48vh] aspect-[9/16] opacity-80" />
+        </div>
+
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/20 to-background/65 md:bg-gradient-to-r md:from-background md:via-background/80 md:to-background/25" />
         <div className="absolute inset-0 film-grain opacity-[0.12] mix-blend-overlay" />
       </div>
 
@@ -121,13 +151,13 @@ export const HeroSection = () => {
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 px-6 max-w-5xl mx-auto w-full pt-24"
+        className="relative z-10 px-6 md:px-10 lg:px-16 max-w-5xl w-full pt-24 hero-ink max-md:absolute max-md:inset-x-0 max-md:top-0 max-md:h-[58%] max-md:pt-0 max-md:flex max-md:flex-col max-md:justify-end max-md:pb-2"
       >
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="font-mono-meta text-primary mb-8"
+          className="font-mono-meta text-primary mb-6 md:mb-8"
         >
           BLUEPOLAROID / CINEMA × CODE × CHAOS
         </motion.p>
@@ -136,7 +166,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="font-display text-[clamp(3.2rem,12vw,8.5rem)] leading-[0.9] font-bold tracking-tighter mb-8"
+          className="font-display text-[clamp(2.2rem,10vw,8.5rem)] leading-[0.9] font-bold tracking-tighter mb-6 md:mb-8"
         >
           <span className="block">I MAKE</span>
           <span className="block">THINGS THAT</span>
@@ -147,7 +177,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="font-body text-base md:text-lg text-muted-foreground max-w-md mb-3"
+          className="hidden md:block font-body text-base md:text-lg text-muted-foreground max-w-md mb-3"
         >
           Film. Digital. Experiments.
         </motion.p>
@@ -155,7 +185,7 @@ export const HeroSection = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.55 }}
-          className="font-body text-sm md:text-base text-muted-foreground/80 max-w-lg mb-10"
+          className="hidden md:block font-body text-sm md:text-base text-muted-foreground/80 max-w-lg mb-10"
         >
           Somewhere between a camera and a computer.
         </motion.p>
@@ -165,27 +195,11 @@ export const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
           onClick={handleEnter}
-          className="group inline-flex items-center gap-3 font-display text-sm tracking-[0.2em] uppercase text-foreground border border-foreground/20 px-8 py-4 hover:border-primary hover:text-primary transition-colors duration-300"
+          className="group inline-flex items-center gap-3 font-display text-sm tracking-[0.2em] uppercase text-foreground border border-foreground/20 px-6 py-3 md:px-8 md:py-4 hover:border-primary hover:text-primary transition-colors duration-300 mt-2 md:mt-0"
         >
           Step into the work
           <span className="text-accent group-hover:translate-x-1 transition-transform">→</span>
         </motion.button>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.1 }}
-          className="mt-20 md:mt-28 flex items-center gap-3 cursor-pointer"
-          onClick={handleEnter}
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <ChevronDown className="w-4 h-4 text-primary" />
-          </motion.div>
-          <span className="font-mono-meta">SCROLL / FRAME_001</span>
-        </motion.div>
       </motion.div>
     </section>
   );
