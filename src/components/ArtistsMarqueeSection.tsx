@@ -5,6 +5,7 @@ import {
   collaborators,
   formatListeners,
   LIST_PAGE_SIZE,
+  LISTENERS_UPDATED_LABEL,
   sortCollaboratorsByListeners,
   splitCollaboratorRows,
   type Collaborator,
@@ -41,7 +42,7 @@ function ArtistChip({
       onFocus={() => onEnter(artist)}
       onBlur={onLeave}
       onClick={() => onSelect(artist)}
-      aria-label={`${artist.name}, ${formatListeners(artist.monthlyListeners)} monthly listeners`}
+      aria-label={`${artist.name}, ${formatListeners(artist.monthlyListeners, artist.monthlyListenersLabel)} monthly listeners`}
     >
       <img
         src={artist.image}
@@ -122,7 +123,8 @@ function ArtistDetail({
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <h3 className="font-display text-xl font-semibold tracking-tight">{artist.name}</h3>
             <span className="font-mono text-[10px] tracking-wider uppercase text-accent">
-              {formatListeners(artist.monthlyListeners)} monthly listeners
+              {formatListeners(artist.monthlyListeners, artist.monthlyListenersLabel)} monthly
+              listeners
             </span>
           </div>
           <p className="font-mono text-[10px] tracking-wider uppercase text-muted-foreground mt-1">
@@ -333,6 +335,9 @@ export const ArtistsMarqueeSection = () => {
             >
               ARTISTS I&apos;VE FRAMED
             </h2>
+            <p className="font-mono text-[9px] md:text-[10px] tracking-[0.12em] uppercase text-muted-foreground/60 mt-2">
+              Spotify monthly listeners updated {LISTENERS_UPDATED_LABEL}
+            </p>
             <p className="font-body text-muted-foreground mt-4 max-w-xl text-base md:text-lg leading-relaxed">
               Strip or ranked list — Spotify reach plus projects we made together. Swipe the strip:
               bottom follows your finger, top goes the other way, then keeps rolling from there.
@@ -467,7 +472,7 @@ export const ArtistsMarqueeSection = () => {
                       </span>
                     </span>
                     <span className="font-mono text-[11px] tracking-wider uppercase text-accent shrink-0">
-                      {formatListeners(artist.monthlyListeners)}
+                      {formatListeners(artist.monthlyListeners, artist.monthlyListenersLabel)}
                     </span>
                   </button>
                   <AnimatePresence>

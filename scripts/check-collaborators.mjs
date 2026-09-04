@@ -5,7 +5,8 @@
  */
 import assert from 'node:assert/strict';
 
-function formatListeners(n) {
+function formatListeners(n, label) {
+  if (label) return label;
   if (n >= 1_000_000) {
     const v = n / 1_000_000;
     return `${v % 1 === 0 ? v.toFixed(0) : v.toFixed(1).replace(/\.0$/, '')}M`;
@@ -28,6 +29,8 @@ assert.equal(formatListeners(40), '40');
 assert.equal(formatListeners(11500), '11.5K');
 assert.equal(formatListeners(2300000), '2.3M');
 assert.equal(formatListeners(4000000), '4M');
+assert.equal(formatListeners(19400000, '19.4M'), '19.4M');
+assert.equal(formatListeners(10000000, '10M'), '10M');
 
 const sample = Array.from({ length: 6 }, (_, i) => ({ id: String(i) }));
 const { top, bottom } = splitRows(sample);
