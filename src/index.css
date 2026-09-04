@@ -144,33 +144,3 @@
   animation: disc-spin 8s linear infinite;
   will-change: transform;
 }
-
-@keyframes artists-marquee-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-33.333%);
-  }
-}
-
-@keyframes artists-marquee-right {
-  from {
-    transform: translateX(-33.333%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.artists-marquee-left {
-  animation: artists-marquee-left 45s linear infinite;
-}
-
-.artists-marquee-right {
-  animation: artists-marquee-right 45s linear infinite;
-}
-
-.artists-marquee-paused {
-  animation-play-state: paused;
-}

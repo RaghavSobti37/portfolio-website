@@ -213,3 +213,12 @@ export function splitCollaboratorRows(list: Collaborator[] = collaborators): {
   list.forEach((c, i) => (i % 2 === 0 ? top : bottom).push(c));
   return { top, bottom };
 }
+
+/** Highest Spotify monthly listeners first. */
+export function sortCollaboratorsByListeners(
+  list: Collaborator[] = collaborators
+): Collaborator[] {
+  return [...list].sort((a, b) => b.monthlyListeners - a.monthlyListeners);
+}
+
+export const LIST_PAGE_SIZE = 10;

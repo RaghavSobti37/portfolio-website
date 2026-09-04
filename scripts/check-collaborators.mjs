@@ -40,4 +40,19 @@ assert.deepEqual(
   ['1', '3', '5']
 );
 
+function sortByListeners(list) {
+  return [...list].sort((a, b) => b.monthlyListeners - a.monthlyListeners);
+}
+
+const ranked = sortByListeners([
+  { id: 'a', monthlyListeners: 100 },
+  { id: 'b', monthlyListeners: 5000 },
+  { id: 'c', monthlyListeners: 900 },
+]);
+assert.deepEqual(
+  ranked.map((c) => c.id),
+  ['b', 'c', 'a']
+);
+assert.equal(ranked.slice(0, 2).length, 2);
+
 console.log('check-collaborators: ok');

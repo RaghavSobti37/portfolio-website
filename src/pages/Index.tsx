@@ -22,8 +22,8 @@ const Index = () => {
       <Navigation />
       <main>
         <HeroSection />
-        <PortfolioSection />
         <ArtistsMarqueeSection />
+        <PortfolioSection />
         <ReelsArchiveSection />
         <GallerySection />
         <ServicesSection />
