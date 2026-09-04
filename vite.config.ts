@@ -42,6 +42,8 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Allow Cloudflare / localtunnel / localhost.run preview hosts
+    allowedHosts: true,
   },
   plugins: [
     react(),
