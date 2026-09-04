@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const navLinks = [
   { name: 'Work', href: '#work' },
+  { name: 'Artists', href: '#artists' },
   { name: 'Archive', href: '#archive' },
   { name: 'Lab', href: '#lab' },
   { name: 'About', href: '#about' },
