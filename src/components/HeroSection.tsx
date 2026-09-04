@@ -98,11 +98,11 @@ const ReelNh7 = ({ className }: { className?: string }) => (
   />
 );
 
-const ReelAditya = ({ className }: { className?: string }) => (
+const ReelLaksh = ({ className }: { className?: string }) => (
   <HeroClip
-    src="/hero/aditya.mp4"
-    poster="/hero/aditya.jpg"
-    label="Aditya Gadhvi reel"
+    src="/hero/laksh.mp4?v=cuts"
+    poster="/hero/laksh.jpg"
+    label="Laksh interview reel"
     className={className}
   />
 );
@@ -125,19 +125,19 @@ export const HeroSection = () => {
           <WideFanna className="w-full aspect-video shrink-0" />
           <div className="flex justify-center gap-2 w-full shrink-0">
             <ReelNh7 className="flex-1 aspect-[9/16]" />
-            <ReelAditya className="flex-1 aspect-[9/16]" />
             <ReelVichaar className="flex-1 aspect-[9/16]" />
+            <ReelLaksh className="flex-1 aspect-[9/16]" />
           </div>
         </div>
 
-        {/* Desktop — 16:9 stack same height as Vichaar */}
+        {/* Desktop — 16:9 stack same height as center reel */}
         <div className="hidden md:flex absolute inset-y-0 right-10 lg:right-16 xl:right-24 items-center gap-5 lg:gap-7">
           <div className="flex flex-col gap-3 lg:gap-4 h-[56vh] lg:h-[64vh] w-[calc((56vh-0.75rem)/2*16/9)] lg:w-[calc((64vh-1rem)/2*16/9)] shrink-0">
             <WideKhwaab className="flex-1 min-h-0 w-full opacity-80" />
             <WideFanna className="flex-1 min-h-0 w-full opacity-80" />
           </div>
-          <ReelVichaar className="h-[56vh] lg:h-[64vh] aspect-[9/16] z-[1]" />
-          <ReelNh7 className="h-[42vh] lg:h-[48vh] aspect-[9/16] opacity-80" />
+          <ReelNh7 className="h-[56vh] lg:h-[64vh] aspect-[9/16] z-[1]" />
+          <ReelLaksh className="h-[42vh] lg:h-[48vh] aspect-[9/16] opacity-80" />
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/20 to-background/65 md:bg-gradient-to-r md:from-background md:via-background/80 md:to-background/25" />
