@@ -21,9 +21,49 @@ const HeroClip = ({
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
+
+    v.defaultMuted = true;
     v.muted = true;
+    v.setAttribute('muted', '');
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
     v.playbackRate = 1;
-    v.play().catch(() => undefined);
+    // Prefer direct src — more reliable than <source> alone on Safari
+    if (v.getAttribute('src') !== src) {
+      v.src = src;
+    }
+    v.load();
+
+    const tryPlay = () => {
+      v.muted = true;
+      const p = v.play();
+      if (p) p.catch(() => undefined);
+    };
+
+    tryPlay();
+    v.addEventListener('loadeddata', tryPlay);
+    v.addEventListener('canplay', tryPlay);
+    v.addEventListener('canplaythrough', tryPlay);
+    v.addEventListener('loadedmetadata', tryPlay);
+
+    const onVis = () => {
+      if (document.visibilityState === 'visible') tryPlay();
+    };
+    document.addEventListener('visibilitychange', onVis);
+
+    const kick = window.setTimeout(tryPlay, 250);
+    const kick2 = window.setTimeout(tryPlay, 1000);
+
+    return () => {
+      window.clearTimeout(kick);
+      window.clearTimeout(kick2);
+      v.removeEventListener('loadeddata', tryPlay);
+      v.removeEventListener('canplay', tryPlay);
+      v.removeEventListener('canplaythrough', tryPlay);
+      v.removeEventListener('loadedmetadata', tryPlay);
+      document.removeEventListener('visibilitychange', onVis);
+    };
   }, [src]);
 
   return (
@@ -69,7 +109,7 @@ const WideFanna = ({ className }: { className?: string }) => (
 
 const ReelVichaar = ({ className }: { className?: string }) => (
   <HeroClip
-    src="/hero/right.mp4"
+    src="/hero/right.mp4?v=h264-first8-last8"
     poster="/thumbnails/ig-DbiexjeO0l-.jpg"
     label="Vichaar reel"
     zoom
@@ -79,7 +119,7 @@ const ReelVichaar = ({ className }: { className?: string }) => (
 
 const ReelNh7 = ({ className }: { className?: string }) => (
   <HeroClip
-    src="/hero/center.mp4?v=first8-last8"
+    src="/hero/center.mp4?v=h264-first8-last8"
     poster="/thumbnails/ig-DWY8k8Jj79k.jpg"
     label="NH7 Weekender reel"
     className={className}
