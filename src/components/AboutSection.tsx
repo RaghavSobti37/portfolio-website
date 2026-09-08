@@ -85,12 +85,12 @@ export const AboutSection = () => {
             <div className="polaroid-frame max-w-md rotate-[-1.5deg] relative">
               <div className="aspect-square overflow-hidden bg-secondary">
                 <img
-                  src="/gallery/i25.jpg"
-                  alt="Raghav"
+                  src="/gallery/about.jpg"
+                  alt="Raghav with camera"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <p className="mt-2 px-1 font-mono text-[10px] text-ink/50">RAGHAV / BEHIND_CAMERA</p>
+              <p className="mt-2 px-1 font-mono text-[10px] text-ink/50">RAGHAV / ON_THE_ROAD</p>
             </div>
           </motion.div>
 

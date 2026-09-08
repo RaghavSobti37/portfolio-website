@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ResumeLeadDialog } from '@/components/ResumeLeadDialog';
 
 const socialLinks = [
   { label: 'GITHUB', href: 'https://github.com/RaghavSobti37' },
@@ -7,10 +9,18 @@ const socialLinks = [
   { label: 'INSTAGRAM', href: 'https://www.instagram.com/bluepolaroid05/' },
 ];
 
+const resumeLink = {
+  label: 'CREATIVE TECHNOLOGIST RESUME',
+  href: '/resumes/raghav-creative-technologist-resume.pdf',
+  download: 'Raghav-Raj-Sobti-Creative-Technologist-Resume.pdf',
+};
+
 const MAIL = 'raghavsobti37@gmail.com';
 const MAILTO = `mailto:${MAIL}?subject=${encodeURIComponent('Project inquiry')}`;
 
 export const CodingFooter = () => {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
   return (
     <footer id="contact" className="relative py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6">
@@ -45,6 +55,13 @@ export const CodingFooter = () => {
                 {s.label} ↗
               </a>
             ))}
+            <button
+              type="button"
+              onClick={() => setResumeOpen(true)}
+              className="font-mono-meta text-emerald-500 hover:text-emerald-400 transition-colors"
+            >
+              {resumeLink.label} ↗
+            </button>
             <Link
               to="/"
               className="font-mono-meta text-accent hover:text-accent/80 transition-colors md:ml-auto w-fit shrink-0"
@@ -61,6 +78,15 @@ export const CodingFooter = () => {
           </div>
         </motion.div>
       </div>
+
+      <ResumeLeadDialog
+        open={resumeOpen}
+        onOpenChange={setResumeOpen}
+        portfolio="coding"
+        resumeHref={resumeLink.href}
+        resumeDownload={resumeLink.download}
+        resumeLabel={resumeLink.label}
+      />
     </footer>
   );
 };

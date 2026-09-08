@@ -3,6 +3,22 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
+function readJsonBody(req: import("http").IncomingMessage): Promise<Record<string, unknown>> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    req.on("data", (c) => chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c)));
+    req.on("end", () => {
+      try {
+        const raw = Buffer.concat(chunks).toString("utf8");
+        resolve(raw ? (JSON.parse(raw) as Record<string, unknown>) : {});
+      } catch (e) {
+        reject(e);
+      }
+    });
+    req.on("error", reject);
+  });
+}
+
 function spotifyDevApi(): Plugin {
   return {
     name: "spotify-dev-api",
@@ -38,6 +54,52 @@ function spotifyDevApi(): Plugin {
   };
 }
 
+/** Local `/api/resume-lead` so resume form works under `vite` (not only Vercel). */
+function resumeLeadDevApi(): Plugin {
+  return {
+    name: "resume-lead-dev-api",
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        const url = req.url?.split("?")[0] ?? "";
+        if (url !== "/api/resume-lead") return next();
+
+        res.setHeader("Content-Type", "application/json");
+        res.setHeader("Cache-Control", "no-store");
+
+        if (req.method === "OPTIONS") {
+          res.statusCode = 204;
+          res.end();
+          return;
+        }
+
+        if (req.method !== "POST") {
+          res.statusCode = 405;
+          res.end(JSON.stringify({ ok: false, error: "POST only" }));
+          return;
+        }
+
+        try {
+          const fileEnv = loadEnv(server.config.mode, process.cwd(), "");
+          const env = { ...process.env, ...fileEnv } as NodeJS.ProcessEnv;
+          const body = await readJsonBody(req);
+          const { processResumeLead } = await import("./api/lib/resumeLeadCore.mjs");
+          const result = await processResumeLead(body, env);
+          res.statusCode = result.ok ? 200 : result.status || 500;
+          res.end(JSON.stringify(result.ok ? { ok: true } : { ok: false, error: result.error }));
+        } catch (err) {
+          res.statusCode = 502;
+          res.end(
+            JSON.stringify({
+              ok: false,
+              error: err instanceof Error ? err.message : "Upstream error",
+            })
+          );
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
@@ -49,6 +111,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === "development" && componentTagger(),
     mode === "development" && spotifyDevApi(),
+    mode === "development" && resumeLeadDevApi(),
   ].filter(Boolean),
   resolve: {
     alias: {

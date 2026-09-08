@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raghav Raj Sobti — BluePolaroid Film Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0b0b0d;
+      --paper: #f3efe6;
+      --muted: #6b6560;
+      --electric: #235cb9;
+      --polaroid: #f35f0e;
+      --fg-light: #f0ebe3;
+      --pw: 338.67mm;
+      --ph: 190.5mm;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: #1a1a1a;
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    @page {
+      size: 338.67mm 190.5mm;
+      margin: 0;
+    }
+
+    .page {
+      width: var(--pw);
+      height: var(--ph);
+      margin: 0 auto 10px;
+      position: relative;
+      overflow: hidden;
+      background: var(--paper);
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    @media print {
+      html, body { background: none; }
+      .page { margin: 0; }
+    }
+
+    .display { font-family: 'Space Grotesk', system-ui, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    .meta {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .media {
+      background: #d8d2c6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .media img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .media.dark { background: #121214; }
+
+    .pad {
+      padding: 10mm 12mm 9mm;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid rgba(11,11,13,0.16);
+      padding-bottom: 4mm;
+      margin-bottom: 5mm;
+      flex-shrink: 0;
+    }
+
+    .page-head h2 {
+      font-size: 26px;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+
+    .page-num { color: var(--muted); }
+
+    .cover {
+      background: var(--ink);
+      color: var(--fg-light);
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+    }
+
+    .cover-hero.media { height: 100%; width: 100%; }
+
+    .cover-side {
+      padding: 12mm 11mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-left: 1px solid rgba(240,235,227,0.1);
+    }
+
+    .cover-brand { color: var(--polaroid); margin-bottom: 5mm; }
+
+    .cover h1 {
+      font-size: 40px;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      margin-bottom: 4mm;
+    }
+
+    .cover-role {
+      font-size: 13px;
+      color: rgba(240,235,227,0.85);
+      margin-bottom: 5mm;
+      letter-spacing: 0.02em;
+    }
+
+    .cover-tag {
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: rgba(240,235,227,0.72);
+      max-width: 110mm;
+    }
+
+    .cover-foot {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5mm;
+      font-size: 11px;
+      color: rgba(240,235,227,0.6);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.15fr;
+      gap: 8mm;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .about-grid .media { height: 100%; }
+
+    .about-copy p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #2a2724;
+      margin-bottom: 4mm;
+    }
+
+    .timeline { list-style: none; }
+
+    .timeline li {
+      display: grid;
+      grid-template-columns: 16mm 1fr;
+      gap: 3mm;
+      padding: 2.4mm 0;
+      border-bottom: 1px solid rgba(11,11,13,0.1);
+      font-size: 12.5px;
+    }
+
+    .timeline .year { color: var(--polaroid); font-weight: 500; }
+
+    .film-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6mm;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .film-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .film-card .media {
+      flex: 1;
+      min-height: 78mm;
+      margin-bottom: 3.5mm;
+    }
+
+    .film-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5mm;
+    }
+
+    .film-card .role {
+      color: var(--electric);
+      margin-bottom: 2mm;
+    }
+
+    .film-card p {
+      font-size: 11.5px;
+      line-height: 1.4;
+      color: #33302c;
+    }
+
+    .fest-layout {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 7mm;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .fest-layout > .media { height: 100%; }
+
+    .fest-right {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .fest-right > p {
+      font-size: 12px;
+      line-height: 1.45;
+      color: #2f2c28;
+      margin-bottom: 4mm;
+      flex-shrink: 0;
+    }
+
+    .fest-thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4mm;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .fest-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .fest-card .media {
+      flex: 1;
+      min-height: 70mm;
+      margin-bottom: 2.5mm;
+    }
+
+    .fest-card h4 {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 1mm;
+    }
+
+    .fest-card p {
+      font-size: 10.5px;
+      line-height: 1.35;
+      color: #3a3733;
+    }
+
+    .credits-intro {
+      font-size: 12.5px;
+      line-height: 1.45;
+      max-width: 220mm;
+      margin-bottom: 5mm;
+      color: #2f2c28;
+      flex-shrink: 0;
+    }
+
+    .credit-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6mm;
+      flex: 1;
+    }
+
+    .credit-block h3 {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--polaroid);
+      margin-bottom: 3mm;
+      font-weight: 600;
+    }
+
+    .credit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .credit-table td {
+      padding: 2.2mm 0;
+      border-bottom: 1px solid rgba(11,11,13,0.12);
+      vertical-align: top;
+    }
+
+    .credit-table td:first-child {
+      font-weight: 600;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      width: 48%;
+    }
+
+    .credit-table td:nth-child(2) {
+      color: var(--electric);
+      font-size: 10px;
+    }
+
+    .credit-table td:last-child {
+      text-align: right;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .craft-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 8mm;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .craft-grid .media { height: 100%; }
+
+    .skill-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm 6mm;
+    }
+
+    .skill-block h3 {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--polaroid);
+      margin-bottom: 2.5mm;
+      font-weight: 600;
+    }
+
+    .skill-block ul {
+      list-style: none;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: #2f2c28;
+    }
+
+    .skill-block li {
+      padding: 1.8mm 0;
+      border-bottom: 1px solid rgba(11,11,13,0.1);
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4mm;
+      margin-top: 5mm;
+    }
+
+    .svc {
+      border: 1px solid rgba(11,11,13,0.14);
+      padding: 3.5mm;
+      background: rgba(255,255,255,0.35);
+    }
+
+    .svc .num { color: var(--polaroid); margin-bottom: 1.5mm; }
+    .svc h4 { font-size: 13px; font-weight: 700; margin-bottom: 1mm; }
+    .svc p { font-size: 11px; color: #3a3733; line-height: 1.35; }
+
+    .close {
+      background: var(--ink);
+      color: var(--fg-light);
+    }
+
+    .close .pad { justify-content: space-between; }
+
+    .close h2 {
+      font-size: 42px;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      margin: 4mm 0 5mm;
+    }
+
+    .close-line {
+      font-size: 14px;
+      max-width: 180mm;
+      line-height: 1.45;
+      color: rgba(240,235,227,0.7);
+      margin-bottom: 8mm;
+    }
+
+    .close-links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5mm 14mm;
+      max-width: 200mm;
+    }
+
+    .close-links .label { color: var(--polaroid); margin-bottom: 1.5mm; }
+
+    .close-links a, .close-links span {
+      color: var(--fg-light);
+      text-decoration: none;
+      font-size: 12.5px;
+    }
+
+    .close-foot {
+      border-top: 1px solid rgba(240,235,227,0.12);
+      padding-top: 5mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-foot span {
+      font-size: 11px;
+      color: rgba(240,235,227,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1 Cover -->
+  <section class="page cover">
+    <div class="cover-hero media dark">
+      <img src="../public/preview.jpg" alt="BluePolaroid film still" />
+    </div>
+    <div class="cover-side">
+      <div>
+        <p class="meta cover-brand">BluePolaroid</p>
+        <h1 class="display">RAGHAV RAJ<br />SOBTI</h1>
+        <p class="cover-role display">Videographer · Editor · Cinematographer</p>
+        <p class="cover-tag">Music films, festival coverage, artist interviews, and cinematic edits — from set to DaVinci Resolve.</p>
+      </div>
+      <div class="cover-foot">
+        <span class="mono">Film · Edit · Frame</span>
+        <span>bluepolaroid.com</span>
+        <span>Portfolio 2026 · 16:9</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 About -->
+  <section class="page">
+    <div class="pad">
+      <div class="page-head">
+        <div>
+          <p class="meta" style="color:var(--electric);margin-bottom:1.5mm;">About</p>
+          <h2 class="display">I’m Raghav.</h2>
+        </div>
+        <span class="meta page-num">02 / 07</span>
+      </div>
+      <div class="about-grid">
+        <div class="media">
+          <img src="../public/gallery/about.jpg" alt="Raghav on set" />
+        </div>
+        <div class="about-copy">
+          <p>I shoot and cut stories for music, culture, and live events — comfortable directing the frame, supporting as AD on multi-day music films, and finishing in DaVinci Resolve.</p>
+          <p>Path so far: assistant direction on music films → owning festival and interview coverage → directing music videos → NYFA cinematography craft.</p>
+          <ul class="timeline">
+            <li><span class="mono year">2022</span><span>Assistant Director</span></li>
+            <li><span class="mono year">2023</span><span>Production / Music Films</span></li>
+            <li><span class="mono year">2024</span><span>Artist Stories / Events</span></li>
+            <li><span class="mono year">2025</span><span>NYFA Cinematography + Director</span></li>
+            <li><span class="mono year">2026</span><span>Festivals · Content · Edits</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 Films -->
+  <section class="page">
+    <div class="pad">
+      <div class="page-head">
+        <div>
+          <p class="meta" style="color:var(--electric);margin-bottom:1.5mm;">Selected work</p>
+          <h2 class="display">Films &amp; music videos</h2>
+        </div>
+        <span class="meta page-num">03 / 07</span>
+      </div>
+      <div class="film-row">
+        <article class="film-card">
+          <div class="media dark">
+            <img src="../public/hero/khwaab-a.jpg" alt="Ek Kamra still" />
+          </div>
+          <h3 class="display">Ek Kamra</h3>
+          <p class="meta role">Director &amp; Cinematographer · 2025</p>
+          <p>Directed and shot with a minimalist aesthetic and strong emotional narrative — intimacy, distance, and the space between people.</p>
+        </article>
+        <article class="film-card">
+          <div class="media dark">
+            <img src="../public/hero/fanna.jpg" alt="Narazi still" />
+          </div>
+          <h3 class="display">Narazi</h3>
+          <p class="meta role">Cinematographer · 2024 · Short Film</p>
+          <p>Black-and-white study on loneliness — a fresh visual take on Kun Faya Kun. Mood, isolation, and still frames.</p>
+        </article>
+        <article class="film-card">
+          <div class="media dark">
+            <img src="../public/hero/khwaab-b.jpg" alt="Khwaab" />
+          </div>
+          <h3 class="display">Khwaab</h3>
+          <p class="meta role">Assistant Director · 2024 · Music Video</p>
+          <p>Unrequited love as visual language. Music-film set coordination for EBC / Artiste First — prep through offline.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Live -->
+  <section class="page">
+    <div class="pad">
+      <div class="page-head">
+        <div>
+          <p class="meta" style="color:var(--electric);margin-bottom:1.5mm;">Live &amp; festivals</p>
+          <h2 class="display">NH7 &amp; artist stories</h2>
+        </div>
+        <span class="meta page-num">04 / 07</span>
+      </div>
+      <div class="fest-layout">
+        <div class="media dark">
+          <img src="../public/thumbnails/ig-DWY8k8Jj79k.jpg" alt="NH7 Weekender Aashiqana" />
+        </div>
+        <div class="fest-right">
+          <p>Senior videography and festival storytelling for NH7 Weekender — stages, crowd energy, team stories, and 90-second artist interviews shot under live-event pressure. Featured: Gini, Aditya Gadhvi, Indian Ocean.</p>
+          <div class="fest-thumbs">
+            <article class="fest-card">
+              <div class="media dark">
+                <img src="../public/thumbnails/ig-DaS166SBKj-.jpg" alt="Gini" />
+              </div>
+              <h4 class="display">90 Seconds · Gini</h4>
+              <p class="meta" style="color:var(--electric);margin-bottom:1mm;">Videographer · 2026</p>
+              <p>Women taking over India’s independent scene.</p>
+            </article>
+            <article class="fest-card">
+              <div class="media dark">
+                <img src="../public/thumbnails/ig-DYZpxenwlot.jpg" alt="Aditya Gadhvi" />
+              </div>
+              <h4 class="display">90 Seconds · Aditya Gadhvi</h4>
+              <p class="meta" style="color:var(--electric);margin-bottom:1mm;">Videographer · 2026</p>
+              <p>Folk music, roots, and chart-ruling power.</p>
+            </article>
+            <article class="fest-card">
+              <div class="media dark">
+                <img src="../public/thumbnails/ig-DbiexjeO0l-.jpg" alt="Vichaar" />
+              </div>
+              <h4 class="display">90 Seconds · Vichaar</h4>
+              <p class="meta" style="color:var(--electric);margin-bottom:1mm;">Videographer · 2026</p>
+              <p>Belief, 3 Drags, and the indie stage.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Credits -->
+  <section class="page">
+    <div class="pad">
+      <div class="page-head">
+        <div>
+          <p class="meta" style="color:var(--electric);margin-bottom:1.5mm;">Credits</p>
+          <h2 class="display">Selected filmography</h2>
+        </div>
+        <span class="meta page-num">05 / 07</span>
+      </div>
+      <p class="credits-intro">
+        Music films, shorts, commercials, and festival coverage — Director, Cinematographer, Assistant Director, Videographer, and Editor.
+      </p>
+      <div class="credit-cols">
+        <div class="credit-block">
+          <h3 class="mono">Director / Cinematographer</h3>
+          <table class="credit-table">
+            <tr><td>Ek Kamra</td><td>Director &amp; DP</td><td>2025</td></tr>
+            <tr><td>Paas aa re</td><td>Director &amp; DP</td><td>2025</td></tr>
+            <tr><td>Narazi</td><td>Cinematographer</td><td>2024</td></tr>
+            <tr><td>Dead Dreams</td><td>Director &amp; DP</td><td>2024</td></tr>
+            <tr><td>TIMEOUT</td><td>Director / DP</td><td>2024</td></tr>
+          </table>
+        </div>
+        <div class="credit-block">
+          <h3 class="mono">Assistant Director</h3>
+          <table class="credit-table">
+            <tr><td>Khwaab</td><td>Assistant Director</td><td>2024</td></tr>
+            <tr><td>Rooh / Rooh 2.0</td><td>2nd AD</td><td>2024</td></tr>
+            <tr><td>Dhamaal</td><td>1st DA</td><td>2024</td></tr>
+            <tr><td>Aabruu</td><td>2nd AD</td><td>2023–24</td></tr>
+            <tr><td>RIQQAT</td><td>2nd AD</td><td>2023–24</td></tr>
+          </table>
+        </div>
+        <div class="credit-block">
+          <h3 class="mono">Festivals · Live · Ads</h3>
+          <table class="credit-table">
+            <tr><td>NH7 Weekender</td><td>Sr. Videographer / CD</td><td>2024–26</td></tr>
+            <tr><td>90-sec interviews</td><td>Videographer</td><td>2026</td></tr>
+            <tr><td>NPS ad films</td><td>Intern AD</td><td>2023</td></tr>
+            <tr><td>Jahnvi / live sets</td><td>Videographer</td><td>2025</td></tr>
+            <tr><td>Havells Music</td><td>Reels &amp; post creatives</td><td>2025–</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Craft / editing -->
+  <section class="page">
+    <div class="pad">
+      <div class="page-head">
+        <div>
+          <p class="meta" style="color:var(--electric);margin-bottom:1.5mm;">Craft</p>
+          <h2 class="display">Edit · Camera · Colour</h2>
+        </div>
+        <span class="meta page-num">06 / 07</span>
+      </div>
+      <div class="craft-grid">
+        <div class="media dark">
+          <img src="../public/hero/aditya.jpg" alt="Artist interview still" />
+        </div>
+        <div>
+          <div class="skill-cols">
+            <div class="skill-block">
+              <h3 class="mono">Editing</h3>
+              <ul>
+                <li>DaVinci Resolve</li>
+                <li>Offline / online cuts</li>
+                <li>Music video pacing</li>
+                <li>Short-form / reels</li>
+                <li>Festival &amp; event edits</li>
+              </ul>
+            </div>
+            <div class="skill-block">
+              <h3 class="mono">Image</h3>
+              <ul>
+                <li>Cinematography</li>
+                <li>Color grading</li>
+                <li>Storyboarding</li>
+                <li>Shot lists</li>
+                <li>Live multi-cam coverage</li>
+              </ul>
+            </div>
+          </div>
+          <div class="services">
+            <div class="svc">
+              <p class="meta num">01</p>
+              <h4 class="display">Make a film</h4>
+              <p>Direction / Cinematography / Music Videos / Ads</p>
+            </div>
+            <div class="svc">
+              <p class="meta num">02</p>
+              <h4 class="display">Capture a moment</h4>
+              <p>Events / Artists / BTS / Interviews</p>
+            </div>
+            <div class="svc">
+              <p class="meta num">03</p>
+              <h4 class="display">Cut the story</h4>
+              <p>DaVinci Resolve / Colour / Delivery</p>
+            </div>
+            <div class="svc">
+              <p class="meta num">04</p>
+              <h4 class="display">NYFA craft</h4>
+              <p>15-week Cinematography · Aug–Dec 2025</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Close -->
+  <section class="page close">
+    <div class="pad">
+      <div>
+        <p class="meta" style="color:var(--polaroid);">Contact</p>
+        <h2 class="display">Let’s shoot<br />&amp; cut.</h2>
+        <p class="close-line">Music films, festivals, artist content, brand reels, and cinematic edits. Mumbai · available for select collaborations.</p>
+        <div class="close-links">
+          <div>
+            <p class="meta label">Email</p>
+            <a href="mailto:raghavsobti37@gmail.com">raghavsobti37@gmail.com</a>
+          </div>
+          <div>
+            <p class="meta label">Phone</p>
+            <span>+91 8591499393</span>
+          </div>
+          <div>
+            <p class="meta label">Website</p>
+            <a href="https://bluepolaroid.com">bluepolaroid.com</a>
+          </div>
+          <div>
+            <p class="meta label">Instagram</p>
+            <a href="https://www.instagram.com/bluepolaroid05/">@bluepolaroid05</a>
+          </div>
+        </div>
+      </div>
+      <div class="close-foot">
+        <span class="mono">BluePolaroid · Film Portfolio</span>
+        <span class="meta">07 / 07</span>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

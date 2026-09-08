@@ -10,7 +10,7 @@ type SeoProps = {
 };
 
 const SITE = 'https://bluepolaroid.com';
-const DEFAULT_IMAGE = `${SITE}/gallery/i25.jpg`;
+const DEFAULT_IMAGE = `${SITE}/gallery/about.jpg`;
 
 function setMeta(attr: 'name' | 'property', key: string, content: string) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`) as HTMLMetaElement | null;
