@@ -1,5 +1,32 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+
+const aboutFrames = [
+  {
+    src: '/gallery/about-silhouette.jpg',
+    alt: 'Raghav with camera at golden hour',
+    caption: 'RAGHAV / ON_THE_ROAD',
+    object: 'object-[center_30%]',
+  },
+  {
+    src: '/gallery/about-bts.jpg',
+    alt: 'Raghav directing on location',
+    caption: 'BTS / LOCATION',
+    object: 'object-[center_20%]',
+  },
+  {
+    src: '/gallery/about-shoot.jpg',
+    alt: 'Raghav shooting on location',
+    caption: 'FRAME / CITY',
+    object: 'object-center',
+  },
+  {
+    src: '/gallery/about.jpg',
+    alt: 'Raghav with camera',
+    caption: 'RAGHAV / WALKING',
+    object: 'object-cover object-[center_35%]',
+  },
+] as const;
 
 const storyTimeline = [
   { year: '2022', line: 'Assistant Director' },
@@ -56,6 +83,15 @@ const path = [
 export const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const [frameIndex, setFrameIndex] = useState(0);
+  const frame = aboutFrames[frameIndex];
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setFrameIndex((i) => (i + 1) % aboutFrames.length);
+    }, 3000);
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <section id="about" className="py-24 md:py-32 relative overflow-hidden border-t border-border">
@@ -80,17 +116,36 @@ export const AboutSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative mx-auto md:mx-0 w-full max-w-md"
+            aria-label="Raghav on set with camera"
           >
-            <div className="polaroid-frame max-w-md rotate-[-1.5deg] relative">
-              <div className="aspect-square overflow-hidden bg-secondary">
-                <img
-                  src="/gallery/about.jpg"
-                  alt="Raghav with camera"
-                  className="w-full h-full object-cover"
-                />
+            <div className="polaroid-frame rotate-[-1.5deg] shadow-lift">
+              <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={frame.src}
+                    src={frame.src}
+                    alt={frame.alt}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.45 }}
+                    className={`absolute inset-0 w-full h-full object-cover ${frame.object}`}
+                  />
+                </AnimatePresence>
               </div>
-              <p className="mt-2 px-1 font-mono text-[10px] text-ink/50">RAGHAV / ON_THE_ROAD</p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={frame.caption}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-2 px-1 font-mono text-[10px] text-ink/50"
+                >
+                  {frame.caption}
+                </motion.p>
+              </AnimatePresence>
             </div>
           </motion.div>
 
