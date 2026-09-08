@@ -11,8 +11,6 @@ const socialLinks = [
 
 const resumeLink = {
   label: 'CREATIVE TECHNOLOGIST RESUME',
-  href: '/resumes/raghav-creative-technologist-resume.pdf',
-  download: 'Raghav-Raj-Sobti-Creative-Technologist-Resume.pdf',
 };
 
 const MAIL = 'raghavsobti37@gmail.com';
@@ -83,8 +81,6 @@ export const CodingFooter = () => {
         open={resumeOpen}
         onOpenChange={setResumeOpen}
         portfolio="coding"
-        resumeHref={resumeLink.href}
-        resumeDownload={resumeLink.download}
         resumeLabel={resumeLink.label}
       />
     </footer>

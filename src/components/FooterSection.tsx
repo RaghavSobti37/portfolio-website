@@ -13,8 +13,6 @@ const socialLinks = [
 
 const resumeLink = {
   label: 'VIDEOGRAPHER RESUME',
-  href: '/resumes/raghav-videographer-resume.pdf',
-  download: 'Raghav-Raj-Sobti-Videographer-Resume.pdf',
 };
 
 const MAIL = 'raghavsobti37@gmail.com';
@@ -85,8 +83,6 @@ export const FooterSection = () => {
         open={resumeOpen}
         onOpenChange={setResumeOpen}
         portfolio="creative"
-        resumeHref={resumeLink.href}
-        resumeDownload={resumeLink.download}
         resumeLabel={resumeLink.label}
       />
     </footer>
