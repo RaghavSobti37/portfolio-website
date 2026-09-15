@@ -18,50 +18,51 @@ export const CodingExperience = () => {
   const timelineData = [
     {
       date: 'Mar 2025 - Present',
-      title: 'Freelance Creative Technologist',
-      description: 'Building web platforms, workflow systems, API integrations and automation for creative-business operations and public-facing digital experiences.',
+      title: 'Creative Technologist — The Shakti Collective',
+      description:
+        'Building academy + artist platform, courses, and brand systems. Shipping Next.js experiences for cultural storytelling ops.',
     },
     {
       date: 'Mar 2025 - Jul 2025',
-      title: 'Project Intern - Full-Stack Systems',
-      description: 'Developed internal business workflows with role-based permissions, secure authentication and MongoDB-backed data models.',
+      title: 'Project Intern — EKORS',
+      description:
+        'Assisted in development of internal tools and projects. Supported achieving key milestones in project delivery.',
     },
     {
-      date: '2025',
-      title: 'Cinematography Programme - New York Film Academy',
-      description: 'Completed intensive training in lighting, camera technicalities, storytelling, pacing, set practice, DaVinci Resolve, colour correction and grading.',
+      date: 'Jun 2022 - Aug 2022',
+      title: 'Intern — Fruture Studio',
+      description:
+        'Crafted Discord server infrastructure for a Web3 startup. Managed technical assets for corporate social media accounts.',
+    },
+    {
+      date: 'Aug 2025 - Dec 2025',
+      title: 'NYFA 15-week Online Cinematography Program',
+      description:
+        'Lighting, camera, pacing, set practice, DaVinci Resolve colour. Completed hands-on projects with peer crews and applied craft across narrative and music visuals.',
     },
     {
       date: '2021 - 2025',
-      title: 'B.Tech in Computer Science - BML Munjal University, Gurugram',
-      description: 'Comprehensive education in computer science fundamentals, software engineering, and web technologies.',
+      title: 'B.Tech in Computer Science — BML Munjal University, Gurugram',
+      description: 'Computer science fundamentals, software engineering, and web technologies.',
     },
   ];
 
   const certifications = [
     {
-      title: 'Google Cloud Computing Foundations: Infrastructure in Google Cloud',
-      org: 'Google Cloud',
-      date: 'Oct 2023',
+      title: 'Google Cloud Computing Foundations',
+      org: 'Google',
+      date: 'Jan 2026',
       tag: 'GCP',
       accent: '#4285F4',
-      blurb: 'Cloud infrastructure fundamentals on Google Cloud.',
+      blurb: 'Gained understanding of cloud infrastructure and deployment.',
     },
     {
-      title: 'Get Started with Figma',
-      org: 'Coursera',
-      date: 'Feb 2023',
-      tag: 'FIGMA',
-      accent: '#A259FF',
-      blurb: 'Interface design workflow — frames, components, handoff basics.',
-    },
-    {
-      title: 'Create a Storyboard using Canva',
-      org: 'Coursera Project Network',
-      date: 'Feb 2023',
-      tag: 'CANVA',
-      accent: '#00C4CC',
-      blurb: 'Visual storytelling and storyboard layout for film / pitch decks.',
+      title: 'UI/UX Design Principles',
+      org: 'Online Learning Platform',
+      date: 'Dec 2025',
+      tag: 'UI/UX',
+      accent: '#F24E1E',
+      blurb: 'Applied design thinking to create user-centered interfaces.',
     },
   ];
 
@@ -83,9 +84,9 @@ export const CodingExperience = () => {
               Raghav Raj <span className="text-gradient">Sobti</span>
             </h2>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
-              Creative Technologist and Cinematographer building digital products,
-              automation workflows and cinematic web experiences. His strongest work
-              connects frontend craft, backend systems, APIs and creative operations.
+              Creative Technologist with expertise in visual storytelling and web
+              applications. Proven skills in UI/UX design, fostering collaboration
+              between technical and creative teams to drive impactful digital solutions.
             </p>
           </motion.div>
 

@@ -5,9 +5,10 @@ import { codingProjects, languageColor, type CodingProject } from '@/data/coding
 import { CommitSparkline } from '@/components/coding/CommitSparkline';
 import { ProjectPreview } from '@/components/coding/ProjectPreview';
 
-/** CoreKnot first, then website designs (TSC → corp sites with frames), tools last */
+/** Resume-featured first (CoreKnot, EKORS, TSC), then website designs, tools last */
 const PROJECT_ORDER = [
   'coreknot',
+  'ekors',
   'tsc',
   'balaji',
   'shrim',
@@ -17,10 +18,9 @@ const PROJECT_ORDER = [
   'woteat',
   'resume-gen',
   'photo-cleaner',
-  'ekors',
 ] as const;
 
-const FEATURED_IDS = new Set(['coreknot', 'tsc', 'balaji', 'shrim', 'destiny']);
+const FEATURED_IDS = new Set(['coreknot', 'ekors', 'tsc', 'balaji', 'shrim']);
 
 function orderedProjects(): CodingProject[] {
   const map = new Map(codingProjects.map((p) => [p.id, p]));

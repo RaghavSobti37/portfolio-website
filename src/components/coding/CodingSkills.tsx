@@ -5,23 +5,23 @@ import { Code2, Palette, Server, Zap } from 'lucide-react';
 const skillCategories = [
   {
     icon: Code2,
-    title: 'Frontend',
-    skills: ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Responsive UI'],
+    title: 'Programming & Web',
+    skills: ['Node.js', 'Express', 'MongoDB', 'React', 'Next.js', 'Tailwind CSS', 'JavaScript (ES6)', 'HTML5/CSS3'],
   },
   {
     icon: Server,
-    title: 'Backend & Data',
-    skills: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'JWT Auth', 'REST APIs'],
+    title: 'Specialized Tech',
+    skills: ['Google Cloud Infrastructure', 'Internet of Things (IoT)', 'Token-Based Authentication', 'RESTful APIs'],
   },
   {
     icon: Palette,
-    title: 'Creative Systems',
-    skills: ['UI/UX Design', 'Figma', 'Motion Design', 'SEO Structure', 'Media Layouts', 'Design Systems'],
+    title: 'Design & Discovery',
+    skills: ['Figma (UI/UX Design)', 'Google SEO and AEO Optimization', 'Microsoft Clarity'],
   },
   {
     icon: Zap,
-    title: 'Automation',
-    skills: ['GitHub Actions', 'AiSensy', 'Google Sheets API', 'EmailJS', 'WhatsApp Workflows', 'Vercel'],
+    title: 'Technical Suite',
+    skills: ['Vercel', 'Render', 'Git', 'Multi Agentic Workflows'],
   },
 ];
 
