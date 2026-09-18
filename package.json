@@ -12,7 +12,8 @@
     "spotify:auth": "node scripts/spotify-get-refresh-token.mjs",
     "check:collaborators": "node scripts/check-collaborators.mjs",
     "portfolio:pdf": "node scripts/generate-portfolio-pdf.mjs",
-    "test:resume-lead": "node --env-file=.env scripts/test-resume-lead.mjs"
+    "test:resume-lead": "node --env-file=.env scripts/test-resume-lead.mjs",
+    "test:resume-lead-softfail": "node scripts/test-resume-lead-softfail.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
