@@ -26,5 +26,5 @@ export default async function handler(req, res) {
   if (!result.ok) {
     return res.status(result.status || 500).json({ ok: false, error: result.error });
   }
-  return res.status(200).json({ ok: true });
+  return res.status(200).json({ ok: true, sheetSynced: result.sheetSynced === true });
 }

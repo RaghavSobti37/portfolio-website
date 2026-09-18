@@ -85,7 +85,13 @@ function resumeLeadDevApi(): Plugin {
           const { processResumeLead } = await import("./api/lib/resumeLeadCore.mjs");
           const result = await processResumeLead(body, env);
           res.statusCode = result.ok ? 200 : result.status || 500;
-          res.end(JSON.stringify(result.ok ? { ok: true } : { ok: false, error: result.error }));
+          res.end(
+            JSON.stringify(
+              result.ok
+                ? { ok: true, sheetSynced: result.sheetSynced === true }
+                : { ok: false, error: result.error }
+            )
+          );
         } catch (err) {
           res.statusCode = 502;
           res.end(
