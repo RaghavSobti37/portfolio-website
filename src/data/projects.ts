@@ -13,6 +13,8 @@ export interface Project {
   videoUrl: string;
   platform: 'youtube' | 'instagram';
   featured?: boolean;
+  /** Always sort at the end of project listings. */
+  endPinned?: boolean;
   views?: number;
 }
 
@@ -376,36 +378,39 @@ const projectsData: Project[] = [
   },
   {
     id: 33,
-    title: "Making of Aabruu",
+    title: "Aabruu — AD / BTS",
     role: "1st Director's Assistant",
     year: "2024",
-    description: "Aabruu is a heartfelt song that expresses having pride on your lover.",
+    description: "Behind the scenes of the Aabruu music film, shot in Kashmir.",
     image: "/thumbnails/professional-videographer-behind-scenes-aabruu.jpg",
     category: "Behind the scenes",
     videoUrl: "https://www.youtube.com/embed/N2_sGRTLaIs",
-    platform: "youtube"
+    platform: "youtube",
+    endPinned: true
   },
   {
     id: 34,
-    title: "Making of Dhamaal",
+    title: "Dhamaal — AD / BTS",
     role: "1st Director's Assistant",
     year: "2024",
-    description: "Presenting the journey and the making of the music film of Dhamaal.",
+    description: "Behind the scenes of the Dhamaal music film, shot in Kashmir.",
     image: "/thumbnails/professional-cinematographer-behind-scenes-dhamaal.jpg",
     category: "Behind the scenes",
     videoUrl: "https://www.youtube.com/embed/prEhLOAk3GI",
-    platform: "youtube"
+    platform: "youtube",
+    endPinned: true
   },
   {
     id: 35,
-    title: "Making of Rooh",
+    title: "Rooh — AD / BTS",
     role: "2nd Assistant Director",
     year: "2024",
-    description: "Presenting the journey and the making of the music film of Rooh.",
+    description: "Behind the scenes of the Rooh music film, shot in Leh-Ladakh.",
     image: "/thumbnails/professional-videographer-behind-scenes-rooh.jpg",
     category: "Behind the scenes",
     videoUrl: "https://www.youtube.com/embed/RRUdEIQ9vH8",
-    platform: "youtube"
+    platform: "youtube",
+    endPinned: true
   },
   {
     id: 36,
@@ -693,7 +698,12 @@ const projectsData: Project[] = [
 
 export const projects = [...projectsData]
   .map((p) => ({ ...p, views: mediaViews(p.videoUrl, p.platform) }))
-  .sort((a, b) => (b.views ?? 0) - (a.views ?? 0) || a.id - b.id);
+  .sort(
+    (a, b) =>
+      Number(a.endPinned ?? false) - Number(b.endPinned ?? false) ||
+      (b.views ?? 0) - (a.views ?? 0) ||
+      a.id - b.id
+  );
 
 // Export individual categories for filtering (All first — gram-style chips)
 export const projectCategories = [

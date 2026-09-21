@@ -1,5 +1,6 @@
 import { motion, useInView, type Variants } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { RefreshCw, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { photos, photoLabel, type Photo } from '@/data/photos';
@@ -82,7 +83,10 @@ export const GallerySection = () => {
             </button>
           </div>
           <p className="font-body text-muted-foreground max-w-lg">
-            Frames from around the work — kept in their original ratios.
+            Frames from around the work — kept in their original ratios.{' '}
+            <Link to="/gallery" className="text-primary hover:text-accent transition-colors">
+              See the full gallery →
+            </Link>
           </p>
         </motion.div>
 
