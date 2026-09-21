@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Coding from "./pages/Coding";
+import Gallery from "./pages/Gallery";
 import SpotifyCallback from "./pages/SpotifyCallback";
 import NotFound from "./pages/NotFound";
 import { NowPlayingDisc } from "@/components/NowPlayingDisc";
@@ -25,6 +26,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/coding" element={<Coding />} />
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/dev" element={<Coding />} />
           <Route path="/callback" element={<SpotifyCallback />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

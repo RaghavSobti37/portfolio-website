@@ -1,4 +1,5 @@
 // Gallery stills — numbered labels only (no categories)
+import { IG_FILES } from './igPhotos';
 
 export interface Photo {
   id: number;
@@ -16,6 +17,16 @@ export const photos: Photo[] = GALLERY_IDS.map((id) => ({
   id,
   src: `/gallery/${id}.jpg`,
 }));
+
+/** Extra stills used elsewhere on the site (about section portraits). */
+const SITE_EXTRA_FILES = ['about.jpg', 'about-bts.jpg', 'about-shoot.jpg', 'about-silhouette.jpg', 'i25.jpg'];
+
+/** Everything for the /gallery page: site archive + about stills + Instagram pulls. */
+export const allPhotos: Photo[] = [
+  ...photos,
+  ...SITE_EXTRA_FILES.map((file, i) => ({ id: 1000 + i, src: `/gallery/${file}` })),
+  ...IG_FILES.map((file, i) => ({ id: 2000 + i, src: `/gallery/instagram/${file}` })),
+];
 
 export function photoLabel(index: number): string {
   return String(index + 1).padStart(3, '0');
