@@ -56,6 +56,15 @@ export const Navigation = () => {
             ))}
             <li>
               <Link
+                to="/projects"
+                onClick={() => window.scrollTo(0, 0)}
+                className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
+                Projects
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/gallery"
                 onClick={() => window.scrollTo(0, 0)}
                 className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
@@ -106,6 +115,16 @@ export const Navigation = () => {
                   {link.name}
                 </motion.button>
               ))}
+              <Link
+                to="/projects"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  window.scrollTo(0, 0);
+                }}
+                className="font-display text-2xl tracking-tight"
+              >
+                Projects
+              </Link>
               <Link
                 to="/gallery"
                 onClick={() => {

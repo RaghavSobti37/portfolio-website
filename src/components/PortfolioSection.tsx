@@ -1,5 +1,6 @@
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ExternalLink, Play, X } from 'lucide-react';
 import { projects, projectCategories, type Project } from '@/data/projects';
 import { LazyImage } from '@/components/LazyImage';
@@ -239,9 +240,17 @@ export const PortfolioSection = () => {
 
         <div className="mt-28">
           <p className="font-mono-meta mb-3">MORE WORK · INDEX</p>
-          <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-6">
-            Everything else I’ve made
-          </h3>
+          <div className="flex flex-wrap items-baseline justify-between gap-3 mb-6">
+            <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight">
+              Everything else I’ve made
+            </h3>
+            <Link
+              to="/projects"
+              className="font-mono text-[10px] tracking-wider uppercase text-primary hover:text-accent transition-colors"
+            >
+              See all projects →
+            </Link>
+          </div>
 
           <div className="flex flex-wrap gap-2 mb-8">
             {projectCategories
