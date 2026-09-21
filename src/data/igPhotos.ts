@@ -215,4 +215,5 @@ export const IG_FILES: string[] = [
   'highlight-11.jpg',
   'highlight-12.jpg',
   'highlight-13.jpg',
+  'highlight-14.jpg',
 ];
