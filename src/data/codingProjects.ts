@@ -157,10 +157,10 @@ export const codingProjects: CodingProject[] = [
     title: 'Resume Generator',
     repo: 'Resume-Generator',
     description:
-      'Connects a GitHub account, imports projects and generates structured resumes with AI-assisted descriptions.',
-    tech: ['React', 'GitHub API', 'AI Writing'],
+      'Connects a GitHub account, ranks projects against a role and generates a structured, printable resume without requiring account setup.',
+    tech: ['React', 'GitHub API', 'Local Drafts'],
     github: 'https://github.com/RaghavSobti37/Resume-Generator',
-    website: 'https://resume-generator-sandy.vercel.app',
+    website: 'https://resume-generator-app-raghavsobti37s-projects.vercel.app',
     language: 'JavaScript',
     featured: true,
     preview: {
