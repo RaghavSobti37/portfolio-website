@@ -152,15 +152,17 @@ export const CodingProjects = () => {
                         </div>
 
                         <div className="flex flex-wrap gap-4">
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-2 font-mono-meta text-primary hover:text-accent"
-                          >
-                            <Github className="w-3.5 h-3.5" />
-                            REPO ↗
-                          </a>
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-2 font-mono-meta text-primary hover:text-accent"
+                            >
+                              <Github className="w-3.5 h-3.5" />
+                              REPO ↗
+                            </a>
+                          )}
                           {project.website && (
                             <a
                               href={project.website}
@@ -175,7 +177,7 @@ export const CodingProjects = () => {
                         </div>
                       </div>
 
-                      <CommitSparkline repo={project.repo} weeks={26} />
+                      {project.github && <CommitSparkline repo={project.repo} weeks={26} />}
                     </div>
                   </div>
                 </div>

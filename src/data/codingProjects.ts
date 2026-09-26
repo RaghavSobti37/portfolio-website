@@ -4,7 +4,7 @@ export interface CodingProject {
   repo: string;
   description: string;
   tech: string[];
-  github: string;
+  github?: string;
   website?: string;
   language?: string;
   featured?: boolean;
@@ -134,9 +134,8 @@ export const codingProjects: CodingProject[] = [
     title: 'Auto Mailer',
     repo: 'Auto-Mailer',
     description:
-      'Automation for structured email outreach, repeated follow-ups and communication workflow efficiency.',
-    tech: ['JavaScript', 'Email Systems', 'Automation'],
-    github: 'https://github.com/RaghavSobti37/Auto-Mailer',
+      'Private, local-only email workspace. Contact data and operational records stay on the operator’s computer.',
+    tech: ['JavaScript', 'Local MongoDB', 'Email Automation'],
     website: 'https://auto-mailer-blue.vercel.app',
     language: 'JavaScript',
     featured: true,
