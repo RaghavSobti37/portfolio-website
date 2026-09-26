@@ -4,8 +4,9 @@
  *      EMAIL_ADDRESS / EMAIL_PASSWORD (or GMAIL_APP_PASSWORD / SMTP_PASS),
  *      RESUME_LEADS_SHEET_ID (optional)
  *
- * Sheet ACL: prefer configured sheet; on 403 create/reuse SA-owned
- * "BluePolaroid Resume Leads". Sheet failures never block email delivery.
+ * Sheet target: RESUME_LEADS_SHEET_ID or built-in default resume sheet.
+ * Never GOOGLE_SHEET_ID (CoreKnot newsletter — different spreadsheet).
+ * Sheet failures never block email delivery.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -168,13 +169,22 @@ function isSheetPermissionError(err) {
   );
 }
 
-function sheetsAuth(creds) {
+function sheetsOnlyAuth(creds) {
   return new google.auth.GoogleAuth({
     credentials: {
       client_email: creds.client_email,
       private_key: creds.private_key,
     },
-    // drive: find/create SA-owned sheet + share with inbox owner
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+}
+
+function sheetsAndDriveAuth(creds) {
+  return new google.auth.GoogleAuth({
+    credentials: {
+      client_email: creds.client_email,
+      private_key: creds.private_key,
+    },
     scopes: [
       'https://www.googleapis.com/auth/spreadsheets',
       'https://www.googleapis.com/auth/drive',
@@ -182,75 +192,14 @@ function sheetsAuth(creds) {
   });
 }
 
-async function canReadSheet(sheets, spreadsheetId) {
-  await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: 'A1:F1',
-  });
-}
-
-/** Prefer configured sheet; on 403 fall back to a sheet the service account owns. */
-async function resolveWritableSpreadsheetId(env, sheets, drive) {
-  const configured =
-    envGet(env, 'RESUME_LEADS_SHEET_ID', 'GOOGLE_SHEET_ID') || DEFAULT_SHEET_ID;
-
-  try {
-    await canReadSheet(sheets, configured);
-    return configured;
-  } catch (err) {
-    if (!isSheetPermissionError(err)) throw err;
-    console.warn(
-      `[resume-lead] no access to configured sheet ${configured}; using SA-owned "${SA_LEADS_SHEET_TITLE}"`
-    );
-  }
-
-  const q = [
-    `name='${SA_LEADS_SHEET_TITLE.replace(/'/g, "\\'")}'`,
-    "mimeType='application/vnd.google-apps.spreadsheet'",
-    'trashed=false',
-  ].join(' and ');
-
-  const listed = await drive.files.list({
-    q,
-    spaces: 'drive',
-    fields: 'files(id,name)',
-    pageSize: 1,
-  });
-  const existingId = listed.data.files?.[0]?.id;
-  if (existingId) return existingId;
-
-  const created = await sheets.spreadsheets.create({
-    requestBody: {
-      properties: { title: SA_LEADS_SHEET_TITLE },
-      sheets: [{ properties: { title: 'Leads' } }],
-    },
-  });
-  const id = created.data.spreadsheetId;
-  if (!id) throw new Error('Failed to create SA-owned leads spreadsheet');
-
-  const shareTo = envGet(env, 'EMAIL_ADDRESS', 'SMTP_USER') || DEFAULT_FROM;
-  try {
-    await drive.permissions.create({
-      fileId: id,
-      requestBody: {
-        type: 'user',
-        role: 'writer',
-        emailAddress: shareTo,
-      },
-      sendNotificationEmail: true,
-    });
-  } catch (shareErr) {
-    // Sheet still usable by SA; owner may open via Drive as SA later
-    console.warn(
-      `[resume-lead] created sheet ${id} but could not share with ${shareTo}:`,
-      shareErr instanceof Error ? shareErr.message : shareErr
-    );
-  }
-
-  console.info(
-    `[resume-lead] created SA-owned leads sheet ${id} (shared with ${shareTo}). Set RESUME_LEADS_SHEET_ID=${id} in Vercel when ready.`
-  );
-  return id;
+/**
+ * Resume leads sheet only — never reuse CoreKnot GOOGLE_SHEET_ID (newsletter).
+ * That env var pointed the SA at a different spreadsheet and caused 403s
+ * even when the resume sheet was shared correctly.
+ */
+export function resumeLeadsSheetCandidates(env) {
+  const ids = [envGet(env, 'RESUME_LEADS_SHEET_ID'), DEFAULT_SHEET_ID];
+  return [...new Set(ids.filter(Boolean))];
 }
 
 async function writeLeadRow(sheets, spreadsheetId, row) {
@@ -278,25 +227,101 @@ async function writeLeadRow(sheets, spreadsheetId, row) {
   });
 }
 
+async function ensureSaOwnedLeadsSheet(env, creds) {
+  const auth = sheetsAndDriveAuth(creds);
+  const sheets = google.sheets({ version: 'v4', auth });
+  const drive = google.drive({ version: 'v3', auth });
+
+  const q = [
+    `name='${SA_LEADS_SHEET_TITLE.replace(/'/g, "\\'")}'`,
+    "mimeType='application/vnd.google-apps.spreadsheet'",
+    'trashed=false',
+  ].join(' and ');
+
+  const listed = await drive.files.list({
+    q,
+    spaces: 'drive',
+    fields: 'files(id,name)',
+    pageSize: 1,
+  });
+  const existingId = listed.data.files?.[0]?.id;
+  if (existingId) return { sheets, spreadsheetId: existingId };
+
+  const created = await sheets.spreadsheets.create({
+    requestBody: {
+      properties: { title: SA_LEADS_SHEET_TITLE },
+      sheets: [{ properties: { title: 'Leads' } }],
+    },
+  });
+  const id = created.data.spreadsheetId;
+  if (!id) throw new Error('Failed to create SA-owned leads spreadsheet');
+
+  const shareTo = envGet(env, 'EMAIL_ADDRESS', 'SMTP_USER') || DEFAULT_FROM;
+  try {
+    await drive.permissions.create({
+      fileId: id,
+      requestBody: {
+        type: 'user',
+        role: 'writer',
+        emailAddress: shareTo,
+      },
+      sendNotificationEmail: true,
+    });
+  } catch (shareErr) {
+    console.warn(
+      `[resume-lead] created sheet ${id} but could not share with ${shareTo}:`,
+      shareErr instanceof Error ? shareErr.message : shareErr
+    );
+  }
+
+  console.info(
+    `[resume-lead] created SA-owned leads sheet ${id}. Set RESUME_LEADS_SHEET_ID=${id} in Vercel when ready.`
+  );
+  return { sheets, spreadsheetId: id };
+}
+
 async function appendToSheet(env, { name, email, company, portfolio, resume }) {
   const creds = getServiceAccount(env);
   if (!creds) {
     throw new Error('Sheets not configured (GOOGLE_SERVICE_ACCOUNT_EMAIL / GOOGLE_PRIVATE_KEY)');
   }
 
-  const auth = sheetsAuth(creds);
-  const sheets = google.sheets({ version: 'v4', auth });
-  const drive = google.drive({ version: 'v3', auth });
-  const spreadsheetId = await resolveWritableSpreadsheetId(env, sheets, drive);
-
-  await writeLeadRow(sheets, spreadsheetId, [
+  const row = [
     new Date().toISOString(),
     name,
     email,
     company,
     portfolio,
     resume,
-  ]);
+  ];
+
+  // Primary: sheets-only auth against resume sheet id(s) — not newsletter GOOGLE_SHEET_ID.
+  const sheets = google.sheets({ version: 'v4', auth: sheetsOnlyAuth(creds) });
+  const candidates = resumeLeadsSheetCandidates(env);
+  let lastErr = null;
+
+  for (const spreadsheetId of candidates) {
+    try {
+      await writeLeadRow(sheets, spreadsheetId, row);
+      return { spreadsheetId };
+    } catch (err) {
+      lastErr = err;
+      if (!isSheetPermissionError(err)) throw err;
+      console.warn(
+        `[resume-lead] cannot write sheet ${spreadsheetId}:`,
+        err instanceof Error ? err.message : err
+      );
+    }
+  }
+
+  // Last resort: SA-owned sheet (needs Drive API on the GCP project).
+  try {
+    const fallback = await ensureSaOwnedLeadsSheet(env, creds);
+    await writeLeadRow(fallback.sheets, fallback.spreadsheetId, row);
+    return { spreadsheetId: fallback.spreadsheetId };
+  } catch (fallbackErr) {
+    throw lastErr || fallbackErr;
+  }
 }
 
 async function sendViaGmailSmtp(env, { to, subject, text, html, pdfPath, attachmentName }) {
@@ -336,7 +361,7 @@ async function sendViaGmailSmtp(env, { to, subject, text, html, pdfPath, attachm
 
 /**
  * @param {object} [deps] optional injectables for tests
- * @returns {Promise<{ ok: true, kind?: string } | { ok: false, error: string, status: number }>}
+ * @returns {Promise<{ ok: true, kind?: string, sheetSynced?: boolean } | { ok: false, error: string, status: number }>}
  */
 export async function processResumeLead(body, env = process.env, deps = {}) {
   const appendLead = deps.appendToSheet || appendToSheet;
@@ -363,6 +388,7 @@ export async function processResumeLead(body, env = process.env, deps = {}) {
   }
 
   // Sheet is best-effort lead capture — never block PDF delivery on ACL/config issues.
+  let sheetSynced = false;
   try {
     await appendLead(env, {
       name,
@@ -371,6 +397,7 @@ export async function processResumeLead(body, env = process.env, deps = {}) {
       portfolio: variant.sheetPortfolio,
       resume: variant.sheetResume,
     });
+    sheetSynced = true;
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error('[resume-lead] sheet write failed (continuing to email):', msg);
@@ -390,5 +417,5 @@ export async function processResumeLead(body, env = process.env, deps = {}) {
     return { ok: false, status: 502, error: `Email send failed: ${msg}` };
   }
 
-  return { ok: true, kind: variant.kind };
+  return { ok: true, kind: variant.kind, sheetSynced };
 }
