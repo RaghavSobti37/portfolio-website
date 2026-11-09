@@ -118,6 +118,7 @@ export const codingProjects: CodingProject[] = [
     website: 'https://photo-cleaner-app.vercel.app',
     language: 'JavaScript',
     featured: true,
+    frame: '/project-frames/photo-cleaner.png',
     preview: {
       bg: '#111318',
       accent: '#ff4b4b',
@@ -162,6 +163,7 @@ export const codingProjects: CodingProject[] = [
     website: 'https://client-phi-ten-24.vercel.app',
     language: 'JavaScript',
     featured: true,
+    frame: '/project-frames/resume-gen.png',
     preview: {
       bg: '#f4f1ea',
       accent: '#111111',

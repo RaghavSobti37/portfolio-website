@@ -1,169 +1,62 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin } from 'lucide-react';
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { focusRing } from '@/components/coding/CodingHero';
 
 const navLinks = [
-  { name: 'Projects', href: '#projects' },
-  { name: 'Skills', href: '#skills' },
+  { name: 'Builds', href: '#projects' },
+  { name: 'Activity', href: '#activity' },
+  { name: 'Stack', href: '#skills' },
   { name: 'Experience', href: '#experience' },
-  { name: 'Contact', href: '#contact' },
 ];
 
+const linkClass = `font-body text-sm text-muted-foreground hover:text-foreground transition-colors ${focusRing}`;
+
 export const CodingNavigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleLinkClick = (href: string) => {
-    setIsMobileMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const goCinema = () => {
-    setIsMobileMenuOpen(false);
-    window.scrollTo(0, 0);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'glass py-4' : 'bg-transparent py-6'
-        }`}
-      >
-        <div className="container mx-auto px-6 flex items-center justify-between">
-          <span className="font-display text-xl sm:text-2xl font-bold tracking-wider text-foreground truncate">
-            RAGS<span className="text-accent">.</span>DEV
-          </span>
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background" aria-label="Main">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+        <Link to="/coding" className={`font-display text-xl font-bold tracking-tight ${focusRing}`}>
+          RAGS<span className="text-accent">.</span>DEV
+        </Link>
 
-          <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <button
-                  onClick={() => handleLinkClick(link.href)}
-                  className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-accent transition-colors duration-300 relative group"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
-                </button>
-              </li>
-            ))}
-            <li>
-              <Link
-                to="/"
-                onClick={goCinema}
-                className="font-display text-sm tracking-widest uppercase text-primary hover:text-accent transition-colors"
-              >
-                Creative <span className="whitespace-nowrap">Portfolio ↗</span>
-              </Link>
-            </li>
-            <li className="flex items-center gap-4 ml-4">
-              <a
-                href="https://www.linkedin.com/in/raghav-raj-sobti/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-muted-foreground hover:text-accent transition-colors"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="https://github.com/RaghavSobti37"
-                target="_blank"
-                rel="noreferrer"
-                className="text-muted-foreground hover:text-accent transition-colors"
-              >
-                <Github size={20} />
-              </a>
-            </li>
-          </ul>
-
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-foreground p-2"
-            aria-label="Toggle menu"
+        <div className="hidden md:flex items-center gap-7">
+          {navLinks.map((l) => (
+            <a key={l.name} href={l.href} className={linkClass}>{l.name}</a>
+          ))}
+          <Link to="/" className={linkClass}>Film portfolio</Link>
+          <a
+            href="mailto:raghavsobti37@gmail.com"
+            className={`inline-flex items-center h-9 px-4 bg-accent text-accent-foreground font-display text-sm font-medium hover:bg-accent/90 active:translate-y-px transition-colors ${focusRing}`}
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            Email me
+          </a>
         </div>
-      </motion.nav>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed inset-y-0 right-0 w-3/4 max-w-sm z-50 glass"
-          >
-            <div className="flex flex-col items-center justify-center h-full gap-8 px-8">
-              <Link
-                to="/"
-                onClick={goCinema}
-                className="font-mono-meta text-primary text-center"
-              >
-                Creative <span className="whitespace-nowrap">Portfolio ↗</span>
-              </Link>
-              {navLinks.map((link, index) => (
-                <motion.button
-                  key={link.name}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => handleLinkClick(link.href)}
-                  className="font-display text-2xl tracking-widest uppercase text-foreground hover:text-accent transition-colors"
-                >
-                  {link.name}
-                </motion.button>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-                className="flex items-center gap-6 mt-8"
-              >
-                <a
-                  href="https://www.linkedin.com/in/raghav-raj-sobti/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-foreground hover:text-accent transition-colors"
-                >
-                  <Linkedin size={28} />
-                </a>
-                <a
-                  href="https://github.com/RaghavSobti37"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-foreground hover:text-accent transition-colors"
-                >
-                  <Github size={28} />
-                </a>
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className={`md:hidden p-2 text-foreground ${focusRing}`}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 bg-background/80 z-40 md:hidden"
-          />
-        )}
-      </AnimatePresence>
-    </>
+      {open && (
+        <div className="md:hidden border-t border-border bg-background">
+          <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
+            {navLinks.map((l) => (
+              <a key={l.name} href={l.href} onClick={() => setOpen(false)} className="font-body text-base text-foreground">{l.name}</a>
+            ))}
+            <Link to="/" className="font-body text-base text-foreground">Film portfolio</Link>
+            <a href="mailto:raghavsobti37@gmail.com" className="font-body text-base text-accent">Email me</a>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };

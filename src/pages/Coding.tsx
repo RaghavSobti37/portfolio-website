@@ -16,7 +16,7 @@ const Coding = () => {
         path="/coding"
       />
       <CodingNavigation />
-      <main>
+      <main id="top">
         <CodingHero />
         <CodingActivity />
         <CodingProjects />

@@ -28,23 +28,19 @@ export const CommitSparkline = ({
 }) => {
   const { buckets, loading, error, lastPush, total } = useRepoCommitGraph(repo, weeks);
 
-  if (error) {
-    return <p className="font-mono text-[10px] text-muted-foreground/60">Graph unavailable</p>;
-  }
+  if (error) return null;
 
   return (
     <div className="space-y-2 pt-1">
-      <div className="flex items-baseline justify-between gap-3">
-        <p className="font-mono text-[9px] tracking-[0.18em] uppercase text-muted-foreground">
-          {weeks}w activity
-        </p>
-        <p className="font-mono text-[10px] text-muted-foreground">
-          {loading ? '…' : `${total} commits`}
-          {!loading && lastPush ? ` · ${relativeTime(lastPush)}` : ''}
+      <div className="flex items-baseline justify-between gap-3 font-body text-xs text-muted-foreground">
+        <p>Commits, last {weeks} weeks</p>
+        <p className="tabular-nums">
+          {loading ? 'Loading' : `${total} commits`}
+          {!loading && lastPush ? `, last push ${relativeTime(lastPush)}` : ''}
         </p>
       </div>
       {loading ? (
-        <div className="h-8 animate-pulse bg-muted/30" />
+        <div className="h-8 motion-safe:animate-pulse bg-muted/30" />
       ) : (
         <Bars buckets={buckets} />
       )}

@@ -1,88 +1,27 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ResumeLeadDialog } from '@/components/ResumeLeadDialog';
+import { focusRing } from '@/components/coding/CodingHero';
 
-const socialLinks = [
-  { label: 'GITHUB', href: 'https://github.com/RaghavSobti37' },
-  { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/raghav-raj-sobti/' },
-  { label: 'INSTAGRAM', href: 'https://www.instagram.com/bluepolaroid05/' },
-];
+const linkClass = `font-body text-muted-foreground hover:text-foreground transition-colors ${focusRing}`;
 
-const resumeLink = {
-  label: 'CREATIVE TECHNOLOGIST RESUME',
-};
-
-const MAIL = 'raghavsobti37@gmail.com';
-const MAILTO = `mailto:${MAIL}?subject=${encodeURIComponent('Project inquiry')}`;
-
-export const CodingFooter = () => {
-  const [resumeOpen, setResumeOpen] = useState(false);
-
-  return (
-    <footer id="contact" className="relative py-24 md:py-32 border-t border-border">
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="font-mono-meta text-accent mb-6">GOT AN IDEA?</p>
-          <h2 className="font-display text-[clamp(2.5rem,8vw,5.5rem)] font-bold tracking-tighter leading-[0.95] mb-10 max-w-3xl">
-            LET’S BUILD
-            <br />
-            SOMETHING SOLID.
-          </h2>
-
-          <a
-            href={MAILTO}
-            className="font-display text-xl md:text-2xl text-primary hover:text-accent transition-colors break-all"
-          >
-            {MAIL}
-          </a>
-
-          <div className="flex flex-wrap items-center gap-6 mt-10 mb-20">
-            {socialLinks.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                className="font-mono-meta text-muted-foreground hover:text-primary transition-colors"
-              >
-                {s.label} ↗
-              </a>
-            ))}
-            <button
-              type="button"
-              onClick={() => setResumeOpen(true)}
-              className="font-mono-meta text-emerald-500 hover:text-emerald-400 transition-colors"
-            >
-              {resumeLink.label} ↗
-            </button>
-            <Link
-              to="/"
-              className="font-mono-meta text-accent hover:text-accent/80 transition-colors md:ml-auto w-fit shrink-0"
-            >
-              GO TO CREATIVE <span className="whitespace-nowrap">PORTFOLIO ↗</span>
-            </Link>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-t border-border pt-8">
-            <p className="font-mono-meta">RAGS.DEV © {new Date().getFullYear()}</p>
-            <p className="font-body text-sm text-muted-foreground">
-              Built with React, TypeScript &amp; systems thinking.
-            </p>
-          </div>
-        </motion.div>
+export const CodingFooter = () => (
+  <footer id="contact" className="py-20 md:py-28 border-t border-border">
+    <div className="max-w-6xl mx-auto px-6">
+      <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight max-w-2xl [text-wrap:balance]">
+        Need a website or an internal tool built?
+      </h2>
+      <a
+        href="mailto:raghavsobti37@gmail.com"
+        className={`mt-8 inline-block font-display text-2xl md:text-3xl text-accent underline decoration-accent/40 underline-offset-8 hover:decoration-accent transition-colors break-all ${focusRing}`}
+      >
+        raghavsobti37@gmail.com
+      </a>
+      <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+        <a href="https://github.com/RaghavSobti37" target="_blank" rel="noreferrer" className={linkClass}>GitHub</a>
+        <a href="https://www.linkedin.com/in/raghav-raj-sobti/" target="_blank" rel="noreferrer" className={linkClass}>LinkedIn</a>
+        <a href="/resumes/raghav-creative-technologist-resume.pdf" target="_blank" rel="noreferrer" className={linkClass}>Résumé (PDF)</a>
+        <Link to="/" className={linkClass}>Film portfolio</Link>
       </div>
-
-      <ResumeLeadDialog
-        open={resumeOpen}
-        onOpenChange={setResumeOpen}
-        portfolio="coding"
-        resumeLabel={resumeLink.label}
-      />
-    </footer>
-  );
-};
+      <p className="mt-16 font-body text-sm text-muted-foreground">© {new Date().getFullYear()} Raghav Raj Sobti</p>
+    </div>
+  </footer>
+);
