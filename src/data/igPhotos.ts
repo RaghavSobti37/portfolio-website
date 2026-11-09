@@ -1,6 +1,13 @@
 // Generated from @bluepolaroid05 Instagram (posts + highlights), curated: professional/natural only.
 // Files live in /public/gallery/instagram/.
 export const IG_FILES: string[] = [
+  // Havells mYOUsic Bootcamp, Jaipur (2026)
+  'De9OyFejTNG-0.jpg',
+  'De9OyFejTNG-1.jpg',
+  'De9OyFejTNG-2.jpg',
+  'De9o4aFn1O7-0.jpg',
+  'De_0C8GmtTm-0.jpg',
+  'DfE51A6gcRJ-0.jpg',
   'C-iMAKvIYrj-1.jpg',
   'C-iMAKvIYrj-2.jpg',
   'C17D2BGyJPd-0.jpg',

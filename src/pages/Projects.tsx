@@ -25,6 +25,10 @@ const openExternal = (item: Project) => {
   }
 };
 
+// Only YouTube counts are real; Instagram numbers in engagement.ts are sort estimates.
+const ytViews = (p: Project) =>
+  p.platform === 'youtube' && p.views ? `${p.views.toLocaleString('en')} views` : null;
+
 const Projects = () => {
   const [active, setActive] = useState<Project | null>(null);
   const [cat, setCat] = useState('all');
@@ -121,7 +125,10 @@ const Projects = () => {
                   <p className="font-display text-sm text-paper font-medium truncate">
                     {project.title}
                   </p>
-                  <p className="font-mono text-[9px] text-paper/70 truncate">{project.role}</p>
+                  <p className="font-mono text-[9px] text-paper/70 truncate">
+                    {project.role}
+                    {ytViews(project) && <span className="text-paper/55"> · {ytViews(project)}</span>}
+                  </p>
                 </div>
               </motion.button>
             ))}
@@ -168,6 +175,7 @@ const Projects = () => {
                 <h3 className="font-display text-2xl font-bold">{active.title}</h3>
                 <p className="font-mono-meta mt-1">
                   {active.year} · {active.role}
+                  {ytViews(active) && ` · ${ytViews(active)}`}
                 </p>
               </div>
               <button

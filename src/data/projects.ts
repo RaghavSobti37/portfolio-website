@@ -694,6 +694,18 @@ const projectsData: Project[] = [
     platform: "instagram",
     featured: true
   },
+  {
+    id: 61,
+    title: "Gogangaa",
+    role: "AI Filmmaker",
+    year: "2026",
+    description: "A 9-minute AI-generated short film explaining the Gogangaa project for Shri Kshetra Dattadham.",
+    image: "/thumbnails/ai-film-gogangaa.jpg",
+    category: "AI Film",
+    videoUrl: "https://www.youtube.com/embed/mwHVQmIkvKw",
+    platform: "youtube",
+    featured: true
+  },
 ];
 
 export const projects = [...projectsData]
@@ -710,6 +722,7 @@ export const projectCategories = [
   { id: 'all', label: 'All' },
   { id: 'Music Video', label: 'Music Videos' },
   { id: 'short-film', label: 'Short Films' },
+  { id: 'AI Film', label: 'AI Films' },
   { id: 'interview', label: 'Interviews' },
   { id: 'event', label: 'Events' },
   { id: 'showreel', label: 'Showreels' },

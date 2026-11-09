@@ -43,7 +43,9 @@ export const reelSeries = [
   { id: 'rohith-fun', label: 'Rohith · Fun' },
   { id: 'havells-dumka', label: 'Havells · Dumka' },
   { id: 'havells-noida', label: 'Havells · Noida' },
+  { id: 'havells-jaipur', label: 'Havells · Jaipur' },
   { id: 'havells-other', label: 'Havells · Other' },
+  { id: 'dattadham', label: 'Dattadham' },
   { id: 'weekly-beat', label: 'Weekly Beat' },
   { id: 'tsc', label: 'TSC Academy' },
   { id: 'harshaduhita', label: 'HarshaDuhita' },
@@ -230,6 +232,48 @@ export const reels: Reel[] = [
     role: 'Shot',
     year: '2025',
     url: 'https://www.instagram.com/reel/DVV9IO5k6vP/',
+  },
+  // Havells mYOUsic Bootcamp — Jaipur (photo posts)
+  {
+    id: 'hj1',
+    title: 'Havells mYOUsic Bootcamp · Jaipur 01',
+    series: 'havells-jaipur',
+    role: 'Photographer',
+    year: '2026',
+    url: 'https://www.instagram.com/p/De9OyFejTNG/',
+  },
+  {
+    id: 'hj2',
+    title: 'Havells mYOUsic Bootcamp · Jaipur 02',
+    series: 'havells-jaipur',
+    role: 'Photographer',
+    year: '2026',
+    url: 'https://www.instagram.com/p/De9o4aFn1O7/',
+  },
+  {
+    id: 'hj3',
+    title: 'Havells mYOUsic Bootcamp · Jaipur 03',
+    series: 'havells-jaipur',
+    role: 'Photographer',
+    year: '2026',
+    url: 'https://www.instagram.com/p/De_0C8GmtTm/',
+  },
+  {
+    id: 'hj4',
+    title: 'Havells mYOUsic Bootcamp · Jaipur 04',
+    series: 'havells-jaipur',
+    role: 'Photographer',
+    year: '2026',
+    url: 'https://www.instagram.com/p/DfE51A6gcRJ/',
+  },
+  // Shri Kshetra Dattadham
+  {
+    id: 'dd1',
+    title: 'Dattadham · Sundar Sundar Re Avadhut',
+    series: 'dattadham',
+    role: 'Shot',
+    year: '2026',
+    url: 'https://www.instagram.com/reel/DcjCC1YOeRV/',
   },
   // Havells other
   {
