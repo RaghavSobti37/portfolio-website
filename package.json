@@ -16,6 +16,7 @@
     "test:resume-lead-softfail": "node scripts/test-resume-lead-softfail.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
     "@hookform/resolvers": "^3.10.0",
     "@microsoft/clarity": "^1.0.2",
     "@radix-ui/react-accordion": "^1.2.11",

@@ -1,19 +1,16 @@
+import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Navigation } from '@/components/Navigation';
-import { ReelsArchiveSection } from '@/components/ReelsArchiveSection';
-import { FooterSection } from '@/components/FooterSection';
 import { Seo } from '@/components/Seo';
-import Projects from '@/pages/Projects';
-import Gallery from '@/pages/Gallery';
-import { projects } from '@/data/projects';
+import { StudioHeader, StudioContact, Lightbox, type Playable } from '@/components/studio/Studio';
+import { projects, projectCategories } from '@/data/projects';
+import { reels, reelSeries, reelViews, getReelShortcode } from '@/data/reels';
 import { allPhotos } from '@/data/photos';
 
 const tabs = [
-  { id: 'films', label: 'Films & videos', count: projects.length },
-  { id: 'reels', label: 'Reels' },
+  { id: 'films', label: 'Films and videos', count: projects.length },
+  { id: 'reels', label: 'Reels', count: reels.length },
   { id: 'photos', label: 'Photos', count: allPhotos.length },
 ] as const;
-
 type TabId = (typeof tabs)[number]['id'];
 
 const seo: Record<TabId, { title: string; description: string }> = {
@@ -32,53 +29,157 @@ const seo: Record<TabId, { title: string; description: string }> = {
   },
 };
 
-/** One place for everything: films/videos, reels and photos as tabs. */
+const PAGE = 24;
+
+/** Reel thumbnails live in /reels or /thumbnails; hide the image if neither exists. */
+function ReelImg({ url, alt }: { url: string; alt: string }) {
+  const code = getReelShortcode(url);
+  const [src, setSrc] = useState(`/reels/${code}.jpg`);
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      onError={() => (src.startsWith('/reels/') ? setSrc(`/thumbnails/ig-${code}.jpg`) : setSrc(''))}
+      style={src ? undefined : { visibility: 'hidden' }}
+    />
+  );
+}
+
+/** Everything in one place: films and videos, reels, photos. */
 const Work = ({ defaultTab = 'films' }: { defaultTab?: TabId }) => {
   const [params, setParams] = useSearchParams();
   const fromUrl = params.get('tab') as TabId | null;
   const tab: TabId = fromUrl && tabs.some((t) => t.id === fromUrl) ? fromUrl : defaultTab;
+  const [cat, setCat] = useState('all');
+  const [series, setSeries] = useState('all');
+  const [shown, setShown] = useState(PAGE);
+  const [active, setActive] = useState<Playable | null>(null);
+
+  const films = cat === 'all' ? projects : projects.filter((p) => p.category === cat);
+  const reelList = useMemo(
+    () =>
+      [...(series === 'all' ? reels : reels.filter((r) => r.series === series))].sort(
+        (a, b) => reelViews(b) - reelViews(a) || a.id.localeCompare(b.id)
+      ),
+    [series]
+  );
+
+  const switchTab = (id: TabId) => {
+    setShown(PAGE);
+    setParams(id === 'films' ? {} : { tab: id }, { replace: true });
+  };
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="st">
       <Seo {...seo[tab]} path="/work" />
-      <Navigation />
+      <StudioHeader />
 
-      <main className="pt-28 md:pt-36">
-        <div className="container mx-auto px-6">
-          <p className="font-mono-meta text-primary mb-3">WORK</p>
-          <h1 className="font-display text-[clamp(2.75rem,9vw,6rem)] font-bold tracking-tighter leading-[0.9] mb-4">
-            Everything I’ve made
-          </h1>
-          <p className="font-body text-muted-foreground max-w-xl mb-10">
-            Music videos, short films, AI films, festivals, artist interviews, brand reels and stills — in one place.
-          </p>
-
-          <div role="tablist" aria-label="Work type" className="flex flex-wrap gap-2 border-b border-border mb-10">
-            {tabs.map((t) => (
-              <button
-                key={t.id}
-                role="tab"
-                aria-selected={tab === t.id}
-                onClick={() => setParams(t.id === 'films' ? {} : { tab: t.id }, { replace: true })}
-                className={`font-display text-sm md:text-base tracking-widest uppercase px-4 py-3 -mb-px border-b-2 transition-colors ${
-                  tab === t.id
-                    ? 'border-accent text-foreground'
-                    : 'border-transparent text-muted-foreground hover:text-primary'
-                }`}
-              >
-                {t.label}
-                {'count' in t && <span className="ml-2 font-mono text-[10px] text-muted-foreground">{t.count}</span>}
-              </button>
-            ))}
-          </div>
+      <main>
+        <div className="st-page-title">
+          <h1>Work</h1>
         </div>
 
-        {tab === 'films' && <Projects embedded />}
-        {tab === 'reels' && <ReelsArchiveSection />}
-        {tab === 'photos' && <Gallery embedded />}
+        <div className="st-tabs" role="tablist" aria-label="Type of work">
+          {tabs.map((t) => (
+            <button key={t.id} role="tab" aria-selected={tab === t.id} onClick={() => switchTab(t.id)}>
+              {t.label}
+              <sup>{t.count}</sup>
+            </button>
+          ))}
+        </div>
+
+        {tab === 'films' && (
+          <>
+            <div className="st-filters">
+              {projectCategories.map((c) => (
+                <button key={c.id} aria-pressed={cat === c.id} onClick={() => setCat(c.id)}>
+                  {c.label}
+                </button>
+              ))}
+            </div>
+            <div className="st-grid">
+              {films.map((p) => (
+                <button
+                  key={p.id}
+                  className="st-card"
+                  onClick={() => setActive({ title: p.title, sub: `${p.role}, ${p.year}`, url: p.videoUrl, platform: p.platform })}
+                >
+                  <div className="img">
+                    <img src={p.image} alt={p.title} loading="lazy" />
+                  </div>
+                  <div className="t">{p.title}</div>
+                  <div className="r">
+                    {p.role}, {p.year}
+                  </div>
+                </button>
+              ))}
+            </div>
+            {films.length === 0 && <p className="st-filters">Nothing in this category yet.</p>}
+          </>
+        )}
+
+        {tab === 'reels' && (
+          <>
+            <div className="st-filters">
+              {reelSeries.map((s) => (
+                <button
+                  key={s.id}
+                  aria-pressed={series === s.id}
+                  onClick={() => {
+                    setSeries(s.id);
+                    setShown(PAGE);
+                  }}
+                >
+                  {s.label.replace(' · ', ', ')}
+                </button>
+              ))}
+            </div>
+            <div className="st-grid tall">
+              {reelList.slice(0, shown).map((r) => (
+                <button
+                  key={r.id}
+                  className="st-card"
+                  onClick={() => setActive({ title: r.title, sub: `${r.role}, ${r.year}`, url: r.url, platform: 'instagram' })}
+                >
+                  <div className="img">
+                    <ReelImg url={r.url} alt={r.title} />
+                  </div>
+                  <div className="t">{r.title}</div>
+                  <div className="r">
+                    {r.role}, {r.year}
+                  </div>
+                </button>
+              ))}
+            </div>
+            {reelList.length > shown && (
+              <button className="st-more" onClick={() => setShown((n) => n + PAGE)}>
+                Show more reels
+              </button>
+            )}
+          </>
+        )}
+
+        {tab === 'photos' && (
+          <>
+            <div className="st-photos">
+              {allPhotos.slice(0, shown * 2).map((ph, i) => (
+                <button key={ph.src} onClick={() => setActive({ title: `Still ${i + 1}`, url: ph.src, platform: 'image' })}>
+                  <img src={ph.src} alt={`Still ${i + 1} from Raghav’s photo archive`} loading="lazy" />
+                </button>
+              ))}
+            </div>
+            {allPhotos.length > shown * 2 && (
+              <button className="st-more" onClick={() => setShown((n) => n + PAGE)}>
+                Show more photos
+              </button>
+            )}
+          </>
+        )}
       </main>
 
-      <FooterSection />
+      <StudioContact />
+      <Lightbox item={active} onClose={() => setActive(null)} />
     </div>
   );
 };
