@@ -90,8 +90,8 @@ const path = [
     date: '2026',
     era: '07',
     title: 'AI Filmmaker',
-    subtitle: 'Gogangaa · 9-min AI short',
-    description: 'Made Gogangaa, a 9-minute AI film for Shri Kshetra Dattadham — camera thinking applied to generative tools.',
+    subtitle: 'GauGanga · 9-min AI short',
+    description: 'Made GauGanga, a 9-minute AI film for Shri Kshetra Dattadham — camera thinking applied to generative tools.',
     beat: 'New tools, same eye',
   },
 ];

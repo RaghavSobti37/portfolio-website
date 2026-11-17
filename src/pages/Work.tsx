@@ -4,6 +4,7 @@ import { Seo } from '@/components/Seo';
 import { StudioHeader, StudioContact, StudioCta, Lightbox, type Playable } from '@/components/studio/Studio';
 import { projects, projectCategories } from '@/data/projects';
 import { reels, reelSeries, reelViews, getReelShortcode } from '@/data/reels';
+import { LoopMedia, sourceUrl } from '@/components/studio/LoopMedia';
 import { allPhotos } from '@/data/photos';
 
 const tabs = [
@@ -31,18 +32,14 @@ const seo: Record<TabId, { title: string; description: string }> = {
 
 const PAGE = 24;
 
-/** Reel thumbnails live in /reels or /thumbnails; hide the image if neither exists. */
-function ReelImg({ url, alt }: { url: string; alt: string }) {
+/** Reel tiles: a local loop if there is one, else the reel still with a slow push-in. */
+function ReelMedia({ url, alt }: { url: string; alt: string }) {
   const code = getReelShortcode(url);
-  const [src, setSrc] = useState(`/reels/${code}.jpg`);
+  const [img, setImg] = useState(`/reels/${code}.jpg`);
   return (
-    <img
-      src={src}
-      alt={alt}
-      loading="lazy"
-      onError={() => (src.startsWith('/reels/') ? setSrc(`/thumbnails/ig-${code}.jpg`) : setSrc(''))}
-      style={src ? undefined : { visibility: 'hidden' }}
-    />
+    <div onErrorCapture={() => img.startsWith('/reels/') && setImg(`/thumbnails/ig-${code}.jpg`)}>
+      <LoopMedia url={url} image={img} alt={alt} className="img" />
+    </div>
   );
 }
 
@@ -100,19 +97,13 @@ const Work = ({ defaultTab = 'films' }: { defaultTab?: TabId }) => {
             </div>
             <div className="st-grid">
               {films.map((p) => (
-                <button
-                  key={p.id}
-                  className="st-card"
-                  onClick={() => setActive({ title: p.title, sub: `${p.role}, ${p.year}`, url: p.videoUrl, platform: p.platform })}
-                >
-                  <div className="img">
-                    <img src={p.image} alt={p.title} loading="lazy" />
-                  </div>
+                <a key={p.id} className="st-card" href={sourceUrl(p.videoUrl)} target="_blank" rel="noreferrer">
+                  <LoopMedia url={p.videoUrl} image={p.image} alt={p.title} className="img" />
                   <div className="t">{p.title}</div>
                   <div className="r">
                     {p.role}, {p.year}
                   </div>
-                </button>
+                </a>
               ))}
             </div>
             {films.length === 0 && <p className="st-filters">Nothing in this category yet.</p>}
@@ -137,19 +128,13 @@ const Work = ({ defaultTab = 'films' }: { defaultTab?: TabId }) => {
             </div>
             <div className="st-grid tall">
               {reelList.slice(0, shown).map((r) => (
-                <button
-                  key={r.id}
-                  className="st-card"
-                  onClick={() => setActive({ title: r.title, sub: `${r.role}, ${r.year}`, url: r.url, platform: 'instagram' })}
-                >
-                  <div className="img">
-                    <ReelImg url={r.url} alt={r.title} />
-                  </div>
+                <a key={r.id} className="st-card" href={sourceUrl(r.url)} target="_blank" rel="noreferrer">
+                  <ReelMedia url={r.url} alt={r.title} />
                   <div className="t">{r.title}</div>
                   <div className="r">
                     {r.role}, {r.year}
                   </div>
-                </button>
+                </a>
               ))}
             </div>
             {reelList.length > shown && (

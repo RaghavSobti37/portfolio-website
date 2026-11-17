@@ -696,10 +696,10 @@ const projectsData: Project[] = [
   },
   {
     id: 61,
-    title: "Gogangaa",
+    title: "GauGanga",
     role: "AI Filmmaker",
     year: "2026",
-    description: "A 9-minute AI-generated short film explaining the Gogangaa project for Shri Kshetra Dattadham.",
+    description: "A 9-minute AI-generated short film explaining the GauGanga project for Shri Kshetra Dattadham.",
     image: "/thumbnails/ai-film-gogangaa.jpg",
     category: "AI Film",
     videoUrl: "https://www.youtube.com/embed/mwHVQmIkvKw",
