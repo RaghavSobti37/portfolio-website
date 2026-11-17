@@ -296,3 +296,58 @@ const entries = pages
 if (entries) sm = sm.replace('</urlset>', `${entries}\n</urlset>`);
 writeFileSync(smPath, sm);
 console.log(`service pages: ${pages.length} written`);
+// ---------------------------------------------------------------------------
+// Crawlable fallbacks for the React routes "/" and "/work": the real content is
+// placed inside #root so search engines see text and links even before JS runs.
+// React replaces it on load, so visitors never see this markup.
+const projSrc = readFileSync(join(process.cwd(), 'src/data/projects.ts'), 'utf8');
+const works = [...projSrc.matchAll(/title: "([^"]+)",\s*role: "([^"]+)",\s*year: "(\d+)",\s*description: "([^"]*)",\s*image: "([^"]+)",\s*category: "([^"]+)",\s*videoUrl: "([^"]+)"/g)].map(
+  ([, title, role, year, description, image, category, videoUrl]) => {
+    const yt = videoUrl.match(/(?:embed\/|v=)([\w-]{11})/)?.[1];
+    return { title, role, year, description, image, category, url: yt ? `https://www.youtube.com/watch?v=${yt}` : videoUrl.split('?')[0] };
+  }
+);
+const tpl = readFileSync(join(OUT, 'index.html'), 'utf8');
+const setHead = (html, { title, desc, path }) =>
+  html
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`)
+    .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${esc(desc)}$2`)
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${SITE}${path}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${SITE}${path}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${esc(title)}$2`)
+    .replace(/(<meta\s+property="og:description"\s+content=")[^"]*(")/, `$1${esc(desc)}$2`);
+const workList = (list) =>
+  `<ul>${list.map((w) => `<li><a href="${esc(w.url)}">${esc(w.title)}</a> — ${esc(w.role)}, ${w.year}. ${esc(w.description)}</li>`).join('')}</ul>`;
+const svcList = `<ul>${PAGES.map((p) => `<li><a href="/services/${p.slug}">${esc(p.service)}</a>: ${esc(p.desc)}</li>`).join('')}</ul>`;
+const fallback = (inner) => `<div id="root"><div class="seo-fallback">${inner}</div></div>`;
+
+const homeInner = `<h1>Raghav Raj Sobti — music films, festivals and AI films</h1>
+<p>Cinematographer, director and video editor in Mumbai, working across India under BluePolaroid. Creative director of NH7 Weekender films (2026), director of Ek Kamra and The Last Page, maker of the AI film GauGanga, NYFA-trained, with about 15.8M views across films and artist interviews.</p>
+<h2>Services</h2>${svcList}
+<h2>Selected work</h2>${workList(works.slice(0, 20))}
+<p><a href="/work">All work, reels and photos</a> · <a href="mailto:${EMAIL}">${EMAIL}</a> · <a href="https://wa.me/${WA}">WhatsApp ${PHONE}</a></p>`;
+writeFileSync(join(OUT, 'index.html'), tpl.replace('<div id="root"></div>', fallback(homeInner)));
+
+const workTitle = 'Work | Raghav Raj Sobti (BluePolaroid) — Music Videos, Films, Events & AI Films';
+const workDesc = `All ${works.length} films and videos by Raghav Raj Sobti (BluePolaroid), Mumbai — music videos, short films, AI films, festival and concert films, artist interviews, brand reels and photography.`;
+const workLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: workTitle,
+  url: `${SITE}/work`,
+  about: person,
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: works.map((w, i) => ({
+      '@type': 'ListItem', position: i + 1,
+      item: { '@type': 'CreativeWork', name: w.title, genre: w.category, dateCreated: w.year, url: w.url, image: `${SITE}${w.image}`, creator: person, description: w.description },
+    })),
+  },
+};
+const workHtml = setHead(tpl, { title: workTitle, desc: workDesc, path: '/work' })
+  .replace('</head>', `<script type="application/ld+json">${JSON.stringify(workLd)}</script>\n</head>`)
+  .replace('<div id="root"></div>', fallback(`<h1>Work — Raghav Raj Sobti</h1><p>${esc(workDesc)}</p>${workList(works)}`));
+mkdirSync(join(OUT, 'work'), { recursive: true });
+writeFileSync(join(OUT, 'work', 'index.html'), workHtml);
+console.log(`seo fallbacks: home + work (${works.length} works)`);
+
