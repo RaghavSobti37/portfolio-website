@@ -151,32 +151,32 @@ const PAGES = [
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const CSS = `
-:root{--paper:#ededea;--ink:#141414;--graphite:#6e6e69;--rule:#cfcfc9;--blue:#2340e8;--pad:clamp(16px,3.2vw,48px)}
+:root{--paper:#ebe5d8;--ink:#131c33;--graphite:#6d6253;--rule:#d2c8b4;--blue:#2445d4;--navy:#142057;--ochre:#b07a26;--moss:#56603d;--pad:clamp(16px,3.2vw,48px)}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 'Archivo','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .wrap{padding:0 var(--pad)}
 nav{display:flex;justify-content:space-between;align-items:baseline;padding:18px var(--pad)}
-nav .logo{font-weight:600}nav .logo span{font-weight:400;color:var(--graphite);margin-left:10px;font-size:15px}
+nav .logo{font-weight:600;color:var(--blue)}nav .logo span{font-weight:400;color:var(--graphite);margin-left:10px;font-size:15px}
 nav .links{display:flex;gap:clamp(14px,2.4vw,32px);font-size:15px;color:var(--graphite)}nav .links a:hover{color:var(--ink)}
-.kicker{font-size:15px;color:var(--graphite);margin:clamp(48px,8vw,120px) 0 14px}
+.kicker{font-size:15px;color:var(--ochre);margin:clamp(48px,8vw,120px) 0 14px}
 h1{font-weight:500;font-size:clamp(2.4rem,6vw,6rem);line-height:.95;letter-spacing:-.045em;margin:0 0 28px;max-width:15ch}
-h2{font-size:15px;font-weight:600;margin:72px 0 0;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+h2{font-size:15px;font-weight:600;color:var(--moss);margin:72px 0 0;padding-bottom:14px;border-bottom:1px solid var(--rule)}
 .lead{font-size:clamp(1.15rem,1.8vw,1.45rem);line-height:1.35;letter-spacing:-.01em;max-width:52ch;margin:0}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0}
-.btn{display:inline-block;padding:12px 20px;border:1px solid var(--ink);font-size:15px}
-.btn.p{background:var(--ink);color:var(--paper)}.btn:hover{background:var(--ink);color:var(--paper)}
+.btn{display:inline-block;padding:12px 20px;border:1px solid var(--blue);color:var(--blue);font-size:15px}
+.btn.p{background:var(--blue);color:var(--paper)}.btn:hover{background:var(--navy);border-color:var(--navy);color:var(--paper)}
 ul.offers{list-style:none;padding:0;margin:0}ul.offers li{padding:14px 0;border-bottom:1px solid var(--rule);font-size:clamp(1.05rem,1.6vw,1.3rem);letter-spacing:-.01em}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:32px 20px;margin-top:20px}
 .card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#dcdcd7}
-.card div{padding-top:10px}.card b{display:block;font-weight:500}.card small{color:var(--graphite);font-size:14px}
+.card div{padding-top:10px}.card b{display:block;font-weight:500}.card:hover b{color:var(--blue)}.card small{color:var(--graphite);font-size:14px}
 ol.steps{list-style:none;padding:0;margin:0;counter-reset:s}ol.steps li{counter-increment:s;padding:14px 0;border-bottom:1px solid var(--rule)}
-ol.steps li::before{content:counter(s);color:var(--graphite);display:inline-block;width:2.2em}
+ol.steps li::before{content:counter(s);color:var(--ochre);display:inline-block;width:2.2em}
 details{border-bottom:1px solid var(--rule);padding:14px 0}details summary{cursor:pointer;font-weight:500}details p{color:var(--graphite);margin:10px 0 0;max-width:60ch}
 .svc{list-style:none;padding:0;margin:0;border-top:1px solid var(--rule)}
 .svc a{display:grid;grid-template-columns:minmax(0,22rem) 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--rule)}
 .svc b{font-weight:500;font-size:clamp(1.25rem,2vw,1.6rem);letter-spacing:-.02em}.svc span{color:var(--graphite);max-width:60ch}.svc a:hover b{color:var(--blue)}
-footer{margin-top:120px;background:var(--ink);color:#c9c9c4;padding:56px var(--pad) 40px;font-size:15px}
+footer{margin-top:120px;background:var(--navy);color:#c9d1f5;padding:56px var(--pad) 40px;font-size:15px}
 footer a{color:var(--paper)}footer p{margin:0 0 12px;max-width:80ch}
 @media (max-width:640px){nav .logo span{display:none}nav .links{gap:14px;font-size:14px}.svc a{grid-template-columns:1fr;gap:4px}}
 `;

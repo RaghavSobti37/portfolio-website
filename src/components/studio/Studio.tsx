@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '@fontsource-variable/archivo/wdth.css';
 import '@/styles/studio.css';
@@ -6,28 +6,65 @@ import '@/styles/studio.css';
 export const EMAIL = 'raghavsobti37@gmail.com';
 export const WHATSAPP = 'https://wa.me/918591499393?text=' + encodeURIComponent('Hi Raghav, I have a project: ');
 
-/** Sticky header: name on the left, four places on the right. */
+/** Sticky header: name on the left, four places on the right (a full-screen menu on phones). */
 export function StudioHeader() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
   const goHomeSection = (id: string) => {
+    setOpen(false);
     if (pathname === '/') document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     else navigate('/', { state: { scrollTo: `#${id}` } });
   };
+  const toContact = () => {
+    setOpen(false);
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
   return (
-    <header className="st-head">
+    <header className={`st-head${open ? ' menu-open' : ''}`}>
       <Link to="/" className="st-name" onClick={() => window.scrollTo(0, 0)}>
         Raghav Raj Sobti<small>BluePolaroid</small>
       </Link>
-      <nav className="st-nav" aria-label="Main">
-        <Link to="/work" aria-current={pathname === '/work' ? 'page' : undefined}>Work</Link>
+      <button type="button" className="st-menu-btn" aria-expanded={open} onClick={() => setOpen(true)}>
+        Menu
+      </button>
+      <nav className={`st-nav${open ? ' open' : ''}`} aria-label="Main">
+        <button type="button" className="close" onClick={() => setOpen(false)}>
+          Close
+        </button>
+        <Link to="/work" onClick={() => setOpen(false)} aria-current={pathname === '/work' ? 'page' : undefined}>
+          Work
+        </Link>
         <a href="/services">Services</a>
-        <button type="button" onClick={() => goHomeSection('about')}>About</button>
-        <button type="button" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+        <button type="button" onClick={() => goHomeSection('about')}>
+          About
+        </button>
+        <button type="button" onClick={toContact}>
           Contact
         </button>
+        <a className="mini" href={WHATSAPP}>
+          WhatsApp +91 85914 99393
+        </a>
       </nav>
     </header>
+  );
+}
+
+/** Phone-only bar so starting a project is always one tap away. */
+export function StudioCta() {
+  return (
+    <div className="st-cta">
+      <a className="p" href={WHATSAPP}>
+        WhatsApp me
+      </a>
+      <a href={`mailto:${EMAIL}?subject=${encodeURIComponent('Project enquiry')}`}>Email</a>
+    </div>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Seo } from '@/components/Seo';
-import { StudioHeader, StudioContact, Lightbox, type Playable } from '@/components/studio/Studio';
+import { StudioHeader, StudioContact, StudioCta, Lightbox, type Playable } from '@/components/studio/Studio';
 import { projects, projectCategories } from '@/data/projects';
 import { reels, reelSeries, reelViews, getReelShortcode } from '@/data/reels';
 import { allPhotos } from '@/data/photos';
@@ -179,6 +179,7 @@ const Work = ({ defaultTab = 'films' }: { defaultTab?: TabId }) => {
       </main>
 
       <StudioContact />
+      <StudioCta />
       <Lightbox item={active} onClose={() => setActive(null)} />
     </div>
   );
