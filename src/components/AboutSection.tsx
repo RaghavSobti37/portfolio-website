@@ -33,7 +33,7 @@ const storyTimeline = [
   { year: '2023', line: 'Production / Music Films' },
   { year: '2024', line: 'Artist Stories / Events' },
   { year: '2025', line: 'NYFA Cinematography + Director' },
-  { year: '2026', line: 'Cinema × Code' },
+  { year: '2026', line: 'Festivals · AI Film · Code' },
 ];
 
 /** Vertical path — each step builds on the last */
@@ -77,6 +77,22 @@ const path = [
     subtitle: '15-week Cinematography — NYFA',
     description: 'Lighting, camera, pacing, set practice, DaVinci Resolve, colour — craft with grammar.',
     beat: 'Sharpen craft',
+  },
+  {
+    date: '2026',
+    era: '06',
+    title: 'Creative Director',
+    subtitle: 'NH7 Weekender · 90 Seconds With',
+    description: 'Aashiqana and The Team for NH7 Weekender, plus a run of 90-second artist interviews — Gini, Aditya Gadhvi, Maan Panu, Vichaar.',
+    beat: 'Lead the story',
+  },
+  {
+    date: '2026',
+    era: '07',
+    title: 'AI Filmmaker',
+    subtitle: 'Gogangaa · 9-min AI short',
+    description: 'Made Gogangaa, a 9-minute AI film for Shri Kshetra Dattadham — camera thinking applied to generative tools.',
+    beat: 'New tools, same eye',
   },
 ];
 
