@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const navLinks = [
-  { name: 'Work', href: '#work' },
-  { name: 'Artists', href: '#artists' },
-  { name: 'Archive', href: '#archive' },
-  { name: 'Lab', href: '#lab' },
-  { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
+type NavItem = { name: string; to: string; kind: 'route' | 'page' | 'home-section' | 'section' };
+
+/** Five places, no overlap: Work holds films, reels and photos; Services are static SEO pages. */
+const navLinks: NavItem[] = [
+  { name: 'Work', to: '/work', kind: 'route' },
+  { name: 'Services', to: '/services', kind: 'page' },
+  { name: 'About', to: '#about', kind: 'home-section' },
+  { name: 'Contact', to: '#contact', kind: 'section' },
 ];
 
 export const Navigation = () => {
@@ -22,9 +23,21 @@ export const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLinkClick = (href: string) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleLinkClick = (item: NavItem) => {
     setIsMobileMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    if (item.kind === 'page') {
+      window.location.href = item.to;
+    } else if (item.kind === 'route') {
+      navigate(item.to);
+      window.scrollTo(0, 0);
+    } else if (item.kind === 'home-section' && pathname !== '/') {
+      navigate('/', { state: { scrollTo: item.to } });
+    } else {
+      document.querySelector(item.to)?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -38,15 +51,15 @@ export const Navigation = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <a href="#" className="font-display text-xl md:text-2xl font-bold tracking-tight">
+          <Link to="/" onClick={() => window.scrollTo(0, 0)} className="font-display text-xl md:text-2xl font-bold tracking-tight">
             BLUE<span className="text-primary">POLAROID</span>
-          </a>
+          </Link>
 
           <ul className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <button
-                  onClick={() => handleLinkClick(link.href)}
+                  onClick={() => handleLinkClick(link)}
                   className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors duration-300 relative group"
                 >
                   {link.name}
@@ -54,24 +67,6 @@ export const Navigation = () => {
                 </button>
               </li>
             ))}
-            <li>
-              <Link
-                to="/projects"
-                onClick={() => window.scrollTo(0, 0)}
-                className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/gallery"
-                onClick={() => window.scrollTo(0, 0)}
-                className="font-display text-sm tracking-widest uppercase text-muted-foreground hover:text-primary transition-colors duration-300"
-              >
-                Gallery
-              </Link>
-            </li>
             <li>
               <Link
                 to="/coding"
@@ -109,32 +104,12 @@ export const Navigation = () => {
                   initial={{ opacity: 0, x: 16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.06 }}
-                  onClick={() => handleLinkClick(link.href)}
+                  onClick={() => handleLinkClick(link)}
                   className="font-display text-2xl tracking-tight"
                 >
                   {link.name}
                 </motion.button>
               ))}
-              <Link
-                to="/projects"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  window.scrollTo(0, 0);
-                }}
-                className="font-display text-2xl tracking-tight"
-              >
-                Projects
-              </Link>
-              <Link
-                to="/gallery"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  window.scrollTo(0, 0);
-                }}
-                className="font-display text-2xl tracking-tight"
-              >
-                Gallery
-              </Link>
               <Link
                 to="/coding"
                 onClick={() => {

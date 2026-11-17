@@ -184,7 +184,7 @@ footer a{color:var(--fg)}
 @media (max-width:640px){nav .links{gap:12px}nav .links .hide{display:none}}
 `;
 
-const nav = `<nav class="wrap"><a class="logo" href="/">BLUE<span>POLAROID</span></a><div class="links"><a href="/services">Services</a><a href="/projects">Work</a><a class="hide" href="/gallery">Gallery</a><a href="mailto:${EMAIL}">Contact</a></div></nav>`;
+const nav = `<nav class="wrap"><a class="logo" href="/">BLUE<span>POLAROID</span></a><div class="links"><a href="/work">Work</a><a href="/services">Services</a><a class="hide" href="/#about">About</a><a href="mailto:${EMAIL}">Contact</a></div></nav>`;
 
 const footerHtml = (links) => `<footer class="wrap"><p><b>Raghav Raj Sobti</b> · BluePolaroid · Cinematographer, director &amp; editor · Mumbai, India<br>
 <a href="mailto:${EMAIL}">${EMAIL}</a> · <a href="https://wa.me/${WA}">${PHONE}</a> · <a href="https://www.instagram.com/bluepolaroid05/">Instagram</a> · <a href="https://www.youtube.com/@bluepolaroid05">YouTube</a></p>
@@ -232,7 +232,7 @@ function servicePage(p) {
 <p class="kicker">${esc(p.kicker)}</p>
 <h1>${esc(p.h1)}</h1>
 <p class="lead">${esc(p.intro)}</p>
-<div class="cta"><a class="btn p" href="${wa}">WhatsApp for a quote</a><a class="btn" href="${mail}">Email your brief</a><a class="btn" href="/projects">See all work</a></div>
+<div class="cta"><a class="btn p" href="${wa}">WhatsApp for a quote</a><a class="btn" href="${mail}">Email your brief</a><a class="btn" href="/work">See all work</a></div>
 <h2>What I do</h2>
 <ul class="offers">${p.offers.map((o) => `<li>${esc(o)}</li>`).join('')}</ul>
 <h2>Selected work</h2>

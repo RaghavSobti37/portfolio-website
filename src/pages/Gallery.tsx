@@ -27,7 +27,8 @@ const itemVariants: Variants = {
   visible: { opacity: 1, transition: { duration: 0.35 } },
 };
 
-const Gallery = () => {
+/** `embedded` renders just the content, for the tabbed /work page. */
+const Gallery = ({ embedded = false }: { embedded?: boolean }) => {
   const [ordered, setOrdered] = useState(() => shufflePhotos(allPhotos));
   const [shuffleKey, setShuffleKey] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -70,13 +71,16 @@ const Gallery = () => {
   const selectedLabel = selectedIndex !== null ? photoLabel(selectedIndex) : '';
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Seo
+    <div className={embedded ? '' : 'min-h-screen bg-background text-foreground overflow-x-hidden'}>
+      {!embedded && (
+        <Seo
         title="Photo Gallery | Raghav Raj Sobti (BluePolaroid) — Photography Archive"
-        description="Full photography archive of Raghav Raj Sobti (BluePolaroid) — stills from shoots, music films, live events and the Instagram archive."
-        path="/gallery"
-      />
+          description="Full photography archive of Raghav Raj Sobti (BluePolaroid) — stills from shoots, music films, live events and the Instagram archive."
+          path="/gallery"
+        />
+      )}
 
+      {!embedded && (
       <header className="fixed top-0 left-0 right-0 z-50 glass py-3">
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link to="/" className="font-display text-xl md:text-2xl font-bold tracking-tight">
@@ -91,14 +95,15 @@ const Gallery = () => {
           </Link>
         </div>
       </header>
+      )}
 
-      <main className="pt-28 md:pt-32 pb-24">
+      <main className={embedded ? 'pb-24' : 'pt-28 md:pt-32 pb-24'}>
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-12"
+            className={embedded ? 'hidden' : 'mb-12'}
           >
             <p className="font-mono-meta text-primary mb-3">FULL ARCHIVE · STILLS</p>
             <div className="flex flex-wrap items-end justify-between gap-4 mb-3">
@@ -211,7 +216,7 @@ const Gallery = () => {
         </div>
       )}
 
-      <FooterSection />
+      {!embedded && <FooterSection />}
     </div>
   );
 };

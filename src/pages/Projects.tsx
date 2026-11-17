@@ -29,20 +29,24 @@ const openExternal = (item: Project) => {
 const ytViews = (p: Project) =>
   p.platform === 'youtube' && p.views ? `${p.views.toLocaleString('en')} views` : null;
 
-const Projects = () => {
+/** `embedded` renders just the content, for the tabbed /work page. */
+const Projects = ({ embedded = false }: { embedded?: boolean }) => {
   const [active, setActive] = useState<Project | null>(null);
   const [cat, setCat] = useState('all');
 
   const filtered = cat === 'all' ? projects : projects.filter((p) => p.category === cat);
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Seo
+    <div className={embedded ? '' : 'min-h-screen bg-background text-foreground overflow-x-hidden'}>
+      {!embedded && (
+        <Seo
         title="All Projects | Raghav Raj Sobti (BluePolaroid) — Films, Music Videos & More"
-        description="Every project by Raghav Raj Sobti (BluePolaroid) — music films, short films, interviews, showreels, ad films and behind-the-scenes work."
-        path="/projects"
-      />
+          description="Every project by Raghav Raj Sobti (BluePolaroid) — music films, short films, interviews, showreels, ad films and behind-the-scenes work."
+          path="/projects"
+        />
+      )}
 
+      {!embedded && (
       <header className="fixed top-0 left-0 right-0 z-50 glass py-3">
         <div className="container mx-auto px-6 flex items-center justify-between">
           <Link to="/" className="font-display text-xl md:text-2xl font-bold tracking-tight">
@@ -57,14 +61,15 @@ const Projects = () => {
           </Link>
         </div>
       </header>
+      )}
 
-      <main className="pt-28 md:pt-32 pb-24">
+      <main className={embedded ? 'pb-24' : 'pt-28 md:pt-32 pb-24'}>
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-12"
+            className={embedded ? 'hidden' : 'mb-12'}
           >
             <p className="font-mono-meta text-primary mb-3">FULL INDEX · PROJECTS</p>
             <h1 className="font-display text-4xl md:text-6xl font-bold tracking-tight mb-3">
@@ -189,7 +194,7 @@ const Projects = () => {
         </div>
       )}
 
-      <FooterSection />
+      {!embedded && <FooterSection />}
     </div>
   );
 };

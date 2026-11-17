@@ -245,10 +245,10 @@ export const PortfolioSection = () => {
               Everything else I’ve made
             </h3>
             <Link
-              to="/projects"
+              to="/work"
               className="font-mono text-[10px] tracking-wider uppercase text-primary hover:text-accent transition-colors"
             >
-              See all projects →
+              All work, reels &amp; photos →
             </Link>
           </div>
 
